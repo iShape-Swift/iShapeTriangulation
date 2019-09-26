@@ -1,0 +1,9 @@
+platform :ios, '11'
+
+target 'iOSPodTest' do
+	use_frameworks!
+
+	pod 'iGeometry',						:path => '../../iGeometry/iGeometry'
+	pod 'iShapeTriangulation',				:path => '../iShapeTriangulation'
+
+end
