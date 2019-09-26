@@ -1,0 +1,20 @@
+platform :osx, '10.14'
+
+target 'iShapeUI' do
+	use_frameworks!
+
+	pod 'iGeometry',						:path => '../../iGeometry/iGeometry'
+	pod 'iShapeTriangulation',				:path => '../iShapeTriangulation'
+
+
+	post_install do |installer|
+    	installer.pods_project.targets.each do |target|
+        	if target.name == 'iShapeTriangulation'
+            	target.build_configurations.each do |config|
+                	config.build_settings['OTHER_SWIFT_FLAGS'] = '-DiShapeTest'
+                	puts "iShapeTest flag added"
+            	end
+        	end
+        end
+    end
+end
