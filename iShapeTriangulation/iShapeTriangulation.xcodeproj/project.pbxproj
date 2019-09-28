@@ -16,6 +16,7 @@
 		548AE0DE233CE27B00494FE4 /* PlainShape+SliceBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D5233CE27B00494FE4 /* PlainShape+SliceBuffer.swift */; };
 		548AE0DF233CE27B00494FE4 /* PlainShape+Delaunay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D6233CE27B00494FE4 /* PlainShape+Delaunay.swift */; };
 		548AE0E0233CE27B00494FE4 /* Delaunay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D7233CE27B00494FE4 /* Delaunay.swift */; };
+		5491D00D233FBA7C00E8FDD2 /* Triangulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491D00C233FBA7C00E8FDD2 /* Triangulator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		548AE0D5233CE27B00494FE4 /* PlainShape+SliceBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+SliceBuffer.swift"; sourceTree = "<group>"; };
 		548AE0D6233CE27B00494FE4 /* PlainShape+Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Delaunay.swift"; sourceTree = "<group>"; };
 		548AE0D7233CE27B00494FE4 /* Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delaunay.swift; sourceTree = "<group>"; };
+		5491D00C233FBA7C00E8FDD2 /* Triangulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangulator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				548AE0CE233CE27B00494FE4 /* Util */,
 				548AE0D1233CE27B00494FE4 /* PlainShape */,
+				5491D00C233FBA7C00E8FDD2 /* Triangulator.swift */,
 			);
 			path = Triangulation;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				548AE0DD233CE27B00494FE4 /* PlainShape+Layout.swift in Sources */,
 				548AE0DB233CE27B00494FE4 /* IntPoint+Monotone.swift in Sources */,
 				548AE0D9233CE27B00494FE4 /* MonotoneSplitTests.swift in Sources */,
+				5491D00D233FBA7C00E8FDD2 /* Triangulator.swift in Sources */,
 				548AE0DA233CE27B00494FE4 /* IntPoint+Sort.swift in Sources */,
 				548AE0DF233CE27B00494FE4 /* PlainShape+Delaunay.swift in Sources */,
 			);
