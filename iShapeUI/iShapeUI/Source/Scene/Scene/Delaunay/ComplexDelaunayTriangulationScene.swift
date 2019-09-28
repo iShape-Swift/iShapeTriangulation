@@ -12,7 +12,7 @@ import iGeometry
 
 final class ComplexDelaunayTriangulationScene: CoordinateSystemScene {
 
-    private var pageIndex: Int = 10
+    private var pageIndex: Int = 16
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
 

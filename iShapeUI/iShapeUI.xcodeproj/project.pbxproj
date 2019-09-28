@@ -35,11 +35,25 @@
 		548AE161233CFC8000494FE4 /* ShapeCoordinatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE148233CFC8000494FE4 /* ShapeCoordinatSystem.swift */; };
 		548AE162233CFC8000494FE4 /* CoordinateSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE149233CFC8000494FE4 /* CoordinateSystemScene.swift */; };
 		548AE169233D004600494FE4 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE168233D004600494FE4 /* CGPoint.swift */; };
+		5491CFFC233F477C00E8FDD2 /* iShapeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491CFFB233F477C00E8FDD2 /* iShapeUITests.swift */; };
+		5491D00B233F4B9900E8FDD2 /* iGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491D00A233F4B9900E8FDD2 /* iGeometryTests.swift */; };
 		8C160ACF86CAE90D191D727E /* Pods_iShapeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBDAFFA687FD222AEC8744A /* Pods_iShapeUI.framework */; };
+		E18A2C6B194E327C8C62A577 /* Pods_iShapeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AAA98F73E6E8C0A4B190F9F /* Pods_iShapeUITests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5491CFFE233F477C00E8FDD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 548AE10E233CE7EE00494FE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 548AE115233CE7EE00494FE4;
+			remoteInfo = iShapeUI;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		42CB61B1B321248266C9C523 /* Pods-iShapeUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeUI.debug.xcconfig"; path = "Target Support Files/Pods-iShapeUI/Pods-iShapeUI.debug.xcconfig"; sourceTree = "<group>"; };
+		4BF2F6C6DEA27AE0C38944D8 /* Pods-iShapeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeUITests.release.xcconfig"; path = "Target Support Files/Pods-iShapeUITests/Pods-iShapeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		548AE116233CE7EE00494FE4 /* iShapeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShapeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		548AE11D233CE7EF00494FE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		548AE120233CE7EF00494FE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +85,12 @@
 		548AE148233CFC8000494FE4 /* ShapeCoordinatSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeCoordinatSystem.swift; sourceTree = "<group>"; };
 		548AE149233CFC8000494FE4 /* CoordinateSystemScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateSystemScene.swift; sourceTree = "<group>"; };
 		548AE168233D004600494FE4 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		5491CFF9233F477C00E8FDD2 /* iShapeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iShapeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5491CFFB233F477C00E8FDD2 /* iShapeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iShapeUITests.swift; sourceTree = "<group>"; };
+		5491CFFD233F477C00E8FDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5491D00A233F4B9900E8FDD2 /* iGeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iGeometryTests.swift; sourceTree = "<group>"; };
+		5AAA98F73E6E8C0A4B190F9F /* Pods_iShapeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iShapeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		976DFA98C28D26CB9AD5817C /* Pods-iShapeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeUITests.debug.xcconfig"; path = "Target Support Files/Pods-iShapeUITests/Pods-iShapeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2F1F06BFD59733BD8304333 /* Pods-iShapeUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeUI.release.xcconfig"; path = "Target Support Files/Pods-iShapeUI/Pods-iShapeUI.release.xcconfig"; sourceTree = "<group>"; };
 		DDBDAFFA687FD222AEC8744A /* Pods_iShapeUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iShapeUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -84,6 +104,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5491CFF6233F477C00E8FDD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E18A2C6B194E327C8C62A577 /* Pods_iShapeUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				DDBDAFFA687FD222AEC8744A /* Pods_iShapeUI.framework */,
+				5AAA98F73E6E8C0A4B190F9F /* Pods_iShapeUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -99,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				548AE118233CE7EE00494FE4 /* iShapeUI */,
+				5491CFFA233F477C00E8FDD2 /* iShapeUITests */,
 				548AE117233CE7EE00494FE4 /* Products */,
 				C0B854C184E18A6EF331F4E8 /* Pods */,
 				46F673DB34FF401ECD52D2C8 /* Frameworks */,
@@ -109,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				548AE116233CE7EE00494FE4 /* iShapeUI.app */,
+				5491CFF9233F477C00E8FDD2 /* iShapeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,11 +253,23 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		5491CFFA233F477C00E8FDD2 /* iShapeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5491CFFB233F477C00E8FDD2 /* iShapeUITests.swift */,
+				5491D00A233F4B9900E8FDD2 /* iGeometryTests.swift */,
+				5491CFFD233F477C00E8FDD2 /* Info.plist */,
+			);
+			path = iShapeUITests;
+			sourceTree = "<group>";
+		};
 		C0B854C184E18A6EF331F4E8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				42CB61B1B321248266C9C523 /* Pods-iShapeUI.debug.xcconfig */,
 				D2F1F06BFD59733BD8304333 /* Pods-iShapeUI.release.xcconfig */,
+				976DFA98C28D26CB9AD5817C /* Pods-iShapeUITests.debug.xcconfig */,
+				4BF2F6C6DEA27AE0C38944D8 /* Pods-iShapeUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -253,18 +296,41 @@
 			productReference = 548AE116233CE7EE00494FE4 /* iShapeUI.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5491CFF8233F477C00E8FDD2 /* iShapeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5491D002233F477C00E8FDD2 /* Build configuration list for PBXNativeTarget "iShapeUITests" */;
+			buildPhases = (
+				6D0E2AD0EAB2FF22A8A3B21B /* [CP] Check Pods Manifest.lock */,
+				5491CFF5233F477C00E8FDD2 /* Sources */,
+				5491CFF6233F477C00E8FDD2 /* Frameworks */,
+				5491CFF7233F477C00E8FDD2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5491CFFF233F477C00E8FDD2 /* PBXTargetDependency */,
+			);
+			name = iShapeUITests;
+			productName = iShapeUITests;
+			productReference = 5491CFF9233F477C00E8FDD2 /* iShapeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		548AE10E233CE7EE00494FE4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1030;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = iShape;
 				TargetAttributes = {
 					548AE115233CE7EE00494FE4 = {
 						CreatedOnToolsVersion = 10.3;
+					};
+					5491CFF8233F477C00E8FDD2 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = 548AE115233CE7EE00494FE4;
 					};
 				};
 			};
@@ -282,6 +348,7 @@
 			projectRoot = "";
 			targets = (
 				548AE115233CE7EE00494FE4 /* iShapeUI */,
+				5491CFF8233F477C00E8FDD2 /* iShapeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -296,9 +363,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5491CFF7233F477C00E8FDD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6D0E2AD0EAB2FF22A8A3B21B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iShapeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B1CB908ABF8643E038B03C1B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -374,7 +470,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5491CFF5233F477C00E8FDD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5491CFFC233F477C00E8FDD2 /* iShapeUITests.swift in Sources */,
+				5491D00B233F4B9900E8FDD2 /* iGeometryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5491CFFF233F477C00E8FDD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 548AE115233CE7EE00494FE4 /* iShapeUI */;
+			targetProxy = 5491CFFE233F477C00E8FDD2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		548AE11F233CE7EF00494FE4 /* Main.storyboard */ = {
@@ -510,6 +623,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iShapeUI/iShapeUI.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = iShapeUI/Info.plist;
@@ -530,6 +644,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iShapeUI/iShapeUI.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = iShapeUI/Info.plist;
@@ -541,6 +656,46 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ishape.iShapeUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5491D000233F477C00E8FDD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 976DFA98C28D26CB9AD5817C /* Pods-iShapeUITests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = iShapeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WeakTeam.iShapeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iShapeUI.app/Contents/MacOS/iShapeUI";
+			};
+			name = Debug;
+		};
+		5491D001233F477C00E8FDD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BF2F6C6DEA27AE0C38944D8 /* Pods-iShapeUITests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = iShapeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WeakTeam.iShapeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iShapeUI.app/Contents/MacOS/iShapeUI";
 			};
 			name = Release;
 		};
@@ -561,6 +716,15 @@
 			buildConfigurations = (
 				548AE127233CE7EF00494FE4 /* Debug */,
 				548AE128233CE7EF00494FE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5491D002233F477C00E8FDD2 /* Build configuration list for PBXNativeTarget "iShapeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5491D000233F477C00E8FDD2 /* Debug */,
+				5491D001233F477C00E8FDD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
