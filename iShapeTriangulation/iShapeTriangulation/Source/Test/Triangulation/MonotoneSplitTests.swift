@@ -255,6 +255,25 @@ static let data: [[[Point]]] = [
                 Point(x: -20, y:  10),
                 Point(x: -15, y:   5)
             ]
+        ],
+        // test 17
+        [
+            [
+                Point(x: -5, y: 10),
+                Point(x: 5, y: 10),
+                Point(x: 10, y: 5),
+                Point(x: 10, y: -5),
+                Point(x: 5, y: -10),
+                Point(x: -5, y: -10),
+                Point(x: -10, y: -5),
+                Point(x: -10, y: 5)
+            ],
+            [
+                Point(x: -5, y: 0),
+                Point(x: 0, y: -5),
+                Point(x: 5, y: 0),
+                Point(x: 0, y: 5)
+            ],
         ]
     ]
 }

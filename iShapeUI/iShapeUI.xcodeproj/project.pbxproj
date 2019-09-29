@@ -37,6 +37,7 @@
 		548AE169233D004600494FE4 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE168233D004600494FE4 /* CGPoint.swift */; };
 		5491CFFC233F477C00E8FDD2 /* iShapeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491CFFB233F477C00E8FDD2 /* iShapeUITests.swift */; };
 		5491D00B233F4B9900E8FDD2 /* iGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491D00A233F4B9900E8FDD2 /* iGeometryTests.swift */; };
+		5491D00F2340CC3300E8FDD2 /* TriangulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491D00E2340CC3300E8FDD2 /* TriangulatorTests.swift */; };
 		8C160ACF86CAE90D191D727E /* Pods_iShapeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBDAFFA687FD222AEC8744A /* Pods_iShapeUI.framework */; };
 		E18A2C6B194E327C8C62A577 /* Pods_iShapeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AAA98F73E6E8C0A4B190F9F /* Pods_iShapeUITests.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		5491CFFB233F477C00E8FDD2 /* iShapeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iShapeUITests.swift; sourceTree = "<group>"; };
 		5491CFFD233F477C00E8FDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5491D00A233F4B9900E8FDD2 /* iGeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iGeometryTests.swift; sourceTree = "<group>"; };
+		5491D00E2340CC3300E8FDD2 /* TriangulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangulatorTests.swift; sourceTree = "<group>"; };
 		5AAA98F73E6E8C0A4B190F9F /* Pods_iShapeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iShapeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		976DFA98C28D26CB9AD5817C /* Pods-iShapeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeUITests.debug.xcconfig"; path = "Target Support Files/Pods-iShapeUITests/Pods-iShapeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2F1F06BFD59733BD8304333 /* Pods-iShapeUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeUI.release.xcconfig"; path = "Target Support Files/Pods-iShapeUI/Pods-iShapeUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				5491CFFB233F477C00E8FDD2 /* iShapeUITests.swift */,
 				5491D00A233F4B9900E8FDD2 /* iGeometryTests.swift */,
 				5491CFFD233F477C00E8FDD2 /* Info.plist */,
+				5491D00E2340CC3300E8FDD2 /* TriangulatorTests.swift */,
 			);
 			path = iShapeUITests;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 			files = (
 				5491CFFC233F477C00E8FDD2 /* iShapeUITests.swift in Sources */,
 				5491D00B233F4B9900E8FDD2 /* iGeometryTests.swift in Sources */,
+				5491D00F2340CC3300E8FDD2 /* TriangulatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

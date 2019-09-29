@@ -7,15 +7,11 @@
 //
 
 import XCTest
-import iGeometry
+import iShapeTriangulation
 
 class iShapeUITests: XCTestCase {
 
-    func testExample() {
-        let point = IntPoint(x: 0, y: 0)
-        let a = point.bitPack
-        XCTAssertEqual(a, 0)
-    }
+
 
 
 }
