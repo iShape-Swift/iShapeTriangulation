@@ -34,10 +34,24 @@ final class TriangulatorTests: XCTestCase {
         
         let triangles = Triangulator.triangulateDelaunay(points: points, hull: hule, holes: [hole])
         
-        print(triangles)
+        let template = [
+            6, 7, 8,
+            6, 8, 5,
+            0, 8, 7,
+            11, 8, 0,
+            1, 11, 0,
+            1, 10, 11,
+            8, 9, 5,
+            4, 5, 9,
+            10, 4, 9,
+            2, 10, 1,
+            10, 3, 4,
+            2, 3, 10
+        ]
         
-//        XCTAssertEqual(a, 0)
+        XCTAssertEqual(triangles, template)
     }
 
 
 }
+
