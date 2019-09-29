@@ -3,7 +3,7 @@ platform :osx, '10.14'
 target 'iShapeUI' do
 	use_frameworks!
 
-	pod 'iGeometry',						:path => '../../iGeometry/iGeometry'
+	pod 'iGeometry',						:path => '../../iGeometry'
 	pod 'iShapeTriangulation',				:path => '../iShapeTriangulation'
 
 
