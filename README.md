@@ -16,13 +16,35 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 ## Basic Usage
 
-Let's imagine you have a polygon shown on the picture below:
+Let's imagine you have a polygon like one is shown on the picture below:
 
 <img align="left" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_0.svg" width="500">
-
+<p align="left">
 You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction,
 as shown on the picture below:
 
+```swift
+let verices: [CGPoint] = [
+
+  // hule points list in clockwise direction
+  CGPoint(x: -5, y: 10),
+  CGPoint(x: 5, y: 10),
+  CGPoint(x: 10, y: 5),
+  CGPoint(x: 10, y: -5),
+  CGPoint(x: 5, y: -10),
+  CGPoint(x: -5, y: -10),
+  CGPoint(x: -10, y: -5),
+  CGPoint(x: -10, y: 5),
+            
+  // holes points list in counterclockwise direction
+  CGPoint(x: -5, y: 0),
+  CGPoint(x: 0, y: -5),
+  CGPoint(x: 5, y: 0),
+  CGPoint(x: 0, y: 5)
+]
+
+```
+</p>
 
 <img align="left" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_1.svg" width="500">
 
