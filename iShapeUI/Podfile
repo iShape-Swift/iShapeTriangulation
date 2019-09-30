@@ -3,7 +3,15 @@ platform :osx, '10.14'
 target 'iShapeUI' do
 	use_frameworks!
 
-	pod 'iGeometry',						:path => '../../iGeometry'
+	work_path = '../../iGeometry'
+	if File.exist?(work_path)
+		puts "==> switch to work directory: " + work_path
+		pod 'iGeometry', :path => work_path
+	else
+		puts "==> use cloud version"
+		pod 'iGeometry'
+	end
+
 	pod 'iShapeTriangulation',				:path => '../iShapeTriangulation'
 
 
