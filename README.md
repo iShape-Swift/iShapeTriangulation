@@ -16,7 +16,7 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 ## Basic Usage
 
-Let's imagine you have a polygon like one is shown on the picture below:
+Let's imagine you have a polygon like one is shown below:
 
 <img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_0.svg" width="500">
 
