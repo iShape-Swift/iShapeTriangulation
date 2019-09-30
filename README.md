@@ -20,8 +20,7 @@ Let's imagine you have a polygon like one is shown on the picture below:
 
 <img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_0.svg" width="500">
 
-You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction,
-as shown on the picture below:
+You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction
 
 ```swift
 let verices: [CGPoint] = [
@@ -46,6 +45,8 @@ let verices: [CGPoint] = [
 ```
 
 <img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_1.svg" width="500">
+
+After a triangulation you will get an array of indices. Where each triple are represent an indices of the triangle vertices. The indices are always listed in a clock wise direction.
 
 <img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_2.svg" width="500">
 
