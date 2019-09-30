@@ -18,8 +18,8 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 Let's imagine you have a polygon like one is shown on the picture below:
 
-<img align="left" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_0.svg" width="500">
-<p align="left">
+<img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_0.svg" width="500">
+
 You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction,
 as shown on the picture below:
 
@@ -44,9 +44,8 @@ let verices: [CGPoint] = [
 ]
 
 ```
-</p>
 
-<img align="left" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_1.svg" width="500">
+<img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_1.svg" width="500">
 
-<img align="left" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_2.svg" width="500">
+<img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_2.svg" width="500">
 
