@@ -13,7 +13,7 @@ final class ShapeTriangle: CAShapeLayer {
     init(points: [CGPoint], text: String, color: CGColor, lineWidth: CGFloat = 0.25) {
         super.init()
         
-        let linePath = CGMutablePath()
+        //let linePath = CGMutablePath()
         let n = points.count
         var start = points[n - 1]
         var middle: CGPoint = .zero
@@ -28,7 +28,7 @@ final class ShapeTriangle: CAShapeLayer {
         middle.x = middle.x / CGFloat(n)
         middle.y = middle.y / CGFloat(n)
 
-        self.path = linePath
+        //self.path = linePath
         self.fillColor = color
         self.opacity = 1.0
         

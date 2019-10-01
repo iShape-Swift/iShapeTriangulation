@@ -29,7 +29,7 @@ final class ViewController: NSViewController {
             frame.size = CGSize(width: 600, height: 800)
             self.view.window?.setFrame(frame, display: true)
         }
-        
+        self.setupPopUpButton()
         canvasView.add(shape: scene)
         self.canvasView.testName.stringValue = scene.getName()
         canvasView.onMouseMoved = { event in
@@ -37,6 +37,14 @@ final class ViewController: NSViewController {
             self.scene.mouseMove(point: point)
         }
     }
+
+    private func setupPopUpButton() {
+        let popUpButton = canvasView.testList
+        popUpButton.addItems(withTitles: ["Item 1", "Item 2", "Item 3"])
+        popUpButton.selectItem(at: 0)
+    }
+    
+
     
     override func mouseDown(with event: NSEvent) {
         let point = self.canvasView.convert(point: event.locationInWindow)

@@ -12,7 +12,7 @@ import iGeometry
 
 final class ComplexDelaunayTriangulationScene: CoordinateSystemScene {
 
-    private var pageIndex: Int = 16
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "pageIndex")
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
 
@@ -167,12 +167,14 @@ extension ComplexDelaunayTriangulationScene: SceneNavigation {
     func next() {
         let n = MonotoneSplitTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
+        UserDefaults.standard.set(pageIndex, forKey: "pageIndex")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = MonotoneSplitTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
+        UserDefaults.standard.set(pageIndex, forKey: "pageIndex")
         self.showPage(index: self.pageIndex)
     }
     

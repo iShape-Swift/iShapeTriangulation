@@ -9,7 +9,7 @@
 import XCTest
 import iGeometry
 
-class iGeometryTests: XCTestCase {
+final class iGeometryTests: XCTestCase {
 
     func testIntPoint_0() {
         let point = IntPoint(x: 0, y: 0)

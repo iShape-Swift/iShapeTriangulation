@@ -12,6 +12,7 @@ final class CanvasView: NSView {
     
     private var transform: CATransform3D
     private static let canvasSize: CGFloat = 10
+    
     private (set) var testName: NSTextField = {
         let textField = NSTextField()
         textField.isEditable = false
@@ -21,6 +22,14 @@ final class CanvasView: NSView {
         return textField
     }()
     
+    private (set) var testList: NSPopUpButton = {
+        let button = NSPopUpButton()
+        let layer = CALayer()
+        layer.backgroundColor = NSColor.black.cgColor
+        button.layer = layer
+
+        return button
+    }()
     var onMouseMoved: ((NSEvent) -> ())?
     
     var trackingArea : NSTrackingArea?
@@ -44,6 +53,7 @@ final class CanvasView: NSView {
         wantsLayer = true
         self.layer?.backgroundColor = Colors.white
         self.addSubview(testName)
+        self.addSubview(testList)
     }
     
     required init?(coder decoder: NSCoder) {
@@ -52,6 +62,7 @@ final class CanvasView: NSView {
         wantsLayer = true
         self.layer?.backgroundColor = Colors.white
         self.addSubview(testName)
+        self.addSubview(testList)
     }
     
     override func layout() {
@@ -70,7 +81,8 @@ final class CanvasView: NSView {
             layer.transform = self.transform
         }
         
-        self.testName.frame = CGRect(x: 0.5 * (size.width - width), y: size.height - height, width: width, height: height)
+        self.testList.frame = CGRect(x: 0.5 * (size.width - width), y: size.height - height, width: width, height: height)
+        self.testName.frame = CGRect(x: 0.5 * (size.width - width), y: size.height - 2 * height, width: width, height: height)
     }
     
     private static func calculateCurrentTransform(rect: CGRect) -> CATransform3D {
