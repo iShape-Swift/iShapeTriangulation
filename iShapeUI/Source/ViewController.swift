@@ -15,13 +15,8 @@ final class ViewController: NSViewController {
             return self.view as! CanvasView
         }
     }
-    
-//    private let scene = SplitScene()
-//    private let scene = MotoneBreakScene()
-//    private let scene = PlainTriangulationScene()
-//    private let scene = DelaunayAssessmentScene()
+
     private var scene: (CALayer & MouseCompatible & SceneNavigation)?
-//    private let scene = MotoneDelaunayTriangulationScene()
     
     override func viewDidLoad() {
         super.viewDidLoad()
