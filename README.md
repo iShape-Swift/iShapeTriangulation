@@ -23,7 +23,7 @@ Let's imagine you have a polygon like one is shown below:
 You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction
 
 ```swift
-let vertices: [CGPoint] = [
+let points: [CGPoint] = [
 
   // hule vertices list in clockwise direction
   CGPoint(x: -5, y: 10),
@@ -42,11 +42,15 @@ let vertices: [CGPoint] = [
   CGPoint(x: 0, y: 5)
 ]
 
+let hule = points[0...7]
+let hole = points[8...11]
+        
+let triangles = Triangulator.triangulateDelaunay(points: points, hull: hule, holes: [hole])
+
 ```
 
 <img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_1.svg" width="500">
 
 After a triangulation you will get an array of indices. Where each triple are represent an indices of the triangle vertices. The indices are always listed in a clock wise direction.
-
 <img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_2.svg" width="500">
 
