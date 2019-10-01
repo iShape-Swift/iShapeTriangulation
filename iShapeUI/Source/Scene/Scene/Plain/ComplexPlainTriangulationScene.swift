@@ -12,7 +12,7 @@ import iGeometry
 
 final class ComplexPlainTriangulationScene: CoordinateSystemScene {
 
-    private var pageIndex: Int = 2
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "complex")
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
 
@@ -167,12 +167,14 @@ extension ComplexPlainTriangulationScene: SceneNavigation {
     func next() {
         let n = MonotoneSplitTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
+        UserDefaults.standard.set(pageIndex, forKey: "complex")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = MonotoneSplitTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
+        UserDefaults.standard.set(pageIndex, forKey: "complex")
         self.showPage(index: self.pageIndex)
     }
     
