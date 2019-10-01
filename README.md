@@ -54,3 +54,13 @@ let triangles: [Int] = Triangulator.triangulateDelaunay(points: points, hull: hu
 After a triangulation you will get an array of indices. Where each triple are represent an indices of the triangle vertices. The indices are always listed in a clock wise direction.
 <img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_2.svg" width="500">
 
+---
+
+## Installation
+
+### [CocoaPods](https://cocoapods.org/)
+
+Add the following to your `Podfile`:
+```ruby
+pod 'iShapeTriangulation'
+```
