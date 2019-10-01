@@ -20,7 +20,7 @@ final class ViewController: NSViewController {
 //    private let scene = MotoneBreakScene()
 //    private let scene = PlainTriangulationScene()
 //    private let scene = DelaunayAssessmentScene()
-    private let scene = ComplexDelaunayTriangulationScene()
+    private var scene: (CALayer & MouseCompatible & SceneNavigation)?
 //    private let scene = MotoneDelaunayTriangulationScene()
     
     override func viewDidLoad() {
@@ -30,45 +30,64 @@ final class ViewController: NSViewController {
             self.view.window?.setFrame(frame, display: true)
         }
         self.setupPopUpButton()
-        canvasView.add(shape: scene)
-        self.canvasView.testName.stringValue = scene.getName()
-        canvasView.onMouseMoved = { event in
-            let point = self.canvasView.convert(point: event.locationInWindow)
-            self.scene.mouseMove(point: point)
-        }
     }
 
     private func setupPopUpButton() {
         let popUpButton = canvasView.testList
-        popUpButton.addItems(withTitles: ["Item 1", "Item 2", "Item 3"])
+        popUpButton.addItems(withTitles: ["Triangulation", "Delaunay"])
         popUpButton.selectItem(at: 0)
+        popUpButton.action = #selector(didPickScene)
+        popUpButton.target = self
+        self.selectScene(index: 0)
     }
     
-
+    @objc private func didPickScene(sender: NSPopUpButton) {
+        self.selectScene(index: sender.indexOfSelectedItem)
+    }
+    
+    private func selectScene(index: Int) {
+        self.scene?.removeFromSuperlayer()
+        let newScene: CALayer & MouseCompatible & SceneNavigation
+        switch index {
+        case 0:
+            newScene = ComplexDelaunayTriangulationScene()
+        default:
+            newScene = DelaunayAssessmentScene()
+        }
+        
+        canvasView.add(shape: newScene)
+        self.canvasView.testName.stringValue = newScene.getName()
+        canvasView.onMouseMoved = { event in
+            let point = self.canvasView.convert(point: event.locationInWindow)
+            self.scene?.mouseMove(point: point)
+        }
+        
+        self.scene = newScene
+    }
     
     override func mouseDown(with event: NSEvent) {
         let point = self.canvasView.convert(point: event.locationInWindow)
-        self.scene.mouseDown(point: point)
+        self.scene?.mouseDown(point: point)
     }
     
     
     override func mouseUp(with event: NSEvent) {
         let point = self.canvasView.convert(point: event.locationInWindow)
-        self.scene.mouseUp(point: point)
+        self.scene?.mouseUp(point: point)
     }
     
     override func mouseDragged(with event: NSEvent) {
         let point = self.canvasView.convert(point: event.locationInWindow)
-        self.scene.mouseDragged(point: point)
+        self.scene?.mouseDragged(point: point)
     }
 
     override func keyDown(with theEvent: NSEvent) {
         if theEvent.keyCode == 124 || theEvent.keyCode == 49 || theEvent.keyCode == 36 {
-            scene.next()
-            self.canvasView.testName.stringValue = scene.getName()
+            scene?.next()
+            self.canvasView.testName.stringValue = scene?.getName() ?? ""
         } else if theEvent.keyCode == 123 {
-            scene.back()
-            self.canvasView.testName.stringValue = scene.getName()
+            scene?.back()
+            self.canvasView.testName.stringValue = scene?.getName() ?? ""
         }
     }
     

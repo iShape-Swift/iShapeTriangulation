@@ -68,7 +68,7 @@ final class CanvasView: NSView {
     override func layout() {
         super.layout()
         let size = self.bounds.size
-        let width: CGFloat = 100
+        let width: CGFloat = 120
         let height: CGFloat = 20
 
         self.transform = CanvasView.calculateCurrentTransform(rect: self.bounds)
@@ -101,7 +101,7 @@ final class CanvasView: NSView {
     
     func add(shape: CALayer) {
         shape.transform = transform
-        self.layer?.addSublayer(shape)
+        self.layer?.insertSublayer(shape, at: 0)
     }
     
     override var acceptsFirstResponder: Bool {

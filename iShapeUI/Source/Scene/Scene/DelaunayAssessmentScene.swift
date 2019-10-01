@@ -7,20 +7,28 @@
 //
 
 import Cocoa
+import iGeometry
 @testable import iShapeTriangulation
-/*
+
 final class DelaunayAssessmentScene: CoordinateSystemScene {
     
-    private var pageIndex: Int = 5
+    private var pageIndex: Int = 0
 
     var data = [
-//        CGPoint(x:-15, y:  0), CGPoint(x:-20, y: -5), CGPoint(x:-25, y:  0), CGPoint(x:-20, y: 10),
-//        CGPoint(x: -5, y: 30), CGPoint(x:-10, y: 20), CGPoint(x: -5, y: 10), CGPoint(x:  0, y: 20),
-//        CGPoint(x:  5, y:  5), CGPoint(x:  5, y:-10), CGPoint(x: 10, y:-20), CGPoint(x: 10, y: -5),
-        CGPoint(x: -5, y:-20), CGPoint(x:-15, y:-25), CGPoint(x:-20, y:-10), CGPoint(x: -5, y: -15)
+        [
+          CGPoint(x:-15, y:  0), CGPoint(x:-20, y: -5), CGPoint(x:-25, y:  0), CGPoint(x:-20, y: 10)
+        ],
+        [
+          CGPoint(x: -5, y: 30), CGPoint(x:-10, y: 20), CGPoint(x: -5, y: 10), CGPoint(x:  0, y: 20)
+        ],
+        [
+          CGPoint(x:  5, y:  5), CGPoint(x:  5, y:-10), CGPoint(x: 10, y:-20), CGPoint(x: 10, y: -5)
+        ],
+        [
+          CGPoint(x: -5, y:-20), CGPoint(x:-15, y:-25), CGPoint(x:-20, y:-10), CGPoint(x: -5, y: -15)
+        ]
     ]
-    
-    
+
     private var index: Int?
     private let content = CALayer()
 
@@ -58,13 +66,14 @@ final class DelaunayAssessmentScene: CoordinateSystemScene {
         let n = data.count / 4
         for i in 0..<n {
             let j = 4 * i
-            let a = data[j].point
-            let b = data[j + 1].point
-            let c = data[j + 2].point
-            let p = data[j + 3].point
+            let points = data[pageIndex]
+            let a = points[j].point
+            let b = points[j + 1].point
+            let c = points[j + 2].point
+            let p = points[j + 3].point
             
             
-            let circle = Monotone.circumscribedСircleCenter(a: a, b: b, c: c)
+            let circle = Delaunay.circumscribedСircleCenter(a: a, b: b, c: c)
             
             self.content.addSublayer(ShapeCircle(position: circle.center.toCGPoint, radius: CGFloat(circle.radius), color: Colors.lightGray, depth: 0.4))
 
@@ -73,7 +82,7 @@ final class DelaunayAssessmentScene: CoordinateSystemScene {
             let ci = IntGeom.defGeom.int(point: c)
             let pi = IntGeom.defGeom.int(point: p)
             
-            let success = Monotone.verify(p: pi, a: ai, b: bi, c: ci)
+            let success = Delaunay.verefy(p: pi, a: ai, b: bi, c: ci)
             //let success = Monotone.isFloatDelaunay(p: p, a: a, b: b, c: c)
             
             let color: CGColor
@@ -100,7 +109,7 @@ extension DelaunayAssessmentScene: MouseCompatible {
     private func findNearest(point: CGPoint) -> Int? {
         var i = 0
         while i < data.count {
-            let p = data[i]
+            let p = data[pageIndex][i]
             let dx = p.x - point.x
             let dy = p.y - point.y
             let r = dx * dx + dy * dy
@@ -131,9 +140,9 @@ extension DelaunayAssessmentScene: MouseCompatible {
         let y = CGFloat(Int(point.y * 2)) / 2
         
         let point = CGPoint(x: x, y: y)
-        let prevPoint = data[index]
+        let prevPoint = data[pageIndex][index]
         if point != prevPoint {
-            data[index] = point
+            data[pageIndex][index] = point
             self.update()
         }
     }
@@ -141,12 +150,18 @@ extension DelaunayAssessmentScene: MouseCompatible {
 }
 
 extension DelaunayAssessmentScene: SceneNavigation {
-    func next() {}
     
-    func back() {}
+    func next() {
+        self.pageIndex = (self.pageIndex + 1) % self.data.count
+        self.update()
+    }
+    
+    func back() {
+        self.pageIndex = (self.pageIndex - 1 + self.data.count) % self.data.count
+        self.update()
+    }
     
     func getName() -> String {
-        return "test 0"
+        return "test \(self.pageIndex)"
     }
 }
-*/
