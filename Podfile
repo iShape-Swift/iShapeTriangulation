@@ -3,7 +3,9 @@ platform :osx, '10.14'
 target 'iShapeUI' do
 	use_frameworks!
 
-	work_path = '../../iGeometry'
+    project 'iShapeUI.xcodeproj'
+
+	work_path = '../iGeometry'
 	if File.exist?(work_path)
 		puts "==> switch to work directory: " + work_path
 		pod 'iGeometry', :path => work_path
@@ -12,7 +14,7 @@ target 'iShapeUI' do
 		pod 'iGeometry'
 	end
 
-	pod 'iShapeTriangulation',				:path => '../iShapeTriangulation'
+	pod 'iShapeTriangulation',				:path => './'
 
 
 	post_install do |installer|
