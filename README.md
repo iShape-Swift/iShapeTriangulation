@@ -23,9 +23,9 @@ Let's imagine you have a polygon like one is shown below:
 You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction
 
 ```swift
-let verices: [CGPoint] = [
+let vertices: [CGPoint] = [
 
-  // hule points list in clockwise direction
+  // hule vertices list in clockwise direction
   CGPoint(x: -5, y: 10),
   CGPoint(x: 5, y: 10),
   CGPoint(x: 10, y: 5),
@@ -35,7 +35,7 @@ let verices: [CGPoint] = [
   CGPoint(x: -10, y: -5),
   CGPoint(x: -10, y: 5),
             
-  // holes points list in counterclockwise direction
+  // holes vertices list in counterclockwise direction
   CGPoint(x: -5, y: 0),
   CGPoint(x: 0, y: -5),
   CGPoint(x: 5, y: 0),
