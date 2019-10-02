@@ -22,11 +22,10 @@
 		548AE14D233CFC8000494FE4 /* ActiveIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE12E233CFC8000494FE4 /* ActiveIndex.swift */; };
 		548AE14E233CFC8000494FE4 /* MouseCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE12F233CFC8000494FE4 /* MouseCompatible.swift */; };
 		548AE14F233CFC8000494FE4 /* SceneNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE130233CFC8000494FE4 /* SceneNavigation.swift */; };
-		548AE150233CFC8000494FE4 /* SplitScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE132233CFC8000494FE4 /* SplitScene.swift */; };
-		548AE151233CFC8000494FE4 /* MotonePlainTriangulationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE134233CFC8000494FE4 /* MotonePlainTriangulationScene.swift */; };
-		548AE152233CFC8000494FE4 /* ComplexPlainTriangulationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE135233CFC8000494FE4 /* ComplexPlainTriangulationScene.swift */; };
-		548AE153233CFC8000494FE4 /* ComplexDelaunayTriangulationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE137233CFC8000494FE4 /* ComplexDelaunayTriangulationScene.swift */; };
-		548AE154233CFC8000494FE4 /* MotoneDelaunayTriangulationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE138233CFC8000494FE4 /* MotoneDelaunayTriangulationScene.swift */; };
+		548AE151233CFC8000494FE4 /* MotonePlainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE134233CFC8000494FE4 /* MotonePlainScene.swift */; };
+		548AE152233CFC8000494FE4 /* ComplexPlainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE135233CFC8000494FE4 /* ComplexPlainScene.swift */; };
+		548AE153233CFC8000494FE4 /* ComplexDelaunayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE137233CFC8000494FE4 /* ComplexDelaunayScene.swift */; };
+		548AE154233CFC8000494FE4 /* MotoneDelaunayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE138233CFC8000494FE4 /* MotoneDelaunayScene.swift */; };
 		548AE155233CFC8000494FE4 /* DelaunayAssessmentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE139233CFC8000494FE4 /* DelaunayAssessmentScene.swift */; };
 		548AE156233CFC8000494FE4 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE13B233CFC8000494FE4 /* CanvasView.swift */; };
 		548AE157233CFC8000494FE4 /* ShapeVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE13D233CFC8000494FE4 /* ShapeVector.swift */; };
@@ -42,6 +41,7 @@
 		548AE161233CFC8000494FE4 /* ShapeCoordinatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE148233CFC8000494FE4 /* ShapeCoordinatSystem.swift */; };
 		548AE162233CFC8000494FE4 /* CoordinateSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE149233CFC8000494FE4 /* CoordinateSystemScene.swift */; };
 		548AE169233D004600494FE4 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE168233D004600494FE4 /* CGPoint.swift */; };
+		54D643932345381B007BD72A /* ShapeLinePolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643922345381B007BD72A /* ShapeLinePolygon.swift */; };
 		837530B3B33C2F605E304055 /* Pods_iShapeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5038F8CCF97A64A9FD46E3 /* Pods_iShapeTests.framework */; };
 		8C160ACF86CAE90D191D727E /* Pods_iShapeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBDAFFA687FD222AEC8744A /* Pods_iShapeUI.framework */; };
 /* End PBXBuildFile section */
@@ -80,11 +80,10 @@
 		548AE12E233CFC8000494FE4 /* ActiveIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveIndex.swift; sourceTree = "<group>"; };
 		548AE12F233CFC8000494FE4 /* MouseCompatible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MouseCompatible.swift; sourceTree = "<group>"; };
 		548AE130233CFC8000494FE4 /* SceneNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneNavigation.swift; sourceTree = "<group>"; };
-		548AE132233CFC8000494FE4 /* SplitScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitScene.swift; sourceTree = "<group>"; };
-		548AE134233CFC8000494FE4 /* MotonePlainTriangulationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotonePlainTriangulationScene.swift; sourceTree = "<group>"; };
-		548AE135233CFC8000494FE4 /* ComplexPlainTriangulationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexPlainTriangulationScene.swift; sourceTree = "<group>"; };
-		548AE137233CFC8000494FE4 /* ComplexDelaunayTriangulationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDelaunayTriangulationScene.swift; sourceTree = "<group>"; };
-		548AE138233CFC8000494FE4 /* MotoneDelaunayTriangulationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotoneDelaunayTriangulationScene.swift; sourceTree = "<group>"; };
+		548AE134233CFC8000494FE4 /* MotonePlainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotonePlainScene.swift; sourceTree = "<group>"; };
+		548AE135233CFC8000494FE4 /* ComplexPlainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexPlainScene.swift; sourceTree = "<group>"; };
+		548AE137233CFC8000494FE4 /* ComplexDelaunayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDelaunayScene.swift; sourceTree = "<group>"; };
+		548AE138233CFC8000494FE4 /* MotoneDelaunayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotoneDelaunayScene.swift; sourceTree = "<group>"; };
 		548AE139233CFC8000494FE4 /* DelaunayAssessmentScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelaunayAssessmentScene.swift; sourceTree = "<group>"; };
 		548AE13B233CFC8000494FE4 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		548AE13D233CFC8000494FE4 /* ShapeVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeVector.swift; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 		548AE148233CFC8000494FE4 /* ShapeCoordinatSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeCoordinatSystem.swift; sourceTree = "<group>"; };
 		548AE149233CFC8000494FE4 /* CoordinateSystemScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateSystemScene.swift; sourceTree = "<group>"; };
 		548AE168233D004600494FE4 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		54D643922345381B007BD72A /* ShapeLinePolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeLinePolygon.swift; sourceTree = "<group>"; };
 		5AAA98F73E6E8C0A4B190F9F /* Pods_iShapeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iShapeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8197A97D83146A1569C76122 /* Pods-iShapeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeTests.release.xcconfig"; path = "Target Support Files/Pods-iShapeTests/Pods-iShapeTests.release.xcconfig"; sourceTree = "<group>"; };
 		976DFA98C28D26CB9AD5817C /* Pods-iShapeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeUITests.debug.xcconfig"; path = "Target Support Files/Pods-iShapeUITests/Pods-iShapeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,7 +228,6 @@
 		548AE131233CFC8000494FE4 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				548AE132233CFC8000494FE4 /* SplitScene.swift */,
 				548AE133233CFC8000494FE4 /* Plain */,
 				548AE136233CFC8000494FE4 /* Delaunay */,
 				548AE139233CFC8000494FE4 /* DelaunayAssessmentScene.swift */,
@@ -239,8 +238,8 @@
 		548AE133233CFC8000494FE4 /* Plain */ = {
 			isa = PBXGroup;
 			children = (
-				548AE134233CFC8000494FE4 /* MotonePlainTriangulationScene.swift */,
-				548AE135233CFC8000494FE4 /* ComplexPlainTriangulationScene.swift */,
+				548AE134233CFC8000494FE4 /* MotonePlainScene.swift */,
+				548AE135233CFC8000494FE4 /* ComplexPlainScene.swift */,
 			);
 			path = Plain;
 			sourceTree = "<group>";
@@ -248,8 +247,8 @@
 		548AE136233CFC8000494FE4 /* Delaunay */ = {
 			isa = PBXGroup;
 			children = (
-				548AE137233CFC8000494FE4 /* ComplexDelaunayTriangulationScene.swift */,
-				548AE138233CFC8000494FE4 /* MotoneDelaunayTriangulationScene.swift */,
+				548AE137233CFC8000494FE4 /* ComplexDelaunayScene.swift */,
+				548AE138233CFC8000494FE4 /* MotoneDelaunayScene.swift */,
 			);
 			path = Delaunay;
 			sourceTree = "<group>";
@@ -286,6 +285,7 @@
 			children = (
 				548AE141233CFC8000494FE4 /* ShapeVertexPolygon.swift */,
 				548AE142233CFC8000494FE4 /* ShapeVectorPolygon.swift */,
+				54D643922345381B007BD72A /* ShapeLinePolygon.swift */,
 			);
 			path = Polygon;
 			sourceTree = "<group>";
@@ -493,13 +493,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				548AE14E233CFC8000494FE4 /* MouseCompatible.swift in Sources */,
-				548AE150233CFC8000494FE4 /* SplitScene.swift in Sources */,
 				548AE15E233CFC8000494FE4 /* ShapeArea.swift in Sources */,
 				548AE156233CFC8000494FE4 /* CanvasView.swift in Sources */,
 				548AE14D233CFC8000494FE4 /* ActiveIndex.swift in Sources */,
-				548AE154233CFC8000494FE4 /* MotoneDelaunayTriangulationScene.swift in Sources */,
-				548AE151233CFC8000494FE4 /* MotonePlainTriangulationScene.swift in Sources */,
-				548AE153233CFC8000494FE4 /* ComplexDelaunayTriangulationScene.swift in Sources */,
+				548AE154233CFC8000494FE4 /* MotoneDelaunayScene.swift in Sources */,
+				548AE151233CFC8000494FE4 /* MotonePlainScene.swift in Sources */,
+				548AE153233CFC8000494FE4 /* ComplexDelaunayScene.swift in Sources */,
 				548AE14B233CFC8000494FE4 /* AppDelegate.swift in Sources */,
 				548AE160233CFC8000494FE4 /* ShapeNode.swift in Sources */,
 				548AE157233CFC8000494FE4 /* ShapeVector.swift in Sources */,
@@ -509,12 +508,13 @@
 				548AE161233CFC8000494FE4 /* ShapeCoordinatSystem.swift in Sources */,
 				548AE15D233CFC8000494FE4 /* ShapeLine.swift in Sources */,
 				548AE14C233CFC8000494FE4 /* Colors.swift in Sources */,
-				548AE152233CFC8000494FE4 /* ComplexPlainTriangulationScene.swift in Sources */,
+				548AE152233CFC8000494FE4 /* ComplexPlainScene.swift in Sources */,
 				548AE15A233CFC8000494FE4 /* ShapeVertexPolygon.swift in Sources */,
 				548AE14F233CFC8000494FE4 /* SceneNavigation.swift in Sources */,
 				548AE169233D004600494FE4 /* CGPoint.swift in Sources */,
 				548AE158233CFC8000494FE4 /* ShapeTriangle.swift in Sources */,
 				548AE15C233CFC8000494FE4 /* ShapeDot.swift in Sources */,
+				54D643932345381B007BD72A /* ShapeLinePolygon.swift in Sources */,
 				548AE162233CFC8000494FE4 /* CoordinateSystemScene.swift in Sources */,
 				548AE14A233CFC8000494FE4 /* ViewController.swift in Sources */,
 				548AE159233CFC8000494FE4 /* ShapeCircle.swift in Sources */,

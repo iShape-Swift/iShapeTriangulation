@@ -1,8 +1,8 @@
 //
-//  ComplexDelaunayTriangulationScene.swift
+//  MotonePlainScene.swift
 //  iShapeUI
 //
-//  Created by Nail Sharipov on 22/09/2019.
+//  Created by Nail Sharipov on 06/08/2019.
 //  Copyright © 2019 Nail Sharipov. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class ComplexDelaunayTriangulationScene: CoordinateSystemScene {
-
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "complex")
-    private var data: [[Point]] = []
-    private var aIndex: ActiveIndex?
-
+final class MotonePlainScene: CoordinateSystemScene {
+    
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "monotone")
+    private var data: [Point] = []
+    private var index: Int?
+    
     override init() {
         super.init()
         self.showPage(index: pageIndex)
@@ -47,19 +47,26 @@ final class ComplexDelaunayTriangulationScene: CoordinateSystemScene {
     
     private func addShapes() {
         let iGeom = IntGeom()
-        
-        let shape = self.getShape()
-        let iShape = IntShape(shape: shape)
+
+        var info = [String]()
+        info.reserveCapacity(data.count)
+        for i in 0..<data.count {
+           info.append(String(i))
+        }
+
+        let iPoints = iGeom.int(points: data)
+
+        let iShape = IntShape(hull: iPoints, holes: [])
         let pShape = PlainShape(iShape: iShape)
 
-        let triangles = pShape.triangulateDelaunay()
-        let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
+        let triangles = pShape.triangulate()
+        
         var triangle = [Int]()
         var k = 0
         for i in triangles {
             triangle.append(i)
             if triangle.count == 3 {
-                let cgPoints = triangle.map({ shapePoints[$0] })
+                let cgPoints = triangle.map({ self.data[$0] }).toCGPoints()
                 let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
                 self.addSublayer(shapeTriangle)
                 triangle.removeAll()
@@ -67,17 +74,16 @@ final class ComplexDelaunayTriangulationScene: CoordinateSystemScene {
             }
         }
         
-        let debugShapes = pShape.split().shapes
-        
-        for i in 0..<debugShapes.count {
-            let shape = debugShapes[i]
-            let color = Colors.getColor(index: i).cgColor
-            let points = iGeom.float(points: shape.points).toCGPoints()
-            self.addSublayer(ShapeVectorPolygon(points: points, shift: 0.5, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
+        let color: CGColor
+        let isValid = iPoints.isMonotone
+        if isValid {
+            color = Colors.master
+        } else {
+            color = Colors.lightGray
         }
         
         let pathes = pShape.pathes
-
+        
         for vertices in pathes {
             var points = [CGPoint]()
             points.reserveCapacity(vertices.count)
@@ -92,54 +98,51 @@ final class ComplexDelaunayTriangulationScene: CoordinateSystemScene {
             }
             
             let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
+            
+            self.addSublayer(ShapeVectorPolygon(points: points, shift: -1.0, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
             self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
         }
-
-    }
+   }
     
     func showPage(index: Int) {
-        self.data = ComplexTests.data[index]
+        self.data = MonotoneTests.data[index]
         self.update()
     }
     
 }
 
-extension ComplexDelaunayTriangulationScene: MouseCompatible {
 
-    private func findNearest(point: Point) -> ActiveIndex? {
-        var j = 0
-        while j < data.count {
-            var i = 0
-            let points = data[j]
-            while i < points.count {
-                let p = points[i]
-                let dx = p.x - point.x
-                let dy = p.y - point.y
-                let r = dx * dx + dy * dy
-                if r < 0.5 {
-                    return ActiveIndex(i: i, j: j)
-                }
-                
-                i += 1
+extension MotonePlainScene: MouseCompatible {
+    
+    private func findNearest(point: Point) -> Int? {
+        var i = 0
+        while i < data.count {
+            let p = data[i]
+            let dx = p.x - point.x
+            let dy = p.y - point.y
+            let r = dx * dx + dy * dy
+            if r < 0.5 {
+                return i
             }
-            j += 1
+            
+            i += 1
         }
-
+        
         return nil
     }
-
+    
     func mouseDown(point: CGPoint) {
-        self.aIndex = findNearest(point: point.point)
+        self.index = findNearest(point: point.point)
     }
     
     
     func mouseUp(point: CGPoint) {
-        self.aIndex = nil
+        self.index = nil
     }
     
     
     func mouseDragged(point: CGPoint) {
-        guard let index = self.aIndex else {
+        guard let index = self.index else {
             return
         }
         
@@ -147,34 +150,27 @@ extension ComplexDelaunayTriangulationScene: MouseCompatible {
         let y = Float(Int(point.y * 2)) / 2
         
         let point = Point(x: x, y: y)
-        let prevPoint = data[index.j][index.i]
+        let prevPoint = data[index]
         if point != prevPoint {
-            data[index.j][index.i] = point
+            data[index] = point
             self.update()
         }
     }
     
-    private func getShape() -> Shape {
-        let hull = data[0]
-        var holes = data
-        holes.remove(at: 0)
-        return Shape(hull: hull, holes: holes)
-    }
-    
 }
 
-extension ComplexDelaunayTriangulationScene: SceneNavigation {
+extension MotonePlainScene: SceneNavigation {
     func next() {
         let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: "complex")
+        UserDefaults.standard.set(pageIndex, forKey: "monotone")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: "complex")
+        UserDefaults.standard.set(pageIndex, forKey: "monotone")
         self.showPage(index: self.pageIndex)
     }
     

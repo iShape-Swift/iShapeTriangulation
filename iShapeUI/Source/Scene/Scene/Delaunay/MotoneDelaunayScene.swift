@@ -1,18 +1,16 @@
 //
-//  MotoneDelaunayTriangulationScene.swift
+//  MotoneDelaunayScene.swift
 //  iShapeUI
 //
 //  Created by Nail Sharipov on 11/09/2019.
 //  Copyright © 2019 Nail Sharipov. All rights reserved.
 //
 
-import Foundation
-
 import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class MotoneDelaunayTriangulationScene: CoordinateSystemScene {
+final class MotoneDelaunayScene: CoordinateSystemScene {
     
     private var pageIndex: Int = UserDefaults.standard.integer(forKey: "monotone")
     private var data: [Point] = []
@@ -147,7 +145,7 @@ final class MotoneDelaunayTriangulationScene: CoordinateSystemScene {
 }
 
 
-extension MotoneDelaunayTriangulationScene: MouseCompatible {
+extension MotoneDelaunayScene: MouseCompatible {
     
     private func findNearest(point: Point, sqrR: Float = 0.5) -> Int? {
         var i = 0
@@ -225,7 +223,7 @@ extension MotoneDelaunayTriangulationScene: MouseCompatible {
     
 }
 
-extension MotoneDelaunayTriangulationScene: SceneNavigation {
+extension MotoneDelaunayScene: SceneNavigation {
     func next() {
         let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n

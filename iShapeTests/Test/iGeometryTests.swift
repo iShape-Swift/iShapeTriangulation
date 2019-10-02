@@ -135,8 +135,8 @@ final class iGeometryTests: XCTestCase {
         let shape = Shape(
             hull: [Point(x: -10, y: -10), Point(x: -10, y: 10), Point(x: 10, y: 10), Point(x: 10, y: -10)],
             holes: [
-                [Point(x: 0, y: -5), Point(x: 5, y: -5), Point(x: 5, y: 5), Point(x: 0, y: 5)],
-                [Point(x: -5, y: -5), Point(x: 0, y: -5), Point(x: 0, y: 5), Point(x: -5, y: 5)]
+                [Point(x: 1, y: -5), Point(x: 5, y: -5), Point(x: 5, y: 5), Point(x: 1, y: 5)],
+                [Point(x: -5, y: -5), Point(x: -1, y: -5), Point(x: -1, y: 5), Point(x: -5, y: 5)]
             ]
         )
         let iShape = IntShape(shape: shape)

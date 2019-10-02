@@ -52,13 +52,21 @@ final class ShapeVectorPolygon: CALayer {
     }
     
     private static func normal(a: CGPoint, b: CGPoint, c: CGPoint) -> CGPoint {
+        guard (b - a).magnitude > 0.00000000000000000001 && (c - b).magnitude > 0.00000000000000000001 else {
+            return CGPoint(x: 1, y: 0)
+        }
         let ab = (b - a).normalize
         let bc = (c - b).normalize
-        
+
         let abN = CGPoint(x: ab.y, y: -ab.x)
         let bcN = CGPoint(x: bc.y, y: -bc.x)
         
-        return (abN + bcN).normalize
+        let sum = abN + bcN
+        if sum.magnitude < 0.00000000000000000001 {
+            return CGPoint(x: -ab.x, y: -ab.y)
+        }
+        
+        return sum.normalize
     }
     
 }

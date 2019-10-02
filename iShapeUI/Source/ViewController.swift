@@ -45,13 +45,13 @@ final class ViewController: NSViewController {
         let newScene: CALayer & MouseCompatible & SceneNavigation
         switch index {
         case 0:
-            newScene = ComplexPlainTriangulationScene()
+            newScene = ComplexPlainScene()
         case 1:
-            newScene = ComplexDelaunayTriangulationScene()
+            newScene = ComplexDelaunayScene()
         case 2:
-            newScene = MotonePlainTriangulationScene()
+            newScene = MotonePlainScene()
         case 3:
-            newScene = MotoneDelaunayTriangulationScene()
+            newScene = MotoneDelaunayScene()
         default:
             newScene = DelaunayAssessmentScene()
         }

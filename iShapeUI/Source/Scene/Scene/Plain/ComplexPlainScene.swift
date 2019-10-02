@@ -1,5 +1,5 @@
 //
-//  ComplexPlainTriangulationScene.swift
+//  ComplexPlainScene.swift
 //  iShapeUI
 //
 //  Created by Nail Sharipov on 21/09/2019.
@@ -10,7 +10,7 @@ import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class ComplexPlainTriangulationScene: CoordinateSystemScene {
+final class ComplexPlainScene: CoordinateSystemScene {
 
     private var pageIndex: Int = UserDefaults.standard.integer(forKey: "complex")
     private var data: [[Point]] = []
@@ -51,32 +51,39 @@ final class ComplexPlainTriangulationScene: CoordinateSystemScene {
         let shape = self.getShape()
         let iShape = IntShape(shape: shape)
         let pShape = PlainShape(iShape: iShape)
-
-        let triangles = pShape.triangulate()
-        let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
-        var triangle = [Int]()
-        var k = 0
-        for i in triangles {
-            triangle.append(i)
-            if triangle.count == 3 {
-                let cgPoints = triangle.map({ shapePoints[$0] })
-                let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
-                self.addSublayer(shapeTriangle)
-                triangle.removeAll()
-                k += 1
+        
+        var isValid: Bool = false
+        if case .valid = pShape.validate() {
+            isValid = true
+        }
+        if isValid {
+            let triangles = pShape.triangulate()
+            let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
+            var triangle = [Int]()
+            var k = 0
+            for i in triangles {
+                triangle.append(i)
+                if triangle.count == 3 {
+                    let cgPoints = triangle.map({ shapePoints[$0] })
+                    let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
+                    self.addSublayer(shapeTriangle)
+                    triangle.removeAll()
+                    k += 1
+                }
+            }
+            
+            let debugShapes = pShape.split().shapes
+            
+            for i in 0..<debugShapes.count {
+                let shape = debugShapes[i]
+                let color = Colors.getColor(index: i).cgColor
+                let points = iGeom.float(points: shape.points).toCGPoints()
+                self.addSublayer(ShapeVectorPolygon(points: points, shift: 0.5, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
             }
         }
         
-        let debugShapes = pShape.split().shapes
-        
-        for i in 0..<debugShapes.count {
-            let shape = debugShapes[i]
-            let color = Colors.getColor(index: i).cgColor
-            let points = iGeom.float(points: shape.points).toCGPoints()
-            self.addSublayer(ShapeVectorPolygon(points: points, shift: 0.5, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
-        }
-        
         let pathes = pShape.pathes
+        let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
 
         for vertices in pathes {
             var points = [CGPoint]()
@@ -90,11 +97,12 @@ final class ComplexPlainTriangulationScene: CoordinateSystemScene {
                 data.append(String(vertex.index))
                 points.append(iGeom.float(point: vertex.point).toCGPoint)
             }
-            
-            let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
+
+            if !isValid {
+                self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.4, color: Colors.red))
+            }
             self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
         }
-
     }
     
     func showPage(index: Int) {
@@ -104,7 +112,7 @@ final class ComplexPlainTriangulationScene: CoordinateSystemScene {
     
 }
 
-extension ComplexPlainTriangulationScene: MouseCompatible {
+extension ComplexPlainScene: MouseCompatible {
 
     private func findNearest(point: Point) -> ActiveIndex? {
         var j = 0
@@ -163,7 +171,7 @@ extension ComplexPlainTriangulationScene: MouseCompatible {
     
 }
 
-extension ComplexPlainTriangulationScene: SceneNavigation {
+extension ComplexPlainScene: SceneNavigation {
     func next() {
         let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n

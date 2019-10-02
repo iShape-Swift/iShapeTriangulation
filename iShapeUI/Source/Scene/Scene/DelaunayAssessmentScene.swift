@@ -83,7 +83,6 @@ final class DelaunayAssessmentScene: CoordinateSystemScene {
             let pi = IntGeom.defGeom.int(point: p)
             
             let success = Delaunay.verefy(p: pi, a: ai, b: bi, c: ci)
-            //let success = Monotone.isFloatDelaunay(p: p, a: a, b: b, c: c)
             
             let color: CGColor
             

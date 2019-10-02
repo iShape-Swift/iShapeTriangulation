@@ -1,8 +1,8 @@
 //
-//  SplitScene.swift
+//  ComplexDelaunayScene.swift
 //  iShapeUI
 //
-//  Created by Nail Sharipov on 16/07/2019.
+//  Created by Nail Sharipov on 22/09/2019.
 //  Copyright © 2019 Nail Sharipov. All rights reserved.
 //
 
@@ -10,9 +10,9 @@ import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class SplitScene: CoordinateSystemScene {
+final class ComplexDelaunayScene: CoordinateSystemScene {
 
-    private var pageIndex: Int = 2
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "complex")
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
 
@@ -52,13 +52,34 @@ final class SplitScene: CoordinateSystemScene {
         let iShape = IntShape(shape: shape)
         let pShape = PlainShape(iShape: iShape)
 
-        let debugShapes = pShape.split().shapes
-        
-        for i in 0..<debugShapes.count {
-            let shape = debugShapes[i]
-            let color = Colors.getColor(index: i).cgColor
-            let points = iGeom.float(points: shape.points).toCGPoints()
-            self.addSublayer(ShapeVectorPolygon(points: points, shift: 0.5, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
+        var isValid: Bool = false
+        if case .valid = pShape.validate() {
+            isValid = true
+        }
+        if isValid {
+            let triangles = pShape.triangulateDelaunay()
+            let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
+            var triangle = [Int]()
+            var k = 0
+            for i in triangles {
+                triangle.append(i)
+                if triangle.count == 3 {
+                    let cgPoints = triangle.map({ shapePoints[$0] })
+                    let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
+                    self.addSublayer(shapeTriangle)
+                    triangle.removeAll()
+                    k += 1
+                }
+            }
+            
+            let debugShapes = pShape.split().shapes
+            
+            for i in 0..<debugShapes.count {
+                let shape = debugShapes[i]
+                let color = Colors.getColor(index: i).cgColor
+                let points = iGeom.float(points: shape.points).toCGPoints()
+                self.addSublayer(ShapeVectorPolygon(points: points, shift: 0.5, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
+            }
         }
         
         let pathes = pShape.pathes
@@ -77,6 +98,9 @@ final class SplitScene: CoordinateSystemScene {
             }
             
             let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
+            if !isValid {
+                self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.4, color: Colors.red))
+            }
             self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
         }
 
@@ -89,7 +113,7 @@ final class SplitScene: CoordinateSystemScene {
     
 }
 
-extension SplitScene: MouseCompatible {
+extension ComplexDelaunayScene: MouseCompatible {
 
     private func findNearest(point: Point) -> ActiveIndex? {
         var j = 0
@@ -148,16 +172,18 @@ extension SplitScene: MouseCompatible {
     
 }
 
-extension SplitScene: SceneNavigation {
+extension ComplexDelaunayScene: SceneNavigation {
     func next() {
         let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
+        UserDefaults.standard.set(pageIndex, forKey: "complex")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
+        UserDefaults.standard.set(pageIndex, forKey: "complex")
         self.showPage(index: self.pageIndex)
     }
     
@@ -165,4 +191,3 @@ extension SplitScene: SceneNavigation {
         return "test \(self.pageIndex)"
     }
 }
-

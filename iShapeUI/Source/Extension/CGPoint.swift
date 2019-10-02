@@ -20,6 +20,10 @@ extension CGPoint {
         return sqrt(x * x + y * y)
     }
     
+    var magnitude: CGFloat {
+        return x * x + y * y
+    }
+    
     var normalize: CGPoint {
         let l = self.length
         return CGPoint(x: x / l, y: y / l)
