@@ -47,4 +47,111 @@ final class iGeometryTests: XCTestCase {
         XCTAssertEqual(points, [a, b])
     }
     
+    func testValidation_00() {
+        let shape = Shape(hull: [Point(x: -1, y: 0), Point(x: 0, y: 1), Point(x: 1, y: 0)], holes: [])
+        let iShape = IntShape(shape: shape)
+        let pShape = PlainShape(iShape: iShape)
+        
+        let isValid: Bool
+        if case .valid = pShape.validate() {
+            isValid = true
+        } else {
+            isValid = false
+        }
+        
+        XCTAssertEqual(isValid, true)
+    }
+    
+    func testValidation_01() {
+        let shape = Shape(hull: [Point(x: -1, y: 0), Point(x: 0, y: -1), Point(x: 1, y: 0)], holes: [])
+        let iShape = IntShape(shape: shape)
+        let pShape = PlainShape(iShape: iShape)
+        
+        let isValid: Bool
+        if case .valid = pShape.validate() {
+            isValid = true
+        } else {
+            isValid = false
+        }
+        
+        XCTAssertEqual(isValid, false)
+    }
+    
+    func testValidation_02() {
+        let shape = Shape(
+            hull: [Point(x: -10, y: -10), Point(x: -10, y: 10), Point(x: 10, y: 10), Point(x: 10, y: -10)],
+            holes: [
+                [Point(x: -5, y: -5), Point(x: -5, y: 5), Point(x: 0, y: 5), Point(x: 0, y: -5)],
+                [Point(x: 0, y: -5), Point(x: 5, y: -5), Point(x: 5, y: 5), Point(x: 0, y: 5)]
+            ]
+        )
+        let iShape = IntShape(shape: shape)
+        let pShape = PlainShape(iShape: iShape)
+        
+        let validation = pShape.validate()
+
+        let isValid: Bool
+        switch validation {
+        case .valid:
+            isValid = true
+        case let .holeIsNotCounterClockWise(index):
+            XCTAssertEqual(index, 0)
+            isValid = false
+        default:
+            isValid = false
+        }
+
+        XCTAssertEqual(isValid, false)
+    }
+    
+    func testValidation_03() {
+        let shape = Shape(
+            hull: [Point(x: -10, y: -10), Point(x: -10, y: 10), Point(x: 10, y: 10), Point(x: 10, y: -10)],
+            holes: [
+                [Point(x: 0, y: -5), Point(x: 5, y: -5), Point(x: 5, y: 5), Point(x: 0, y: 5)],
+                [Point(x: -5, y: -5), Point(x: -5, y: 5), Point(x: 0, y: 5), Point(x: 0, y: -5)]
+            ]
+        )
+        let iShape = IntShape(shape: shape)
+        let pShape = PlainShape(iShape: iShape)
+        
+        let validation = pShape.validate()
+
+        let isValid: Bool
+        switch validation {
+        case .valid:
+            isValid = true
+        case let .holeIsNotCounterClockWise(index):
+            XCTAssertEqual(index, 1)
+            isValid = false
+        default:
+            isValid = false
+        }
+
+        XCTAssertEqual(isValid, false)
+    }
+    
+    func testValidation_04() {
+        let shape = Shape(
+            hull: [Point(x: -10, y: -10), Point(x: -10, y: 10), Point(x: 10, y: 10), Point(x: 10, y: -10)],
+            holes: [
+                [Point(x: 0, y: -5), Point(x: 5, y: -5), Point(x: 5, y: 5), Point(x: 0, y: 5)],
+                [Point(x: -5, y: -5), Point(x: 0, y: -5), Point(x: 0, y: 5), Point(x: -5, y: 5)]
+            ]
+        )
+        let iShape = IntShape(shape: shape)
+        let pShape = PlainShape(iShape: iShape)
+        
+        let validation = pShape.validate()
+
+        let isValid: Bool
+        switch validation {
+        case .valid:
+            isValid = true
+        default:
+            isValid = false
+        }
+
+        XCTAssertEqual(isValid, true)
+    }
 }
