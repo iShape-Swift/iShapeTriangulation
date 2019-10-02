@@ -83,7 +83,7 @@ final class SplitScene: CoordinateSystemScene {
     }
     
     func showPage(index: Int) {
-        self.data = MonotoneSplitTests.data[index]
+        self.data = ComplexTests.data[index]
         self.update()
     }
     
@@ -150,13 +150,13 @@ extension SplitScene: MouseCompatible {
 
 extension SplitScene: SceneNavigation {
     func next() {
-        let n = MonotoneSplitTests.data.count
+        let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = MonotoneSplitTests.data.count
+        let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
         self.showPage(index: self.pageIndex)
     }

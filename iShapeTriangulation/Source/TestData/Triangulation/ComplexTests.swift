@@ -1,5 +1,5 @@
 //
-//  MonotoneSplitTests.swift
+//  ComplexTests.swift
 //  iShapeTriangulation
 //
 //  Created by Nail Sharipov on 07/09/2019.
@@ -11,7 +11,7 @@ import iGeometry
 
 #if iShapeTest
 
-struct MonotoneSplitTests {
+struct ComplexTests {
 
 static let data: [[[Point]]] = [
         // test 0

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		548AE0D8233CE27B00494FE4 /* MonotoneBreakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0CB233CE27B00494FE4 /* MonotoneBreakTests.swift */; };
-		548AE0D9233CE27B00494FE4 /* MonotoneSplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0CC233CE27B00494FE4 /* MonotoneSplitTests.swift */; };
+		540D282823446FF7001FD387 /* MonotoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D282623446FF7001FD387 /* MonotoneTests.swift */; };
+		540D282923446FF7001FD387 /* ComplexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D282723446FF7001FD387 /* ComplexTests.swift */; };
 		548AE0DA233CE27B00494FE4 /* IntPoint+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0CF233CE27B00494FE4 /* IntPoint+Sort.swift */; };
 		548AE0DB233CE27B00494FE4 /* IntPoint+Monotone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D0233CE27B00494FE4 /* IntPoint+Monotone.swift */; };
 		548AE0DC233CE27B00494FE4 /* PlainShape+Triangulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D2233CE27B00494FE4 /* PlainShape+Triangulation.swift */; };
@@ -20,10 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		540D282623446FF7001FD387 /* MonotoneTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonotoneTests.swift; sourceTree = "<group>"; };
+		540D282723446FF7001FD387 /* ComplexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexTests.swift; sourceTree = "<group>"; };
 		548AE08A233CE11B00494FE4 /* iShapeTriangulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iShapeTriangulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		548AE08E233CE11B00494FE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		548AE0CB233CE27B00494FE4 /* MonotoneBreakTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonotoneBreakTests.swift; sourceTree = "<group>"; };
-		548AE0CC233CE27B00494FE4 /* MonotoneSplitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonotoneSplitTests.swift; sourceTree = "<group>"; };
 		548AE0CF233CE27B00494FE4 /* IntPoint+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntPoint+Sort.swift"; sourceTree = "<group>"; };
 		548AE0D0233CE27B00494FE4 /* IntPoint+Monotone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntPoint+Monotone.swift"; sourceTree = "<group>"; };
 		548AE0D2233CE27B00494FE4 /* PlainShape+Triangulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Triangulation.swift"; sourceTree = "<group>"; };
@@ -45,6 +45,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		540D282423446FF7001FD387 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				540D282523446FF7001FD387 /* Triangulation */,
+			);
+			path = TestData;
+			sourceTree = "<group>";
+		};
+		540D282523446FF7001FD387 /* Triangulation */ = {
+			isa = PBXGroup;
+			children = (
+				540D282623446FF7001FD387 /* MonotoneTests.swift */,
+				540D282723446FF7001FD387 /* ComplexTests.swift */,
+			);
+			path = Triangulation;
+			sourceTree = "<group>";
+		};
 		548AE080233CE11B00494FE4 = {
 			isa = PBXGroup;
 			children = (
@@ -74,27 +91,10 @@
 		548AE0C8233CE27B00494FE4 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				548AE0C9233CE27B00494FE4 /* Test */,
+				540D282423446FF7001FD387 /* TestData */,
 				548AE0CD233CE27B00494FE4 /* Triangulation */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		548AE0C9233CE27B00494FE4 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				548AE0CA233CE27B00494FE4 /* Triangulation */,
-			);
-			path = Test;
-			sourceTree = "<group>";
-		};
-		548AE0CA233CE27B00494FE4 /* Triangulation */ = {
-			isa = PBXGroup;
-			children = (
-				548AE0CB233CE27B00494FE4 /* MonotoneBreakTests.swift */,
-				548AE0CC233CE27B00494FE4 /* MonotoneSplitTests.swift */,
-			);
-			path = Triangulation;
 			sourceTree = "<group>";
 		};
 		548AE0CD233CE27B00494FE4 /* Triangulation */ = {
@@ -222,13 +222,13 @@
 			files = (
 				548AE0DE233CE27B00494FE4 /* PlainShape+SliceBuffer.swift in Sources */,
 				548AE0DC233CE27B00494FE4 /* PlainShape+Triangulation.swift in Sources */,
-				548AE0D8233CE27B00494FE4 /* MonotoneBreakTests.swift in Sources */,
 				548AE0E0233CE27B00494FE4 /* Delaunay.swift in Sources */,
 				548AE0DD233CE27B00494FE4 /* PlainShape+Layout.swift in Sources */,
+				540D282923446FF7001FD387 /* ComplexTests.swift in Sources */,
 				548AE0DB233CE27B00494FE4 /* IntPoint+Monotone.swift in Sources */,
-				548AE0D9233CE27B00494FE4 /* MonotoneSplitTests.swift in Sources */,
 				5491D00D233FBA7C00E8FDD2 /* Triangulator.swift in Sources */,
 				548AE0DA233CE27B00494FE4 /* IntPoint+Sort.swift in Sources */,
+				540D282823446FF7001FD387 /* MonotoneTests.swift in Sources */,
 				548AE0DF233CE27B00494FE4 /* PlainShape+Delaunay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

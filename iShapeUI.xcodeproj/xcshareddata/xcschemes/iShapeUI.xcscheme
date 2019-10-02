@@ -61,8 +61,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5491CFF8233F477C00E8FDD2"
-               BuildableName = "iShapeUITests.xctest"
-               BlueprintName = "iShapeUITests"
+               BuildableName = "iShapeTests.xctest"
+               BlueprintName = "iShapeTests"
                ReferencedContainer = "container:iShapeUI.xcodeproj">
             </BuildableReference>
          </TestableReference>

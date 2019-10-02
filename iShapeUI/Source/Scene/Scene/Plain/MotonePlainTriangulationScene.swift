@@ -105,7 +105,7 @@ final class MotonePlainTriangulationScene: CoordinateSystemScene {
    }
     
     func showPage(index: Int) {
-        self.data = MonotoneBreakTests.data[index]
+        self.data = MonotoneTests.data[index]
         self.update()
     }
     
@@ -161,14 +161,14 @@ extension MotonePlainTriangulationScene: MouseCompatible {
 
 extension MotonePlainTriangulationScene: SceneNavigation {
     func next() {
-        let n = MonotoneSplitTests.data.count
+        let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
         UserDefaults.standard.set(pageIndex, forKey: "monotone")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = MonotoneSplitTests.data.count
+        let n = ComplexTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
         UserDefaults.standard.set(pageIndex, forKey: "monotone")
         self.showPage(index: self.pageIndex)

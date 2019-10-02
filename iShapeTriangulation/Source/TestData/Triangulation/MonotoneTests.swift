@@ -1,5 +1,5 @@
 //
-//  MonotoneBreakTests.swift
+//  MonotoneTests.swift
 //  iShapeTriangulation
 //
 //  Created by Nail Sharipov on 09/09/2019.
@@ -11,9 +11,9 @@ import iGeometry
 
 #if iShapeTest
 
-struct MonotoneBreakTests {
+public struct MonotoneTests {
     
-    static let data: [[Point]] = [
+    public static let data: [[Point]] = [
         // test 0
         [
             Point(x: -15, y: -15),

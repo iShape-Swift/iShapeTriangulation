@@ -28,7 +28,7 @@ target 'iShapeUI' do
         end
     end
 
-    target 'iShapeUITests' do
+    target 'iShapeTests' do
         inherit! :search_paths
     end
 

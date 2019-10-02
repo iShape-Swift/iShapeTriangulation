@@ -1,6 +1,6 @@
 //
 //  iGeometryTests.swift
-//  iShapeUITests
+//  iShapeTests
 //
 //  Created by Nail Sharipov on 28/09/2019.
 //  Copyright © 2019 iShape. All rights reserved.
