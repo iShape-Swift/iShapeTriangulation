@@ -16,6 +16,8 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 💡 Polygon must not include same points twice
 
+💡 Use integer geometry for calculations
+
 ---
 
 ## Basic Usage
