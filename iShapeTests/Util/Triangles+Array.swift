@@ -39,5 +39,23 @@ extension Array where Element == Int {
         return true
     }
     
+    var prettyString: String {
+        guard self.count % 3 == 0 else {
+            return ""
+        }
+        var j = 0
+        var result = String()
+        for i in 0..<self.count {
+            j += 1
+            if j == 3 {
+                if i != 2 {
+                    result += ",\n"
+                }
+                result += "\(self[i - 2]), \(self[i - 1]), \(self[i])"
+                j = 0
+            }
+        }
+        return result
+    }
     
 }

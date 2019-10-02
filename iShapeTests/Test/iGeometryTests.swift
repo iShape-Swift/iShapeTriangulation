@@ -11,22 +11,22 @@ import iGeometry
 
 final class iGeometryTests: XCTestCase {
 
-    func testIntPoint_0() {
+    func testIntPoint_00() {
         let point = IntPoint(x: 0, y: 0)
         XCTAssertEqual(point.bitPack, 0)
     }
     
-    func testIntPoint_1() {
+    func testIntPoint_01() {
         let point = IntPoint(x: 0, y: 1)
         XCTAssertEqual(point.bitPack, 1)
     }
     
-    func testIntPoint_2() {
+    func testIntPoint_02() {
         let point = IntPoint(x: 1, y: 0)
         XCTAssertEqual(point.bitPack, 256*256*256*128)
     }
     
-    func testIntGeom_0() {
+    func testIntGeom_00() {
         for x in -10...10 {
             for y in -10...10 {
                 let origin = Point(x: Float(x), y: Float(y))
@@ -38,7 +38,7 @@ final class iGeometryTests: XCTestCase {
         }
     }
     
-    func testIntGeom_1() {
+    func testIntGeom_01() {
         let a = Point(x: -100, y: 100)
         let b = Point(x: 100, y: -100)
         let iPoints = IntGeom.defGeom.int(points: [a, b])

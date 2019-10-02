@@ -24,25 +24,12 @@ final class MonotoneDelaunayTests: XCTestCase {
 
         let triangles = pShape.triangulateDelaunay()
         
-        //printA(triangles: triangles)
+//        print(triangles.prettyString)
         
         return triangles
     }
-    
-    private func printA(triangles: [Int]) {
-        var j = 0
-        print("[")
-        for i in 0..<triangles.count {
-            j += 1
-            if j == 3 {
-                print("\(triangles[i - 2]), \(triangles[i - 1]), \(triangles[i]),")
-                j = 0
-            }
-        }
-        print("]")
-    }
-    
-    func testIntPoint_0() {
+
+    func testIntPoint_00() {
         let triangles = self.triangulate(index: 0)
         
         let origin = [
@@ -53,7 +40,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_1() {
+    func testIntPoint_01() {
         let triangles = self.triangulate(index: 1)
         let origin = [
                 0, 1, 3,
@@ -63,7 +50,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_2() {
+    func testIntPoint_02() {
         let triangles = self.triangulate(index: 2)
         let origin = [
                 1, 2, 0,
@@ -73,7 +60,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
 
-    func testIntPoint_3() {
+    func testIntPoint_03() {
         let triangles = self.triangulate(index: 3)
         let origin = [
                 3, 1, 2,
@@ -83,7 +70,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_4() {
+    func testIntPoint_04() {
         let triangles = self.triangulate(index: 4)
         let origin = [
                 3, 0, 2,
@@ -92,7 +79,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_5() {
+    func testIntPoint_05() {
         let triangles = self.triangulate(index: 5)
         let origin = [
                 0, 1, 2,
@@ -102,7 +89,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_6() {
+    func testIntPoint_06() {
         let triangles = self.triangulate(index: 6)
         let origin = [
                 1, 2, 3,
@@ -112,7 +99,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_7() {
+    func testIntPoint_07() {
         let triangles = self.triangulate(index: 7)
         let origin = [
                 0, 1, 8,
@@ -126,7 +113,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_8() {
+    func testIntPoint_08() {
         let triangles = self.triangulate(index: 8)
         let origin = [
                 6, 0, 1,
@@ -140,7 +127,7 @@ final class MonotoneDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_9() {
+    func testIntPoint_09() {
         let triangles = self.triangulate(index: 9)
         let origin = [
                 0, 1, 8,

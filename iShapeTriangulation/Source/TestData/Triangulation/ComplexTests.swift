@@ -11,9 +11,9 @@ import iGeometry
 
 #if iShapeTest
 
-struct ComplexTests {
+public struct ComplexTests {
 
-static let data: [[[Point]]] = [
+public static let data: [[[Point]]] = [
         // test 0
         [
             [
