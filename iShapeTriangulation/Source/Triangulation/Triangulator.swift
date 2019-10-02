@@ -27,7 +27,7 @@ public struct Triangulator {
     }
     
     
-    /// Makes plain triangulation of polygon
+    /// Makes plain triangulation for polygon
     /// - Parameter points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
     /// - Parameter hull: range of the hull vertices in points array
     /// - Parameter holes: array of ranges for all holes
@@ -52,7 +52,7 @@ public struct Triangulator {
         return shape.triangulate()
     }
     
-    /// Makes Delaunay triangulation of polygon
+    /// Makes Delaunay triangulation for polygon
     /// - Parameter points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
     /// - Parameter hull: range of the hull vertices in points array
     /// - Parameter holes: array of ranges for all holes
