@@ -32,7 +32,7 @@ final class TriangulatorTests: XCTestCase {
         let hule = points[0...7]
         let hole = points[8...11]
         
-        let triangles = Triangulator.triangulateDelaunay(points: points, hull: hule, holes: [hole])
+        let triangles = Triangulator().triangulateDelaunay(points: points, hull: hule, holes: [hole])
         
         let template = [
             6, 7, 8,
