@@ -16,6 +16,8 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 💡 Polygon must not include same points twice
 
+💡 Use integer geometry for calculations
+
 ---
 
 ## Basic Usage
@@ -49,7 +51,7 @@ let points: [CGPoint] = [
 let hule = points[0...7]
 let hole = points[8...11]
         
-let triangles: [Int] = Triangulator.triangulateDelaunay(points: points, hull: hule, holes: [hole])
+let triangles: [Int] = Triangulator().triangulateDelaunay(points: points, hull: hule, holes: [hole])
 
 ```
 
