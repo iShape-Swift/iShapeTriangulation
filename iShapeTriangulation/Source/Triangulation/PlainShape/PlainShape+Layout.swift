@@ -6,7 +6,6 @@
 //  Copyright © 2019 Nail Sharipov. All rights reserved.
 //
 
-import Foundation
 import iGeometry
 
 extension PlainShape {
@@ -25,20 +24,6 @@ extension PlainShape {
         let links: [Link]
         let slices: [Slice]
         let indices: [Int]
-    }
-    
-    private enum LinkNature: String {
-        case start
-        case merge
-        case split
-        case end
-        case simple
-    }
-    
-    private struct ShapeNavigator {
-        let iPoints: [IntPoint]
-        let links: [Link]
-        let natures: [LinkNature]
     }
 
     private struct Sub {
@@ -75,7 +60,7 @@ extension PlainShape {
         
         var links = navigator.links
         let natures = navigator.natures
-        let sortIndices = navigator.iPoints.sortIndices
+        let sortIndices = navigator.sortIndices
         
         let n = sortIndices.count
         
@@ -416,93 +401,6 @@ extension PlainShape {
         return Bridge(a: newLinkA, b: newLinkB)
     }
     
-    private var navigator: ShapeNavigator {
-        let n = self.points.count
-        var iPoints = Array<IntPoint>(repeating: .zero, count: n)
-        var links = Array<Link>(repeating: .empty, count: n)
-        var natures = Array<LinkNature>(repeating: .simple, count: n)
-        
-        for layout in self.layouts {
-            var prev = layout.end - 1
-            var this = layout.end
-            var next = layout.begin
-            
-            var a = self.points[prev]
-            var b = self.points[this]
-            var A = a.bitPack
-            var B = b.bitPack
-            
-            while next <= layout.end {
-                let c = points[next]
-                let C = c.bitPack
-                
-                var nature: LinkNature = .simple
-                
-                let isCCW = PlainShape.isCCW(a: a, b: b, c: c)
-                
-                // TODO reverse condition
-                if layout.isHole {
-                    if A > B && B < C {
-                        if isCCW {
-                            nature = .start
-                        } else {
-                            nature = .split
-                        }
-                    }
-                    
-                    if A < B && B > C {
-                        if isCCW {
-                            nature = .end
-                        } else {
-                            nature = .merge
-                        }
-                    }
-                    
-                } else {
-                    if A > B && B < C {
-                        if isCCW {
-                            nature = .start
-                        } else {
-                            nature = .split
-                        }
-                    }
-                    
-                    if A < B && B > C {
-                        if isCCW {
-                            nature = .end
-                        } else {
-                            nature = .merge
-                        }
-                    }
-                }
-                
-                iPoints[this] = b
-                links[this] = Link(prev: prev, this: this, next: next, vertex: Vertex(index: this, point: b))
-                natures[this] = nature
-                
-                a = b
-                b = c
-                
-                A = B
-                B = C
-                
-                prev = this
-                this = next
-                
-                next += 1
-            }
-        }
-        
-        return ShapeNavigator(iPoints: iPoints, links: links, natures: natures)
-    }
-    
-    private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        let m0 = (c.y - a.y) * (b.x - a.x)
-        let m1 = (b.y - a.y) * (c.x - a.x)
-        
-        return m0 < m1
-    }
-    
     private static func sign(a: IntPoint, b: IntPoint, c: IntPoint) -> Int64 {
         return (a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)
     }
@@ -567,63 +465,3 @@ private extension Array where Element == PlainShape.Link {
         }
     }
 }
-
-#if iShapeTest
-
-struct DebugShape {
-    let points: [IntPoint]
-    let data: [String]
-}
-
-extension PlainShape.MonotoneLayout {
-
-    var shapes: [DebugShape] {
-        var shapes = Array<DebugShape>()
-        for index in self.indices {
-            
-            var next = self.links[index]
-            
-            var points = Array<IntPoint>()
-            var data = Array<String>()
-            repeat {
-                points.append(next.vertex.point)
-                data.append(String(next.vertex.index))
-                next = self.links[next.next]
-            } while next.this != index
-
-            shapes.append(DebugShape(points: points, data: data))
-        }
-        
-        return shapes
-    }
-
-}
-
-extension PlainShape {
-    
-    var pathes: [[Vertex]] {
-        get {
-            let navigator = self.navigator
-            let links = navigator.links
-            
-            var pathes = [[Vertex]]()
-            pathes.reserveCapacity(self.layouts.count)
-            
-            for split in self.layouts {
-                var vertices = [Vertex]()
-                vertices.reserveCapacity(navigator.iPoints.count)
-                var next = links[split.begin]
-                repeat {
-                    vertices.append(next.vertex)
-                    next = links[next.next]
-                } while next.this != split.begin
-                
-                pathes.append(vertices)
-            }
-            
-            return pathes
-        }
-    }
-}
-
-#endif
