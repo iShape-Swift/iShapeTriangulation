@@ -53,8 +53,12 @@ final class ComplexPlainScene: CoordinateSystemScene {
         let pShape = PlainShape(iShape: iShape)
         
         var isValid: Bool = false
-        if case .valid = pShape.validate() {
+        let validation = pShape.validate()
+        
+        if case .valid = validation {
             isValid = true
+        } else {
+            print(validation)
         }
         if isValid {
             let triangles = pShape.triangulate()
