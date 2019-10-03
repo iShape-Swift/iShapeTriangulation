@@ -352,6 +352,153 @@ public static let data: [[[Point]]] = [
                 Point(x:  10, y:   0),
                 Point(x:   5, y:   5)
             ]
+        ],
+        // test 22
+        [
+            [
+                Point(x: -10, y:  15),
+                Point(x:  10, y:  15),
+                Point(x:  10, y: -15),
+                Point(x: -10, y: -15)
+            ],
+            [
+                Point(x:  -5, y:   5),
+                Point(x:   0, y:   0),
+                Point(x:   5, y:   5),
+                Point(x:   0, y:  10)
+            ],
+            [
+                Point(x:  -5, y:  -5),
+                Point(x:   0, y: -10),
+                Point(x:   5, y:  -5),
+                Point(x:   0, y:   0)
+            ]
+        ],
+        // test 23
+        [
+            [
+                Point(x: -10, y:  15),
+                Point(x:  10, y:  15),
+                Point(x:  10, y: -15),
+                Point(x: -10, y: -15)
+            ],
+            [
+                Point(x:  -5, y:  -5),
+                Point(x:   0, y: -10),
+                Point(x:   5, y:  -5),
+                Point(x:   0, y:   0)
+            ],
+            [
+                Point(x:  -5, y:   5),
+                Point(x:   0, y:   0),
+                Point(x:   5, y:   5),
+                Point(x:   0, y:  10)
+            ]
+        ],
+        // test 24
+        [
+            [
+                Point(x: -10, y:  10),
+                Point(x:  -5, y:  10),
+                Point(x:   0, y:   5),
+                Point(x:   5, y:  10),
+                Point(x:  10, y:  10),
+                Point(x:  10, y: -10),
+                Point(x: -10, y: -10)
+            ],
+            [
+                Point(x:  -5, y:   0),
+                Point(x:   0, y:  -5),
+                Point(x:   5, y:   0),
+                Point(x:   0, y:   5)
+            ]
+        ],
+        // test 25
+        [
+            [
+                Point(x: -10, y:  10),
+                Point(x:  10, y:  10),
+                Point(x:  10, y: -10),
+                Point(x:   5, y: -10),
+                Point(x:   0, y:  -5),
+                Point(x:  -5, y: -10),
+                Point(x: -10, y: -10)
+            ],
+            [
+                Point(x:  -5, y:   0),
+                Point(x:   0, y:  -5),
+                Point(x:   5, y:   0),
+                Point(x:   0, y:   5)
+            ]
+        ],
+        // test 26
+        [
+            [
+                Point(x: -10, y:  10),
+                Point(x:  -5, y:  10),
+                Point(x:   0, y:   5),
+                Point(x:   5, y:  10),
+                Point(x:  10, y:  10),
+                Point(x:  10, y: -10),
+                Point(x:   5, y: -10),
+                Point(x:   0, y:  -5),
+                Point(x:  -5, y: -10),
+                Point(x: -10, y: -10)
+            ],
+            [
+                Point(x:  -5, y:   0),
+                Point(x:   0, y:  -5),
+                Point(x:   5, y:   0),
+                Point(x:   0, y:   5)
+            ]
+        ],
+        // test 27
+        [
+            [
+                Point(x: -10, y:  10),
+                Point(x:  10, y:  10),
+                Point(x:   0, y:   5),
+                Point(x:   5, y:   0),
+                Point(x:  10, y:  10),
+                Point(x:  10, y: -10),
+                Point(x: -10, y: -10)
+            ]
+        ],
+        // test 28
+        [
+            [
+                Point(x:  10, y:  10),
+                Point(x:  10, y: -10),
+                Point(x:   5, y:   0),
+                Point(x:   0, y:  -5),
+                Point(x:  10, y: -10),
+                Point(x: -10, y: -10),
+                Point(x: -10, y:  10)
+            ]
+        ],
+        // test 29
+        [
+            [
+                Point(x:  10, y:  10),
+                Point(x:  10, y: -10),
+                Point(x: -10, y: -10),
+                Point(x:   0, y:  -5),
+                Point(x:  -5, y:   0),
+                Point(x: -10, y: -10),
+                Point(x: -10, y:  10)
+            ]
+        ],
+        // test 30
+        [
+            [
+                Point(x: -10, y:  10),
+                Point(x:  -5, y:   0),
+                Point(x:   0, y:   5),
+                Point(x: -10, y:  10),
+                Point(x:  10, y:  10),
+                Point(x:  10, y: -10),
+                Point(x: -10, y: -10)
+            ]
         ]
     ]
 }
