@@ -23,7 +23,7 @@ final class iGeometryTests: XCTestCase {
     
     func testIntPoint_02() {
         let point = IntPoint(x: 1, y: 0)
-        XCTAssertEqual(point.bitPack, 256*256*256*128)
+        XCTAssertEqual(point.bitPack, Int64(1) << IntGeom.maxBits)
     }
     
     func testIntGeom_00() {

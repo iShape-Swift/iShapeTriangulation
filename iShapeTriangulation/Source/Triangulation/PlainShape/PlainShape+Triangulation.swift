@@ -18,13 +18,13 @@ public extension PlainShape {
         var triangles = Array<Int>()
         triangles.reserveCapacity(3 * totalCount)
         for index in layout.indices {
-            self.triangulate(index: index, links: layout.links, triangles: &triangles)
+            PlainShape.triangulate(index: index, links: layout.links, triangles: &triangles)
         }
         
         return triangles
     }
 
-    private func triangulate(index: Int, links: [Link], triangles: inout Array<Int>) {
+    private static func triangulate(index: Int, links: [Link], triangles: inout Array<Int>) {
         var c = links[index]
         
         var a0 = links[c.next]
