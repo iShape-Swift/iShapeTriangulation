@@ -12,13 +12,17 @@ import iGeometry
 
 final class MotoneDelaunayScene: CoordinateSystemScene {
     
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "monotone")
+    private var pageIndex: Int = 0
     private var data: [Point] = []
     private var index: Int?
 
     private var circles = [Point: Set<CircleBundle>]()
     
     override init() {
+        let i = UserDefaults.standard.integer(forKey: "monotone")
+        if i < MonotoneTests.data.count {
+            pageIndex = i
+        }
         super.init()
         self.showPage(index: pageIndex)
     }
@@ -225,14 +229,14 @@ extension MotoneDelaunayScene: MouseCompatible {
 
 extension MotoneDelaunayScene: SceneNavigation {
     func next() {
-        let n = ComplexTests.data.count
+        let n = MonotoneTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
         UserDefaults.standard.set(pageIndex, forKey: "monotone")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = ComplexTests.data.count
+        let n = MonotoneTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
         UserDefaults.standard.set(pageIndex, forKey: "monotone")
         self.showPage(index: self.pageIndex)
