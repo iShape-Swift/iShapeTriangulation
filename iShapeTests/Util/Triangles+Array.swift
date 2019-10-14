@@ -8,6 +8,30 @@
 
 import Foundation
 
+private struct Triangle: Hashable {
+    
+    let a: Int
+    let b: Int
+    let c: Int
+    
+    func hash(into hasher: inout Hasher) {
+        if a > b && a > c {
+            hasher.combine(a)
+        } else if b > a && b > c {
+            hasher.combine(b)
+        } else {
+            hasher.combine(c)
+        }
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return
+            lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c ||
+                lhs.a == rhs.b && lhs.b == rhs.c && lhs.c == rhs.a ||
+                lhs.a == rhs.c && lhs.b == rhs.a && lhs.c == rhs.b
+    }
+}
+
 
 extension Array where Element == Int {
     
@@ -16,27 +40,35 @@ extension Array where Element == Int {
             return false
         }
         
-        var j = 0
-        for i in 0..<self.count {
-            j += 1
-            if j == 3 {
-                let a = self[i]
-                let b = self[i - 1]
-                let c = self[i - 2]
-                
-                let a0 = array[i]
-                let b0 = array[i - 1]
-                let c0 = array[i - 2]
-                if !(a == a0 && b == b0 && c == c0 ||
-                    a == c0 && b == a0 && c == b0 ||
-                    a == b0 && b == c0 && c == a0) {
-                    return false
-                }
-                j = 0
+        let a = self.triangles
+        let b = array.triangles
+        var set = Set(a)
+        
+        for triangle in b {
+            if set.remove(triangle) == nil {
+                return false
             }
         }
-
+        
         return true
+    }
+    
+    private var triangles: [Triangle] {
+        get {
+            let n = self.count
+            var result = Array<Triangle>(repeating: .init(a: 0, b: 0, c: 0), count: n / 3)
+            var i = 0
+            while i < n {
+                let a = self[i]
+                let b = self[i + 1]
+                let c = self[i + 2]
+                
+                result[i / 3] = Triangle(a: a, b: b, c: c)
+                
+                i += 3
+            }
+            return result
+        }
     }
     
     var prettyString: String {
