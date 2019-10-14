@@ -28,7 +28,7 @@ final class ComplexDelaunayTests: XCTestCase {
 
         let triangles = pShape.triangulateDelaunay()
         
-//        print(triangles.prettyString)
+        print(triangles.prettyString)
         
         return triangles
     }
@@ -297,5 +297,223 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
+    func testIntPoint_18() {
+        let triangles = self.triangulate(index: 18)
+        let origin = [
+                9, 4, 8,
+                10, 4, 9,
+                7, 4, 10,
+                8, 4, 0,
+                4, 5, 3,
+                4, 3, 0,
+                6, 3, 5,
+                10, 11, 7,
+                1, 7, 11,
+                8, 0, 11,
+                1, 11, 0,
+                7, 1, 2,
+                7, 2, 6,
+                3, 6, 2
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_19() {
+        let triangles = self.triangulate(index: 19)
+        let origin = [
+                7, 8, 9,
+                6, 7, 9,
+                6, 9, 5,
+                0, 5, 9,
+                4, 5, 0,
+                1, 2, 4,
+                1, 4, 0,
+                3, 4, 2
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_20() {
+        let triangles = self.triangulate(index: 20)
+        let origin = [
+                2, 3, 4,
+                1, 2, 4,
+                1, 4, 0,
+                5, 0, 4,
+                9, 0, 5,
+                6, 7, 9,
+                6, 9, 5,
+                8, 9, 7
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_21() {
+        let triangles = self.triangulate(index: 21)
+        let origin = [
+                7, 8, 6,
+                8, 9, 6,
+                0, 4, 5,
+                0, 5, 3,
+                5, 6, 9,
+                5, 9, 3,
+                9, 10, 3,
+                0, 1, 4,
+                1, 7, 4,
+                1, 2, 7,
+                7, 11, 8,
+                7, 2, 11,
+                11, 2, 10,
+                10, 2, 3
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_22() {
+        let triangles = self.triangulate(index: 22)
+        let origin = [
+                4, 11, 8,
+                5, 11, 4,
+                10, 11, 5,
+                6, 10, 5,
+                8, 9, 3,
+                2, 3, 9,
+                10, 2, 9,
+                6, 2, 10,
+                0, 8, 3,
+                4, 8, 0,
+                7, 4, 0,
+                1, 7, 0,
+                6, 7, 1,
+                2, 6, 1
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_23() {
+        let triangles = self.triangulate(index: 23)
+        let origin = [
+                8, 7, 4,
+                9, 7, 8,
+                6, 7, 9,
+                10, 6, 9,
+                4, 5, 3,
+                2, 3, 5,
+                6, 2, 5,
+                10, 2, 6,
+                0, 4, 3,
+                8, 4, 0,
+                11, 8, 0,
+                1, 11, 0,
+                10, 11, 1,
+                2, 10, 1
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_24() {
+        let triangles = self.triangulate(index: 24)
+        let origin = [
+                0, 7, 6,
+                1, 7, 0,
+                10, 7, 1,
+                2, 10, 1,
+                9, 10, 2,
+                3, 9, 2,
+                7, 8, 6,
+                5, 6, 8,
+                9, 5, 8,
+                9, 3, 4,
+                9, 4, 5
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_25() {
+        let triangles = self.triangulate(index: 25)
+        let origin = [
+                7, 4, 5,
+                8, 4, 7,
+                3, 4, 8,
+                9, 3, 8,
+                2, 3, 9,
+                6, 0, 7,
+                6, 7, 5,
+                10, 7, 0,
+                1, 10, 0,
+                9, 10, 1,
+                2, 9, 1
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_26() {
+        let triangles = self.triangulate(index: 26)
+        let origin = [
+                9, 0, 10,
+                9, 10, 8,
+                1, 10, 0,
+                13, 10, 1,
+                2, 13, 1,
+                12, 13, 2,
+                3, 12, 2,
+                10, 7, 8,
+                11, 7, 10,
+                6, 7, 11,
+                12, 6, 11,
+                4, 12, 3,
+                5, 6, 12,
+                4, 5, 12
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_27() {
+        let triangles = self.triangulate(index: 27)
+        let origin = [
+                6, 0, 2,
+                0, 1, 2,
+                6, 2, 3,
+                6, 3, 5,
+                3, 4, 5
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_28() {
+        let triangles = self.triangulate(index: 28)
+        let origin = [
+                5, 3, 4,
+                5, 6, 3,
+                6, 2, 3,
+                6, 0, 2,
+                2, 0, 1
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_29() {
+        let triangles = self.triangulate(index: 29)
+        let origin = [
+                3, 1, 2,
+                6, 4, 5,
+                0, 4, 6,
+                0, 3, 4,
+                3, 0, 1
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func testIntPoint_30() {
+        let triangles = self.triangulate(index: 30)
+        let origin = [
+                0, 1, 6,
+                1, 2, 5,
+                1, 5, 6,
+                4, 2, 3,
+                5, 2, 4
+            ]
+            XCTAssertEqual(triangles.compare(array: origin), true)
+    }
 }
 

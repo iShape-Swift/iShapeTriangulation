@@ -282,5 +282,4 @@ final class MonotonePlainTests: XCTestCase {
             ]
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
-    
 }
