@@ -33,7 +33,7 @@ final class ComplexDelaunayTests: XCTestCase {
         return triangles
     }
 
-    func testIntPoint_00() {
+    func test_00() {
         let triangles = self.triangulate(index: 0)
         
         let origin = [
@@ -44,7 +44,7 @@ final class ComplexDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_01() {
+    func test_01() {
         let triangles = self.triangulate(index: 1)
         let origin = [
                 1, 2, 0,
@@ -55,7 +55,7 @@ final class ComplexDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_02() {
+    func test_02() {
         let triangles = self.triangulate(index: 2)
         let origin = [
                 0, 5, 6,
@@ -70,7 +70,7 @@ final class ComplexDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
 
-    func testIntPoint_03() {
+    func test_03() {
         let triangles = self.triangulate(index: 3)
         let origin = [
                 2, 3, 1,
@@ -79,7 +79,7 @@ final class ComplexDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_04() {
+    func test_04() {
         let triangles = self.triangulate(index: 4)
         let origin = [
                 1, 4, 0,
@@ -89,7 +89,7 @@ final class ComplexDelaunayTests: XCTestCase {
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_05() {
+    func test_05() {
         let triangles = self.triangulate(index: 5)
         let origin = [
                 1, 4, 0,
@@ -100,7 +100,7 @@ final class ComplexDelaunayTests: XCTestCase {
         
     }
     
-    func testIntPoint_06() {
+    func test_06() {
         let triangles = self.triangulate(index: 6)
         let origin = [
                 0, 2, 3,
@@ -109,7 +109,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_07() {
+    func test_07() {
         let triangles = self.triangulate(index: 7)
         let origin = [
                 1, 7, 0,
@@ -122,7 +122,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_08() {
+    func test_08() {
         let triangles = self.triangulate(index: 8)
         let origin = [
                 7, 5, 6,
@@ -135,7 +135,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_09() {
+    func test_09() {
         let triangles = self.triangulate(index: 9)
         let origin = [
                 2, 0, 1,
@@ -148,7 +148,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_10() {
+    func test_10() {
         let triangles = self.triangulate(index: 10)
         let origin = [
                 7, 0, 6,
@@ -161,7 +161,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_11() {
+    func test_11() {
         let triangles = self.triangulate(index: 11)
         let origin = [
                 0, 1, 7,
@@ -175,7 +175,7 @@ final class ComplexDelaunayTests: XCTestCase {
     }
     
     
-    func testIntPoint_12() {
+    func test_12() {
         let triangles = self.triangulate(index: 12)
         let origin = [
                 0, 4, 7,
@@ -189,7 +189,7 @@ final class ComplexDelaunayTests: XCTestCase {
     }
     
     
-    func testIntPoint_13() {
+    func test_13() {
         let triangles = self.triangulate(index: 13)
         let origin = [
                 1, 11, 0,
@@ -207,7 +207,7 @@ final class ComplexDelaunayTests: XCTestCase {
     }
     
     
-    func testIntPoint_14() {
+    func test_14() {
         let triangles = self.triangulate(index: 14)
         let origin = [
                 1, 9, 0,
@@ -223,7 +223,7 @@ final class ComplexDelaunayTests: XCTestCase {
     }
     
     
-    func testIntPoint_15() {
+    func test_15() {
         let triangles = self.triangulate(index: 15)
         let origin = [
                 4, 2, 3,
@@ -233,7 +233,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_16() {
+    func test_16() {
         let triangles = self.triangulate(index: 16)
         let origin = [
                 33, 1, 2,
@@ -278,7 +278,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_17() {
+    func test_17() {
         let triangles = self.triangulate(index: 17)
         let origin = [
                 6, 7, 8,
@@ -297,7 +297,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_18() {
+    func test_18() {
         let triangles = self.triangulate(index: 18)
         let origin = [
                 9, 4, 8,
@@ -318,7 +318,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_19() {
+    func test_19() {
         let triangles = self.triangulate(index: 19)
         let origin = [
                 7, 8, 9,
@@ -333,7 +333,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_20() {
+    func test_20() {
         let triangles = self.triangulate(index: 20)
         let origin = [
                 2, 3, 4,
@@ -348,7 +348,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_21() {
+    func test_21() {
         let triangles = self.triangulate(index: 21)
         let origin = [
                 7, 8, 6,
@@ -369,7 +369,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_22() {
+    func test_22() {
         let triangles = self.triangulate(index: 22)
         let origin = [
                 4, 11, 8,
@@ -390,7 +390,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_23() {
+    func test_23() {
         let triangles = self.triangulate(index: 23)
         let origin = [
                 8, 7, 4,
@@ -411,7 +411,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_24() {
+    func test_24() {
         let triangles = self.triangulate(index: 24)
         let origin = [
                 0, 7, 6,
@@ -429,7 +429,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_25() {
+    func test_25() {
         let triangles = self.triangulate(index: 25)
         let origin = [
                 7, 4, 5,
@@ -447,7 +447,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_26() {
+    func test_26() {
         let triangles = self.triangulate(index: 26)
         let origin = [
                 9, 0, 10,
@@ -468,7 +468,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_27() {
+    func test_27() {
         let triangles = self.triangulate(index: 27)
         let origin = [
                 6, 0, 2,
@@ -480,7 +480,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_28() {
+    func test_28() {
         let triangles = self.triangulate(index: 28)
         let origin = [
                 5, 3, 4,
@@ -492,7 +492,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_29() {
+    func test_29() {
         let triangles = self.triangulate(index: 29)
         let origin = [
                 3, 1, 2,
@@ -504,7 +504,7 @@ final class ComplexDelaunayTests: XCTestCase {
             XCTAssertEqual(triangles.compare(array: origin), true)
     }
     
-    func testIntPoint_30() {
+    func test_30() {
         let triangles = self.triangulate(index: 30)
         let origin = [
                 0, 1, 6,
