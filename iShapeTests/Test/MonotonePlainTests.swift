@@ -23,7 +23,8 @@ final class MonotonePlainTests: XCTestCase {
         let pShape = PlainShape(iShape: iShape)
 
         let triangles = pShape.triangulate()
-        
+
+        XCTAssertEqual(TestUtil.isCCW(points: iPoints, triangles: triangles), true)
 //        print(triangles.prettyString)
         
         return triangles

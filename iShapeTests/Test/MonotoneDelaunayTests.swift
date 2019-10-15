@@ -24,6 +24,8 @@ final class MonotoneDelaunayTests: XCTestCase {
 
         let triangles = pShape.triangulateDelaunay()
         
+        XCTAssertEqual(TestUtil.isCCW(points: iPoints, triangles: triangles), true)
+        
 //        print(triangles.prettyString)
         
         return triangles

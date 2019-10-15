@@ -28,6 +28,8 @@ final class ComplexDelaunayTests: XCTestCase {
 
         let triangles = pShape.triangulateDelaunay()
         
+        XCTAssertEqual(TestUtil.isCCW(points: pShape.points, triangles: triangles), true)
+        
 //        print(triangles.prettyString)
         
         return triangles

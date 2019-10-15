@@ -10,7 +10,7 @@ import XCTest
 import iShapeTriangulation
 
 final class TriangulatorTests: XCTestCase {
-
+    
     func test_0() {
         let points = [
             CGPoint(x: -5, y: 10),
@@ -22,7 +22,7 @@ final class TriangulatorTests: XCTestCase {
             CGPoint(x: -10, y: -5),
             CGPoint(x: -10, y: 5),
             
-
+            
             CGPoint(x: -5, y: 0),
             CGPoint(x: 0, y: -5),
             CGPoint(x: 5, y: 0),
@@ -39,8 +39,8 @@ final class TriangulatorTests: XCTestCase {
             6, 8, 5,
             0, 8, 7,
             11, 8, 0,
-            1, 11, 0,
-            1, 10, 11,
+            11, 0, 1,
+            11, 1, 10,
             8, 9, 5,
             4, 5, 9,
             10, 4, 9,
@@ -51,7 +51,7 @@ final class TriangulatorTests: XCTestCase {
         
         XCTAssertEqual(triangles, template)
     }
-
-
+    
+    
 }
 

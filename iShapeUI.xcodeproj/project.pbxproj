@@ -14,6 +14,7 @@
 		540D28412344782B001FD387 /* MonotonePlainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D28402344782B001FD387 /* MonotonePlainTests.swift */; };
 		540D2843234478E8001FD387 /* MonotoneDelaunayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2842234478E8001FD387 /* MonotoneDelaunayTests.swift */; };
 		540D284523447985001FD387 /* Triangles+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D284423447985001FD387 /* Triangles+Array.swift */; };
+		5458A8252355A66100CB45DC /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458A8242355A66100CB45DC /* TestUtil.swift */; };
 		548AE11E233CE7EF00494FE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11D233CE7EF00494FE4 /* Assets.xcassets */; };
 		548AE121233CE7EF00494FE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11F233CE7EF00494FE4 /* Main.storyboard */; };
 		548AE14A233CFC8000494FE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE12A233CFC8000494FE4 /* ViewController.swift */; };
@@ -69,6 +70,7 @@
 		540D28402344782B001FD387 /* MonotonePlainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonotonePlainTests.swift; sourceTree = "<group>"; };
 		540D2842234478E8001FD387 /* MonotoneDelaunayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotoneDelaunayTests.swift; sourceTree = "<group>"; };
 		540D284423447985001FD387 /* Triangles+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Triangles+Array.swift"; sourceTree = "<group>"; };
+		5458A8242355A66100CB45DC /* TestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		548AE116233CE7EE00494FE4 /* iShapeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShapeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		548AE11D233CE7EF00494FE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		548AE120233CE7EF00494FE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				540D284423447985001FD387 /* Triangles+Array.swift */,
+				5458A8242355A66100CB45DC /* TestUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				540C2362234484C900A1D178 /* ComplexDelaunayTests.swift in Sources */,
 				540D2843234478E8001FD387 /* MonotoneDelaunayTests.swift in Sources */,
 				540C2360234481C100A1D178 /* ComplexPlainTests.swift in Sources */,
+				5458A8252355A66100CB45DC /* TestUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
