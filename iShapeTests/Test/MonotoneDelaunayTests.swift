@@ -215,12 +215,12 @@ final class MonotoneDelaunayTests: XCTestCase {
     func test_14() {
         let triangles = self.triangulate(index: 14)
         let origin = [
-                8, 1, 2,
-                7, 2, 3,
+                1, 2, 8,
+                2, 3, 7,
                 6, 3, 4,
-                8, 0, 1,
-                8, 9, 0,
-                7, 8, 2,
+                9, 0, 1,
+                1, 8, 9,
+                2, 7, 8,
                 6, 7, 3,
                 5, 6, 4
             ]

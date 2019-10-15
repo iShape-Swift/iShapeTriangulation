@@ -28,7 +28,7 @@ final class ComplexDelaunayTests: XCTestCase {
 
         let triangles = pShape.triangulateDelaunay()
         
-        print(triangles.prettyString)
+//        print(triangles.prettyString)
         
         return triangles
     }

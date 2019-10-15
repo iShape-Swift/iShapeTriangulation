@@ -284,12 +284,7 @@ struct Delaunay {
         let isPABccw = Delaunay.isCCW(a: p, b: a, c: b)
         let isPCBccw = Delaunay.isCCW(a: p, b: c, c: b)
         if isPABccw != isPCBccw {
-            // TODO remove ccw check
-            if isCCW(a: a, b: b, c: c) {
-                return Delaunay.isDelaunay(p: p, a: a, b: b, c: c)
-            } else {
-                return Delaunay.isDelaunay(p: p, a: c, b: b, c: a)
-            }
+            return Delaunay.isDelaunay(p: p, a: a, b: b, c: c)
         } else {
             return true
         }
