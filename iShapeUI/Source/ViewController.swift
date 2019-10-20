@@ -33,11 +33,14 @@ final class ViewController: NSViewController {
         popUpButton.selectItem(at: 0)
         popUpButton.action = #selector(didPickScene)
         popUpButton.target = self
-        self.selectScene(index: 0)
+        let index: Int = UserDefaults.standard.integer(forKey: "screen")
+        self.selectScene(index: index)
     }
     
     @objc private func didPickScene(sender: NSPopUpButton) {
-        self.selectScene(index: sender.indexOfSelectedItem)
+        let index = sender.indexOfSelectedItem
+        UserDefaults.standard.set(index, forKey: "screen")
+        self.selectScene(index: index)
     }
     
     private func selectScene(index: Int) {
