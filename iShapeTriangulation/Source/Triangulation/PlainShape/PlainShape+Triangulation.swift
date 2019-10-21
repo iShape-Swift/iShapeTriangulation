@@ -100,7 +100,7 @@ public extension PlainShape {
                                 ax0 = ax1
                                 ax1 = links[ax1.next]
                             }
-                        } while ax1.vertex.point.bitPack < bBit1
+                        } while ax1.vertex.point.bitPack <= bBit1
                     } else {
                         var cx = c
                         var bx0 = b0
@@ -132,12 +132,14 @@ public extension PlainShape {
                                 bx0 = bx1
                                 bx1 = links[bx1.prev]
                             }
-                        } while bx1.vertex.point.bitPack < aBit1
+                        } while bx1.vertex.point.bitPack <= aBit1
                     }
                     
-                    triangles.append(c.vertex.index)
-                    triangles.append(a0.vertex.index)
-                    triangles.append(b0.vertex.index)
+                    if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
+                        triangles.append(c.vertex.index)
+                        triangles.append(a0.vertex.index)
+                        triangles.append(b0.vertex.index)
+                    }
                     
                     if bBit0 < aBit0 {
                         c = b0
