@@ -141,12 +141,20 @@ public extension PlainShape {
                         triangles.append(b0.vertex.index)
                     }
                     
+                    a0 = links[a0.this]
+                    b0 = links[b0.this]
+                    
+                    a0.prev = b0.this
+                    b0.next = a0.this
+                    links[a0.this] = a0
+                    links[b0.this] = b0
+                    
                     if bBit0 < aBit0 {
                         c = b0
-                        b0 = b1
+                        b0 = links[b0.prev]
                     } else {
                         c = a0
-                        a0 = a1
+                        a0 = links[a0.next]
                     }
                 }
         }
