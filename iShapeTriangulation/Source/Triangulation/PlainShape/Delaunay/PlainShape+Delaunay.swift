@@ -42,8 +42,6 @@ public extension PlainShape {
                  c: c
              )
 
-            self.edges.append(Edge(a: b.index, b: c.index, neighbor: triangle.index)) // bc is always slice
-
             if let ac = self.pop(a: a.index, b: c.index) {
                 var neighbor = triangles[ac.neighbor]
                 neighbor.neighbors[0] = triangle.index
@@ -57,6 +55,8 @@ public extension PlainShape {
                 triangle.neighbors[2] = neighbor.index
                 triangles[neighbor.index] = neighbor
             }
+            
+            self.edges.append(Edge(a: b.index, b: c.index, neighbor: triangle.index)) // bc is always slice
 
             triangles[triangle.index] = triangle
 
@@ -66,7 +66,7 @@ public extension PlainShape {
         private mutating func pop(a: Index, b: Index) -> Edge? {
             let last = edges.count - 1
             var i = 0
-            repeat {
+            while i <= last {
                 let e = edges[i]
                 if (e.a == a || e.a == b) && (e.b == a || e.b == b) {
                     if i != last {
@@ -76,7 +76,7 @@ public extension PlainShape {
                     return e
                 }
                 i += 1
-            } while i <= last
+            }
             return nil
         }
     }
@@ -156,7 +156,7 @@ public extension PlainShape {
                         repeat {
                             let isCCW = PlainShape.isCCW_or_Line(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
                             if isCCW {
-                                triangleStack.add(a: cx.vertex, b: ax0.vertex, c: ax1.vertex)
+                                triangleStack.add(a: ax0.vertex, b: ax1.vertex, c: cx.vertex)
                                 
                                 ax1.prev = cx.this
                                 cx.next = ax1.this
