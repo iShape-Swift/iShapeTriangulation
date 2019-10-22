@@ -142,12 +142,15 @@ public extension PlainShape {
                     
                     if bBit0 < aBit0 {
                         c = b0
-                        b0 = links[b0.prev]
+                        b0 = b1
                     } else {
                         c = a0
-                        a0 = links[a0.next]
+                        a0 = a1
                     }
                 } else {
+                    
+                    var isModified = false
+                    
                     if aBit1 < bBit1 {
                         var cx = c
                         var ax0 = a0
@@ -156,6 +159,7 @@ public extension PlainShape {
                         repeat {
                             let isCCW = PlainShape.isCCW_or_Line(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
                             if isCCW {
+                                isModified = true
                                 triangleStack.add(a: ax0.vertex, b: ax1.vertex, c: cx.vertex)
                                 
                                 ax1.prev = cx.this
@@ -184,6 +188,7 @@ public extension PlainShape {
                         repeat {
                             let isCCW = PlainShape.isCCW_or_Line(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
                             if isCCW {
+                                isModified = true
                                 triangleStack.add(a: bx0.vertex, b: cx.vertex, c: bx1.vertex)
                                 
                                 bx1.next = cx.this
@@ -205,25 +210,29 @@ public extension PlainShape {
                                 bx1 = links[bx1.prev]
                             }
                         } while bx1.vertex.point.bitPack <= aBit1
+
+                    }
+                    
+                    if isModified {
+                        a0 = links[a0.this]
+                        b0 = links[b0.this]
+                    } else {
+                         triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
+                        
+                         a0.prev = b0.this
+                         b0.next = a0.this
+                         links[a0.this] = a0
+                         links[b0.this] = b0
+                         
+                         if bBit0 < aBit0 {
+                             c = b0
+                             b0 = b1
+                         } else {
+                             c = a0
+                             a0 = a1
+                         }
                     }
 
-                    a0 = links[a0.this]
-                    b0 = links[b0.this]
-                    
-                    triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
-                   
-                    a0.prev = b0.this
-                    b0.next = a0.this
-                    links[a0.this] = a0
-                    links[b0.this] = b0
-                    
-                    if bBit0 < aBit0 {
-                        c = b0
-                        b0 = links[b0.prev]
-                    } else {
-                        c = a0
-                        a0 = links[a0.next]
-                    }
                 }
         }
     }

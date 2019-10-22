@@ -29,7 +29,7 @@ final class ViewController: NSViewController {
 
     private func setupPopUpButton() {
         let index: Int = UserDefaults.standard.integer(forKey: "screen")
-        //        let index: Int = 0
+//        let index: Int = 0
         let popUpButton = canvasView.testList
         popUpButton.addItems(withTitles: ["Complex Plain", "Complex Delaunay", "Monotone Plain", "Monotone Delaunay", "DelaunayTest"])
         popUpButton.selectItem(at: index)
