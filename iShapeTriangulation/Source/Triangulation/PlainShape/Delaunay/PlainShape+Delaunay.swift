@@ -29,19 +29,19 @@ public extension PlainShape {
             self.edges.reserveCapacity(8)
             self.triangles = Array<Delaunay.Triangle>(repeating: .init(), count: count)
         }
-
+        
         mutating func reset() {
             edges.removeAll(keepingCapacity: true)
         }
         
         mutating func add(a: Vertex, b: Vertex, c: Vertex) {
             var triangle = Delaunay.Triangle(
-                 index: counter,
-                 a: a,
-                 b: b,
-                 c: c
-             )
-
+                index: counter,
+                a: a,
+                b: b,
+                c: c
+            )
+            
             if let ac = self.pop(a: a.index, b: c.index) {
                 var neighbor = triangles[ac.neighbor]
                 neighbor.neighbors[0] = triangle.index
@@ -57,10 +57,20 @@ public extension PlainShape {
             }
             
             self.edges.append(Edge(a: b.index, b: c.index, neighbor: triangle.index)) // bc is always slice
-
+            
             triangles[triangle.index] = triangle
-
+            
             counter += 1
+        }
+        
+        mutating func updateLast() {
+            let e = edges[0]
+            var triangle = self.triangles[counter - 1]
+            var neighbor = triangles[e.neighbor]
+            neighbor.neighbors[0] = triangle.index
+            triangle.neighbors[0] = neighbor.index
+            triangles[neighbor.index] = neighbor
+            triangles[triangle.index] = triangle
         }
         
         private mutating func pop(a: Index, b: Index) -> Edge? {
@@ -80,14 +90,14 @@ public extension PlainShape {
             return nil
         }
     }
-
+    
     func triangulateDelaunay() -> [Int] {
         let layout = self.split()
         
         let vertexCount = self.points.count
         
         let totalCount = vertexCount &+ ((self.layouts.count - 2) << 1)
-
+        
         var triangleStack = TriangleStack(count: totalCount)
         
         var links = layout.links
@@ -113,7 +123,7 @@ public extension PlainShape {
         
         var a0 = links[c.next]
         var b0 = links[c.prev]
-
+        
         next_point:
             while a0.this != b0.this {
                 let a1 = links[a0.next]
@@ -132,9 +142,9 @@ public extension PlainShape {
                 }
                 
                 if aBit0 < bBit1 && bBit0 < aBit1 {
-
+                    
                     triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
-
+                    
                     a0.prev = b0.this
                     b0.next = a0.this
                     links[a0.this] = a0
@@ -210,31 +220,33 @@ public extension PlainShape {
                                 bx1 = links[bx1.prev]
                             }
                         } while bx1.vertex.point.bitPack <= aBit1
-
+                        
                     }
                     
                     if isModified {
                         a0 = links[a0.this]
                         b0 = links[b0.this]
                     } else {
-                         triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
+                        triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
                         
-                         a0.prev = b0.this
-                         b0.next = a0.this
-                         links[a0.this] = a0
-                         links[b0.this] = b0
-                         
-                         if bBit0 < aBit0 {
-                             c = b0
-                             b0 = b1
-                         } else {
-                             c = a0
-                             a0 = a1
-                         }
+                        a0.prev = b0.this
+                        b0.next = a0.this
+                        links[a0.this] = a0
+                        links[b0.this] = b0
+                        
+                        if bBit0 < aBit0 {
+                            c = b0
+                            b0 = b1
+                        } else {
+                            c = a0
+                            a0 = a1
+                        }
                     }
-
+                    
                 }
-        }
+        } // while
+        
+        triangleStack.updateLast()
     }
     
     private static func isCCW_or_Line(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
