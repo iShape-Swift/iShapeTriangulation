@@ -68,35 +68,52 @@ extension PlainShape {
                 
                 // TODO optimise a little
                 
-                let edgeNumber: Int
                 var edgeIndex = self.find(a: a, b: b)
                 if edgeIndex >= 0 {
-                    edgeNumber = 2
-                } else {
-                    edgeIndex = self.find(a: a, b: c)
-                    if edgeIndex >= 0 {
-                        edgeNumber = 1
+                    var edge = self.edges[edgeIndex]
+                    if edge.isEmpty {
+                        edge.triangle = i
+                        edge.edge = 2
+                        self.edges[edgeIndex] = edge
                     } else {
-                        edgeIndex = self.find(a: b, b: c)
-                        if edgeIndex >= 0 {
-                            edgeNumber = 0
-                        } else {
-                            continue
-                        }
+                        triangle.neighbors[2] = edge.triangle
+                        var neighbor = triangles[edge.triangle]
+                        neighbor.neighbors[edge.edge] = i
+                        triangles[edge.triangle] = neighbor
+                        triangles[i] = triangle
                     }
                 }
-
-                var edge = self.edges[edgeIndex]
-                if edge.isEmpty {
-                    edge.triangle = i
-                    edge.edge = edgeNumber
-                    self.edges[edgeIndex] = edge
-                } else {
-                    triangle.neighbors[edgeNumber] = edge.triangle
-                    var neighbor = triangles[edge.triangle]
-                    neighbor.neighbors[edge.edge] = i
-                    triangles[edge.triangle] = neighbor
-                    triangles[i] = triangle
+                
+                edgeIndex = self.find(a: a, b: c)
+                if edgeIndex >= 0 {
+                    var edge = self.edges[edgeIndex]
+                    if edge.isEmpty {
+                        edge.triangle = i
+                        edge.edge = 1
+                        self.edges[edgeIndex] = edge
+                    } else {
+                        triangle.neighbors[1] = edge.triangle
+                        var neighbor = triangles[edge.triangle]
+                        neighbor.neighbors[edge.edge] = i
+                        triangles[edge.triangle] = neighbor
+                        triangles[i] = triangle
+                    }
+                }
+                
+                edgeIndex = self.find(a: b, b: c)
+                if edgeIndex >= 0 {
+                    var edge = self.edges[edgeIndex]
+                    if edge.isEmpty {
+                        edge.triangle = i
+                        edge.edge = 0
+                        self.edges[edgeIndex] = edge
+                    } else {
+                        triangle.neighbors[0] = edge.triangle
+                        var neighbor = triangles[edge.triangle]
+                        neighbor.neighbors[edge.edge] = i
+                        triangles[edge.triangle] = neighbor
+                        triangles[i] = triangle
+                    }
                 }
             }
 
