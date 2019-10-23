@@ -65,12 +65,15 @@ public extension PlainShape {
         
         mutating func updateLast() {
             let e = edges[0]
-            var triangle = self.triangles[counter - 1]
-            var neighbor = triangles[e.neighbor]
-            neighbor.neighbors[0] = triangle.index
-            triangle.neighbors[0] = neighbor.index
-            triangles[neighbor.index] = neighbor
-            triangles[triangle.index] = triangle
+            let triangleIndex = counter - 1
+            if e.neighbor != triangleIndex {
+                var triangle = self.triangles[triangleIndex]
+                var neighbor = triangles[e.neighbor]
+                neighbor.neighbors[0] = triangle.index
+                triangle.neighbors[0] = neighbor.index
+                triangles[neighbor.index] = neighbor
+                triangles[triangle.index] = triangle
+            }
         }
         
         private mutating func pop(a: Index, b: Index) -> Edge? {
@@ -102,8 +105,8 @@ public extension PlainShape {
         
         var links = layout.links
         for index in layout.indices {
-            triangleStack.reset()
             PlainShape.triangulate(index: index, links: &links, triangleStack: &triangleStack)
+            triangleStack.reset()
         }
         
         var triangles = triangleStack.triangles
