@@ -20,7 +20,7 @@ public extension PlainShape {
     private struct TriangleStack {
         
         private var edges: [Edge]
-        private (set) var triangles: [Delaunay.Triangle]
+        private var triangles: [Delaunay.Triangle]
         private var counter: Int
         
         init(count: Int) {
@@ -28,6 +28,13 @@ public extension PlainShape {
             self.edges = Array<Edge>()
             self.edges.reserveCapacity(8)
             self.triangles = Array<Delaunay.Triangle>(repeating: .init(), count: count)
+        }
+        
+        mutating func getTriangles() -> [Delaunay.Triangle] {
+            if counter != triangles.count {
+                triangles.removeLast(triangles.count - counter)
+            }
+            return triangles
         }
         
         mutating func reset() {
@@ -64,15 +71,17 @@ public extension PlainShape {
         }
         
         mutating func updateLast() {
-            let e = edges[0]
-            let triangleIndex = counter - 1
-            if e.neighbor != triangleIndex {
-                var triangle = self.triangles[triangleIndex]
-                var neighbor = triangles[e.neighbor]
-                neighbor.neighbors[0] = triangle.index
-                triangle.neighbors[0] = neighbor.index
-                triangles[neighbor.index] = neighbor
-                triangles[triangle.index] = triangle
+            if !edges.isEmpty {
+                let e = edges[0]
+                let triangleIndex = counter - 1
+                if e.neighbor != triangleIndex {
+                    var triangle = self.triangles[triangleIndex]
+                    var neighbor = triangles[e.neighbor]
+                    neighbor.neighbors[0] = triangle.index
+                    triangle.neighbors[0] = neighbor.index
+                    triangles[neighbor.index] = neighbor
+                    triangles[triangle.index] = triangle
+                }
             }
         }
         
@@ -109,7 +118,7 @@ public extension PlainShape {
             triangleStack.reset()
         }
         
-        var triangles = triangleStack.triangles
+        var triangles = triangleStack.getTriangles()
         
         var sliceBuffer = SliceBuffer(vertexCount: vertexCount, slices: layout.slices)
         sliceBuffer.addConections(triangles: &triangles)
@@ -145,8 +154,9 @@ public extension PlainShape {
                 }
                 
                 if aBit0 < bBit1 && bBit0 < aBit1 {
-                    
-                    triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
+                    if c.vertex.index != a0.vertex.index && c.vertex.index != b0.vertex.index && a0.vertex.index != b0.vertex.index {
+                        triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
+                    }
                     
                     a0.prev = b0.this
                     b0.next = a0.this
@@ -170,11 +180,11 @@ public extension PlainShape {
                         var ax1 = a1
                         
                         repeat {
-                            let isCCW = PlainShape.isCCW_or_Line(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
-                            if isCCW {
-                                isModified = true
+                            let orientation = PlainShape.getOrientation(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
+                            switch orientation {
+                            case .clockWise:
                                 triangleStack.add(a: ax0.vertex, b: ax1.vertex, c: cx.vertex)
-                                
+                                isModified = true
                                 ax1.prev = cx.this
                                 cx.next = ax1.this
                                 links[cx.this] = cx
@@ -188,7 +198,26 @@ public extension PlainShape {
                                     a0 = links[c.next]
                                     continue next_point
                                 }
-                            } else {
+                            case .line:
+                                if ax0.vertex.index != ax1.vertex.index && ax0.vertex.index != cx.vertex.index && ax1.vertex.index != cx.vertex.index {
+                                    triangleStack.add(a: ax0.vertex, b: ax1.vertex, c: cx.vertex)
+                                }
+                                
+                                isModified = true
+                                ax1.prev = cx.this
+                                cx.next = ax1.this
+                                links[cx.this] = cx
+                                links[ax1.this] = ax1
+                                if cx.this != c.this {
+                                    ax0 = cx
+                                    cx = links[cx.prev]
+                                    break
+                                } else {
+                                    c = links[c.this]
+                                    a0 = links[c.next]
+                                    continue next_point
+                                }
+                            case .counterClockWise:
                                 cx = ax0
                                 ax0 = ax1
                                 ax1 = links[ax1.next]
@@ -199,11 +228,29 @@ public extension PlainShape {
                         var bx0 = b0
                         var bx1 = b1
                         repeat {
-                            let isCCW = PlainShape.isCCW_or_Line(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
-                            if isCCW {
-                                isModified = true
+                            let orientation = PlainShape.getOrientation(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
+                            switch orientation {
+                            case .clockWise:
                                 triangleStack.add(a: bx0.vertex, b: cx.vertex, c: bx1.vertex)
-                                
+                                isModified = true
+                                 bx1.next = cx.this
+                                 cx.prev = bx1.this
+                                 links[cx.this] = cx
+                                 links[bx1.this] = bx1
+                                 if cx.this != c.this {
+                                     bx0 = cx
+                                     cx = links[cx.next]
+                                     break
+                                 } else {
+                                     c = links[c.this]
+                                     b0 = links[c.prev]
+                                     continue next_point
+                                 }
+                            case .line:
+                                if bx0.vertex.index != cx.vertex.index && bx0.vertex.index != bx1.vertex.index && cx.vertex.index != bx1.vertex.index {
+                                    triangleStack.add(a: bx0.vertex, b: cx.vertex, c: bx1.vertex)
+                                }
+                                isModified = true
                                 bx1.next = cx.this
                                 cx.prev = bx1.this
                                 links[cx.this] = cx
@@ -217,7 +264,7 @@ public extension PlainShape {
                                     b0 = links[c.prev]
                                     continue next_point
                                 }
-                            } else {
+                            case .counterClockWise:
                                 cx = bx0
                                 bx0 = bx1
                                 bx1 = links[bx1.prev]
@@ -230,8 +277,10 @@ public extension PlainShape {
                         a0 = links[a0.this]
                         b0 = links[b0.this]
                     } else {
-                        triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
-                        
+                        if c.vertex.index != a0.vertex.index && c.vertex.index != b0.vertex.index && a0.vertex.index != b0.vertex.index {
+                            triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
+                        }
+
                         a0.prev = b0.this
                         b0.next = a0.this
                         links[a0.this] = a0
@@ -252,12 +301,33 @@ public extension PlainShape {
         triangleStack.updateLast()
     }
     
+    private enum Orientation {
+        case clockWise
+        case counterClockWise
+        case line
+    }
+    
+    private static func getOrientation(a: IntPoint, b: IntPoint, c: IntPoint) -> Orientation {
+        let m0 = (c.y - a.y) * (b.x - a.x)
+        let m1 = (b.y - a.y) * (c.x - a.x)
+        
+        if m0 < m1 {
+            return .clockWise
+        } else if m0 > m1 {
+            return .counterClockWise
+        } else {
+            return .line
+        }
+    }
+    
+    /*
     private static func isCCW_or_Line(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         let m0 = (c.y &- a.y) &* (b.x &- a.x)
         let m1 = (b.y &- a.y) &* (c.x &- a.x)
         
         return m0 <= m1
     }
+    */
 }
 
 

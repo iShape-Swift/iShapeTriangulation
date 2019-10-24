@@ -21,43 +21,7 @@ extension PlainShape {
         let iPoints: [IntPoint]
         let links: [Link]
         let natures: [LinkNature]
-
-        private struct SortData {
-            let index: Int
-            let factor: Int64
-        }
-        
-        var sortIndices: [Int] {
-            let n = self.iPoints.count
-            var dataList = Array<SortData>(repeating: SortData(index: 0, factor: 0), count: n)
-            var i = 0
-            while i < n {
-                let p = self.iPoints[i]
-                dataList[i] = SortData(index: i, factor: p.bitPack)
-                i += 1
-            }
-            
-            dataList.sort(by: {
-                a, b in
-                if a.factor != b.factor {
-                    return a.factor < b.factor
-                } else {
-                    let nFactorA = natures[a.index].rawValue
-                    let nFactorB = natures[b.index].rawValue
-                    
-                    return nFactorA < nFactorB
-                }
-            })
-            
-            var indices = Array<Int>(repeating: 0, count: n)
-            i = 0
-            while i < n {
-                indices[i] = dataList[i].index
-                i += 1
-            }
-
-            return indices
-        }
+        let sortIndices: [Int]
     }
     
     
@@ -138,9 +102,60 @@ extension PlainShape {
             }
         }
         
-        return ShapeNavigator(iPoints: iPoints, links: links, natures: natures)
+        // sort
+
+        var dataList = Array<SortData>(repeating: SortData(index: 0, factor: 0), count: n)
+        for i in 0..<n {
+            let p = iPoints[i]
+            dataList[i] = SortData(index: i, factor: p.bitPack)
+        }
+        
+        dataList.sort(by: {
+            a, b in
+            if a.factor != b.factor {
+                return a.factor < b.factor
+            } else {
+                let nFactorA = natures[a.index].rawValue
+                let nFactorB = natures[b.index].rawValue
+                
+                return nFactorA < nFactorB
+            }
+        })
+        
+        var indices = Array<Int>(repeating: 0, count: n)
+        var b = SortData(index: -1, factor: .min)
+        var i = 0
+        
+        // filter same points
+        while i < n {
+            var a = dataList[i]
+            indices[i] = a.index
+            if a.factor == b.factor {
+                let index = links[b.index].vertex.index
+                repeat {
+                    let link = links[a.index]
+                    links[a.index] = Link(prev: link.prev, this: link.this, next: link.next, vertex: Vertex(index: index, point: link.vertex.point))
+                    i += 1
+                    if i < n {
+                        a = dataList[i]
+                        indices[i] = a.index
+                    } else {
+                        break
+                    }
+                } while a.factor == b.factor
+            }
+            b = a
+            i += 1
+        }
+
+        return ShapeNavigator(iPoints: iPoints, links: links, natures: natures, sortIndices: indices)
     }
     
+    private struct SortData {
+        let index: Int
+        let factor: Int64
+    }
+
     private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         let m0 = (c.y - a.y) * (b.x - a.x)
         let m1 = (b.y - a.y) * (c.x - a.x)
