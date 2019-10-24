@@ -12,9 +12,9 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 💡 Supports plain and Delaunay triangulation
 
-💡 Polygon must not have self intersections
+💡 Same points is not restricted
 
-💡 Polygon must not include same points twice
+💡 Polygon must not have self intersections
 
 💡 Use integer geometry for calculations
 
