@@ -7,31 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		540D282823446FF7001FD387 /* MonotoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D282623446FF7001FD387 /* MonotoneTests.swift */; };
-		540D282923446FF7001FD387 /* ComplexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D282723446FF7001FD387 /* ComplexTests.swift */; };
-		548AE0DA233CE27B00494FE4 /* IntPoint+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0CF233CE27B00494FE4 /* IntPoint+Sort.swift */; };
-		548AE0DB233CE27B00494FE4 /* IntPoint+Monotone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D0233CE27B00494FE4 /* IntPoint+Monotone.swift */; };
-		548AE0DC233CE27B00494FE4 /* PlainShape+Triangulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D2233CE27B00494FE4 /* PlainShape+Triangulation.swift */; };
-		548AE0DD233CE27B00494FE4 /* PlainShape+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D3233CE27B00494FE4 /* PlainShape+Layout.swift */; };
-		548AE0DE233CE27B00494FE4 /* PlainShape+SliceBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D5233CE27B00494FE4 /* PlainShape+SliceBuffer.swift */; };
-		548AE0DF233CE27B00494FE4 /* PlainShape+Delaunay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D6233CE27B00494FE4 /* PlainShape+Delaunay.swift */; };
-		548AE0E0233CE27B00494FE4 /* Delaunay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE0D7233CE27B00494FE4 /* Delaunay.swift */; };
-		5491D00D233FBA7C00E8FDD2 /* Triangulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491D00C233FBA7C00E8FDD2 /* Triangulator.swift */; };
+		544D4BEB236322DF00ADA404 /* MonotoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BDB236322DF00ADA404 /* MonotoneTests.swift */; };
+		544D4BEC236322DF00ADA404 /* ComplexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BDC236322DF00ADA404 /* ComplexTests.swift */; };
+		544D4BED236322DF00ADA404 /* IntPoint+Monotone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BDF236322DF00ADA404 /* IntPoint+Monotone.swift */; };
+		544D4BEE236322DF00ADA404 /* IntTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE0236322DF00ADA404 /* IntTriangle.swift */; };
+		544D4BEF236322DF00ADA404 /* Triangulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE1236322DF00ADA404 /* Triangulator.swift */; };
+		544D4BF0236322DF00ADA404 /* PlainShape+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE3236322DF00ADA404 /* PlainShape+Test.swift */; };
+		544D4BF1236322DF00ADA404 /* PlainShape+Triangulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE4236322DF00ADA404 /* PlainShape+Triangulation.swift */; };
+		544D4BF2236322DF00ADA404 /* PlainShape+ShapeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE5236322DF00ADA404 /* PlainShape+ShapeNavigator.swift */; };
+		544D4BF3236322DF00ADA404 /* PlainShape+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE6236322DF00ADA404 /* PlainShape+Layout.swift */; };
+		544D4BF4236322DF00ADA404 /* PlainShape+SliceBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE8236322DF00ADA404 /* PlainShape+SliceBuffer.swift */; };
+		544D4BF5236322DF00ADA404 /* PlainShape+Delaunay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BE9236322DF00ADA404 /* PlainShape+Delaunay.swift */; };
+		544D4BF6236322DF00ADA404 /* Delaunay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D4BEA236322DF00ADA404 /* Delaunay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		540D282623446FF7001FD387 /* MonotoneTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonotoneTests.swift; sourceTree = "<group>"; };
-		540D282723446FF7001FD387 /* ComplexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexTests.swift; sourceTree = "<group>"; };
+		544D4BDB236322DF00ADA404 /* MonotoneTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonotoneTests.swift; sourceTree = "<group>"; };
+		544D4BDC236322DF00ADA404 /* ComplexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexTests.swift; sourceTree = "<group>"; };
+		544D4BDF236322DF00ADA404 /* IntPoint+Monotone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntPoint+Monotone.swift"; sourceTree = "<group>"; };
+		544D4BE0236322DF00ADA404 /* IntTriangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntTriangle.swift; sourceTree = "<group>"; };
+		544D4BE1236322DF00ADA404 /* Triangulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangulator.swift; sourceTree = "<group>"; };
+		544D4BE3236322DF00ADA404 /* PlainShape+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Test.swift"; sourceTree = "<group>"; };
+		544D4BE4236322DF00ADA404 /* PlainShape+Triangulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Triangulation.swift"; sourceTree = "<group>"; };
+		544D4BE5236322DF00ADA404 /* PlainShape+ShapeNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+ShapeNavigator.swift"; sourceTree = "<group>"; };
+		544D4BE6236322DF00ADA404 /* PlainShape+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Layout.swift"; sourceTree = "<group>"; };
+		544D4BE8236322DF00ADA404 /* PlainShape+SliceBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+SliceBuffer.swift"; sourceTree = "<group>"; };
+		544D4BE9236322DF00ADA404 /* PlainShape+Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Delaunay.swift"; sourceTree = "<group>"; };
+		544D4BEA236322DF00ADA404 /* Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delaunay.swift; sourceTree = "<group>"; };
 		548AE08A233CE11B00494FE4 /* iShapeTriangulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iShapeTriangulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		548AE08E233CE11B00494FE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		548AE0CF233CE27B00494FE4 /* IntPoint+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntPoint+Sort.swift"; sourceTree = "<group>"; };
-		548AE0D0233CE27B00494FE4 /* IntPoint+Monotone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntPoint+Monotone.swift"; sourceTree = "<group>"; };
-		548AE0D2233CE27B00494FE4 /* PlainShape+Triangulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Triangulation.swift"; sourceTree = "<group>"; };
-		548AE0D3233CE27B00494FE4 /* PlainShape+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Layout.swift"; sourceTree = "<group>"; };
-		548AE0D5233CE27B00494FE4 /* PlainShape+SliceBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+SliceBuffer.swift"; sourceTree = "<group>"; };
-		548AE0D6233CE27B00494FE4 /* PlainShape+Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Delaunay.swift"; sourceTree = "<group>"; };
-		548AE0D7233CE27B00494FE4 /* Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delaunay.swift; sourceTree = "<group>"; };
-		5491D00C233FBA7C00E8FDD2 /* Triangulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangulator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,21 +49,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		540D282423446FF7001FD387 /* TestData */ = {
+		544D4BD8236322DF00ADA404 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				540D282523446FF7001FD387 /* Triangulation */,
+				544D4BD9236322DF00ADA404 /* TestData */,
+				544D4BDD236322DF00ADA404 /* Triangulation */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		544D4BD9236322DF00ADA404 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				544D4BDA236322DF00ADA404 /* Triangulation */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
 		};
-		540D282523446FF7001FD387 /* Triangulation */ = {
+		544D4BDA236322DF00ADA404 /* Triangulation */ = {
 			isa = PBXGroup;
 			children = (
-				540D282623446FF7001FD387 /* MonotoneTests.swift */,
-				540D282723446FF7001FD387 /* ComplexTests.swift */,
+				544D4BDB236322DF00ADA404 /* MonotoneTests.swift */,
+				544D4BDC236322DF00ADA404 /* ComplexTests.swift */,
 			);
 			path = Triangulation;
+			sourceTree = "<group>";
+		};
+		544D4BDD236322DF00ADA404 /* Triangulation */ = {
+			isa = PBXGroup;
+			children = (
+				544D4BDE236322DF00ADA404 /* Util */,
+				544D4BE1236322DF00ADA404 /* Triangulator.swift */,
+				544D4BE2236322DF00ADA404 /* PlainShape */,
+			);
+			path = Triangulation;
+			sourceTree = "<group>";
+		};
+		544D4BDE236322DF00ADA404 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				544D4BDF236322DF00ADA404 /* IntPoint+Monotone.swift */,
+				544D4BE0236322DF00ADA404 /* IntTriangle.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		544D4BE2236322DF00ADA404 /* PlainShape */ = {
+			isa = PBXGroup;
+			children = (
+				544D4BE3236322DF00ADA404 /* PlainShape+Test.swift */,
+				544D4BE4236322DF00ADA404 /* PlainShape+Triangulation.swift */,
+				544D4BE5236322DF00ADA404 /* PlainShape+ShapeNavigator.swift */,
+				544D4BE6236322DF00ADA404 /* PlainShape+Layout.swift */,
+				544D4BE7236322DF00ADA404 /* Delaunay */,
+			);
+			path = PlainShape;
+			sourceTree = "<group>";
+		};
+		544D4BE7236322DF00ADA404 /* Delaunay */ = {
+			isa = PBXGroup;
+			children = (
+				544D4BE8236322DF00ADA404 /* PlainShape+SliceBuffer.swift */,
+				544D4BE9236322DF00ADA404 /* PlainShape+Delaunay.swift */,
+				544D4BEA236322DF00ADA404 /* Delaunay.swift */,
+			);
+			path = Delaunay;
 			sourceTree = "<group>";
 		};
 		548AE080233CE11B00494FE4 = {
@@ -82,58 +136,10 @@
 		548AE08C233CE11B00494FE4 /* iShapeTriangulation */ = {
 			isa = PBXGroup;
 			children = (
-				548AE0C8233CE27B00494FE4 /* Source */,
+				544D4BD8236322DF00ADA404 /* Source */,
 				548AE08E233CE11B00494FE4 /* Info.plist */,
 			);
 			path = iShapeTriangulation;
-			sourceTree = "<group>";
-		};
-		548AE0C8233CE27B00494FE4 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				540D282423446FF7001FD387 /* TestData */,
-				548AE0CD233CE27B00494FE4 /* Triangulation */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		548AE0CD233CE27B00494FE4 /* Triangulation */ = {
-			isa = PBXGroup;
-			children = (
-				548AE0CE233CE27B00494FE4 /* Util */,
-				548AE0D1233CE27B00494FE4 /* PlainShape */,
-				5491D00C233FBA7C00E8FDD2 /* Triangulator.swift */,
-			);
-			path = Triangulation;
-			sourceTree = "<group>";
-		};
-		548AE0CE233CE27B00494FE4 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				548AE0CF233CE27B00494FE4 /* IntPoint+Sort.swift */,
-				548AE0D0233CE27B00494FE4 /* IntPoint+Monotone.swift */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		548AE0D1233CE27B00494FE4 /* PlainShape */ = {
-			isa = PBXGroup;
-			children = (
-				548AE0D2233CE27B00494FE4 /* PlainShape+Triangulation.swift */,
-				548AE0D3233CE27B00494FE4 /* PlainShape+Layout.swift */,
-				548AE0D4233CE27B00494FE4 /* Delaunay */,
-			);
-			path = PlainShape;
-			sourceTree = "<group>";
-		};
-		548AE0D4233CE27B00494FE4 /* Delaunay */ = {
-			isa = PBXGroup;
-			children = (
-				548AE0D5233CE27B00494FE4 /* PlainShape+SliceBuffer.swift */,
-				548AE0D6233CE27B00494FE4 /* PlainShape+Delaunay.swift */,
-				548AE0D7233CE27B00494FE4 /* Delaunay.swift */,
-			);
-			path = Delaunay;
 			sourceTree = "<group>";
 		};
 		548AE0E8233CE32200494FE4 /* Frameworks */ = {
@@ -220,16 +226,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				548AE0DE233CE27B00494FE4 /* PlainShape+SliceBuffer.swift in Sources */,
-				548AE0DC233CE27B00494FE4 /* PlainShape+Triangulation.swift in Sources */,
-				548AE0E0233CE27B00494FE4 /* Delaunay.swift in Sources */,
-				548AE0DD233CE27B00494FE4 /* PlainShape+Layout.swift in Sources */,
-				540D282923446FF7001FD387 /* ComplexTests.swift in Sources */,
-				548AE0DB233CE27B00494FE4 /* IntPoint+Monotone.swift in Sources */,
-				5491D00D233FBA7C00E8FDD2 /* Triangulator.swift in Sources */,
-				548AE0DA233CE27B00494FE4 /* IntPoint+Sort.swift in Sources */,
-				540D282823446FF7001FD387 /* MonotoneTests.swift in Sources */,
-				548AE0DF233CE27B00494FE4 /* PlainShape+Delaunay.swift in Sources */,
+				544D4BF6236322DF00ADA404 /* Delaunay.swift in Sources */,
+				544D4BF1236322DF00ADA404 /* PlainShape+Triangulation.swift in Sources */,
+				544D4BF5236322DF00ADA404 /* PlainShape+Delaunay.swift in Sources */,
+				544D4BEC236322DF00ADA404 /* ComplexTests.swift in Sources */,
+				544D4BEE236322DF00ADA404 /* IntTriangle.swift in Sources */,
+				544D4BF0236322DF00ADA404 /* PlainShape+Test.swift in Sources */,
+				544D4BEF236322DF00ADA404 /* Triangulator.swift in Sources */,
+				544D4BF3236322DF00ADA404 /* PlainShape+Layout.swift in Sources */,
+				544D4BED236322DF00ADA404 /* IntPoint+Monotone.swift in Sources */,
+				544D4BF4236322DF00ADA404 /* PlainShape+SliceBuffer.swift in Sources */,
+				544D4BF2236322DF00ADA404 /* PlainShape+ShapeNavigator.swift in Sources */,
+				544D4BEB236322DF00ADA404 /* MonotoneTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

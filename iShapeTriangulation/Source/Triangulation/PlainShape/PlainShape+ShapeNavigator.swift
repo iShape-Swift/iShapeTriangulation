@@ -47,7 +47,7 @@ extension PlainShape {
                 
                 var nature: LinkNature = .simple
                 
-                let isCCW = PlainShape.isCCW(a: a, b: b, c: c)
+                let isCCW = IntTriangle.isCCW(a: a, b: b, c: c)
                 
                 // TODO reverse condition
                 if layout.isHole {
@@ -154,12 +154,5 @@ extension PlainShape {
     private struct SortData {
         let index: Int
         let factor: Int64
-    }
-
-    private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        let m0 = (c.y - a.y) * (b.x - a.x)
-        let m1 = (b.y - a.y) * (c.x - a.x)
-        
-        return m0 < m1
     }
 }

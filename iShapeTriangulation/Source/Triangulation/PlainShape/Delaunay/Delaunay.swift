@@ -31,7 +31,7 @@ struct Delaunay {
             self.vertices[1] = b
             self.vertices[2] = c
             #if iShapeTest
-            assert(Delaunay.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
+            assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
             #endif
         }
         
@@ -42,7 +42,7 @@ struct Delaunay {
             self.vertices[2] = c
             self.neighbors[0] = bc
             #if iShapeTest
-            assert(Delaunay.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
+            assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
             #endif
         }
         
@@ -54,7 +54,7 @@ struct Delaunay {
             self.neighbors[1] = ac
             self.neighbors[2] = ab
             #if iShapeTest
-            assert(Delaunay.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
+            assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
             #endif
         }
         
@@ -194,7 +194,7 @@ struct Delaunay {
         if isPrefect {
             return false
         } else {
-            let isABP_CCW = Delaunay.isCCW(a: a.point, b: b.point, c: p.point)
+            let isABP_CCW = IntTriangle.isCCW(a: a.point, b: b.point, c: p.point)
             
             let bp = pbc.neighbor(vertex: c.index)
             let cp = pbc.neighbor(vertex: b.index)
@@ -281,8 +281,8 @@ struct Delaunay {
     }
     
     private static func isPrefect(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        let isPABccw = Delaunay.isCCW(a: p, b: a, c: b)
-        let isPCBccw = Delaunay.isCCW(a: p, b: c, c: b)
+        let isPABccw = IntTriangle.isCCW(a: p, b: a, c: b)
+        let isPCBccw = IntTriangle.isCCW(a: p, b: c, c: b)
         if isPABccw != isPCBccw {
             return Delaunay.isDelaunay(p: p, a: a, b: b, c: c)
         } else {
@@ -314,21 +314,6 @@ struct Delaunay {
             
             return Float(sinAlfa) * Float(cosBeta) + Float(cosAlfa) * Float(sinBeta) >= -0.00001
         }
-    }
-
-    // @inline(__always)
-    private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        let m0 = (c.y - a.y) * (b.x - a.x)
-        let m1 = (b.y - a.y) * (c.x - a.x)
-        
-        return m0 < m1
-    }
-    
-    private static func isCCW_or_Line(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        let m0 = (c.y - a.y) * (b.x - a.x)
-        let m1 = (b.y - a.y) * (c.x - a.x)
-        
-        return m0 <= m1
     }
 }
 
