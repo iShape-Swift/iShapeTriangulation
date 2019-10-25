@@ -11,7 +11,7 @@ target 'iShapeUI' do
 		pod 'iGeometry', :path => work_path
 	else
 		puts "==> use cloud version"
-		pod 'iGeometry'
+		pod 'iGeometry', '>= 1.1.0'
 	end
 
 	pod 'iShapeTriangulation',				:path => './'
