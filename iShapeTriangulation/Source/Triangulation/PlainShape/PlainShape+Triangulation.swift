@@ -92,7 +92,6 @@ public extension PlainShape {
                                 if cx.this != c.this {
                                     ax0 = cx
                                     cx = links[cx.prev]
-                                    break
                                 } else {
                                     c = links[c.this]
                                     a0 = links[c.next]
@@ -125,7 +124,6 @@ public extension PlainShape {
                                 if cx.this != c.this {
                                     bx0 = cx
                                     cx = links[cx.next]
-                                    break
                                 } else {
                                     c = links[c.this]
                                     b0 = links[c.prev]

@@ -123,10 +123,11 @@ extension PlainShape {
         })
         
         var indices = Array<Int>(repeating: 0, count: n)
-        var b = SortData(index: -1, factor: .min)
-        var i = 0
         
         // filter same points
+        var b = SortData(index: -1, factor: .min)
+        var i = 0
+
         while i < n {
             var a = dataList[i]
             indices[i] = a.index
