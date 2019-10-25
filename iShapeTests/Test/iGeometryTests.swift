@@ -10,7 +10,7 @@ import XCTest
 import iGeometry
 
 final class iGeometryTests: XCTestCase {
-
+    
     func testIntPoint_00() {
         let point = IntPoint(x: 0, y: 0)
         XCTAssertEqual(point.bitPack, 0)
@@ -89,7 +89,7 @@ final class iGeometryTests: XCTestCase {
         let pShape = PlainShape(iShape: iShape)
         
         let validation = pShape.validate()
-
+        
         let isValid: Bool
         switch validation {
         case .valid:
@@ -100,7 +100,7 @@ final class iGeometryTests: XCTestCase {
         default:
             isValid = false
         }
-
+        
         XCTAssertEqual(isValid, false)
     }
     
@@ -116,7 +116,7 @@ final class iGeometryTests: XCTestCase {
         let pShape = PlainShape(iShape: iShape)
         
         let validation = pShape.validate()
-
+        
         let isValid: Bool
         switch validation {
         case .valid:
@@ -127,7 +127,7 @@ final class iGeometryTests: XCTestCase {
         default:
             isValid = false
         }
-
+        
         XCTAssertEqual(isValid, false)
     }
     
@@ -143,7 +143,7 @@ final class iGeometryTests: XCTestCase {
         let pShape = PlainShape(iShape: iShape)
         
         let validation = pShape.validate()
-
+        
         let isValid: Bool
         switch validation {
         case .valid:
@@ -151,7 +151,7 @@ final class iGeometryTests: XCTestCase {
         default:
             isValid = false
         }
-
+        
         XCTAssertEqual(isValid, true)
     }
 }

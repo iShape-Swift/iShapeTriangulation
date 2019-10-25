@@ -68,6 +68,8 @@ public extension PlainShape {
                         a0 = a1
                     }
                 } else {
+                    var isModified = false
+                    
                     if aBit1 < bBit1 {
                         var cx = c
                         var ax0 = a0
@@ -82,6 +84,7 @@ public extension PlainShape {
                                 triangles.append(ax1.vertex.index)
                                 fallthrough
                             case .line:
+                                isModified = true
                                 ax1.prev = cx.this
                                 cx.next = ax1.this
                                 links[cx.this] = cx
@@ -114,6 +117,7 @@ public extension PlainShape {
                                 triangles.append(bx0.vertex.index)
                                 fallthrough
                             case .line:
+                                isModified = true
                                 bx1.next = cx.this
                                 cx.prev = bx1.this
                                 links[cx.this] = cx
@@ -135,18 +139,28 @@ public extension PlainShape {
                         } while bx1.vertex.point.bitPack <= aBit1
                     }
                     
-                    if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
-                        triangles.append(c.vertex.index)
-                        triangles.append(a0.vertex.index)
-                        triangles.append(b0.vertex.index)
-                    }
-                    
-                    if bBit0 < aBit0 {
-                        c = b0
-                        b0 = b1
+                    if isModified {
+                        a0 = links[a0.this]
+                        b0 = links[b0.this]
                     } else {
-                        c = a0
-                        a0 = a1
+                         if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
+                             triangles.append(c.vertex.index)
+                             triangles.append(a0.vertex.index)
+                             triangles.append(b0.vertex.index)
+                         }
+                        
+                         a0.prev = b0.this
+                         b0.next = a0.this
+                         links[a0.this] = a0
+                         links[b0.this] = b0
+                         
+                         if bBit0 < aBit0 {
+                             c = b0
+                             b0 = b1
+                         } else {
+                             c = a0
+                             a0 = a1
+                         }
                     }
                 }
         }

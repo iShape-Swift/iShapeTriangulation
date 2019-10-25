@@ -68,7 +68,7 @@ final class CanvasView: NSView {
     override func layout() {
         super.layout()
         let size = self.bounds.size
-        let width: CGFloat = 120
+        let width: CGFloat = 160
         let height: CGFloat = 20
 
         self.transform = CanvasView.calculateCurrentTransform(rect: self.bounds)
