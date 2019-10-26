@@ -10,11 +10,11 @@ import iGeometry
 extension PlainShape {
 
     enum LinkNature: Int {
-        case end
-        case start
-        case split
-        case merge
-        case simple
+        case end = 0
+        case start = 1
+        case split = 2
+        case merge = 3
+        case simple = 4
     }
     
     struct ShapeNavigator {
@@ -104,47 +104,46 @@ extension PlainShape {
         
         // sort
 
-        var dataList = Array<SortData>(repeating: SortData(index: 0, factor: 0), count: n)
+        var dataList = Array<SortData>(repeating: SortData(index: 0, factor: 0, nature: 0), count: n)
         for i in 0..<n {
             let p = iPoints[i]
-            dataList[i] = SortData(index: i, factor: p.bitPack)
+            dataList[i] = SortData(index: i, factor: p.bitPack, nature: natures[i].rawValue)
         }
         
         dataList.sort(by: {
             a, b in
             if a.factor != b.factor {
                 return a.factor < b.factor
+            } else if a.nature != b.nature {
+                return a.nature < b.nature
             } else {
-                let nFactorA = natures[a.index].rawValue
-                let nFactorB = natures[b.index].rawValue
-                
-                return nFactorA < nFactorB
+                return a.index < b.index
             }
         })
         
         var indices = Array<Int>(repeating: 0, count: n)
-        var b = SortData(index: -1, factor: .min)
+        var x1 = SortData(index: -1, factor: .min, nature: .min)
         var i = 0
         
         // filter same points
         while i < n {
-            var a = dataList[i]
-            indices[i] = a.index
-            if a.factor == b.factor {
-                let index = links[b.index].vertex.index
+            var x0 = dataList[i]
+            indices[i] = x0.index
+            if x0.factor == x1.factor {
+                let index = links[x1.index].vertex.index
                 repeat {
-                    let link = links[a.index]
-                    links[a.index] = Link(prev: link.prev, this: link.this, next: link.next, vertex: Vertex(index: index, point: link.vertex.point))
+                    let link = links[x0.index]
+                    links[x0.index] = Link(prev: link.prev, this: link.this, next: link.next, vertex: Vertex(index: index, point: link.vertex.point))
                     i += 1
                     if i < n {
-                        a = dataList[i]
-                        indices[i] = a.index
+                        x0 = dataList[i]
+                        indices[i] = x0.index
                     } else {
                         break
                     }
-                } while a.factor == b.factor
+                } while x0.factor == x1.factor
             }
-            b = a
+            x1 = x0
             i += 1
         }
 
@@ -154,6 +153,7 @@ extension PlainShape {
     private struct SortData {
         let index: Int
         let factor: Int64
+        let nature: Int
     }
 
     private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {

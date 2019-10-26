@@ -61,6 +61,7 @@ final class ComplexPlainScene: CoordinateSystemScene {
             print(validation)
         }
         if isValid {
+            
             let triangles = pShape.triangulate()
             let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
             var triangle = [Int]()
@@ -75,7 +76,7 @@ final class ComplexPlainScene: CoordinateSystemScene {
                     k += 1
                 }
             }
-            
+
             let debugShapes = pShape.split().shapes
             
             for i in 0..<debugShapes.count {

@@ -31,24 +31,27 @@ public extension PlainShape {
         var a0 = links[c.next]
         var b0 = links[c.prev]
         
+        var aBit0: Int64
+        var bBit0: Int64
+        
         next_point:
             while a0.this != b0.this {
                 let a1 = links[a0.next]
                 let b1 = links[b0.prev]
                 
-                let aBit0 = a0.vertex.point.bitPack
+                aBit0 = a0.vertex.point.bitPack
                 var aBit1 = a1.vertex.point.bitPack
                 if aBit1 < aBit0 {
                     aBit1 = aBit0
                 }
                 
-                let bBit0 = b0.vertex.point.bitPack
+                bBit0 = b0.vertex.point.bitPack
                 var bBit1 = b1.vertex.point.bitPack
                 if bBit1 < bBit0 {
                     bBit1 = bBit0
                 }
                 
-                if aBit0 < bBit1 && bBit0 < aBit1 {
+                if aBit0 <= bBit1 && bBit0 <= aBit1 {
                     if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
                         triangles.append(c.vertex.index)
                         triangles.append(a0.vertex.index)
@@ -68,13 +71,11 @@ public extension PlainShape {
                         a0 = a1
                     }
                 } else {
-                    var isModified = false
-                    
                     if aBit1 < bBit1 {
                         var cx = c
                         var ax0 = a0
                         var ax1 = a1
-
+                        var ax1Bit: Int64 = .min
                         repeat {
                             let orientation = PlainShape.getOrientation(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
                             switch orientation {
@@ -84,30 +85,32 @@ public extension PlainShape {
                                 triangles.append(ax1.vertex.index)
                                 fallthrough
                             case .line:
-                                isModified = true
                                 ax1.prev = cx.this
                                 cx.next = ax1.this
                                 links[cx.this] = cx
                                 links[ax1.this] = ax1
+
                                 if cx.this != c.this {
-                                    ax0 = cx
-                                    cx = links[cx.prev]
-                                    break
-                                } else {
-                                    c = links[c.this]
-                                    a0 = links[c.next]
-                                    continue next_point
-                                }
+                                     // move back
+                                     ax0 = cx
+                                     cx = links[cx.prev]
+                                 } else {
+                                     // move forward
+                                     ax0 = ax1
+                                     ax1 = links[ax1.next]
+                                 }
                             case .counterClockWise:
                                 cx = ax0
                                 ax0 = ax1
                                 ax1 = links[ax1.next]
                             }
-                        } while ax1.vertex.point.bitPack <= bBit1
+                            ax1Bit = ax1.vertex.point.bitPack
+                        } while ax1Bit < bBit0
                     } else {
                         var cx = c
                         var bx0 = b0
                         var bx1 = b1
+                        var bx1Bit: Int64 = .min
                         repeat {
                             let orientation = PlainShape.getOrientation(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
                             switch orientation {
@@ -117,52 +120,55 @@ public extension PlainShape {
                                 triangles.append(bx0.vertex.index)
                                 fallthrough
                             case .line:
-                                isModified = true
                                 bx1.next = cx.this
                                 cx.prev = bx1.this
                                 links[cx.this] = cx
                                 links[bx1.this] = bx1
+
                                 if cx.this != c.this {
+                                    // move back
                                     bx0 = cx
                                     cx = links[cx.next]
-                                    break
+                                    continue
                                 } else {
-                                    c = links[c.this]
-                                    b0 = links[c.prev]
-                                    continue next_point
+                                    // move forward
+                                    bx0 = bx1
+                                    bx1 = links[bx0.prev]
                                 }
                             case .counterClockWise:
                                 cx = bx0
                                 bx0 = bx1
                                 bx1 = links[bx1.prev]
                             }
-                        } while bx1.vertex.point.bitPack <= aBit1
+                            bx1Bit = bx1.vertex.point.bitPack
+                        } while bx1Bit < aBit0
+                    }
+
+                    c = links[c.this]
+                    a0 = links[c.next]
+                    b0 = links[c.prev]
+                    
+                    aBit0 = a0.vertex.point.bitPack
+                    bBit0 = b0.vertex.point.bitPack
+
+                    triangles.append(c.vertex.index)
+                    triangles.append(a0.vertex.index)
+                    triangles.append(b0.vertex.index)
+
+                    a0.prev = b0.this
+                    b0.next = a0.this
+                    links[a0.this] = a0
+                    links[b0.this] = b0
+
+                    if bBit0 < aBit0 {
+                        c = b0
+                        b0 = links[b0.prev]
+                    } else {
+                        c = a0
+                        a0 = links[a0.next]
                     }
                     
-                    if isModified {
-                        a0 = links[a0.this]
-                        b0 = links[b0.this]
-                    } else {
-                         if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
-                             triangles.append(c.vertex.index)
-                             triangles.append(a0.vertex.index)
-                             triangles.append(b0.vertex.index)
-                         }
-                        
-                         a0.prev = b0.this
-                         b0.next = a0.this
-                         links[a0.this] = a0
-                         links[b0.this] = b0
-                         
-                         if bBit0 < aBit0 {
-                             c = b0
-                             b0 = b1
-                         } else {
-                             c = a0
-                             a0 = a1
-                         }
-                    }
-                }
+                } //while
         }
     }
     

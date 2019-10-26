@@ -29,7 +29,7 @@ final class ComplexPlainTests: XCTestCase {
         
         XCTAssertEqual(TestUtil.isCCW(points: pShape.points, triangles: triangles), true)
         
-//        print(triangles.prettyString)
+        print(triangles.prettyString)
         
         return triangles
     }
@@ -114,11 +114,11 @@ final class ComplexPlainTests: XCTestCase {
         let triangles = self.triangulate(index: 7)
         let origin = [
             0, 1, 7,
-            7, 1, 5,
             6, 7, 5,
-            1, 4, 5,
-            2, 4, 1,
-            2, 3, 4
+            7, 1, 5,
+            2, 3, 1,
+            1, 3, 5,
+            5, 3, 4
         ]
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
@@ -197,10 +197,10 @@ final class ComplexPlainTests: XCTestCase {
             11, 1, 9,
             9, 6, 7,
             9, 7, 8,
-            1, 6, 9,
-            1, 5, 6,
-            2, 5, 1,
-            2, 3, 5,
+            2, 3, 1,
+            1, 3, 9,
+            9, 3, 6,
+            3, 5, 6,
             3, 4, 5
         ]
         XCTAssertEqual(triangles.compare(array: origin), true)
@@ -211,13 +211,13 @@ final class ComplexPlainTests: XCTestCase {
         let triangles = self.triangulate(index: 14)
         let origin = [
             0, 1, 9,
-            9, 1, 7,
             8, 9, 7,
+            9, 1, 7,
             7, 5, 6,
             1, 5, 7,
-            1, 4, 5,
-            2, 4, 1,
-            2, 3, 4
+            2, 3, 1,
+            1, 3, 5,
+            5, 3, 4
         ]
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
@@ -268,9 +268,9 @@ final class ComplexPlainTests: XCTestCase {
             4, 19, 29,
             4, 5, 19,
             19, 5, 18,
-            18, 7, 8,
-            5, 7, 18,
-            5, 6, 7
+            5, 6, 18,
+            18, 6, 8,
+            8, 6, 7
         ]
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
@@ -401,10 +401,10 @@ final class ComplexPlainTests: XCTestCase {
             7, 1, 2,
             2, 3, 9,
             6, 7, 8,
-            9, 3, 4,
-            9, 4, 5,
+            6, 8, 5,
             8, 9, 5,
-            6, 8, 5
+            9, 3, 5,
+            3, 4, 5
         ]
         XCTAssertEqual(triangles.compare(array: origin), true)
     }

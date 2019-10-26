@@ -220,10 +220,10 @@
 		548AE12D233CFC8000494FE4 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				548AE131233CFC8000494FE4 /* Scene */,
 				548AE12E233CFC8000494FE4 /* ActiveIndex.swift */,
 				548AE12F233CFC8000494FE4 /* MouseCompatible.swift */,
 				548AE130233CFC8000494FE4 /* SceneNavigation.swift */,
-				548AE131233CFC8000494FE4 /* Scene */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -259,8 +259,8 @@
 		548AE13A233CFC8000494FE4 /* UIControls */ = {
 			isa = PBXGroup;
 			children = (
-				548AE13B233CFC8000494FE4 /* CanvasView.swift */,
 				548AE13C233CFC8000494FE4 /* Shape */,
+				548AE13B233CFC8000494FE4 /* CanvasView.swift */,
 				548AE148233CFC8000494FE4 /* ShapeCoordinatSystem.swift */,
 				548AE149233CFC8000494FE4 /* CoordinateSystemScene.swift */,
 			);
@@ -270,10 +270,10 @@
 		548AE13C233CFC8000494FE4 /* Shape */ = {
 			isa = PBXGroup;
 			children = (
+				548AE140233CFC8000494FE4 /* Polygon */,
 				548AE13D233CFC8000494FE4 /* ShapeVector.swift */,
 				548AE13E233CFC8000494FE4 /* ShapeTriangle.swift */,
 				548AE13F233CFC8000494FE4 /* ShapeCircle.swift */,
-				548AE140233CFC8000494FE4 /* Polygon */,
 				548AE143233CFC8000494FE4 /* ShapeDot.swift */,
 				548AE144233CFC8000494FE4 /* ShapeLine.swift */,
 				548AE145233CFC8000494FE4 /* ShapeArea.swift */,

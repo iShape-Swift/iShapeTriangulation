@@ -278,6 +278,17 @@ public struct MonotoneTests {
             Point(x: 15, y: -5),
             Point(x: 5, y: 5),
             Point(x: 0, y: -15)
+        ],
+        // test 21
+        [
+            Point(x:-15, y: 15),
+            Point(x: 3, y: 15),
+            Point(x: 5, y: 5),
+            Point(x: 10, y: -4),
+            Point(x: 17, y: -8),
+            Point(x: 9, y: -10),
+            Point(x: 8.5, y: -7),
+            Point(x:-5, y: 2)
         ]
     ]
 }

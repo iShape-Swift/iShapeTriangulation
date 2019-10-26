@@ -21,6 +21,7 @@ final class MotonePlainScene: CoordinateSystemScene {
         if i < MonotoneTests.data.count {
             pageIndex = i
         }
+//                pageIndex = 20
         super.init()
         self.showPage(index: pageIndex)
     }
@@ -77,7 +78,7 @@ final class MotonePlainScene: CoordinateSystemScene {
                 k += 1
             }
         }
-        
+
         let color: CGColor
         let isValid = iPoints.isMonotone
         if isValid {
