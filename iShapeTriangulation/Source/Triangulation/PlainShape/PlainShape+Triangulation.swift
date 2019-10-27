@@ -52,7 +52,7 @@ public extension PlainShape {
                 }
                 
                 if aBit0 <= bBit1 && bBit0 <= aBit1 {
-                    if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
+                    if IntTriangle.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
                         triangles.append(c.vertex.index)
                         triangles.append(a0.vertex.index)
                         triangles.append(b0.vertex.index)
@@ -77,7 +77,7 @@ public extension PlainShape {
                         var ax1 = a1
                         var ax1Bit: Int64 = .min
                         repeat {
-                            let orientation = PlainShape.getOrientation(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
+                            let orientation = IntTriangle.getOrientation(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
                             switch orientation {
                             case .clockWise:
                                 triangles.append(cx.vertex.index)
@@ -112,7 +112,7 @@ public extension PlainShape {
                         var bx1 = b1
                         var bx1Bit: Int64 = .min
                         repeat {
-                            let orientation = PlainShape.getOrientation(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
+                            let orientation = IntTriangle.getOrientation(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
                             switch orientation {
                             case .clockWise:
                                 triangles.append(cx.vertex.index)
@@ -151,7 +151,7 @@ public extension PlainShape {
                     aBit0 = a0.vertex.point.bitPack
                     bBit0 = b0.vertex.point.bitPack
 
-                    if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
+                    if IntTriangle.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
                         triangles.append(c.vertex.index)
                         triangles.append(a0.vertex.index)
                         triangles.append(b0.vertex.index)
@@ -171,30 +171,5 @@ public extension PlainShape {
                     
                 } //while
         }
-    }
-    
-    private enum Orientation {
-        case clockWise
-        case counterClockWise
-        case line
-    }
-    
-    private static func getOrientation(a: IntPoint, b: IntPoint, c: IntPoint) -> Orientation {
-        let m0 = (c.y - a.y) * (b.x - a.x)
-        let m1 = (b.y - a.y) * (c.x - a.x)
-        
-        if m0 < m1 {
-            return .clockWise
-        } else if m0 > m1 {
-            return .counterClockWise
-        } else {
-            return .line
-        }
-    }
-    
-    private static func isNotLine(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        let m0 = (c.y - a.y) * (b.x - a.x)
-        let m1 = (b.y - a.y) * (c.x - a.x)
-        return m0 != m1
     }
 }

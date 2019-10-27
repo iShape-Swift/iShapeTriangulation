@@ -283,4 +283,55 @@ final class MonotonePlainTests: XCTestCase {
         ]
         XCTAssertEqual(triangles.compare(array: origin), true)
     }
+    
+    func test_18() {
+        let triangles = self.triangulate(index: 18)
+        let origin = [
+            9, 0, 8,
+            0, 1, 8,
+            8, 1, 2,
+            2, 3, 6,
+            6, 3, 5,
+            3, 4, 5
+        ]
+        XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func test_19() {
+        let triangles = self.triangulate(index: 19)
+        let origin = [
+            1, 2, 0,
+            0, 6, 7,
+            2, 6, 0,
+            6, 4, 5,
+            2, 4, 6,
+            2, 3, 4
+        ]
+        XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func test_20() {
+        let triangles = self.triangulate(index: 20)
+        let origin = [
+            0, 4, 5,
+            1, 4, 0,
+            1, 2, 4,
+            4, 2, 3
+        ]
+        XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
+    func test_21() {
+        let triangles = self.triangulate(index: 21)
+        let origin = [
+            0, 1, 7,
+            7, 1, 2,
+            7, 2, 6,
+            2, 3, 6,
+            6, 3, 5,
+            5, 3, 4
+        ]
+        XCTAssertEqual(triangles.compare(array: origin), true)
+    }
+    
 }
