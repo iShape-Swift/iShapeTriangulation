@@ -89,16 +89,17 @@ public extension PlainShape {
                                 cx.next = ax1.this
                                 links[cx.this] = cx
                                 links[ax1.this] = ax1
-
+                                
                                 if cx.this != c.this {
-                                     // move back
-                                     ax0 = cx
-                                     cx = links[cx.prev]
-                                 } else {
-                                     // move forward
-                                     ax0 = ax1
-                                     ax1 = links[ax1.next]
-                                 }
+                                    // move back
+                                    ax0 = cx
+                                    cx = links[cx.prev]
+                                    continue
+                                } else {
+                                    // move forward
+                                    ax0 = ax1
+                                    ax1 = links[ax1.next]
+                                }
                             case .counterClockWise:
                                 cx = ax0
                                 ax0 = ax1
@@ -124,7 +125,7 @@ public extension PlainShape {
                                 cx.prev = bx1.this
                                 links[cx.this] = cx
                                 links[bx1.this] = bx1
-
+                                
                                 if cx.this != c.this {
                                     // move back
                                     bx0 = cx
@@ -143,14 +144,14 @@ public extension PlainShape {
                             bx1Bit = bx1.vertex.point.bitPack
                         } while bx1Bit < aBit0
                     }
-
+                    
                     c = links[c.this]
                     a0 = links[c.next]
                     b0 = links[c.prev]
                     
                     aBit0 = a0.vertex.point.bitPack
                     bBit0 = b0.vertex.point.bitPack
-
+                    
                     if IntTriangle.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
                         triangles.append(c.vertex.index)
                         triangles.append(a0.vertex.index)
@@ -160,7 +161,7 @@ public extension PlainShape {
                     b0.next = a0.this
                     links[a0.this] = a0
                     links[b0.this] = b0
-
+                    
                     if bBit0 < aBit0 {
                         c = b0
                         b0 = links[b0.prev]
