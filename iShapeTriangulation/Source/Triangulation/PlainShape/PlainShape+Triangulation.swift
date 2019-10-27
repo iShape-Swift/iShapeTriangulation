@@ -151,10 +151,11 @@ public extension PlainShape {
                     aBit0 = a0.vertex.point.bitPack
                     bBit0 = b0.vertex.point.bitPack
 
-                    triangles.append(c.vertex.index)
-                    triangles.append(a0.vertex.index)
-                    triangles.append(b0.vertex.index)
-
+                    if PlainShape.isNotLine(a: c.vertex.point, b: a0.vertex.point, c: b0.vertex.point) {
+                        triangles.append(c.vertex.index)
+                        triangles.append(a0.vertex.index)
+                        triangles.append(b0.vertex.index)
+                    }
                     a0.prev = b0.this
                     b0.next = a0.this
                     links[a0.this] = a0
