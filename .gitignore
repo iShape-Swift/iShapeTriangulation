@@ -1,3 +1,8 @@
 **/Pods/
 *.xcworkspace
 **/Podfile.lock
+*.pbxuser
+!default.pbxuser
+xcuserdata/
+
+.DS_Store
