@@ -46,7 +46,7 @@ public extension PlainShape {
                 // ignore triangle with tween vertices
                 return
             }
-
+            
             var triangle = Delaunay.Triangle(
                 index: counter,
                 a: a,
@@ -128,128 +128,126 @@ public extension PlainShape {
         var aBit0: Int64
         var bBit0: Int64
         
-        next_point:
-            while a0.this != b0.this {
-                let a1 = links[a0.next]
-                let b1 = links[b0.prev]
+        while a0.this != b0.this {
+            let a1 = links[a0.next]
+            let b1 = links[b0.prev]
+            
+            aBit0 = a0.vertex.point.bitPack
+            var aBit1 = a1.vertex.point.bitPack
+            if aBit1 < aBit0 {
+                aBit1 = aBit0
+            }
+            
+            bBit0 = b0.vertex.point.bitPack
+            var bBit1 = b1.vertex.point.bitPack
+            if bBit1 < bBit0 {
+                bBit1 = bBit0
+            }
+            
+            if aBit0 <= bBit1 && bBit0 <= aBit1 {
+                triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
                 
-                aBit0 = a0.vertex.point.bitPack
-                var aBit1 = a1.vertex.point.bitPack
-                if aBit1 < aBit0 {
-                    aBit1 = aBit0
-                }
+                a0.prev = b0.this
+                b0.next = a0.this
+                links[a0.this] = a0
+                links[b0.this] = b0
                 
-                bBit0 = b0.vertex.point.bitPack
-                var bBit1 = b1.vertex.point.bitPack
-                if bBit1 < bBit0 {
-                    bBit1 = bBit0
-                }
-                
-                if aBit0 <= bBit1 && bBit0 <= aBit1 {
-                    triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
-
-                    a0.prev = b0.this
-                    b0.next = a0.this
-                    links[a0.this] = a0
-                    links[b0.this] = b0
-                    
-                    if bBit0 < aBit0 {
-                        c = b0
-                        b0 = b1
-                    } else {
-                        c = a0
-                        a0 = a1
-                    }
+                if bBit0 < aBit0 {
+                    c = b0
+                    b0 = b1
                 } else {
-                    if aBit1 < bBit1 {
-                        var cx = c
-                        var ax0 = a0
-                        var ax1 = a1
-                        var ax1Bit: Int64 = .min
-                        repeat {
-                            let isCCW_or_Line = IntTriangle.isCCW_or_Line(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
-
-                            if isCCW_or_Line {
-                                triangleStack.add(a: ax0.vertex, b: ax1.vertex, c: cx.vertex)
-                                
-                                ax1.prev = cx.this
-                                cx.next = ax1.this
-                                links[cx.this] = cx
-                                links[ax1.this] = ax1
-
-                                if cx.this != c.this {
-                                     // move back
-                                     ax0 = cx
-                                     cx = links[cx.prev]
-                                 } else {
-                                     // move forward
-                                     ax0 = ax1
-                                     ax1 = links[ax1.next]
-                                 }
+                    c = a0
+                    a0 = a1
+                }
+            } else {
+                if aBit1 < bBit1 {
+                    var cx = c
+                    var ax0 = a0
+                    var ax1 = a1
+                    var ax1Bit: Int64 = .min
+                    repeat {
+                        let isCCW_or_Line = IntTriangle.isCCW_or_Line(a: cx.vertex.point, b: ax0.vertex.point, c: ax1.vertex.point)
+                        
+                        if isCCW_or_Line {
+                            triangleStack.add(a: ax0.vertex, b: ax1.vertex, c: cx.vertex)
+                            
+                            ax1.prev = cx.this
+                            cx.next = ax1.this
+                            links[cx.this] = cx
+                            links[ax1.this] = ax1
+                            
+                            if cx.this != c.this {
+                                // move back
+                                ax0 = cx
+                                cx = links[cx.prev]
                             } else {
-                                cx = ax0
+                                // move forward
                                 ax0 = ax1
                                 ax1 = links[ax1.next]
                             }
-                            ax1Bit = ax1.vertex.point.bitPack
-                        } while ax1Bit < bBit0
-                    } else {
-                        var cx = c
-                        var bx0 = b0
-                        var bx1 = b1
-                        var bx1Bit: Int64 = .min
-                        repeat {
-                            let isCCW_or_Line = IntTriangle.isCCW_or_Line(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
-                            if isCCW_or_Line {
-                                triangleStack.add(a: bx0.vertex, b: cx.vertex, c: bx1.vertex)
-                                
-                                bx1.next = cx.this
-                                cx.prev = bx1.this
-                                links[cx.this] = cx
-                                links[bx1.this] = bx1
-
-                                if cx.this != c.this {
-                                    // move back
-                                    bx0 = cx
-                                    cx = links[cx.next]
-                                    continue
-                                } else {
-                                    // move forward
-                                    bx0 = bx1
-                                    bx1 = links[bx0.prev]
-                                }
+                        } else {
+                            cx = ax0
+                            ax0 = ax1
+                            ax1 = links[ax1.next]
+                        }
+                        ax1Bit = ax1.vertex.point.bitPack
+                    } while ax1Bit < bBit0
+                } else {
+                    var cx = c
+                    var bx0 = b0
+                    var bx1 = b1
+                    var bx1Bit: Int64 = .min
+                    repeat {
+                        let isCCW_or_Line = IntTriangle.isCCW_or_Line(a: cx.vertex.point, b: bx1.vertex.point, c: bx0.vertex.point)
+                        if isCCW_or_Line {
+                            triangleStack.add(a: bx0.vertex, b: cx.vertex, c: bx1.vertex)
+                            
+                            bx1.next = cx.this
+                            cx.prev = bx1.this
+                            links[cx.this] = cx
+                            links[bx1.this] = bx1
+                            
+                            if cx.this != c.this {
+                                // move back
+                                bx0 = cx
+                                cx = links[cx.next]
                             } else {
-                                cx = bx0
+                                // move forward
                                 bx0 = bx1
-                                bx1 = links[bx1.prev]
+                                bx1 = links[bx0.prev]
                             }
-                            bx1Bit = bx1.vertex.point.bitPack
-                        } while bx1Bit < aBit0
-                    }
-
-                    c = links[c.this]
-                    a0 = links[c.next]
-                    b0 = links[c.prev]
-                    
-                    aBit0 = a0.vertex.point.bitPack
-                    bBit0 = b0.vertex.point.bitPack
-
-                    triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
-
-                    a0.prev = b0.this
-                    b0.next = a0.this
-                    links[a0.this] = a0
-                    links[b0.this] = b0
-
-                    if bBit0 < aBit0 {
-                        c = b0
-                        b0 = links[b0.prev]
-                    } else {
-                        c = a0
-                        a0 = links[a0.next]
-                    }
-                    
-                } //while
+                        } else {
+                            cx = bx0
+                            bx0 = bx1
+                            bx1 = links[bx1.prev]
+                        }
+                        bx1Bit = bx1.vertex.point.bitPack
+                    } while bx1Bit < aBit0
+                }
+                
+                c = links[c.this]
+                a0 = links[c.next]
+                b0 = links[c.prev]
+                
+                aBit0 = a0.vertex.point.bitPack
+                bBit0 = b0.vertex.point.bitPack
+                
+                triangleStack.add(a: c.vertex, b: a0.vertex, c: b0.vertex)
+                
+                a0.prev = b0.this
+                b0.next = a0.this
+                links[a0.this] = a0
+                links[b0.this] = b0
+                
+                if bBit0 < aBit0 {
+                    c = b0
+                    b0 = links[b0.prev]
+                } else {
+                    c = a0
+                    a0 = links[a0.next]
+                }
+                
+            } //while
         }
     }
     
