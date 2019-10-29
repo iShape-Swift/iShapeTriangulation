@@ -31,20 +31,17 @@ public extension PlainShape {
         var a0 = links[c.next]
         var b0 = links[c.prev]
         
-        var aBit0: Int64
-        var bBit0: Int64
-        
         while a0.this != b0.this {
             let a1 = links[a0.next]
             let b1 = links[b0.prev]
             
-            aBit0 = a0.vertex.point.bitPack
+            var aBit0 = a0.vertex.point.bitPack
             var aBit1 = a1.vertex.point.bitPack
             if aBit1 < aBit0 {
                 aBit1 = aBit0
             }
             
-            bBit0 = b0.vertex.point.bitPack
+            var bBit0 = b0.vertex.point.bitPack
             var bBit1 = b1.vertex.point.bitPack
             if bBit1 < bBit0 {
                 bBit1 = bBit0

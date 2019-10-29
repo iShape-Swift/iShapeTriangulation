@@ -133,9 +133,8 @@ extension PlainShape {
             var left = 0
             var right = edges.count &- 1
             
-            var k: Int = -1
-            var e = edges[0].id
             repeat {
+                let k: Int
                 if left &+ 1 < right {
                     k = (left &+ right) >> 1
                 } else {
@@ -148,7 +147,7 @@ extension PlainShape {
                     return -1
                 }
 
-                e = edges[k].id
+                let e = edges[k].id
                 if e > id {
                     right = k
                 } else if e < id {
