@@ -125,14 +125,19 @@ struct Delaunay {
         var visitIndex = 0
         
         var origin = Array<Int>()
-        origin.reserveCapacity(4)
+        origin.reserveCapacity(16)
         
         var buffer = Array<Int>()
-        buffer.reserveCapacity(4)
+        buffer.reserveCapacity(16)
         
         origin.append(0)
         
         while origin.count > 0 {
+            
+            if origin.count > 3 {
+                print(origin.count)
+            }
+            
             buffer.removeAll(keepingCapacity: true)
             for i in origin {
                 var triangle = self.triangles[i]
@@ -312,7 +317,9 @@ struct Delaunay {
             let sinAlfa = pay * pcx - pax * pcy
             let sinBeta = bax * bcy - bay * bcx
             
-            return Float(sinAlfa) * Float(cosBeta) + Float(cosAlfa) * Float(sinBeta) >= -0.00001
+            let result = Float(sinAlfa) * Float(cosBeta) + Float(cosAlfa) * Float(sinBeta)
+            
+            return result > -1000000000
         }
     }
 }
