@@ -639,8 +639,44 @@ public struct ComplexTests {
                 Point(x:8.317059, y: -1.654366),    // 62
                 Point(x:16, y: 0)                   // 63
             ]
-        ]
+        ],
+        ComplexTests.donut(count: 1024, radius: 16, k: 0.5)
     ]
+    
+    private static func donut(count: Int, radius: Float, k: Float) -> [[Point]] {
+        let n = Float(count)
+        
+        let da0 = 2 * Float.pi / n
+        let da1 = 16 * Float.pi / n
+        let delta = k * radius
+        
+        var hull = [Point](repeating: .zero, count: count)
+        
+        var a0: Float = 0
+        var a1: Float = 0
+        
+        
+        for i in 0..<count {
+            let r = radius + delta * sin(a1)
+            let x = r * cos(a0)
+            let y = r * sin(a0)
+            a0 -= da0
+            a1 -= da1
+            hull[i] = Point(x: x, y: y)
+        }
+        
+        var hole = [Point](repeating: .zero, count: count)
+        
+        for i in 0..<count {
+            
+            let p = hull[count - i - 1]
+            hole[i] = Point(x: 0.5 * p.x, y: 0.5 * p.y)
+            
+        }
+        return [hull, hole]
+    }
+    
+    
 }
 
 #endif
