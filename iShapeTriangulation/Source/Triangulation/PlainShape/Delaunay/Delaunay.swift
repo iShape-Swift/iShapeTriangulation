@@ -343,6 +343,28 @@ extension Delaunay {
         return Circle(center: Point(x: x, y: y), radius: r)
     }
     
+    public static func inscribedСircle(a: Point, b: Point, c: Point) -> Circle {
+        let ABx = a.x - b.x
+        let ABy = a.y - b.y
+        let AB = sqrt(ABx * ABx + ABy * ABy)
+        
+        let ACx = a.x - c.x
+        let ACy = a.y - c.y
+        let AC = sqrt(ACx * ACx + ACy * ACy)
+        
+        let BCx = b.x - c.x
+        let BCy = b.y - c.y
+        let BC = sqrt(BCx * BCx + BCy * BCy)
+        
+        let p = AB + BC + AC
+        
+        let Ox = (BC * a.x + AC * b.x + AB * c.x) / p
+        let Oy = (BC * a.y + AC * b.y + AB * c.y) / p
+        
+        let r = sqrt((-BC + AC + AB) * (BC - AC + AB) * (BC + AC - AB) / (4 * p))
+        return Circle(center: Point(x: Ox, y: Oy), radius: r)
+    }
+    
     public static func verefy(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         return Delaunay.isPrefect(p: p, a: a, b: b, c: c)
     }

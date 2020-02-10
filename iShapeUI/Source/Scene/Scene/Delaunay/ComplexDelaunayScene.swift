@@ -81,7 +81,7 @@ final class ComplexDelaunayScene: CoordinateSystemScene {
                 self.addSublayer(ShapeVectorPolygon(points: points, shift: 0.5, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
             }
         }
-        
+
         let pathes = pShape.pathes
 
         for vertices in pathes {

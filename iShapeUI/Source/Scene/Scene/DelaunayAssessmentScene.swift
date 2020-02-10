@@ -76,6 +76,10 @@ final class DelaunayAssessmentScene: CoordinateSystemScene {
             let circle = Delaunay.circumscribedСircleCenter(a: a, b: b, c: c)
             
             self.content.addSublayer(ShapeCircle(position: circle.center.toCGPoint, radius: CGFloat(circle.radius), color: Colors.lightGray, depth: 0.4))
+            
+            let iCircle = Delaunay.inscribedСircle(a: a, b: b, c: c)
+            
+            self.content.addSublayer(ShapeCircle(position: iCircle.center.toCGPoint, radius: CGFloat(iCircle.radius), color: Colors.blue, depth: 0.4))
 
             let ai = IntGeom.defGeom.int(point: a)
             let bi = IntGeom.defGeom.int(point: b)
