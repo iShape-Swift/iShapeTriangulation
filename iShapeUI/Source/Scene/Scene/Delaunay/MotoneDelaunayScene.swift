@@ -80,7 +80,7 @@ final class MotoneDelaunayScene: CoordinateSystemScene {
                 if triangle.count == 3 {
                     
                     let abc = triangle.map({ self.data[$0] })
-                    let circle = Delaunay.circumscribedСircleCenter(a: abc[0], b: abc[1], c: abc[2])
+                    let circle = Triangle.circumscribedСircle(a: abc[0], b: abc[1], c: abc[2])
                     let cirShape = ShapeCircle(
                         position: circle.center.toCGPoint,
                         radius: CGFloat(circle.radius),
@@ -258,7 +258,7 @@ extension Point: Hashable {
 
 private struct CircleBundle: Hashable {
 
-    let circle: Delaunay.Circle
+    let circle: Circle
     let shape: ShapeCircle
     
     public func hash(into hasher: inout Hasher) {

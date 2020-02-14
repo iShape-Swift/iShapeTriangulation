@@ -73,11 +73,11 @@ final class DelaunayAssessmentScene: CoordinateSystemScene {
             let p = points[j + 3].point
             
             
-            let circle = Delaunay.circumscribedСircleCenter(a: a, b: b, c: c)
+            let circle = Triangle.circumscribedСircle(a: a, b: b, c: c)
             
             self.content.addSublayer(ShapeCircle(position: circle.center.toCGPoint, radius: CGFloat(circle.radius), color: Colors.lightGray, depth: 0.4))
             
-            let iCircle = Delaunay.inscribedСircle(a: a, b: b, c: c)
+            let iCircle = Triangle.inscribedСircle(a: a, b: b, c: c)
             
             self.content.addSublayer(ShapeCircle(position: iCircle.center.toCGPoint, radius: CGFloat(iCircle.radius), color: Colors.blue, depth: 0.4))
 

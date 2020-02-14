@@ -640,7 +640,7 @@ public struct ComplexTests {
                 Point(x:16, y: 0)                   // 63
             ]
         ],
-        ComplexTests.donut(count: 1024, radius: 16, k: 0.5),
+        ComplexTests.donut(count: 128, radius: 16, k: 0.5),
         ComplexTests.circle(count: 16, radius: 4, k: 0.03),
     ]
     
