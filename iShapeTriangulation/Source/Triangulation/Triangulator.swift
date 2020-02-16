@@ -39,12 +39,13 @@ public struct Triangulator {
 
         if let hull = hull, let holes = holes {
             layouts.reserveCapacity(holes.count + 1)
-            layouts.append(PlainShape.Layout(begin: 0, end: hull.endIndex - 1, isHole: false))
+            layouts.append(PlainShape.Layout(begin: 0, length: hull.endIndex, isClockWise: true))
             for hole in holes {
-                layouts.append(PlainShape.Layout(begin: hole.startIndex , end: hole.endIndex - 1, isHole: true))
+                let length = hole.endIndex - hole.startIndex
+                layouts.append(PlainShape.Layout(begin: hole.startIndex, length: length, isClockWise: false))
             }
         } else {
-            layouts.append(PlainShape.Layout(begin: 0, end: intPoints.count - 1, isHole: false))
+            layouts.append(PlainShape.Layout(begin: 0, length: intPoints.count, isClockWise: true))
         }
 
         let shape = PlainShape(points: intPoints, layouts: layouts)
@@ -63,12 +64,13 @@ public struct Triangulator {
 
         if let hull = hull, let holes = holes {
             layouts.reserveCapacity(holes.count + 1)
-            layouts.append(PlainShape.Layout(begin: 0, end: hull.endIndex - 1, isHole: false))
+            layouts.append(PlainShape.Layout(begin: 0, length: hull.endIndex, isClockWise: true))
             for hole in holes {
-                layouts.append(PlainShape.Layout(begin: hole.startIndex , end: hole.endIndex - 1, isHole: true))
+                let length = hole.endIndex - hole.startIndex
+                layouts.append(PlainShape.Layout(begin: hole.startIndex, length: length, isClockWise: false))
             }
         } else {
-            layouts.append(PlainShape.Layout(begin: 0, end: intPoints.count - 1, isHole: false))
+            layouts.append(PlainShape.Layout(begin: 0, length: intPoints.count, isClockWise: true))
         }
 
         let shape = PlainShape(points: intPoints, layouts: layouts)
