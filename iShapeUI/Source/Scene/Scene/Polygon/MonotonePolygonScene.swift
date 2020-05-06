@@ -63,7 +63,7 @@ final class MonotonePolygonScene: CoordinateSystemScene {
         let iShape = IntShape(hull: iPoints, holes: [])
         let pShape = PlainShape(iShape: iShape)
 
-        let indices = pShape.convexPolygons()
+        let indices = pShape.delaunay().convexPolygonsIndices
 
         var i = 0
         while i < indices.count {

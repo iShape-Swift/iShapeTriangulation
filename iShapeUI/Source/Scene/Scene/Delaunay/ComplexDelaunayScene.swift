@@ -57,7 +57,7 @@ final class ComplexDelaunayScene: CoordinateSystemScene {
             isValid = true
         }
         if isValid {
-            let triangles = pShape.triangulateDelaunay()
+            let triangles = pShape.delaunay().trianglesIndices
             let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
             var triangle = [Int]()
             var k = 0

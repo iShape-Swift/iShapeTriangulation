@@ -92,7 +92,7 @@ extension Delaunay {
         }
     }
     
-    var trianglesIndices: [Int] {
+    public var trianglesIndices: [Int] {
         let n = triangles.count
         var result = Array<Int>(repeating: -1, count: 3 * n)
         var i = 0

@@ -122,7 +122,7 @@ extension Delaunay {
 
     }
     
-    var convexPolygonsIndices: [Int] {
+    public var convexPolygonsIndices: [Int] {
         var result = Array<Int>()
         let n = self.triangles.count
         result.reserveCapacity(4 * n)

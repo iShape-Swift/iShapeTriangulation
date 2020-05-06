@@ -75,7 +75,33 @@ public struct Triangulator {
 
         let shape = PlainShape(points: intPoints, layouts: layouts)
         
-        return shape.triangulateDelaunay()
+        return shape.delaunay().trianglesIndices
+    }
+    
+    /// Break into convex polygons
+    /// - Parameters:
+    ///   - points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
+    ///   - hull: range of the hull vertices in points array
+    ///   - holes: array of ranges for all holes
+    public func polygonate(points: [CGPoint], hull: ArraySlice<CGPoint>?, holes: [ArraySlice<CGPoint>]?) -> [Int] {
+        let intPoints = iGeom.int(points: points.toPoints())
+
+        var layouts = [PlainShape.Layout]()
+
+        if let hull = hull, let holes = holes {
+            layouts.reserveCapacity(holes.count + 1)
+            layouts.append(PlainShape.Layout(begin: 0, length: hull.endIndex, isClockWise: true))
+            for hole in holes {
+                let length = hole.endIndex - hole.startIndex
+                layouts.append(PlainShape.Layout(begin: hole.startIndex, length: length, isClockWise: false))
+            }
+        } else {
+            layouts.append(PlainShape.Layout(begin: 0, length: intPoints.count, isClockWise: true))
+        }
+
+        let shape = PlainShape(points: intPoints, layouts: layouts)
+        
+        return shape.delaunay().convexPolygonsIndices
     }
 
 }

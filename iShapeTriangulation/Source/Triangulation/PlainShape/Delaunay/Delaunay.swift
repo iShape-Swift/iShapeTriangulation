@@ -9,7 +9,7 @@
 import Foundation
 import iGeometry
 
-struct Delaunay {
+public struct Delaunay {
    
     var triangles: [Triangle]
     
