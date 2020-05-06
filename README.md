@@ -14,6 +14,8 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 💡 Supports plain and Delaunay triangulation
 
+💡 Break into convex polygons
+
 💡 Same points is not restricted
 
 💡 Polygon must not have self intersections
