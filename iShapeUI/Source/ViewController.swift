@@ -31,7 +31,7 @@ final class ViewController: NSViewController {
         let index: Int = UserDefaults.standard.integer(forKey: "screen")
 //        let index: Int = 0
         let popUpButton = canvasView.testList
-        popUpButton.addItems(withTitles: ["Complex Plain", "Complex Delaunay", "Monotone Plain", "Monotone Delaunay", "DelaunayTest"])
+        popUpButton.addItems(withTitles: ["Monotone Plain", "Complex Plain", "Monotone Delaunay", "Complex Delaunay", "Monotone Polygon", "Complex Polygon", "DelaunayTest"])
         popUpButton.selectItem(at: index)
         popUpButton.action = #selector(didPickScene)
         popUpButton.target = self
@@ -49,13 +49,17 @@ final class ViewController: NSViewController {
         let newScene: CALayer & MouseCompatible & SceneNavigation
         switch index {
         case 0:
-            newScene = ComplexPlainScene()
-        case 1:
-            newScene = ComplexDelaunayScene()
-        case 2:
             newScene = MotonePlainScene()
-        case 3:
+        case 1:
+            newScene = ComplexPlainScene()
+        case 2:
             newScene = MotoneDelaunayScene()
+        case 3:
+            newScene = ComplexDelaunayScene()
+        case 4:
+            newScene = MonotonePolygonScene()
+        case 5:
+            newScene = ComplexPolygonScene()
         default:
             newScene = DelaunayAssessmentScene()
         }

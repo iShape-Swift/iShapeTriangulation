@@ -14,6 +14,8 @@
 		540D28412344782B001FD387 /* MonotonePlainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D28402344782B001FD387 /* MonotonePlainTests.swift */; };
 		540D2843234478E8001FD387 /* MonotoneDelaunayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D2842234478E8001FD387 /* MonotoneDelaunayTests.swift */; };
 		540D284523447985001FD387 /* Triangles+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D284423447985001FD387 /* Triangles+Array.swift */; };
+		5434D9D62459F03A009BC0E6 /* ComplexPolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D52459F03A009BC0E6 /* ComplexPolygonScene.swift */; };
+		5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */; };
 		5458A8252355A66100CB45DC /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458A8242355A66100CB45DC /* TestUtil.swift */; };
 		548AE11E233CE7EF00494FE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11D233CE7EF00494FE4 /* Assets.xcassets */; };
 		548AE121233CE7EF00494FE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11F233CE7EF00494FE4 /* Main.storyboard */; };
@@ -70,6 +72,8 @@
 		540D28402344782B001FD387 /* MonotonePlainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonotonePlainTests.swift; sourceTree = "<group>"; };
 		540D2842234478E8001FD387 /* MonotoneDelaunayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotoneDelaunayTests.swift; sourceTree = "<group>"; };
 		540D284423447985001FD387 /* Triangles+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Triangles+Array.swift"; sourceTree = "<group>"; };
+		5434D9D52459F03A009BC0E6 /* ComplexPolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexPolygonScene.swift; sourceTree = "<group>"; };
+		5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotonePolygonScene.swift; sourceTree = "<group>"; };
 		5458A8242355A66100CB45DC /* TestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		548AE116233CE7EE00494FE4 /* iShapeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShapeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		548AE11D233CE7EF00494FE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -172,6 +176,15 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
+		5434D9D42459F020009BC0E6 /* Polygon */ = {
+			isa = PBXGroup;
+			children = (
+				5434D9D52459F03A009BC0E6 /* ComplexPolygonScene.swift */,
+				5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */,
+			);
+			path = Polygon;
+			sourceTree = "<group>";
+		};
 		548AE10D233CE7EE00494FE4 = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +244,7 @@
 		548AE131233CFC8000494FE4 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5434D9D42459F020009BC0E6 /* Polygon */,
 				548AE133233CFC8000494FE4 /* Plain */,
 				548AE136233CFC8000494FE4 /* Delaunay */,
 				548AE139233CFC8000494FE4 /* DelaunayAssessmentScene.swift */,
@@ -498,6 +512,7 @@
 			files = (
 				548AE14E233CFC8000494FE4 /* MouseCompatible.swift in Sources */,
 				548AE15E233CFC8000494FE4 /* ShapeArea.swift in Sources */,
+				5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */,
 				548AE156233CFC8000494FE4 /* CanvasView.swift in Sources */,
 				548AE14D233CFC8000494FE4 /* ActiveIndex.swift in Sources */,
 				548AE154233CFC8000494FE4 /* MotoneDelaunayScene.swift in Sources */,
@@ -518,6 +533,7 @@
 				548AE169233D004600494FE4 /* CGPoint.swift in Sources */,
 				548AE158233CFC8000494FE4 /* ShapeTriangle.swift in Sources */,
 				548AE15C233CFC8000494FE4 /* ShapeDot.swift in Sources */,
+				5434D9D62459F03A009BC0E6 /* ComplexPolygonScene.swift in Sources */,
 				54D643932345381B007BD72A /* ShapeLinePolygon.swift in Sources */,
 				548AE162233CFC8000494FE4 /* CoordinateSystemScene.swift in Sources */,
 				548AE14A233CFC8000494FE4 /* ViewController.swift in Sources */,

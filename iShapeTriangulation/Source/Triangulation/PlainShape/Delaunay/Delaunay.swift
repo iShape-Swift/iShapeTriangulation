@@ -10,110 +10,8 @@ import Foundation
 import iGeometry
 
 struct Delaunay {
-
-    struct Triangle {
-        
-        let index: Index
-        
-        // a(0), b(1), c(2)
-        var vertices = Array<Vertex>(repeating: .empty, count: 3)
-        
-        // BC - a(0), AC - b(1), AB - c(2)
-        var neighbors = Array<Index>(repeating: -1, count: 3)
-
-        init() {
-            self.index = -1
-        }
-        
-        init(index: Index, a: Vertex, b: Vertex, c: Vertex) {
-            self.index = index
-            self.vertices[0] = a
-            self.vertices[1] = b
-            self.vertices[2] = c
-            #if iShapeTest
-            assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
-            #endif
-        }
-        
-        init(index: Index, a: Vertex, b: Vertex, c: Vertex, bc: Index) {
-            self.index = index
-            self.vertices[0] = a
-            self.vertices[1] = b
-            self.vertices[2] = c
-            self.neighbors[0] = bc
-            #if iShapeTest
-            assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
-            #endif
-        }
-        
-        init(index: Index, a: Vertex, b: Vertex, c: Vertex, ac: Index, ab: Index) {
-            self.index = index
-            self.vertices[0] = a
-            self.vertices[1] = b
-            self.vertices[2] = c
-            self.neighbors[1] = ac
-            self.neighbors[2] = ab
-            #if iShapeTest
-            assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
-            #endif
-        }
-        
-        fileprivate func opposite(neighbor: Index) -> Index {
-            for i in 0...2 {
-                if self.neighbors[i] == neighbor {
-                    return i
-                }
-            }
-            #if iShapeTest
-            assertionFailure("Neighbor is not present")
-            #endif
-            return -1
-        }
-        
-        fileprivate mutating func updateOpposite(oldNeighbor: Index, newNeighbor: Index) {
-            for i in 0...2 {
-                if self.neighbors[i] == oldNeighbor {
-                    self.neighbors[i] = newNeighbor
-                    return
-                }
-            }
-            #if iShapeTest
-            assertionFailure("Neighbor is not present")
-            #endif
-        }
-        
-        fileprivate func neighbor(vertex: Index) -> Index {
-            for i in 0...2 {
-                if self.vertices[i].index == vertex {
-                    return self.neighbors[i]
-                }
-            }
-            #if iShapeTest
-            assertionFailure("Point is not present")
-            #endif
-            return -1
-        }
-    }
-    
-    private var triangles: [Triangle]
-    
-    var indices: [Int] {
-        let n = triangles.count
-        var result = Array<Int>(repeating: -1, count: 3 * n)
-        var i = 0
-        var j = 0
-        repeat {
-            let triangle = self.triangles[i]
-            result[j] = triangle.vertices[0].index
-            result[j + 1] = triangle.vertices[1].index
-            result[j + 2] = triangle.vertices[2].index
-            
-            j += 3
-            i += 1
-        } while i < n
-        
-        return result
-    }
+   
+    var triangles: [Triangle]
     
     init(triangles: [Triangle]) {
         self.triangles = triangles
@@ -133,11 +31,6 @@ struct Delaunay {
         origin.append(0)
         
         while origin.count > 0 {
-            
-            if origin.count > 3 {
-                print(origin.count)
-            }
-            
             buffer.removeAll(keepingCapacity: true)
             for i in origin {
                 var triangle = self.triangles[i]

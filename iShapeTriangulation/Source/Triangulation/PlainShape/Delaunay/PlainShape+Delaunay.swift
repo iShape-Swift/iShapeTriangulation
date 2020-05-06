@@ -94,6 +94,17 @@ public extension PlainShape {
     }
     
     func triangulateDelaunay() -> [Int] {
+        let delaunay = self.delaunay()
+        return delaunay.trianglesIndices
+    }
+    
+    func convexPolygons() -> [Int] {
+        let delaunay = self.delaunay()
+        return delaunay.convexPolygonsIndices
+    }
+    
+    
+    private func delaunay() -> Delaunay {
         let layout = self.split()
         
         let vertexCount = self.points.count
@@ -116,7 +127,7 @@ public extension PlainShape {
         var delaunay = Delaunay(triangles: triangles)
         delaunay.build()
         
-        return delaunay.indices
+        return delaunay
     }
     
     private static func triangulate(index: Int, links: inout [Link], triangleStack: inout TriangleStack) {

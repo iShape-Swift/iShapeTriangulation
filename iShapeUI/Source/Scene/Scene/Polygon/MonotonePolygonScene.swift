@@ -1,23 +1,21 @@
 //
-//  MotoneDelaunayScene.swift
+//  MonotonePolygonScene.swift
 //  iShapeUI
 //
-//  Created by Nail Sharipov on 11/09/2019.
-//  Copyright © 2019 Nail Sharipov. All rights reserved.
+//  Created by Nail Sharipov on 29.04.2020.
+//  Copyright © 2020 iShape. All rights reserved.
 //
 
 import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class MotoneDelaunayScene: CoordinateSystemScene {
+final class MonotonePolygonScene: CoordinateSystemScene {
     
     private var pageIndex: Int = 0
     private var data: [Point] = []
     private var index: Int?
 
-    private var circles = [Point: Set<CircleBundle>]()
-    
     override init() {
         let i = UserDefaults.standard.integer(forKey: "monotone")
         if i < MonotoneTests.data.count {
@@ -64,61 +62,24 @@ final class MotoneDelaunayScene: CoordinateSystemScene {
         
         let iShape = IntShape(hull: iPoints, holes: [])
         let pShape = PlainShape(iShape: iShape)
-        
-        let color: CGColor
-        let isValid = iPoints.isMonotone
-        if isValid {
-            color = Colors.master
-            
-            let triangles = pShape.triangulateDelaunay()
-            
-            var triangle = [Int]()
-            var k = 0
-            circles.removeAll()
-            for i in triangles {
-                triangle.append(i)
-                if triangle.count == 3 {
-                    
-                    let abc = triangle.map({ self.data[$0] })
-                    let circle = Triangle.circumscribedСircle(a: abc[0], b: abc[1], c: abc[2])
-                    let cirShape = ShapeCircle(
-                        position: circle.center.toCGPoint,
-                        radius: CGFloat(circle.radius),
-                        color: .clear,
-                        depth: 0.2
-                    )
-                    
-                    for p in abc {
-                        let bundle = CircleBundle(circle: circle, shape: cirShape)
-                        if var set = self.circles[p] {
-                            if !set.contains(bundle) {
-                                set.insert(bundle)
-                                self.circles[p] = set
-                            }
-                        } else {
-                            self.circles[p] = Set([bundle])
-                        }
-                    }
-                    
-                    let shapeTriangle = ShapeTriangle(points: abc.toCGPoints(), text: String(k), color: Colors.lightGray)
-                    
-                    
-                    self.addSublayer(shapeTriangle)
-                    
-                    triangle.removeAll()
-                    k += 1
-                }
+
+        let indices = pShape.convexPolygons()
+
+        var i = 0
+        while i < indices.count {
+            let n = indices[i]
+            i += 1
+            var polygon = [Point](repeating: .zero, count: n)
+            for j in 0..<n {
+                let index = indices[j + i]
+                polygon[j] = data[index]
             }
+            i += n
             
-            for sets in self.circles.values {
-                for bundle in sets {
-                    self.addSublayer(bundle.shape)
-                }
-            }
-        } else {
-            color = Colors.lightGray
+            let shape = ShapeLinePolygon(points: polygon.toCGPoints(), lineWidth: 0.5, color: .init(gray: 0.5, alpha: 1))
+            self.addSublayer(shape)
         }
-        
+
         let pathes = pShape.pathes
         
         for vertices in pathes {
@@ -136,7 +97,7 @@ final class MotoneDelaunayScene: CoordinateSystemScene {
             
             let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
             
-            self.addSublayer(ShapeVectorPolygon(points: points, shift: -1.0, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
+            self.addSublayer(ShapeVectorPolygon(points: points, shift: -1.0, tip: 1.0, lineWidth: 0.4, color: Colors.master, indexShift: 2.5, data: nil))
             self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
         }
     }
@@ -149,7 +110,7 @@ final class MotoneDelaunayScene: CoordinateSystemScene {
 }
 
 
-extension MotoneDelaunayScene: MouseCompatible {
+extension MonotonePolygonScene: MouseCompatible {
     
     private func findNearest(point: Point, sqrR: Float = 0.5) -> Int? {
         var i = 0
@@ -195,39 +156,12 @@ extension MotoneDelaunayScene: MouseCompatible {
     }
     
     func mouseMove(point: CGPoint) {
-        let length: Float = 2.0
-        for sets in self.circles.values {
-            for bundle in sets {
-                bundle.shape.strokeColor = .clear
-            }
-        }
-        
-        guard let index = findNearest(point: point.point, sqrR: length * length) else {
-            return
-        }
-        
-        let dot = data[index]
-        
-        guard let set = self.circles[dot] else {
-            return
-        }
-        
-        let mousePoint = point.point
 
-        let dx = mousePoint.x - dot.x
-        let dy = mousePoint.y - dot.y
-
-        let alpha = 1 - sqrt(dx * dx + dy * dy) / length
-        
-        for bundle in set {
-            bundle.shape.strokeColor = NSColor(white: 0.2, alpha: CGFloat(alpha)).cgColor
-        }
-        
     }
     
 }
 
-extension MotoneDelaunayScene: SceneNavigation {
+extension MonotonePolygonScene: SceneNavigation {
     func next() {
         let n = MonotoneTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
@@ -244,29 +178,5 @@ extension MotoneDelaunayScene: SceneNavigation {
     
     func getName() -> String {
         return "test \(self.pageIndex)"
-    }
-}
-
-extension Point: Hashable {
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(x)
-        hasher.combine(y)
-    }
-}
-
-
-private struct CircleBundle: Hashable {
-
-    let circle: Circle
-    let shape: ShapeCircle
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(circle.radius)
-        hasher.combine(circle.center)
-    }
-    
-    static func == (lhs: CircleBundle, rhs: CircleBundle) -> Bool {
-        return lhs.circle.radius == rhs.circle.radius && lhs.circle.center == rhs.circle.center
     }
 }
