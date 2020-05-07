@@ -1,7 +1,7 @@
 # iShapeTriangulation
 Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulation of monotone polygons". The result can be represented as a Delaunay triangulation.
 <p align="center">
-<img src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/logo.svg" width="500">
+<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/logo.svg" width="500">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/feature/readme_edit/Readme/star_triangles.png" width="500">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/feature/readme_edit/Readme/star_polygons.png" width="500">
 </p>
@@ -30,7 +30,7 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 Let's imagine you have a polygon like one is shown below:
 
-<img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_0.svg" width="500">
+<img align="center" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_0.svg" width="500">
 
 You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction
 
@@ -61,10 +61,10 @@ let triangles: [Int] = Triangulator().triangulateDelaunay(points: points, hull: 
 
 ```
 
-<img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_1.svg" width="500">
+<img align="center" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_1.svg" width="500">
 
 After a triangulation you will get an array of indices. Where each triple are represent an indices of the triangle vertices. The indices are always listed in a clock wise direction.
-<img align="center" src="https://github.com/NailxSharipov/iShapeTriangulation/blob/master/vertices_ordering_rule_2.svg" width="500">
+<img align="center" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_2.svg" width="500">
 
 ---
 
