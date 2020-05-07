@@ -185,6 +185,13 @@
 			path = Polygon;
 			sourceTree = "<group>";
 		};
+		543DF7B92463F0840086B9AC /* Tessellation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tessellation;
+			sourceTree = "<group>";
+		};
 		548AE10D233CE7EE00494FE4 = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +251,7 @@
 		548AE131233CFC8000494FE4 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				543DF7B92463F0840086B9AC /* Tessellation */,
 				5434D9D42459F020009BC0E6 /* Polygon */,
 				548AE133233CFC8000494FE4 /* Plain */,
 				548AE136233CFC8000494FE4 /* Delaunay */,
