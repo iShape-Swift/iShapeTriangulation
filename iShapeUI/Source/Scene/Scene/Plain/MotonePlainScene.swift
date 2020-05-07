@@ -11,19 +11,13 @@ import iGeometry
 @testable import iShapeTriangulation
 
 final class MotonePlainScene: CoordinateSystemScene {
-    
-    private var pageIndex: Int = 0
+
     private var data: [Point] = []
     private var index: Int?
     
     override init() {
-        let i = UserDefaults.standard.integer(forKey: "monotone")
-        if i < MonotoneTests.data.count {
-            pageIndex = i
-        }
-//                pageIndex = 20
         super.init()
-        self.showPage(index: pageIndex)
+        self.showPage(index: MonotoneTests.pageIndex)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -166,20 +160,14 @@ extension MotonePlainScene: MouseCompatible {
 
 extension MotonePlainScene: SceneNavigation {
     func next() {
-        let n = MonotoneTests.data.count
-        self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: "monotone")
-        self.showPage(index: self.pageIndex)
+        self.showPage(index: MonotoneTests.nextIndex())
     }
     
     func back() {
-        let n = MonotoneTests.data.count
-        self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: "monotone")
-        self.showPage(index: self.pageIndex)
+        self.showPage(index: MonotoneTests.prevIndex())
     }
     
     func getName() -> String {
-        return "test \(self.pageIndex)"
+        return "test \(MonotoneTests.pageIndex)"
     }
 }

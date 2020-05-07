@@ -12,13 +12,12 @@ import iGeometry
 
 final class ComplexPolygonScene: CoordinateSystemScene {
 
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "complex")
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
 
     override init() {
         super.init()
-        self.showPage(index: pageIndex)
+        self.showPage(index: ComplexTests.pageIndex)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -160,21 +159,16 @@ extension ComplexPolygonScene: MouseCompatible {
 }
 
 extension ComplexPolygonScene: SceneNavigation {
+    
     func next() {
-        let n = ComplexTests.data.count
-        self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: "complex")
-        self.showPage(index: self.pageIndex)
+        self.showPage(index: ComplexTests.nextIndex())
     }
     
     func back() {
-        let n = ComplexTests.data.count
-        self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: "complex")
-        self.showPage(index: self.pageIndex)
+        self.showPage(index: ComplexTests.prevIndex())
     }
     
     func getName() -> String {
-        return "test \(self.pageIndex)"
+        return "test \(ComplexTests.pageIndex)"
     }
 }
