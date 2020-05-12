@@ -13,6 +13,7 @@ extension PlainShape {
         case end
         case start
         case split
+        case extra
         case merge
         case simple
     }
@@ -25,8 +26,14 @@ extension PlainShape {
     }
     
     
-    var navigator: ShapeNavigator {
-        let n = self.points.count
+    func createNavigator(extraPoints: [IntPoint]? = nil) -> ShapeNavigator {
+        let n: Int
+        if let extraPoints = extraPoints {
+            n = self.points.count + extraPoints.count
+        } else {
+            n = self.points.count
+        }
+
         var iPoints = Array<IntPoint>(repeating: .zero, count: n)
         var links = Array<Link>(repeating: .empty, count: n)
         var natures = Array<LinkNature>(repeating: .simple, count: n)
@@ -102,6 +109,18 @@ extension PlainShape {
             }
         }
         
+        if let extraPoints = extraPoints {
+            let m = self.points.count
+            
+            for i in 0..<extraPoints.count {
+                let p = extraPoints[i]
+                let j = i + m
+                iPoints[j] = p
+                links[j] = Link(prev: j, this: j, next: j, vertex: Vertex(index: j, point: p))
+                natures[j] = .extra
+            }
+        }
+
         // sort
 
         var dataList = Array<SortData>(repeating: SortData(index: 0, factor: 0), count: n)

@@ -93,12 +93,13 @@ public extension PlainShape {
         }
     }
 
-    func delaunay() -> Delaunay {
-        let layout = self.split()
+    func delaunay(extraPoints: [IntPoint]?) -> Delaunay {
+        let layout = self.split(extraPoints: extraPoints)
         
-        let vertexCount = self.points.count
-        
-        let totalCount = vertexCount &+ ((self.layouts.count - 2) << 1)
+        let extraCount: Int = extraPoints?.count ?? 0
+        let vertexCount = self.points.count + extraCount
+
+        let totalCount = vertexCount &+ ((self.layouts.count - 2) << 1) + extraCount
         
         var triangleStack = TriangleStack(count: totalCount)
         

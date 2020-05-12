@@ -26,7 +26,7 @@ final class ComplexDelaunayTests: XCTestCase {
         let iShape = IntShape(shape: shape, iGeom: iGeom)
         let pShape = PlainShape(iShape: iShape)
         
-        let triangles = pShape.triangulateDelaunay()
+        let triangles = pShape.delaunay(extraPoints: nil).trianglesIndices
         
         XCTAssertEqual(TestUtil.isCCW(points: pShape.points, triangles: triangles), true)
         

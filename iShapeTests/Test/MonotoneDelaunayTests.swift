@@ -22,7 +22,7 @@ final class MonotoneDelaunayTests: XCTestCase {
         let iShape = IntShape(hull: iPoints, holes: [])
         let pShape = PlainShape(iShape: iShape)
         
-        let triangles = pShape.triangulateDelaunay()
+        let triangles = pShape.delaunay(extraPoints: nil).trianglesIndices
         
         XCTAssertEqual(TestUtil.isCCW(points: iPoints, triangles: triangles), true)
         

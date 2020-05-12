@@ -66,7 +66,7 @@ final class MotoneDelaunayScene: CoordinateSystemScene {
         if isValid {
             color = Colors.master
             
-            let triangles = pShape.delaunay().trianglesIndices
+            let triangles = pShape.delaunay(extraPoints: nil).trianglesIndices
             
             var triangle = [Int]()
             var k = 0

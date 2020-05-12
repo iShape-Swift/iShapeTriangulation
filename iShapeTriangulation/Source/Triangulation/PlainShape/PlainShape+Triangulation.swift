@@ -11,9 +11,10 @@ import iGeometry
 
 public extension PlainShape {
     
-    func triangulate() -> [Int] {
-        let layout = self.split()
-        let totalCount = self.points.count + ((self.layouts.count - 2) << 1)
+    func triangulate(extraPoints: [IntPoint]? = nil) -> [Int] {
+        let layout = self.split(extraPoints: extraPoints)
+        let extraCount: Int = extraPoints?.count ?? 0
+        let totalCount = self.points.count + extraCount + ((self.layouts.count - 2) << 1)
         
         var triangles = Array<Int>()
         triangles.reserveCapacity(3 * totalCount)

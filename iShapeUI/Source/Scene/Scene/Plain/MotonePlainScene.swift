@@ -58,7 +58,7 @@ final class MotonePlainScene: CoordinateSystemScene {
         let iShape = IntShape(hull: iPoints, holes: [])
         let pShape = PlainShape(iShape: iShape)
 
-        let triangles = pShape.triangulate()
+        let triangles = pShape.triangulate(extraPoints: nil)
         
         var triangle = [Int]()
         var k = 0

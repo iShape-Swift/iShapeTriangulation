@@ -42,7 +42,7 @@ extension PlainShape {
     
     var pathes: [[Vertex]] {
         get {
-            let navigator = self.navigator
+            let navigator = self.createNavigator()
             let links = navigator.links
             
             var pathes = [[Vertex]]()

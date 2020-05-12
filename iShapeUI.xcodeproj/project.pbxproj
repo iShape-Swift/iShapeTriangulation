@@ -16,7 +16,7 @@
 		540D284523447985001FD387 /* Triangles+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D284423447985001FD387 /* Triangles+Array.swift */; };
 		5434D9D62459F03A009BC0E6 /* ComplexPolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D52459F03A009BC0E6 /* ComplexPolygonScene.swift */; };
 		5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */; };
-		543DF7BB2463F53D0086B9AC /* TeselationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543DF7BA2463F53D0086B9AC /* TeselationScene.swift */; };
+		543DF7C2246412B90086B9AC /* TessellationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543DF7C1246412B90086B9AC /* TessellationScene.swift */; };
 		5458A8252355A66100CB45DC /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458A8242355A66100CB45DC /* TestUtil.swift */; };
 		548AE11E233CE7EF00494FE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11D233CE7EF00494FE4 /* Assets.xcassets */; };
 		548AE121233CE7EF00494FE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11F233CE7EF00494FE4 /* Main.storyboard */; };
@@ -75,7 +75,7 @@
 		540D284423447985001FD387 /* Triangles+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Triangles+Array.swift"; sourceTree = "<group>"; };
 		5434D9D52459F03A009BC0E6 /* ComplexPolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexPolygonScene.swift; sourceTree = "<group>"; };
 		5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotonePolygonScene.swift; sourceTree = "<group>"; };
-		543DF7BA2463F53D0086B9AC /* TeselationScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeselationScene.swift; sourceTree = "<group>"; };
+		543DF7C1246412B90086B9AC /* TessellationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TessellationScene.swift; sourceTree = "<group>"; };
 		5458A8242355A66100CB45DC /* TestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		548AE116233CE7EE00494FE4 /* iShapeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShapeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		548AE11D233CE7EF00494FE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -187,10 +187,10 @@
 			path = Polygon;
 			sourceTree = "<group>";
 		};
-		543DF7B92463F0840086B9AC /* Tessellation */ = {
+		543DF7C0246412B90086B9AC /* Tessellation */ = {
 			isa = PBXGroup;
 			children = (
-				543DF7BA2463F53D0086B9AC /* TeselationScene.swift */,
+				543DF7C1246412B90086B9AC /* TessellationScene.swift */,
 			);
 			path = Tessellation;
 			sourceTree = "<group>";
@@ -254,7 +254,7 @@
 		548AE131233CFC8000494FE4 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				543DF7B92463F0840086B9AC /* Tessellation */,
+				543DF7C0246412B90086B9AC /* Tessellation */,
 				5434D9D42459F020009BC0E6 /* Polygon */,
 				548AE133233CFC8000494FE4 /* Plain */,
 				548AE136233CFC8000494FE4 /* Delaunay */,
@@ -523,10 +523,10 @@
 			files = (
 				548AE14E233CFC8000494FE4 /* MouseCompatible.swift in Sources */,
 				548AE15E233CFC8000494FE4 /* ShapeArea.swift in Sources */,
-				543DF7BB2463F53D0086B9AC /* TeselationScene.swift in Sources */,
 				5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */,
 				548AE156233CFC8000494FE4 /* CanvasView.swift in Sources */,
 				548AE14D233CFC8000494FE4 /* ActiveIndex.swift in Sources */,
+				543DF7C2246412B90086B9AC /* TessellationScene.swift in Sources */,
 				548AE154233CFC8000494FE4 /* MotoneDelaunayScene.swift in Sources */,
 				548AE151233CFC8000494FE4 /* MotonePlainScene.swift in Sources */,
 				548AE153233CFC8000494FE4 /* ComplexDelaunayScene.swift in Sources */,

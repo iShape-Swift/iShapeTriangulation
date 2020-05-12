@@ -1,23 +1,24 @@
 //
-//  ComplexDelaunayScene.swift
+//  Tessellation.swift
 //  iShapeUI
 //
-//  Created by Nail Sharipov on 22/09/2019.
-//  Copyright © 2019 Nail Sharipov. All rights reserved.
+//  Created by Nail Sharipov on 07.05.2020.
+//  Copyright © 2020 iShape. All rights reserved.
 //
 
 import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class ComplexDelaunayScene: CoordinateSystemScene {
+final class TessellationScene: CoordinateSystemScene {
 
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
+    private let iGeom = IntGeom()
 
     override init() {
         super.init()
-        self.showPage(index: ComplexTests.pageIndex)
+        self.showPage(index: TessellationTests.pageIndex)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,43 +46,41 @@ final class ComplexDelaunayScene: CoordinateSystemScene {
     }
     
     private func addShapes() {
-        let iGeom = IntGeom()
-        
+
         let shape = self.getShape()
         let iShape = IntShape(shape: shape)
         let pShape = PlainShape(iShape: iShape)
-
+        
         var isValid: Bool = false
-        if case .valid = pShape.validate() {
+        let validation = pShape.validate()
+        
+        if case .valid = validation {
             isValid = true
+        } else {
+            print(validation)
         }
-        if isValid {
-            let triangles = pShape.delaunay(extraPoints: nil).trianglesIndices
-            let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
-            var triangle = [Int]()
-            var k = 0
-            for i in triangles {
-                triangle.append(i)
-                if triangle.count == 3 {
-                    let cgPoints = triangle.map({ shapePoints[$0] })
-                    let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
-                    self.addSublayer(shapeTriangle)
-                    triangle.removeAll()
-                    k += 1
-                }
-            }
-            
-            let debugShapes = pShape.split().shapes
-            
-            for i in 0..<debugShapes.count {
-                let shape = debugShapes[i]
-                let color = Colors.getColor(index: i).cgColor
-                let points = iGeom.float(points: shape.points).toCGPoints()
-                self.addSublayer(ShapeVectorPolygon(points: points, shift: 0.5, tip: 1.0, lineWidth: 0.4, color: color, indexShift: 2.5, data: nil))
+        
+        let extra = self.getExtra()
+        
+        let triangles = pShape.delaunay(extraPoints: extra).trianglesIndices
+        let shapePoints = iGeom.float(points: pShape.points + extra).toCGPoints()
+
+        var triangle = [Int]()
+        var k = 0
+        for i in triangles {
+            triangle.append(i)
+            if triangle.count == 3 {
+                let cgPoints = triangle.map({ shapePoints[$0] })
+                let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
+                self.addSublayer(shapeTriangle)
+                triangle.removeAll()
+                k += 1
             }
         }
 
+        
         let pathes = pShape.pathes
+        let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
 
         for vertices in pathes {
             var points = [CGPoint]()
@@ -95,24 +94,29 @@ final class ComplexDelaunayScene: CoordinateSystemScene {
                 data.append(String(vertex.index))
                 points.append(iGeom.float(point: vertex.point).toCGPoint)
             }
-            
-            let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
+
             if !isValid {
                 self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.4, color: Colors.red))
             }
             self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
         }
-
+        
+        
+        let cgExtra = iGeom.float(points: extra).toCGPoints()
+        
+        for vertex in cgExtra {
+            self.addSublayer(ShapeDot(position: vertex, radius: 1, color: dotColor))
+        }
     }
     
     func showPage(index: Int) {
-        self.data = ComplexTests.data[index]
+        self.data = TessellationTests.data[index]
         self.update()
     }
     
 }
 
-extension ComplexDelaunayScene: MouseCompatible {
+extension TessellationScene: MouseCompatible {
 
     private func findNearest(point: Point) -> ActiveIndex? {
         var j = 0
@@ -166,21 +170,32 @@ extension ComplexDelaunayScene: MouseCompatible {
         let hull = data[0]
         var holes = data
         holes.remove(at: 0)
+        if !holes.isEmpty {
+            holes.removeLast()
+        }
         return Shape(hull: hull, holes: holes)
+    }
+    
+    private func getExtra() -> [IntPoint] {
+        if let last = data.last {
+            return iGeom.int(points: last)
+        } else {
+            fatalError("can not be null")
+        }
     }
     
 }
 
-extension ComplexDelaunayScene: SceneNavigation {
+extension TessellationScene: SceneNavigation {
     func next() {
-        self.showPage(index: ComplexTests.nextIndex())
+        self.showPage(index: TessellationTests.nextIndex())
     }
     
     func back() {
-        self.showPage(index: ComplexTests.prevIndex())
+        self.showPage(index: TessellationTests.prevIndex())
     }
     
     func getName() -> String {
-        return "test \(ComplexTests.pageIndex)"
+        return "test \(TessellationTests.pageIndex)"
     }
 }

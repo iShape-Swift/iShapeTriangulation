@@ -30,6 +30,10 @@ extension PlainShape {
         var next: Link      // top branch
         var prev: Link      // bottom branch
         
+        var isEmpty: Bool {
+            return next.this == prev.this
+        }
+        
         init(node: Link) {
             self.next = node
             self.prev = node
@@ -42,8 +46,21 @@ extension PlainShape {
     }
     
     private struct DualSub {
-        var nextSub: Sub    // top branch
-        var prevSub: Sub    // bottom branch
+        var next: Link    // top branch
+        var middle: Index
+        var prev: Link    // bottom branch
+        
+        init(next: Link, middle: Index, prev: Link) {
+            self.next = next
+            self.middle = middle
+            self.prev = prev
+        }
+        
+        init(nextSub: Sub, prevSub: Sub) {
+            self.next = nextSub.next
+            self.middle = nextSub.prev.this
+            self.prev = prevSub.prev
+        }
     }
     
     private struct Bridge {
@@ -54,9 +71,9 @@ extension PlainShape {
         }
     }
     
-    func split() -> MonotoneLayout {
+    func split(extraPoints: [IntPoint]? = nil) -> MonotoneLayout {
         
-        let navigator = self.navigator
+        let navigator = self.createNavigator(extraPoints: extraPoints)
         
         var links = navigator.links
         let natures = navigator.natures
@@ -86,6 +103,97 @@ extension PlainShape {
                     subs.append(Sub(node: node))
                     i += 1
                     continue nextNode
+                    
+                case .extra:
+                    j = 0
+                    
+                    while j < dSubs.count {
+                        
+                        let dSub = dSubs[j]
+                        let pA = dSub.next.vertex.point
+                        let pB = links[dSub.next.next].vertex.point
+                        let pC = links[dSub.prev.prev].vertex.point
+                        let pD = dSub.prev.vertex.point
+                        
+                        let p = node.vertex.point
+                        
+                        if PlainShape.isTetragonContain(p: p, a: pA, b: pB, c: pC, d: pD) {
+                            let a = dSub.middle
+                            let b = node.this
+                            let bridge = self.connect(a: a, b: b, links: &links)
+                            subs.append(Sub(next: dSub.next, prev: links[b]))
+                            subs.append(Sub(next: bridge.b, prev: dSub.prev))
+                            slices.append(bridge.slice)
+                            // add slice
+                            dSubs.exclude(index: j)
+                            
+                            i += 1
+                            continue nextNode
+                        }
+                        
+                        j += 1
+                        
+                    }   //  while dSubs
+                    
+                    j = 0
+                    
+                    while j < subs.count {
+                        let sub = subs[j]
+                        
+                        let pA = sub.next.vertex.point
+                        let pB = links[sub.next.next].vertex.point
+                        let pC = links[sub.prev.prev].vertex.point
+                        let pD = sub.prev.vertex.point
+                        
+                        let p = node.vertex.point
+                        
+                        if PlainShape.isTetragonContain(p: p, a: pA, b: pB, c: pC, d: pD) {
+                            if !sub.isEmpty {
+                                let next: Link
+                                let prev: Link
+                                if pA.x > pD.x {
+                                    next = links[sub.next.this]
+                                    prev = links[sub.next.prev]
+                                    
+                                } else {
+                                    next = links[sub.prev.next]
+                                    prev = links[sub.prev.this]
+                                }
+                                subs.exclude(index: j)
+                                
+                                let index = self.connectExtraSub(next: next.this, prev: prev.this, node: node.this, links: &links)
+                                
+                                let newNodeLink = links[node.this]
+                                dSubs.append(
+                                    DualSub(
+                                        next: links[sub.next.this],
+                                        middle: newNodeLink.this,
+                                        prev: links[sub.prev.this]
+                                    )
+                                )
+                                
+                                slices.append(Slice(a: next.vertex.index, b: node.vertex.index))
+                                slices.append(Slice(a: node.vertex.index, b: prev.vertex.index))
+                                
+                                indices.append(links.findStart(index: index))
+
+                                i += 1
+                                continue nextNode
+                            } else {
+                                let a = sub.next.this
+                                let result = self.connectExtraEmptySub(a: a, p: node.this, links: &links)
+                                subs[j] = Sub(node: links[node.this])
+                                
+                                indices.append(links.findStart(index: result.a0))
+                                indices.append(links.findStart(index: result.a1))
+                                i += 1
+                                continue nextNode
+                            }
+                        }
+                        
+                        j += 1
+                    }
+                    
                 case .merge:
                     
                     var newNextSub: Sub?
@@ -97,15 +205,15 @@ extension PlainShape {
                         
                         let dSub = dSubs[j]
                         
-                        if dSub.nextSub.next.next == node.this {
+                        if dSub.next.next == node.this {
                             let a = node.this
-                            let b = dSub.prevSub.next.this
+                            let b = dSub.middle
                             
                             let bridge = self.connect(a: a, b: b, links: &links)
                             indices.append(links.findStart(index: bridge.a.this))
                             slices.append(bridge.slice)
                             
-                            let prevSub = Sub(next: links[a], prev: dSub.prevSub.prev)
+                            let prevSub = Sub(next: links[a], prev: dSub.prev)
                             
                             if let nextSub = newNextSub {
                                 dSubs[j] = DualSub(nextSub: nextSub, prevSub: prevSub)
@@ -118,16 +226,16 @@ extension PlainShape {
                             
                             newPrevSub = prevSub
                             continue
-                        } else if dSub.prevSub.prev.prev == node.this {
+                        } else if dSub.prev.prev == node.this {
                             
-                            let a = dSub.nextSub.prev.this
+                            let a = dSub.middle
                             let b = node.this
                             
                             let bridge = self.connect(a: a, b: b, links: &links)
                             indices.append(links.findStart(index: bridge.a.this))
                             slices.append(bridge.slice)
 
-                            let nextSub = Sub(next: dSub.nextSub.next, prev: links[b])
+                            let nextSub = Sub(next: dSub.next, prev: links[b])
                             
                             if let prevSub = newPrevSub {
                                 dSubs[j] = DualSub(nextSub: nextSub, prevSub: prevSub)
@@ -224,19 +332,19 @@ extension PlainShape {
                     while j < dSubs.count {
                         
                         let dSub = dSubs[j]
-                        let pA = dSub.nextSub.next.vertex.point
-                        let pB = links[dSub.nextSub.next.next].vertex.point
-                        let pC = links[dSub.prevSub.prev.prev].vertex.point
-                        let pD = dSub.prevSub.prev.vertex.point
+                        let pA = dSub.next.vertex.point
+                        let pB = links[dSub.next.next].vertex.point
+                        let pC = links[dSub.prev.prev].vertex.point
+                        let pD = dSub.prev.vertex.point
                         
                         let p = node.vertex.point
                         
                         if PlainShape.isTetragonContain(p: p, a: pA, b: pB, c: pC, d: pD) {
-                            let a = dSub.nextSub.prev.this
+                            let a = dSub.middle
                             let b = node.this
                             let bridge = self.connect(a: a, b: b, links: &links)
-                            subs.append(Sub(next: dSub.nextSub.next, prev: links[b]))
-                            subs.append(Sub(next: bridge.b, prev: dSub.prevSub.prev))
+                            subs.append(Sub(next: dSub.next, prev: links[b]))
+                            subs.append(Sub(next: bridge.b, prev: dSub.prev))
                             slices.append(bridge.slice)
                             dSubs.exclude(index: j)
                             
@@ -256,7 +364,7 @@ extension PlainShape {
                         let sub = subs[j]
                         
                         // second condition is useless because it repeats the first
-                        if sub.next.next == node.this /* || sub.prev.prev.index == node.this */{
+                        if sub.next.next == node.this /* || sub.prev.index == node.this */{
                             indices.append(links.findStart(index: node.this))
                             subs.exclude(index: j)
                             
@@ -274,9 +382,9 @@ extension PlainShape {
                         let dSub = dSubs[j]
                         
                         // second condition is useless because it repeats the first
-                        if dSub.nextSub.next.next == node.this /*|| dSub.prevSub.prev.prev.index == node.this*/ {
+                        if dSub.next.next == node.this /*|| dSub.prevSub.prev.index == node.this*/ {
                             
-                            let a = dSub.nextSub.prev.this
+                            let a = dSub.middle
                             let b = node.this
                             let bridge = self.connect(a: a, b: b, links: &links)
                             indices.append(links.findStart(index: a))
@@ -324,16 +432,16 @@ extension PlainShape {
                         
                         let dSub = dSubs[j]
                         
-                        if dSub.nextSub.next.next == node.this {
+                        if dSub.next.next == node.this {
                             
-                            let a = dSub.nextSub.prev.this
+                            let a = dSub.middle
                             let b = node.this
                             
                             let bridge = self.connect(a: a, b: b, links: &links)
                             indices.append(links.findStart(index: node.this))
                             slices.append(bridge.slice)
                             
-                            let newSub = Sub(next: bridge.b, prev: dSub.prevSub.prev)
+                            let newSub = Sub(next: bridge.b, prev: dSub.prev)
                             subs.append(newSub)
                             
                             dSubs.exclude(index: j)
@@ -341,16 +449,16 @@ extension PlainShape {
                             // goto next node
                             i += 1
                             continue nextNode
-                        } else if dSub.prevSub.prev.prev == node.this {
+                        } else if dSub.prev.prev == node.this {
                             
                             let a = node.this
-                            let b = dSub.prevSub.next.this
+                            let b = dSub.middle
                             
                             let bridge = self.connect(a: a, b: b, links: &links)
                             indices.append(links.findStart(index: node.this))
                             slices.append(bridge.slice)
                             
-                            let newSub = Sub(next: links[dSub.nextSub.next.this], prev: bridge.a)
+                            let newSub = Sub(next: links[dSub.next.this], prev: bridge.a)
                             subs.append(newSub)
                             
                             dSubs.exclude(index: j)
@@ -374,12 +482,12 @@ extension PlainShape {
     private func connect(a ai: Index, b bi: Index, links: inout[Link]) -> Bridge {
         let aLink = links[ai]
         let bLink = links[bi]
-        
+
         links[ai].prev = bi
         links[bi].next = ai
-        
+
         let count = links.count
-        
+
         let newLinkA = Link(
             prev: aLink.prev,
             this: count,
@@ -388,7 +496,7 @@ extension PlainShape {
         )
         links.append(newLinkA)
         links[aLink.prev].next = count
-        
+
         let newLinkB = Link(
             prev: count,
             this: count + 1,
@@ -397,8 +505,134 @@ extension PlainShape {
         )
         links.append(newLinkB)
         links[bLink.next].prev = count + 1
-        
+
         return Bridge(a: newLinkA, b: newLinkB)
+    }
+    
+    private func connectExtraSub(next iNext: Index, prev iPrev: Index, node iNode: Index, links: inout[Link]) -> Index {
+        var nextLink = links[iNext]
+        var nodeLink = links[iNode]
+        var prevLink = links[iPrev]
+
+        let count = links.count
+        
+        let iNewNext = count
+        let iNewP = count + 1
+        let iNewPrev = count + 2
+        
+        let newNextLink = Link(
+            prev: iNewPrev,
+            this: iNewNext,
+            next: iNewP,
+            vertex: nextLink.vertex
+        )
+        links.append(newNextLink)
+
+        let newNodeLink = Link(
+            prev: iNewNext,
+            this: iNewP,
+            next: iNewPrev,
+            vertex: nodeLink.vertex
+        )
+        links.append(newNodeLink)
+
+        let newPrevLink = Link(
+            prev: iNewP,
+            this: iNewPrev,
+            next: iNewNext,
+            vertex: prevLink.vertex
+        )
+        links.append(newPrevLink)
+        
+
+        nextLink.prev = iNode
+        nodeLink.next = iNext
+        nodeLink.prev = iPrev
+        prevLink.next = iNode
+        
+        links[iNext] = nextLink
+        links[iNode] = nodeLink
+        links[iPrev] = prevLink
+        
+        return iNewP
+    }
+    
+    private func connectExtraEmptySub(a ai: Index, p pi: Index, links: inout[Link]) -> (a0: Index, a1: Index) {
+        var aLink = links[ai]
+        var pLink = links[pi]
+        var nextLink = links[aLink.next]
+        var prevLink = links[aLink.prev]
+
+        let count = links.count
+        
+        let new_a = count
+        let new_p_1 = count + 1
+        let new_prev = count + 2
+        
+        let new_p_0 = count + 3
+        let new_next = count + 4
+
+        // bottom
+        
+        let newLinkA = Link(
+            prev: new_prev,
+            this: new_a,
+            next: new_p_1,
+            vertex: aLink.vertex
+        )
+        links.append(newLinkA)
+        
+        let newLinkP1 = Link(
+            prev: new_a,
+            this: new_p_1,
+            next: new_prev,
+            vertex: pLink.vertex
+        )
+        links.append(newLinkP1)
+
+        let newLinkPrev = Link(
+            prev: new_p_1,
+            this: new_prev,
+            next: new_a,
+            vertex: prevLink.vertex
+        )
+        links.append(newLinkPrev)
+        
+        // top
+        
+        let newLinkP0 = Link(
+            prev: new_next,
+            this: new_p_0,
+            next: ai,
+            vertex: pLink.vertex
+        )
+        links.append(newLinkP0)
+        
+        let newLinkNext = Link(
+            prev: ai,
+            this: new_next,
+            next: new_p_0,
+            vertex: nextLink.vertex
+        )
+        links.append(newLinkNext)
+        
+        // top
+        aLink.prev = new_p_0
+        aLink.next = new_next
+        links[aLink.this] = aLink
+        
+        // sub
+        nextLink.prev = pLink.this
+        pLink.next = nextLink.this
+        pLink.prev = prevLink.this
+        prevLink.next = pLink.this
+
+        // update
+        links[pLink.this] = pLink
+        links[nextLink.this] = nextLink
+        links[prevLink.this] = prevLink
+
+        return (a0: ai, a1: new_a)
     }
     
     private static func sign(a: IntPoint, b: IntPoint, c: IntPoint) -> Int64 {

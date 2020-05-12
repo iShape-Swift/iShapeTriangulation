@@ -51,7 +51,7 @@ final class ComplexPolygonScene: CoordinateSystemScene {
         let iShape = IntShape(shape: shape)
         let pShape = PlainShape(iShape: iShape)
 
-        let indices = pShape.delaunay().convexPolygonsIndices
+        let indices = pShape.delaunay(extraPoints: nil).convexPolygonsIndices
         let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
         
         
