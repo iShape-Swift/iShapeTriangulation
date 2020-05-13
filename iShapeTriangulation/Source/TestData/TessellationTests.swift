@@ -73,7 +73,7 @@ public struct TessellationTests {
         // test 3
         [
             [
-                Point(x: 1, y: 5),
+                Point(x: 0, y: 5),
                 Point(x: -5, y: 10),
                 Point(x: 5, y: 10),
                 Point(x: 10, y: 0),
@@ -82,6 +82,34 @@ public struct TessellationTests {
             ],
             [
                 Point(x: 5, y: 0)
+            ]
+        ],
+        // test 4
+        [
+            [
+                Point(x: 0, y: 5),
+                Point(x: -5, y: 10),
+                Point(x: 5, y: 10),
+                Point(x: 10, y: 0),
+                Point(x: 5, y: -10),
+                Point(x: -5, y: -10)
+            ],
+            [
+                Point(x: 4, y: 0)
+            ]
+        ],
+        // test 5
+        [
+            [
+                Point(x: -10, y: 5),
+                Point(x: -5, y: 5),
+                Point(x: 5, y: 10),
+                Point(x: 10, y: 0),
+                Point(x: 5, y: -10),
+                Point(x: -5, y: -10)
+            ],
+            [
+                Point(x: 4, y: 0)
             ]
         ]
 
