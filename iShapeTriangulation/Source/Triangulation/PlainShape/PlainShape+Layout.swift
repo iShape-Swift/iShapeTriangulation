@@ -511,57 +511,7 @@ extension PlainShape {
 
         return Bridge(a: newLinkA, b: newLinkB)
     }
-    
-    /*
-    private func connectExtra(next iNext: Index, prev iPrev: Index, node iNode: Index, links: inout[Link]) -> Index {
-        var nextLink = links[iNext]
-        var nodeLink = links[iNode]
-        var prevLink = links[iPrev]
 
-        let count = links.count
-        
-        let iNewNext = count
-        let iNewP = count + 1
-        let iNewPrev = count + 2
-        
-        let newNextLink = Link(
-            prev: iNewPrev,
-            this: iNewNext,
-            next: iNewP,
-            vertex: nextLink.vertex
-        )
-        links.append(newNextLink)
-
-        let newNodeLink = Link(
-            prev: iNewNext,
-            this: iNewP,
-            next: iNewPrev,
-            vertex: nodeLink.vertex
-        )
-        links.append(newNodeLink)
-
-        let newPrevLink = Link(
-            prev: iNewP,
-            this: iNewPrev,
-            next: iNewNext,
-            vertex: prevLink.vertex
-        )
-        links.append(newPrevLink)
-        
-
-        nextLink.prev = iNode
-        nodeLink.next = iNext
-        nodeLink.prev = iPrev
-        prevLink.next = iNode
-        
-        links[iNext] = nextLink
-        links[iNode] = nodeLink
-        links[iPrev] = prevLink
-        
-        return iNewP
-    }
-    */
-    
     private func connectExtraPrev(hand iHand: Index, node iNode: Index, links: inout[Link]) -> Index {
         var handLink = links[iHand]
         var nodeLink = links[iNode]
@@ -622,84 +572,6 @@ extension PlainShape {
         links[iNext] = nextLink
         
         return iNewHand
-    }
-    
-    private func connectExtraEmptySub(a ai: Index, p pi: Index, links: inout[Link]) -> (a0: Index, a1: Index) {
-        var aLink = links[ai]
-        var pLink = links[pi]
-        var nextLink = links[aLink.next]
-        var prevLink = links[aLink.prev]
-
-        let count = links.count
-        
-        let new_a = count
-        let new_p_1 = count + 1
-        let new_prev = count + 2
-        
-        let new_p_0 = count + 3
-        let new_next = count + 4
-
-        // bottom
-        
-        let newLinkA = Link(
-            prev: new_prev,
-            this: new_a,
-            next: new_p_1,
-            vertex: aLink.vertex
-        )
-        links.append(newLinkA)
-        
-        let newLinkP1 = Link(
-            prev: new_a,
-            this: new_p_1,
-            next: new_prev,
-            vertex: pLink.vertex
-        )
-        links.append(newLinkP1)
-
-        let newLinkPrev = Link(
-            prev: new_p_1,
-            this: new_prev,
-            next: new_a,
-            vertex: prevLink.vertex
-        )
-        links.append(newLinkPrev)
-        
-        // top
-        
-        let newLinkP0 = Link(
-            prev: new_next,
-            this: new_p_0,
-            next: ai,
-            vertex: pLink.vertex
-        )
-        links.append(newLinkP0)
-        
-        let newLinkNext = Link(
-            prev: ai,
-            this: new_next,
-            next: new_p_0,
-            vertex: nextLink.vertex
-        )
-        links.append(newLinkNext)
-        
-        // top
-        aLink.prev = new_p_0
-        aLink.next = new_next
-        links[aLink.this] = aLink
-        
-        // sub
-        nextLink.prev = pLink.this
-        pLink.next = nextLink.this
-        pLink.prev = prevLink.this
-        prevLink.next = pLink.this
-
-        // update
-        links[pLink.this] = pLink
-        links[nextLink.this] = nextLink
-        links[prevLink.this] = prevLink
-
-        return (a0: ai, a1: new_a)
     }
     
     private static func sign(a: IntPoint, b: IntPoint, c: IntPoint) -> Int64 {
