@@ -51,15 +51,6 @@ final class TessellationScene: CoordinateSystemScene {
         let iShape = IntShape(shape: shape)
         let pShape = PlainShape(iShape: iShape)
         
-        var isValid: Bool = false
-        let validation = pShape.validate()
-        
-        if case .valid = validation {
-            isValid = true
-        } else {
-            print(validation)
-        }
-        
         let extra = self.getExtra()
         
         let triangles = pShape.delaunay(extraPoints: extra).trianglesIndices
@@ -71,7 +62,7 @@ final class TessellationScene: CoordinateSystemScene {
             triangle.append(i)
             if triangle.count == 3 {
                 let cgPoints = triangle.map({ shapePoints[$0] })
-                let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
+                let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.gray, lineWidth: 0.125)
                 self.addSublayer(shapeTriangle)
                 triangle.removeAll()
                 k += 1
@@ -95,9 +86,7 @@ final class TessellationScene: CoordinateSystemScene {
                 points.append(iGeom.float(point: vertex.point).toCGPoint)
             }
 
-            if !isValid {
-                self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.4, color: Colors.red))
-            }
+            self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.4, color: Colors.darkGray))
             self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
         }
         

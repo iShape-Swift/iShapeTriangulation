@@ -114,42 +114,26 @@ extension PlainShape {
                         let pB = links[dSub.next.next].vertex.point
                         let pC = links[dSub.prev.prev].vertex.point
                         let pD = dSub.prev.vertex.point
-                        
+
                         let p = node.vertex.point
-                        
+
                         if PlainShape.isTetragonContain(p: p, a: pA, b: pB, c: pC, d: pD) {
-                            let middle = links[dSub.middle]
-                            let next: Link
-                            let prev: Link
-                            if middle.vertex.point.y < node.vertex.point.y {
-                                next = links[middle.next]
-                                prev = middle
-                            } else {
-                                next = middle
-                                prev = links[middle.prev]
-                            }
-                           
-                            let index = self.connectExtra(next: next.this, prev: prev.this, node: node.this, links: &links)
-                            
-                            let newNodeLink = links[node.this]
-                            
+                            let hand = links[dSub.middle]
+                             slices.append(Slice(a: hand.vertex.index, b: node.vertex.index))
+                             _ = self.connectExtraPrev(hand: hand.this, node: node.this, links: &links)
+                             
                             dSubs[j] = DualSub(
-                                next: links[dSub.next.this],
-                                middle: newNodeLink.this,
-                                prev: links[dSub.prev.this]
-                            )
-                            
-                            slices.append(Slice(a: next.vertex.index, b: node.vertex.index))
-                            slices.append(Slice(a: node.vertex.index, b: prev.vertex.index))
-                            
-                            indices.append(links.findStart(index: index))
+                                 next: links[dSub.next.this],
+                                 middle: node.this,
+                                 prev: links[dSub.prev.this]
+                             )
 
                             i += 1
                             continue nextNode
                         }
-                        
+
                         j += 1
-                        
+
                     }   //  while dSubs
                     
                     j = 0
@@ -166,7 +150,6 @@ extension PlainShape {
                         
                         if PlainShape.isTetragonContain(p: p, a: pA, b: pB, c: pC, d: pD) {
                             if !sub.isEmpty {
-
                                 if pA.x > pD.x {
                                     let hand = sub.next
                                     slices.append(Slice(a: hand.vertex.index, b: node.vertex.index))
@@ -195,12 +178,17 @@ extension PlainShape {
                                 i += 1
                                 continue nextNode
                             } else {
-                                let a = sub.next.this
-                                let result = self.connectExtraEmptySub(a: a, p: node.this, links: &links)
-                                subs[j] = Sub(node: links[node.this])
-                                
-                                indices.append(links.findStart(index: result.a0))
-                                indices.append(links.findStart(index: result.a1))
+                                let hand = links[sub.next.this]
+                                slices.append(Slice(a: hand.vertex.index, b: node.vertex.index))
+                                let newPrev = self.connectExtraPrev(hand: hand.this, node: node.this, links: &links)
+                                dSubs.append(
+                                    DualSub(
+                                       next: links[hand.this],
+                                       middle: node.this,
+                                       prev: links[newPrev]
+                                    )
+                                )
+                                subs.exclude(index: j)
                                 i += 1
                                 continue nextNode
                             }
@@ -524,6 +512,7 @@ extension PlainShape {
         return Bridge(a: newLinkA, b: newLinkB)
     }
     
+    /*
     private func connectExtra(next iNext: Index, prev iPrev: Index, node iNode: Index, links: inout[Link]) -> Index {
         var nextLink = links[iNext]
         var nodeLink = links[iNode]
@@ -571,6 +560,7 @@ extension PlainShape {
         
         return iNewP
     }
+    */
     
     private func connectExtraPrev(hand iHand: Index, node iNode: Index, links: inout[Link]) -> Index {
         var handLink = links[iHand]

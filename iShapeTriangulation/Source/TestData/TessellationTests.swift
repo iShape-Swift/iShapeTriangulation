@@ -111,7 +111,176 @@ public struct TessellationTests {
             [
                 Point(x: 4, y: 0)
             ]
-        ]
+        ],
+        // test 6
+        [
+            [
+                Point(x: -10, y: 5),
+                Point(x: -5, y: 10),
+                Point(x: 5, y: 10),
+                Point(x: 10, y: 0),
+                Point(x: 5, y: -10),
+                Point(x: -5, y: -10)
+            ],
+            [
+                Point(x: -4, y: -1),
+                Point(x: 0, y: 0)
+            ]
+        ],
+        // test 7
+        [
+            [
+                Point(x: -10, y: 5),
+                Point(x: -5, y: 10),
+                Point(x: 5, y: 10),
+                Point(x: 10, y: 0),
+                Point(x: 5, y: -10),
+                Point(x: -5, y: -10)
+            ],
+            [
+                Point(x: -5, y: 5),
+                Point(x: 0, y: 0),
+                Point(x: 5, y: -5)
+            ]
+        ],
+        // test 8
+        [
+            [
+                Point(x: -15, y: 15),
+                Point(x: 15, y: 15),
+                Point(x: 15, y: -15),
+                Point(x: -15, y: -15)
+            ],
+            [
+                Point(x: 0, y: 5),
+                Point(x: 5, y: 0),
+                Point(x: 0, y: -5),
+                Point(x: -5, y: 0)
+            ]
+        ],
+        // test 9
+        [
+            [
+                Point(x: -15, y: -5),
+                Point(x: -15, y: 5),
+                
+                Point(x: -5, y: 15),
+                Point(x:  5, y: 15),
+
+                Point(x: 15, y: 5),
+                Point(x: 15, y: -5),
+                
+                Point(x:  5, y: -15),
+                Point(x: -5, y: -15)
+            ],
+            [
+                Point(x: -5, y: 5),
+                Point(x: -5, y: -5),
+                Point(x:  5, y: -5),
+                Point(x:  5, y: 5)
+            ],
+            [
+                Point(x: 10, y: 0),
+                Point(x: 0, y: 10),
+                Point(x: -10, y: 0),
+                Point(x: 0, y: -10),
+            ]
+        ],
+        // test 10
+        [
+            [
+                Point(x: -15, y: 15),
+                Point(x: 15, y: 15),
+                Point(x: 15, y: -15),
+                Point(x: -15, y: -15)
+            ],
+            [
+                Point(x: -10, y: 10),
+                Point(x: -5, y: 10),
+                Point(x: 0, y: 10),
+                Point(x: 5, y: 10),
+                Point(x: 10, y: 10),
+
+                Point(x: -10, y: 5),
+                Point(x: -5, y: 5),
+                Point(x: 0, y: 5),
+                Point(x: 5, y: 5),
+                Point(x: 10, y: 5),
+                
+                Point(x: -10, y: 0),
+                Point(x: -5, y: 0),
+                Point(x: 0, y: 0),
+                Point(x: 5, y: 0),
+                Point(x: 10, y: 0),
+                
+                Point(x: -10, y: -5),
+                Point(x: -5, y: -5),
+                Point(x: 0, y: -5),
+                Point(x: 5, y: -5),
+                Point(x: 10, y: -5),
+                
+                Point(x: -10, y: -10),
+                Point(x: -5, y: -10),
+                Point(x: 0, y: -10),
+                Point(x: 5, y: -10),
+                Point(x: 10, y: -10)
+            ]
+        ],
+        // test 11
+        [
+            [
+                Point(x: -25, y:  5),
+                
+                Point(x: -30, y:  20),
+                Point(x: -25, y:  30),
+                Point(x: -10, y:  25),
+                Point(x:   0, y:  30),
+                
+                Point(x:  15, y:  15),
+                Point(x:  30, y:  15),
+                Point(x:  35, y:   5),
+                
+                Point(x:  30, y: -10),
+                Point(x:  25, y: -10),
+                Point(x:  15, y: -20),
+                Point(x:  15, y: -30),
+                
+                Point(x:  -5, y: -35),
+                
+                Point(x: -15, y: -20),
+                Point(x: -40, y: -25),
+                Point(x: -35, y:  -5)
+            ],
+            [
+                Point(x:   5, y:   0),
+                Point(x:  10, y: -10),
+                Point(x:  25, y:   0),
+                Point(x:  15, y:   5)
+            ],
+            [
+                Point(x: -15, y:   0),
+                Point(x: -25, y:  -5),
+                Point(x: -30, y: -15),
+                Point(x: -15, y: -10),
+                Point(x:  -5, y: -15),
+                Point(x:   0, y: -25),
+                Point(x:   5, y: -15),
+                Point(x:  -5, y:  -5),
+                Point(x:  -5, y:   5),
+                Point(x:   5, y:  10),
+                Point(x:   0, y:  20),
+                Point(x:  -5, y:  15),
+                Point(x: -10, y:  15),
+                Point(x: -15, y:  20),
+                Point(x: -20, y:  10),
+                Point(x: -15, y:   5)
+            ],
+            [
+                Point(x: 0, y: 5),
+                Point(x: 0, y: 0),
+                Point(x: 0, y: -5)
+            ]
+        ],
 
     ]
 }
