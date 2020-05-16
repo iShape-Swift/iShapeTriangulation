@@ -5,7 +5,7 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/star_triangle.svg" width="500"/>
 </p>
 
-## Breaking into polygons
+## Breaking into convex polygons
 <p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/star_polygon.svg" width="500" />
 </p>
