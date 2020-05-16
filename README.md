@@ -1,8 +1,15 @@
 # iShapeTriangulation
 Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulation of monotone polygons". The result can be represented as a Delaunay triangulation.
+### Delaunay triangulation
 <p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/star_triangle.svg" width="500">
+</p>
+### Breaking into polygons
+<p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/star_polygon.svg" width="500">
+</p>
+### Triangulation with extra points
+<p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_triangles_extra_points.svg" width="500">
 </p>
 
