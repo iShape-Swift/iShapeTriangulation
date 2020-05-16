@@ -18,6 +18,8 @@
 		5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */; };
 		543DF7C2246412B90086B9AC /* TessellationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543DF7C1246412B90086B9AC /* TessellationScene.swift */; };
 		5458A8252355A66100CB45DC /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458A8242355A66100CB45DC /* TestUtil.swift */; };
+		54842732246DA3FA00BBF07C /* ApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54842731246DA3FA00BBF07C /* ApiTests.swift */; };
+		54842749246FEF1D00BBF07C /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54842748246FEF1D00BBF07C /* SVG.swift */; };
 		548AE11E233CE7EF00494FE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11D233CE7EF00494FE4 /* Assets.xcassets */; };
 		548AE121233CE7EF00494FE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11F233CE7EF00494FE4 /* Main.storyboard */; };
 		548AE14A233CFC8000494FE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE12A233CFC8000494FE4 /* ViewController.swift */; };
@@ -77,6 +79,8 @@
 		5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotonePolygonScene.swift; sourceTree = "<group>"; };
 		543DF7C1246412B90086B9AC /* TessellationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TessellationScene.swift; sourceTree = "<group>"; };
 		5458A8242355A66100CB45DC /* TestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
+		54842731246DA3FA00BBF07C /* ApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTests.swift; sourceTree = "<group>"; };
+		54842748246FEF1D00BBF07C /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
 		548AE116233CE7EE00494FE4 /* iShapeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShapeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		548AE11D233CE7EF00494FE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		548AE120233CE7EF00494FE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				540C2361234484C900A1D178 /* ComplexDelaunayTests.swift */,
 				540D283A234470D8001FD387 /* TriangulatorTests.swift */,
 				540D283B234470D8001FD387 /* iGeometryTests.swift */,
+				54842731246DA3FA00BBF07C /* ApiTests.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				548AE133233CFC8000494FE4 /* Plain */,
 				548AE136233CFC8000494FE4 /* Delaunay */,
 				548AE139233CFC8000494FE4 /* DelaunayAssessmentScene.swift */,
+				54842748246FEF1D00BBF07C /* SVG.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				540D28412344782B001FD387 /* MonotonePlainTests.swift in Sources */,
+				54842732246DA3FA00BBF07C /* ApiTests.swift in Sources */,
 				540D283D234470D8001FD387 /* TriangulatorTests.swift in Sources */,
 				540D284523447985001FD387 /* Triangles+Array.swift in Sources */,
 				540D283E234470D8001FD387 /* iGeometryTests.swift in Sources */,
@@ -527,6 +534,7 @@
 				548AE156233CFC8000494FE4 /* CanvasView.swift in Sources */,
 				548AE14D233CFC8000494FE4 /* ActiveIndex.swift in Sources */,
 				543DF7C2246412B90086B9AC /* TessellationScene.swift in Sources */,
+				54842749246FEF1D00BBF07C /* SVG.swift in Sources */,
 				548AE154233CFC8000494FE4 /* MotoneDelaunayScene.swift in Sources */,
 				548AE151233CFC8000494FE4 /* MotonePlainScene.swift in Sources */,
 				548AE153233CFC8000494FE4 /* ComplexDelaunayScene.swift in Sources */,

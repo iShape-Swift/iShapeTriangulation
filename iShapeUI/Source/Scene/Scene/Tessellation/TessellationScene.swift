@@ -50,26 +50,28 @@ final class TessellationScene: CoordinateSystemScene {
         let shape = self.getShape()
         let iShape = IntShape(shape: shape)
         let pShape = PlainShape(iShape: iShape)
-        
+
         let extra = self.getExtra()
         
         let triangles = pShape.delaunay(extraPoints: extra).trianglesIndices
         let shapePoints = iGeom.float(points: pShape.points + extra).toCGPoints()
 
+        var svgPath = [[CGPoint]]()
+        
         var triangle = [Int]()
         var k = 0
         for i in triangles {
             triangle.append(i)
             if triangle.count == 3 {
                 let cgPoints = triangle.map({ shapePoints[$0] })
-                let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.gray, lineWidth: 0.125)
+                let shapeTriangle = ShapeTriangle(points: cgPoints, text: ""/*String(k)*/, color: Colors.gray, lineWidth: 0.08)
                 self.addSublayer(shapeTriangle)
+                svgPath.append(cgPoints)
                 triangle.removeAll()
                 k += 1
             }
         }
 
-        
         let pathes = pShape.pathes
         let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
 
@@ -85,9 +87,9 @@ final class TessellationScene: CoordinateSystemScene {
                 data.append(String(vertex.index))
                 points.append(iGeom.float(point: vertex.point).toCGPoint)
             }
-
-            self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.4, color: Colors.darkGray))
-            self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
+            svgPath.append(points)
+            self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.16, color: Colors.darkGray))
+//            self.addSublayer(ShapeVertexPolygon(points: points, radius: 0.3, color: dotColor, indexShift: 2.0, data: nil))
         }
         
         
@@ -96,6 +98,8 @@ final class TessellationScene: CoordinateSystemScene {
         for vertex in cgExtra {
             self.addSublayer(ShapeDot(position: vertex, radius: 1, color: dotColor))
         }
+        
+        SVG.svgPrint(pathes: svgPath)
     }
     
     func showPage(index: Int) {

@@ -54,7 +54,7 @@ final class ComplexPolygonScene: CoordinateSystemScene {
         let indices = pShape.delaunay(extraPoints: nil).convexPolygonsIndices
         let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
         
-        
+        var svgPath = [[CGPoint]]()
         var i = 0
         while i < indices.count {
             let n = indices[i]
@@ -65,12 +65,13 @@ final class ComplexPolygonScene: CoordinateSystemScene {
                 polygon[j] = shapePoints[index]
             }
             i += n
-            
-            let shape = ShapeLinePolygon(points: polygon, lineWidth: 0.5, color: .init(gray: 0.5, alpha: 1))
+            svgPath.append(polygon)
+            let shape = ShapeLinePolygon(points: polygon, lineWidth: 0.08, color: .init(gray: 0.5, alpha: 1))
             self.addSublayer(shape)
         }
 
         let pathes = pShape.pathes
+        
         
         for vertices in pathes {
             var points = [CGPoint]()
@@ -78,18 +79,19 @@ final class ComplexPolygonScene: CoordinateSystemScene {
             
             var data = [String]()
             data.reserveCapacity(vertices.count)
-            
+
             for i in 0..<vertices.count {
                 let vertex = vertices[i]
                 data.append(String(vertex.index))
                 points.append(iGeom.float(point: vertex.point).toCGPoint)
             }
-            
-            let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
-            
-            self.addSublayer(ShapeVectorPolygon(points: points, shift: -1.0, tip: 1.0, lineWidth: 0.4, color: Colors.master, indexShift: 2.5, data: nil))
-            self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
+
+            self.addSublayer(ShapeVectorPolygon(points: points, shift: -1.0, tip: 1.0, lineWidth: 0.2, color: Colors.master, indexShift: 2.5, data: nil))
+            self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.16, color: Colors.darkGray))
+            svgPath.append(points)
         }
+        
+        SVG.svgPrint(pathes: svgPath, lines: [])
     }
     
     func showPage(index: Int) {
@@ -172,3 +174,6 @@ extension ComplexPolygonScene: SceneNavigation {
         return "test \(ComplexTests.pageIndex)"
     }
 }
+
+
+

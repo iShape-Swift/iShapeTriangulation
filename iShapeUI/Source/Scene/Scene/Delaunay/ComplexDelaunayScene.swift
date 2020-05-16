@@ -55,6 +55,9 @@ final class ComplexDelaunayScene: CoordinateSystemScene {
         if case .valid = pShape.validate() {
             isValid = true
         }
+        
+        var svgPath = [[CGPoint]]()
+        
         if isValid {
             let triangles = pShape.delaunay(extraPoints: nil).trianglesIndices
             let shapePoints = iGeom.float(points: pShape.points).toCGPoints()
@@ -66,6 +69,7 @@ final class ComplexDelaunayScene: CoordinateSystemScene {
                     let cgPoints = triangle.map({ shapePoints[$0] })
                     let shapeTriangle = ShapeTriangle(points: cgPoints, text: String(k), color: Colors.lightGray)
                     self.addSublayer(shapeTriangle)
+                    svgPath.append(cgPoints)
                     triangle.removeAll()
                     k += 1
                 }
@@ -101,8 +105,10 @@ final class ComplexDelaunayScene: CoordinateSystemScene {
                 self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.4, color: Colors.red))
             }
             self.addSublayer(ShapeVertexPolygon(points: points, radius: 1, color: dotColor, indexShift: 2.5, data: data))
+            svgPath.append(points)
         }
 
+        SVG.svgPrint(pathes: svgPath)
     }
     
     func showPage(index: Int) {

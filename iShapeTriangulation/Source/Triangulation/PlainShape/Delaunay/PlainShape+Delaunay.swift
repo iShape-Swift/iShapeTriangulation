@@ -93,7 +93,7 @@ public extension PlainShape {
         }
     }
 
-    func delaunay(extraPoints: [IntPoint]?) -> Delaunay {
+    func delaunay(extraPoints: [IntPoint]? = nil) -> Delaunay {
         let layout = self.split(extraPoints: extraPoints)
         
         let extraCount: Int = extraPoints?.count ?? 0
