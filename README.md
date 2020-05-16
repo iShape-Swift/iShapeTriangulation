@@ -7,11 +7,11 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 ### Breaking into polygons
 <p align="center">
-<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/star_polygon.svg" width="800"/>
+<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/star_polygon.svg" width="500"/>
 </p>
 ### Triangulation with extra points
 <p align="center">
-<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_triangles_extra_points.svg" width="500"/>
+<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_triangles_extra_points.svg" width="800"/>
 </p>
 
 ## Features
