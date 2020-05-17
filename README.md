@@ -39,7 +39,10 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 Let's imagine you have a polygon like one is shown below:
 
-<img align="center" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_0.svg" width="500">
+<p float="left">
+  <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_0.svg" width="300"/>
+  <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_1.svg" width="300"/>
+</p>
 
 You should list your hull vertices in clockwise direction and your holes vertices in counterclockwise direction
 
@@ -94,8 +97,8 @@ while i < polygons.count {
 
 ```
 
-the result must be:
-
+the trinagles result must be:
+```swift
 triangle 0: (6, 7, 8)
 triangle 1: (6, 8, 5)
 triangle 2: (7, 0, 8)
@@ -108,15 +111,14 @@ triangle 8: (9, 10, 4)
 triangle 9: (2, 10, 1)
 triangle 10: (10, 3, 4)
 triangle 11: (2, 3, 10)
-
+```
+and for polygons:
+```swift
 polygon 0: (6, 7, 8, 9, 4, 5)
 polygon 1: (7, 0, 1, 11, 8)
 polygon 2: (11, 1, 2, 3, 10)
 polygon 3: (9, 10, 3, 4)
-
-
-<img align="center" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_1.svg" width="500">
-
+```
 After a triangulation you will get an array of indices. Where each triple are represent an indices of the triangle vertices. The indices are always listed in a clock wise direction.
 <img align="center" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_2.svg" width="500">
 
