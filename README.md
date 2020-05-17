@@ -96,8 +96,8 @@ while i < polygons.count {
 }
 
 ```
-
-the trinagles result must be:
+After a triangulation you will get an array of indices. Where each triple are represent an indices of the triangle vertices. The indices are always listed in a clock wise direction.
+<img align="left" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_2.svg" width="300"/>
 ```swift
 triangle 0: (6, 7, 8)
 triangle 1: (6, 8, 5)
@@ -120,7 +120,6 @@ polygon 2: (11, 1, 2, 3, 10)
 polygon 3: (9, 10, 3, 4)
 ```
 After a triangulation you will get an array of indices. Where each triple are represent an indices of the triangle vertices. The indices are always listed in a clock wise direction.
-<img align="center" src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/vertices_ordering_rule_2.svg" width="500">
 
 ---
 
