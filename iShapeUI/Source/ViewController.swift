@@ -31,7 +31,7 @@ final class ViewController: NSViewController {
         let index: Int = UserDefaults.standard.integer(forKey: "screen")
 //        let index: Int = 0
         let popUpButton = canvasView.testList
-        popUpButton.addItems(withTitles: ["Monotone Plain", "Complex Plain", "Monotone Delaunay", "Complex Delaunay", "Monotone Polygon", "Complex Polygon", "Tessellation", "DelaunayTest"])
+        popUpButton.addItems(withTitles: ["Monotone Plain", "Complex Plain", "Monotone Delaunay", "Complex Delaunay", "Monotone Polygon", "Complex Polygon", "Tessellation", "Voronoi", "DelaunayTest"])
         popUpButton.selectItem(at: index)
         popUpButton.action = #selector(didPickScene)
         popUpButton.target = self
@@ -62,6 +62,8 @@ final class ViewController: NSViewController {
             newScene = ComplexPolygonScene()
         case 6:
             newScene = TessellationScene()
+        case 7:
+            newScene = VoronoiScene()
         default:
             newScene = DelaunayAssessmentScene()
         }
