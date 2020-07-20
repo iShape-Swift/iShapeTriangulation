@@ -9,8 +9,7 @@
 import iGeometry
 
 struct TestUtil {
-    
-    
+
     public static func isCCW(points: [IntPoint], triangles: [Int]) -> Bool {
         let n = triangles.count
         var i = 0

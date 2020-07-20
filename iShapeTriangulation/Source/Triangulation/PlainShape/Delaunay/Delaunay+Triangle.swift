@@ -51,6 +51,17 @@ extension Delaunay {
             assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
         }
         
+        init(index: Index, a: Vertex, b: Vertex, c: Vertex, bc: Index, ac: Index, ab: Index) {
+            self.index = index
+            self.vertices[0] = a
+            self.vertices[1] = b
+            self.vertices[2] = c
+            self.neighbors[0] = bc
+            self.neighbors[1] = ac
+            self.neighbors[2] = ab
+            assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
+        }
+        
         func vertex(neighbor: Index) -> Vertex {
             for i in 0...2 {
                 if self.neighbors[i] == neighbor {
@@ -68,6 +79,16 @@ extension Delaunay {
                 }
             }
             assertionFailure("Neighbor is not present")
+            return -1
+        }
+        
+        func index(index: Index) -> Index {
+            for i in 0...2 {
+                if self.vertices[i].index == index {
+                    return i
+                }
+            }
+//            assertionFailure("Index is not present")
             return -1
         }
         

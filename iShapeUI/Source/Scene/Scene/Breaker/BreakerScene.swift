@@ -1,8 +1,8 @@
 //
-//  ComplexPolygonScene.swift
+//  BreakerScene.swift
 //  iShapeUI
 //
-//  Created by Nail Sharipov on 29.04.2020.
+//  Created by Nail Sharipov on 20.05.2020.
 //  Copyright © 2020 iShape. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class ComplexPolygonScene: CoordinateSystemScene {
+final class BreakerScene: CoordinateSystemScene {
 
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
     private let iGeom = IntGeom()
-    
+
     override init() {
         super.init()
         self.showPage(index: ExtraPointsTests.pageIndex)
@@ -46,52 +46,71 @@ final class ComplexPolygonScene: CoordinateSystemScene {
     }
     
     private func addShapes() {
+
         let shape = self.getShape()
         let iShape = IntShape(shape: shape)
         let pShape = PlainShape(iShape: iShape)
 
         let extra = self.getExtra()
         
-        let indices = pShape.delaunay(extraPoints: extra).convexPolygonsIndices
+        let delaunay = pShape.delaunay(extraPoints: extra)
+
+        let triangles = delaunay.trianglesIndices
         let shapePoints = iGeom.float(points: pShape.points + extra).toCGPoints()
-        
+
         var svgPath = [[CGPoint]]()
-        var i = 0
-        while i < indices.count {
-            let n = indices[i]
-            i += 1
-            var polygon = [CGPoint](repeating: .zero, count: n)
-            for j in 0..<n {
-                let index = indices[j + i]
-                polygon[j] = shapePoints[index]
+        
+        var triangle = [Int]()
+        var k = 0
+        for i in triangles {
+            triangle.append(i)
+            if triangle.count == 3 {
+                let cgPoints = triangle.map({ shapePoints[$0] })
+                let shapeTriangle = ShapeTriangle(points: cgPoints, text: ""/*String(k)*/, color: Colors.gray, lineWidth: 0.08)
+                self.addSublayer(shapeTriangle)
+                svgPath.append(cgPoints)
+                triangle.removeAll()
+                k += 1
             }
-            i += n
-            svgPath.append(polygon)
-            let shape = ShapeLinePolygon(points: polygon, lineWidth: 0.08, color: .init(gray: 0.5, alpha: 1))
-            self.addSublayer(shape)
         }
 
         let pathes = pShape.pathes
-        
-        
+        let dotColor = CGColor(red: 1, green: 0, blue: 0, alpha: 1)
+
         for vertices in pathes {
             var points = [CGPoint]()
             points.reserveCapacity(vertices.count)
             
             var data = [String]()
             data.reserveCapacity(vertices.count)
-
+            
             for i in 0..<vertices.count {
                 let vertex = vertices[i]
                 data.append(String(vertex.index))
                 points.append(iGeom.float(point: vertex.point).toCGPoint)
             }
-
-            self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.16, color: Colors.darkGray))
             svgPath.append(points)
+            self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.16, color: Colors.darkGray))
         }
         
-        SVG.svgPrint(pathes: svgPath, lines: [])
+        
+        let cgExtra = iGeom.float(points: extra).toCGPoints()
+        
+        for vertex in cgExtra {
+            self.addSublayer(ShapeDot(position: vertex, radius: 1, color: dotColor))
+        }
+        
+        
+        let iPathes = delaunay.getCentroidNet()
+        let piece = iGeom.float(paths: iPathes)
+        
+        for path in piece {
+            self.addSublayer(ShapeLinePolygon(points: path.toCGPoints(), lineWidth: 0.2, color: Colors.red))
+        }
+        
+        
+        
+//        SVG.svgPrint(pathes: svgPath)
     }
     
     func showPage(index: Int) {
@@ -101,7 +120,7 @@ final class ComplexPolygonScene: CoordinateSystemScene {
     
 }
 
-extension ComplexPolygonScene: MouseCompatible {
+extension BreakerScene: MouseCompatible {
 
     private func findNearest(point: Point) -> ActiveIndex? {
         var j = 0
@@ -171,8 +190,7 @@ extension ComplexPolygonScene: MouseCompatible {
     
 }
 
-extension ComplexPolygonScene: SceneNavigation {
-    
+extension BreakerScene: SceneNavigation {
     func next() {
         self.showPage(index: ExtraPointsTests.nextIndex())
     }
@@ -185,6 +203,3 @@ extension ComplexPolygonScene: SceneNavigation {
         return "test \(ExtraPointsTests.pageIndex)"
     }
 }
-
-
-

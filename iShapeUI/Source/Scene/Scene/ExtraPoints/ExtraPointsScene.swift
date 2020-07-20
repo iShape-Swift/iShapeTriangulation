@@ -1,8 +1,8 @@
 //
-//  VoronoiScene.swift
+//  ExtraPointsScene.swift
 //  iShapeUI
 //
-//  Created by Nail Sharipov on 20.05.2020.
+//  Created by Nail Sharipov on 07.05.2020.
 //  Copyright © 2020 iShape. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class VoronoiScene: CoordinateSystemScene {
+final class ExtraPointsScene: CoordinateSystemScene {
 
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
@@ -18,7 +18,7 @@ final class VoronoiScene: CoordinateSystemScene {
 
     override init() {
         super.init()
-        self.showPage(index: TessellationTests.pageIndex)
+        self.showPage(index: ExtraPointsTests.pageIndex)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,11 +53,7 @@ final class VoronoiScene: CoordinateSystemScene {
 
         let extra = self.getExtra()
         
-        let delaunay = pShape.delaunay(extraPoints: extra)
-        
-        let circles = delaunay.getCircles(intGeom: iGeom)
-        let iCircles = delaunay.getInscribedCircles(intGeom: iGeom)
-        let triangles = delaunay.trianglesIndices
+        let triangles = pShape.delaunay(extraPoints: extra).trianglesIndices
         let shapePoints = iGeom.float(points: pShape.points + extra).toCGPoints()
 
         var svgPath = [[CGPoint]]()
@@ -102,25 +98,17 @@ final class VoronoiScene: CoordinateSystemScene {
             self.addSublayer(ShapeDot(position: vertex, radius: 1, color: dotColor))
         }
         
-        for circle in circles {
-            self.addSublayer(ShapeDot(position: circle.toCGPoint, radius: 1, color: Colors.orange))
-        }
-        
-        for circle in iCircles {
-            self.addSublayer(ShapeDot(position: circle.toCGPoint, radius: 1, color: Colors.darkGreen))
-        }
-        
         SVG.svgPrint(pathes: svgPath)
     }
     
     func showPage(index: Int) {
-        self.data = TessellationTests.data[index]
+        self.data = ExtraPointsTests.data[index]
         self.update()
     }
     
 }
 
-extension VoronoiScene: MouseCompatible {
+extension ExtraPointsScene: MouseCompatible {
 
     private func findNearest(point: Point) -> ActiveIndex? {
         var j = 0
@@ -190,16 +178,16 @@ extension VoronoiScene: MouseCompatible {
     
 }
 
-extension VoronoiScene: SceneNavigation {
+extension ExtraPointsScene: SceneNavigation {
     func next() {
-        self.showPage(index: TessellationTests.nextIndex())
+        self.showPage(index: ExtraPointsTests.nextIndex())
     }
     
     func back() {
-        self.showPage(index: TessellationTests.prevIndex())
+        self.showPage(index: ExtraPointsTests.prevIndex())
     }
     
     func getName() -> String {
-        return "test \(TessellationTests.pageIndex)"
+        return "test \(ExtraPointsTests.pageIndex)"
     }
 }

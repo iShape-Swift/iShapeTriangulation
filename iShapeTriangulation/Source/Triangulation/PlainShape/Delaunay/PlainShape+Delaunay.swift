@@ -114,7 +114,7 @@ public extension PlainShape {
         var sliceBuffer = SliceBuffer(vertexCount: vertexCount, slices: layout.slices)
         sliceBuffer.addConections(triangles: &triangles)
         
-        var delaunay = Delaunay(triangles: triangles)
+        var delaunay = Delaunay(pathCount: self.points.count, extraCount: extraCount, triangles: triangles)
         delaunay.build()
         
         return delaunay

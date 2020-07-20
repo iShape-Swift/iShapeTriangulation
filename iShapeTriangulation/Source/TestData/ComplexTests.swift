@@ -28,7 +28,7 @@ public struct ComplexTests {
         UserDefaults.standard.set(ComplexTests.pageIndex, forKey: ComplexTests.key)
         return ComplexTests.pageIndex
     }
-    
+
     public static let data: [[[Point]]] = [
         // test 0
         [

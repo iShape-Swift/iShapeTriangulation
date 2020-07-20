@@ -16,9 +16,9 @@
 		540D284523447985001FD387 /* Triangles+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D284423447985001FD387 /* Triangles+Array.swift */; };
 		5434D9D62459F03A009BC0E6 /* ComplexPolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D52459F03A009BC0E6 /* ComplexPolygonScene.swift */; };
 		5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */; };
-		543DF7C2246412B90086B9AC /* TessellationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543DF7C1246412B90086B9AC /* TessellationScene.swift */; };
+		543DF7C2246412B90086B9AC /* ExtraPointsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543DF7C1246412B90086B9AC /* ExtraPointsScene.swift */; };
 		5458A8252355A66100CB45DC /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458A8242355A66100CB45DC /* TestUtil.swift */; };
-		547F06C524759A5500981F18 /* VoronoiScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547F06C424759A5500981F18 /* VoronoiScene.swift */; };
+		547F06C524759A5500981F18 /* BreakerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547F06C424759A5500981F18 /* BreakerScene.swift */; };
 		54842732246DA3FA00BBF07C /* ApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54842731246DA3FA00BBF07C /* ApiTests.swift */; };
 		54842749246FEF1D00BBF07C /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54842748246FEF1D00BBF07C /* SVG.swift */; };
 		548AE11E233CE7EF00494FE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11D233CE7EF00494FE4 /* Assets.xcassets */; };
@@ -48,6 +48,7 @@
 		548AE161233CFC8000494FE4 /* ShapeCoordinatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE148233CFC8000494FE4 /* ShapeCoordinatSystem.swift */; };
 		548AE162233CFC8000494FE4 /* CoordinateSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE149233CFC8000494FE4 /* CoordinateSystemScene.swift */; };
 		548AE169233D004600494FE4 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AE168233D004600494FE4 /* CGPoint.swift */; };
+		54D4519B24BF15FF00D33710 /* TessellationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D4519A24BF15FF00D33710 /* TessellationScene.swift */; };
 		54D643932345381B007BD72A /* ShapeLinePolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643922345381B007BD72A /* ShapeLinePolygon.swift */; };
 		837530B3B33C2F605E304055 /* Pods_iShapeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5038F8CCF97A64A9FD46E3 /* Pods_iShapeTests.framework */; };
 		8C160ACF86CAE90D191D727E /* Pods_iShapeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBDAFFA687FD222AEC8744A /* Pods_iShapeUI.framework */; };
@@ -78,9 +79,9 @@
 		540D284423447985001FD387 /* Triangles+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Triangles+Array.swift"; sourceTree = "<group>"; };
 		5434D9D52459F03A009BC0E6 /* ComplexPolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexPolygonScene.swift; sourceTree = "<group>"; };
 		5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotonePolygonScene.swift; sourceTree = "<group>"; };
-		543DF7C1246412B90086B9AC /* TessellationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TessellationScene.swift; sourceTree = "<group>"; };
+		543DF7C1246412B90086B9AC /* ExtraPointsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraPointsScene.swift; sourceTree = "<group>"; };
 		5458A8242355A66100CB45DC /* TestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
-		547F06C424759A5500981F18 /* VoronoiScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoronoiScene.swift; sourceTree = "<group>"; };
+		547F06C424759A5500981F18 /* BreakerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakerScene.swift; sourceTree = "<group>"; };
 		54842731246DA3FA00BBF07C /* ApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTests.swift; sourceTree = "<group>"; };
 		54842748246FEF1D00BBF07C /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
 		548AE116233CE7EE00494FE4 /* iShapeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShapeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +114,7 @@
 		548AE148233CFC8000494FE4 /* ShapeCoordinatSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeCoordinatSystem.swift; sourceTree = "<group>"; };
 		548AE149233CFC8000494FE4 /* CoordinateSystemScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateSystemScene.swift; sourceTree = "<group>"; };
 		548AE168233D004600494FE4 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		54D4519A24BF15FF00D33710 /* TessellationScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TessellationScene.swift; sourceTree = "<group>"; };
 		54D643922345381B007BD72A /* ShapeLinePolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeLinePolygon.swift; sourceTree = "<group>"; };
 		5AAA98F73E6E8C0A4B190F9F /* Pods_iShapeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iShapeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8197A97D83146A1569C76122 /* Pods-iShapeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iShapeTests.release.xcconfig"; path = "Target Support Files/Pods-iShapeTests/Pods-iShapeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,20 +196,20 @@
 			path = Polygon;
 			sourceTree = "<group>";
 		};
-		543DF7C0246412B90086B9AC /* Tessellation */ = {
+		543DF7C0246412B90086B9AC /* ExtraPoints */ = {
 			isa = PBXGroup;
 			children = (
-				543DF7C1246412B90086B9AC /* TessellationScene.swift */,
+				543DF7C1246412B90086B9AC /* ExtraPointsScene.swift */,
 			);
-			path = Tessellation;
+			path = ExtraPoints;
 			sourceTree = "<group>";
 		};
-		547F06C32475984300981F18 /* Voronoi */ = {
+		547F06C32475984300981F18 /* Breaker */ = {
 			isa = PBXGroup;
 			children = (
-				547F06C424759A5500981F18 /* VoronoiScene.swift */,
+				547F06C424759A5500981F18 /* BreakerScene.swift */,
 			);
-			path = Voronoi;
+			path = Breaker;
 			sourceTree = "<group>";
 		};
 		548AE10D233CE7EE00494FE4 = {
@@ -269,8 +271,9 @@
 		548AE131233CFC8000494FE4 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				547F06C32475984300981F18 /* Voronoi */,
-				543DF7C0246412B90086B9AC /* Tessellation */,
+				54D4519724BF159F00D33710 /* Tessellation */,
+				547F06C32475984300981F18 /* Breaker */,
+				543DF7C0246412B90086B9AC /* ExtraPoints */,
 				5434D9D42459F020009BC0E6 /* Polygon */,
 				548AE133233CFC8000494FE4 /* Plain */,
 				548AE136233CFC8000494FE4 /* Delaunay */,
@@ -341,6 +344,14 @@
 				548AE168233D004600494FE4 /* CGPoint.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		54D4519724BF159F00D33710 /* Tessellation */ = {
+			isa = PBXGroup;
+			children = (
+				54D4519A24BF15FF00D33710 /* TessellationScene.swift */,
+			);
+			path = Tessellation;
 			sourceTree = "<group>";
 		};
 		C0B854C184E18A6EF331F4E8 /* Pods */ = {
@@ -544,7 +555,7 @@
 				5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */,
 				548AE156233CFC8000494FE4 /* CanvasView.swift in Sources */,
 				548AE14D233CFC8000494FE4 /* ActiveIndex.swift in Sources */,
-				543DF7C2246412B90086B9AC /* TessellationScene.swift in Sources */,
+				543DF7C2246412B90086B9AC /* ExtraPointsScene.swift in Sources */,
 				54842749246FEF1D00BBF07C /* SVG.swift in Sources */,
 				548AE154233CFC8000494FE4 /* MotoneDelaunayScene.swift in Sources */,
 				548AE151233CFC8000494FE4 /* MotonePlainScene.swift in Sources */,
@@ -562,12 +573,13 @@
 				548AE15A233CFC8000494FE4 /* ShapeVertexPolygon.swift in Sources */,
 				548AE14F233CFC8000494FE4 /* SceneNavigation.swift in Sources */,
 				548AE169233D004600494FE4 /* CGPoint.swift in Sources */,
+				54D4519B24BF15FF00D33710 /* TessellationScene.swift in Sources */,
 				548AE158233CFC8000494FE4 /* ShapeTriangle.swift in Sources */,
 				548AE15C233CFC8000494FE4 /* ShapeDot.swift in Sources */,
 				5434D9D62459F03A009BC0E6 /* ComplexPolygonScene.swift in Sources */,
 				54D643932345381B007BD72A /* ShapeLinePolygon.swift in Sources */,
 				548AE162233CFC8000494FE4 /* CoordinateSystemScene.swift in Sources */,
-				547F06C524759A5500981F18 /* VoronoiScene.swift in Sources */,
+				547F06C524759A5500981F18 /* BreakerScene.swift in Sources */,
 				548AE14A233CFC8000494FE4 /* ViewController.swift in Sources */,
 				548AE159233CFC8000494FE4 /* ShapeCircle.swift in Sources */,
 			);

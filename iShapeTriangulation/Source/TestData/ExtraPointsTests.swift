@@ -1,5 +1,5 @@
 //
-//  TessellationTests.swift
+//  ExtraPointsTests.swift
 //  iGeometry
 //
 //  Created by Nail Sharipov on 07.05.2020.
@@ -10,22 +10,22 @@
 import Foundation
 import iGeometry
 
-public struct TessellationTests {
+public struct ExtraPointsTests {
     
-    private static let key = "tessellation"
-    public static var pageIndex: Int = UserDefaults.standard.integer(forKey: TessellationTests.key)
+    private static let key = "extraPoints"
+    public static var pageIndex: Int = UserDefaults.standard.integer(forKey: ExtraPointsTests.key)
     public static func nextIndex() -> Int {
-        let n = TessellationTests.data.count
-        TessellationTests.pageIndex = (TessellationTests.pageIndex + 1) % n
-        UserDefaults.standard.set(TessellationTests.pageIndex, forKey: TessellationTests.key)
-        return TessellationTests.pageIndex
+        let n = ExtraPointsTests.data.count
+        ExtraPointsTests.pageIndex = (ExtraPointsTests.pageIndex + 1) % n
+        UserDefaults.standard.set(ExtraPointsTests.pageIndex, forKey: ExtraPointsTests.key)
+        return ExtraPointsTests.pageIndex
     }
     
     public static func prevIndex() -> Int {
-        let n = TessellationTests.data.count
-        TessellationTests.pageIndex = (TessellationTests.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(TessellationTests.pageIndex, forKey: TessellationTests.key)
-        return TessellationTests.pageIndex
+        let n = ExtraPointsTests.data.count
+        ExtraPointsTests.pageIndex = (ExtraPointsTests.pageIndex - 1 + n) % n
+        UserDefaults.standard.set(ExtraPointsTests.pageIndex, forKey: ExtraPointsTests.key)
+        return ExtraPointsTests.pageIndex
     }
     
     public static let data: [[[Point]]] = [
