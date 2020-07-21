@@ -15,6 +15,11 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_triangles_extra_points.svg" width="800" />
 </p>
 
+## Tessellation
+<p align="center">
+<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_tessellation.svg" width="800" />
+</p>
+
 ## Features
 
 💡 Fast O(n*log(n)) algorithm based on "Triangulation of monotone polygons"
@@ -25,6 +30,8 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 
 💡 Supports plain and Delaunay triangulation
 
+💡 Supports tesselation
+
 💡 Supports breaking into convex polygons
 
 💡 Same points is not restricted
@@ -32,6 +39,8 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 💡 Polygon must not have self intersections
 
 💡 Use integer geometry for calculations
+
+💡 More then 100 tests
 
 ---
 
