@@ -11,6 +11,9 @@ import iGeometry
 public extension Delaunay {
 
     mutating func tessellate(maxAngle: Float, minEdge: Int64) -> [Vertex] {
+        guard .pi > maxAngle && 0.5 * .pi <= maxAngle else {
+            return []
+        }
         var extraPoints = [Vertex]()
         var extraPointsIndex = self.pathCount + self.extraCount
         
@@ -52,7 +55,7 @@ public extension Delaunay {
                 k = 0
                 let l = (bb + cc - aa)
                 sCos = l * l / (4 * bb * cc)
-            } else if ca >= ab + bc {
+            } else if ca >= bc + ab {
                 // b, ca
                 k = 1
                 let l = (aa + cc - bb)
@@ -67,7 +70,6 @@ public extension Delaunay {
                 i += 1
                 continue
             }
-
             
             let p = triangle.circumscribedСenter
             let neighbor = self.triangles[j]

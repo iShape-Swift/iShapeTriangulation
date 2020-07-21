@@ -9,7 +9,7 @@
 import Foundation
 import iGeometry
 
-#if iShapeTest
+#if DEBUG
 
 public struct MonotoneTests {
     

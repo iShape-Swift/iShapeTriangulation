@@ -5,7 +5,7 @@
 //  Created by Nail Sharipov on 07.05.2020.
 //
 
-#if iShapeTest
+#if DEBUG
 
 import Foundation
 import iGeometry

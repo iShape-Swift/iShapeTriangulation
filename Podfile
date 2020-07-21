@@ -21,8 +21,8 @@ target 'iShapeUI' do
     	installer.pods_project.targets.each do |target|
         	if target.name == 'iShapeTriangulation'
             	target.build_configurations.each do |config|
-                	config.build_settings['OTHER_SWIFT_FLAGS'] = '-DiShapeTest'
-                	puts "iShapeTest flag added"
+                	config.build_settings['OTHER_SWIFT_FLAGS'] = '-DDEBUG'
+                	puts "DEBUG"
             	end
         	end
         end

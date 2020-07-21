@@ -30,6 +30,7 @@ extension PlainShape {
         var next: Link      // top branch
         var prev: Link      // bottom branch
         
+        @inline(__always)
         var isEmpty: Bool {
             return next.this == prev.this
         }
@@ -66,6 +67,7 @@ extension PlainShape {
     private struct Bridge {
         var a: Link
         var b: Link
+        @inline(__always)
         var slice: Slice {
             return Slice(a: a.vertex.index, b: b.vertex.index)
         }
@@ -482,6 +484,7 @@ extension PlainShape {
         return MonotoneLayout(links: links, slices: slices, indices: indices)
     }
     
+    @inline(__always)
     private func connect(a ai: Index, b bi: Index, links: inout[Link]) -> Bridge {
         let aLink = links[ai]
         let bLink = links[bi]
@@ -512,6 +515,7 @@ extension PlainShape {
         return Bridge(a: newLinkA, b: newLinkB)
     }
 
+    @inline(__always)
     private func connectExtraPrev(hand iHand: Index, node iNode: Index, links: inout[Link]) -> Index {
         var handLink = links[iHand]
         var nodeLink = links[iNode]
@@ -544,6 +548,7 @@ extension PlainShape {
         return iNewHand
     }
     
+    @inline(__always)
     private func connectExtraNext(hand iHand: Index, node iNode: Index, links: inout[Link]) -> Index {
         var handLink = links[iHand]
         var nodeLink = links[iNode]
@@ -574,10 +579,12 @@ extension PlainShape {
         return iNewHand
     }
     
+    @inline(__always)
     private static func sign(a: IntPoint, b: IntPoint, c: IntPoint) -> Int64 {
         return (a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)
     }
     
+    @inline(__always)
     private static func isTriangleContain(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         
         let d1 = PlainShape.sign(a: p, b: a, c: b)
@@ -590,6 +597,7 @@ extension PlainShape {
         return !(has_neg && has_pos)
     }
     
+    @inline(__always)
     private static func isTetragonContain(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint, d: IntPoint) -> Bool {
         return PlainShape.isTriangleContain(p: p, a: a, b: b, c: c) || PlainShape.isTriangleContain(p: p, a: a, b: c, c: d)
     }
@@ -598,6 +606,7 @@ extension PlainShape {
 
 private extension Array {
     
+    @inline(__always)
     mutating func exclude(index: Int) {
         let lastIndex = self.count - 1
         if lastIndex != index {

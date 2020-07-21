@@ -267,9 +267,9 @@ public struct Delaunay {
         return result > -1000000000
     }
     
-    #if iShapeTest
+#if DEBUG
     static func verefy(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         return Delaunay.isPrefect(p: p, a: a, b: b, c: c)
     }
-    #endif
+#endif
 }
