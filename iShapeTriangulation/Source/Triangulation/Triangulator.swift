@@ -73,4 +73,25 @@ public struct Triangulator {
         }
     }
 
+    public struct TessellationResult {
+        let indices: [Int]
+        let extraPoints: [CGPoint]
+    }
+
+    /// Makes Delaunay triangulation for polygon
+    /// - Parameter points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
+    /// - Parameter hull: range of the hull vertices in points array
+    /// - Parameter holes: array of ranges for all holes
+    /// - Parameter maxAngle: max possible triangle angle must be bettwen 0.5*pi...pi
+    /// - Parameter maxEdge: max possible triangle edge belong to the polygon edge
+    public func tessellate(points: [CGPoint], hull: ArraySlice<CGPoint>, holes: [ArraySlice<CGPoint>]?, maxAngle: Float, maxEdgeSize: CGFloat) -> TessellationResult {
+        var shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
+        shape.modify(maxEgeSize: iGeom.int(float: Float(maxEdgeSize)))
+        var delaunay = shape.delaunay()
+        let vertices = delaunay.tessellate(maxAngle: maxAngle)
+        let indices = delaunay.trianglesIndices
+        let extraPoints = vertices.map({ iGeom.float(point: $0.point).toCGPoint })
+        return TessellationResult(indices: indices, extraPoints: extraPoints)
+    }
+
 }

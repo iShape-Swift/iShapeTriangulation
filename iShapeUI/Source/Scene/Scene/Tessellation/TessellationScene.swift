@@ -59,7 +59,7 @@ final class TessellationScene: CoordinateSystemScene {
         var svgPath = [[CGPoint]]()
         
         if isValid {
-            pShape.modify(maxEgeSize: iGeom.int(float: 3))
+            pShape.modify(maxEgeSize: iGeom.int(float: 2))
             var delaunay = pShape.delaunay(extraPoints: nil)
             let extraVertex = delaunay.tessellate(maxAngle: 0.53 * Float.pi)
 
