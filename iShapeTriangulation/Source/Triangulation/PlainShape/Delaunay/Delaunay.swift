@@ -256,17 +256,13 @@ public struct Delaunay {
         
         let cosAlfa = pax * pcx + pay * pcy
         let cosBeta = bax * bcx + bay * bcy
+
+        let sinAlfa = pay * pcx - pax * pcy
+        let sinBeta = bax * bcy - bay * bcx
         
-        if cosAlfa < 0 && cosBeta < 0 {
-            return false
-        } else {
-            let sinAlfa = pay * pcx - pax * pcy
-            let sinBeta = bax * bcy - bay * bcx
-            
-            let result = Float(sinAlfa) * Float(cosBeta) + Float(cosAlfa) * Float(sinBeta)
-            
-            return result > -1000000000
-        }
+        let result = Float(sinAlfa) * Float(cosBeta) + Float(cosAlfa) * Float(sinBeta)
+
+        return result > -1000000000
     }
     
     #if iShapeTest

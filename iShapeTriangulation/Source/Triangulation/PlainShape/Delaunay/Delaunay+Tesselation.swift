@@ -10,11 +10,11 @@ import iGeometry
 
 public extension Delaunay {
 
-    mutating func tessellate(maxAngle: Float) -> [Vertex] {
-        guard maxAngle > 0.5 * .pi && maxAngle < .pi else {
-            return []
-        }
-        
+    mutating func tessellate(maxAngle: Float, minEdge: Int64) -> [Vertex] {
+//        guard maxAngle > 0.5 * .pi && maxAngle < .pi else {
+//            return []
+//        }
+//        
         var extraPoints = [Vertex]()
         var extraPointsIndex = self.pathCount + self.extraCount
         
@@ -22,6 +22,7 @@ public extension Delaunay {
         
         let maxCos = cos(maxAngle)
         let sqrCos = maxCos * maxCos
+        let sqrMinEdge = minEdge * minEdge
         
         while i < self.triangles.count {
             let triangle = self.triangles[i]
@@ -34,6 +35,10 @@ public extension Delaunay {
             let ca = c.point.sqrDistance(point: a.point)
             let bc = b.point.sqrDistance(point: c.point)
             
+            guard ab > sqrMinEdge || ca > sqrMinEdge || bc > sqrMinEdge else {
+                i += 1
+                continue
+            }
             
             let k: Int
             let aa = Float(bc)
