@@ -15,7 +15,7 @@ Complex polygon triangulation. A fast O(n*log(n)) algorithm based on "Triangulat
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_triangles_extra_points.svg" width="800" />
 </p>
 
-## Tessellation with extra points
+## Tessellation
 <p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_tessellation.svg" width="800" />
 </p>
