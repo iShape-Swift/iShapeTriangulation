@@ -128,6 +128,7 @@ public struct Delaunay {
         return minFixIndex
     }
     
+    @inline(__always)
     private mutating func swap(abc: Triangle, pbc: Triangle) -> Bool {
         let pi = pbc.opposite(neighbor: abc.index)
         let p = pbc.vertices[pi]
@@ -231,6 +232,7 @@ public struct Delaunay {
         }
     }
     
+    @inline(__always)
     private static func isPrefect(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         let isPABccw = IntTriangle.isCCW(a: p, b: a, c: b)
         let isPCBccw = IntTriangle.isCCW(a: p, b: c, c: b)
@@ -241,24 +243,24 @@ public struct Delaunay {
         }
     }
     
-    // @inline(__always)
+    @inline(__always)
     private static func isDelaunay(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         
-        let bax = a.x - b.x
-        let bay = a.y - b.y
-        let bcx = c.x - b.x
-        let bcy = c.y - b.y
+        let bax = a.x &- b.x
+        let bay = a.y &- b.y
+        let bcx = c.x &- b.x
+        let bcy = c.y &- b.y
         
-        let pcx = c.x - p.x
-        let pcy = c.y - p.y
-        let pax = a.x - p.x
-        let pay = a.y - p.y
+        let pcx = c.x &- p.x
+        let pcy = c.y &- p.y
+        let pax = a.x &- p.x
+        let pay = a.y &- p.y
         
-        let cosAlfa = pax * pcx + pay * pcy
-        let cosBeta = bax * bcx + bay * bcy
+        let cosAlfa = pax &* pcx &+ pay &* pcy
+        let cosBeta = bax &* bcx &+ bay &* bcy
 
-        let sinAlfa = pay * pcx - pax * pcy
-        let sinBeta = bax * bcy - bay * bcx
+        let sinAlfa = pay &* pcx &- pax &* pcy
+        let sinBeta = bax &* bcy &- bay &* bcx
         
         let result = Float(sinAlfa) * Float(cosBeta) + Float(cosAlfa) * Float(sinBeta)
 

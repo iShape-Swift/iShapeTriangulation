@@ -66,8 +66,6 @@ extension PlainShape {
                 let b = triangle.vertices[1].index
                 let c = triangle.vertices[2].index
                 
-                // TODO optimise a little
-                
                 var edgeIndex = self.find(a: a, b: b)
                 if edgeIndex >= 0 {
                     var edge = self.edges[edgeIndex]
@@ -120,18 +118,18 @@ extension PlainShape {
         }
 
         private func find(a: Index, b: Index) -> Index {
-            guard vertexMarks[a] && vertexMarks[b] else {
+            guard self.vertexMarks[a] && self.vertexMarks[b] else {
                 return null
             }
             let id: Int
             if a < b {
-                id = a &* vertexCount &+ b
+                id = a &* self.vertexCount &+ b
             } else {
-                id = b &* vertexCount &+ a
+                id = b &* self.vertexCount &+ a
             }
             
             var left = 0
-            var right = edges.count &- 1
+            var right = self.edges.count &- 1
             
             repeat {
                 let k: Int
@@ -139,7 +137,7 @@ extension PlainShape {
                     k = (left &+ right) >> 1
                 } else {
                     repeat {
-                        if edges[left].id == id {
+                        if self.edges[left].id == id {
                             return left
                         }
                         left &+= 1
@@ -147,7 +145,7 @@ extension PlainShape {
                     return -1
                 }
 
-                let e = edges[k].id
+                let e = self.edges[k].id
                 if e > id {
                     right = k
                 } else if e < id {

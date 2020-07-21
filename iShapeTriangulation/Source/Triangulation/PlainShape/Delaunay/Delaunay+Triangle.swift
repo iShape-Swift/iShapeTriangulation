@@ -62,6 +62,7 @@ extension Delaunay {
             assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
         }
         
+        @inline(__always)
         func vertex(neighbor: Index) -> Vertex {
             for i in 0...2 {
                 if self.neighbors[i] == neighbor {
@@ -72,6 +73,7 @@ extension Delaunay {
             return Vertex.empty
         }
         
+        @inline(__always)
         func opposite(neighbor: Index) -> Index {
             for i in 0...2 {
                 if self.neighbors[i] == neighbor {
@@ -82,16 +84,17 @@ extension Delaunay {
             return -1
         }
         
+        @inline(__always)
         func index(index: Index) -> Index {
             for i in 0...2 {
                 if self.vertices[i].index == index {
                     return i
                 }
             }
-//            assertionFailure("Index is not present")
             return -1
         }
         
+        @inline(__always)
         mutating func updateOpposite(oldNeighbor: Index, newNeighbor: Index) {
             for i in 0...2 {
                 if self.neighbors[i] == oldNeighbor {
@@ -102,6 +105,7 @@ extension Delaunay {
             assertionFailure("Neighbor is not present")
         }
         
+        @inline(__always)
         func neighbor(vertex: Index) -> Index {
             for i in 0...2 {
                 if self.vertices[i].index == vertex {

@@ -151,7 +151,7 @@ extension Delaunay {
         return result
     }
 
-    
+    @inline(__always)
     private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
         let dxA = a0.x - a1.x
         let dyB = b0.y - b1.y
@@ -181,6 +181,8 @@ extension Delaunay {
 }
 
 private extension Delaunay.Triangle {
+    
+    @inline(__always)
     var center: IntPoint {
         let a = self.vertices[0].point
         let b = self.vertices[1].point
@@ -190,6 +192,8 @@ private extension Delaunay.Triangle {
 }
 
 private extension IntPoint {
+    
+    @inline(__always)
     func center(point: IntPoint) -> IntPoint {
         return IntPoint(x: (self.x + point.x) / 2, y: (self.y + point.y) / 2)
     }

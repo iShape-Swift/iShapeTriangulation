@@ -11,10 +11,6 @@ import iGeometry
 public extension Delaunay {
 
     mutating func tessellate(maxAngle: Float, minEdge: Int64) -> [Vertex] {
-//        guard maxAngle > 0.5 * .pi && maxAngle < .pi else {
-//            return []
-//        }
-//        
         var extraPoints = [Vertex]()
         var extraPointsIndex = self.pathCount + self.extraCount
         
@@ -156,6 +152,7 @@ public extension Delaunay {
 
 private extension Delaunay.Triangle {
     
+    @inline(__always)
     var circumscribedСenter: IntPoint {
         let a = self.vertices[0].point
         let b = self.vertices[1].point
@@ -177,6 +174,7 @@ private extension Delaunay.Triangle {
         return IntPoint(x: Int64(round(x)), y: Int64(round(y)))
     }
 
+    @inline(__always)
     func isContain(p: IntPoint) -> Bool {
         let a = self.vertices[0].point
         let b = self.vertices[1].point
@@ -192,13 +190,8 @@ private extension Delaunay.Triangle {
         return !(has_neg && has_pos)
     }
     
+    @inline(__always)
     private static func sign(a: IntPoint, b: IntPoint, c: IntPoint) -> Int64 {
         return (a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)
-    }
-}
-
-private extension IntPoint {
-    func center(point: IntPoint) -> IntPoint {
-        return IntPoint(x: (self.x + point.x) / 2, y: (self.y + point.y) / 2)
     }
 }

@@ -32,13 +32,13 @@ public extension PlainShape {
         
         mutating func getTriangles() -> [Delaunay.Triangle] {
             if counter != triangles.count {
-                triangles.removeLast(triangles.count - counter)
+                self.triangles.removeLast(triangles.count - counter)
             }
-            return triangles
+            return self.triangles
         }
         
         mutating func reset() {
-            edges.removeAll(keepingCapacity: true)
+            self.edges.removeAll(keepingCapacity: true)
         }
         
         mutating func add(a: Vertex, b: Vertex, c: Vertex) {
@@ -58,33 +58,33 @@ public extension PlainShape {
                 var neighbor = triangles[ac.neighbor]
                 neighbor.neighbors[0] = triangle.index
                 triangle.neighbors[1] = neighbor.index
-                triangles[neighbor.index] = neighbor
+                self.triangles[neighbor.index] = neighbor
             }
             
             if let ab = self.pop(a: a.index, b: b.index) {
                 var neighbor = triangles[ab.neighbor]
                 neighbor.neighbors[0] = triangle.index
                 triangle.neighbors[2] = neighbor.index
-                triangles[neighbor.index] = neighbor
+                self.triangles[neighbor.index] = neighbor
             }
             
             self.edges.append(Edge(a: b.index, b: c.index, neighbor: triangle.index)) // bc is always slice
             
-            triangles[triangle.index] = triangle
+            self.triangles[triangle.index] = triangle
             
-            counter += 1
+            self.counter += 1
         }
         
         private mutating func pop(a: Index, b: Index) -> Edge? {
-            let last = edges.count - 1
+            let last = self.edges.count - 1
             var i = 0
             while i <= last {
-                let e = edges[i]
+                let e = self.edges[i]
                 if (e.a == a || e.a == b) && (e.b == a || e.b == b) {
                     if i != last {
-                        edges[i] = edges[last]
+                        self.edges[i] = self.edges[last]
                     }
-                    edges.removeLast()
+                    self.edges.removeLast()
                     return e
                 }
                 i += 1
