@@ -56,8 +56,7 @@ extension PlainShape {
                 
                 let isCCW = IntTriangle.isCCW(a: a, b: b, c: c)
                 
-                // TODO reverse condition
-                if layout.isHole {
+                if layout.isClockWise {
                     if A > B && B < C {
                         if isCCW {
                             nature = .start
@@ -73,7 +72,6 @@ extension PlainShape {
                             nature = .merge
                         }
                     }
-                    
                 } else {
                     if A > B && B < C {
                         if isCCW {

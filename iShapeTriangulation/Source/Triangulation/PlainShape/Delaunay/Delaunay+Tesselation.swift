@@ -1,5 +1,5 @@
 //
-//  Delaunay+Tesselation.swift
+//  Delaunay+Tessellation.swift
 //  iGeometry
 //
 //  Created by Nail Sharipov on 15.07.2020.
@@ -48,17 +48,17 @@ public extension Delaunay {
             if ab >= bc + ca {
                 // c, ab
                 k = 2
-                let l = (aa + bb - cc)
+                let l = aa + bb - cc
                 sCos = l * l / (4 * aa * bb)
             } else if bc >= ca + ab {
                 // a, bc
                 k = 0
-                let l = (bb + cc - aa)
+                let l = bb + cc - aa
                 sCos = l * l / (4 * bb * cc)
             } else if ca >= bc + ab {
                 // b, ca
                 k = 1
-                let l = (aa + cc - bb)
+                let l = aa + cc - bb
                 sCos = l * l / (4 * aa * cc)
             } else {
                 i += 1
@@ -71,7 +71,7 @@ public extension Delaunay {
                 continue
             }
             
-            let p = triangle.circumscribedСenter
+            let p = triangle.circumscribedCenter
             let neighbor = self.triangles[j]
             
             guard neighbor.isContain(p: p) else {
@@ -155,7 +155,7 @@ public extension Delaunay {
 private extension Delaunay.Triangle {
     
     @inline(__always)
-    var circumscribedСenter: IntPoint {
+    var circumscribedCenter: IntPoint {
         let a = self.vertices[0].point
         let b = self.vertices[1].point
         let c = self.vertices[2].point

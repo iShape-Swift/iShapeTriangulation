@@ -175,10 +175,6 @@ extension PlainShape {
                                         )
                                     )
                                 }
-                                subs.exclude(index: j)
-
-                                i += 1
-                                continue nextNode
                             } else {
                                 let hand = links[sub.next.this]
                                 slices.append(Slice(a: hand.vertex.index, b: node.vertex.index))
@@ -190,10 +186,10 @@ extension PlainShape {
                                        prev: links[newPrev]
                                     )
                                 )
-                                subs.exclude(index: j)
-                                i += 1
-                                continue nextNode
                             }
+                            subs.exclude(index: j)
+                            i += 1
+                            continue nextNode
                         }
                         
                         j += 1
