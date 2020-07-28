@@ -20,6 +20,11 @@ Complex polygon triangulation, tessellation and split into convex polygons. A fa
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_tessellation.svg" width="800" />
 </p>
 
+## Centroid net
+<p align="center">
+<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_centroid.svg" width="800" />
+</p>
+
 ## Features
 
 💡 Fast O(n*log(n)) algorithm based on "Triangulation of monotone polygons"
@@ -33,6 +38,8 @@ Complex polygon triangulation, tessellation and split into convex polygons. A fa
 💡 Supports tesselation
 
 💡 Supports breaking into convex polygons
+
+💡 Supports building centroid net
 
 💡 Same points is not restricted
 
