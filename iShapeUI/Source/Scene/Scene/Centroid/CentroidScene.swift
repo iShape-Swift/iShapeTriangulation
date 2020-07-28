@@ -1,5 +1,5 @@
 //
-//  BreakerScene.swift
+//  CentroidScene.swift
 //  iShapeUI
 //
 //  Created by Nail Sharipov on 20.05.2020.
@@ -10,7 +10,7 @@ import Cocoa
 import iGeometry
 @testable import iShapeTriangulation
 
-final class BreakerScene: CoordinateSystemScene {
+final class CentroidScene: CoordinateSystemScene {
 
     private var data: [[Point]] = []
     private var aIndex: ActiveIndex?
@@ -124,7 +124,7 @@ final class BreakerScene: CoordinateSystemScene {
     
 }
 
-extension BreakerScene: MouseCompatible {
+extension CentroidScene: MouseCompatible {
 
     private func findNearest(point: Point) -> ActiveIndex? {
         var j = 0
@@ -194,7 +194,7 @@ extension BreakerScene: MouseCompatible {
     
 }
 
-extension BreakerScene: SceneNavigation {
+extension CentroidScene: SceneNavigation {
     func next() {
         self.showPage(index: ExtraPointsTests.nextIndex())
     }

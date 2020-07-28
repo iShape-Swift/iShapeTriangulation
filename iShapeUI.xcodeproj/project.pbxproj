@@ -18,7 +18,7 @@
 		5434D9D82459F05F009BC0E6 /* MonotonePolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */; };
 		543DF7C2246412B90086B9AC /* ExtraPointsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543DF7C1246412B90086B9AC /* ExtraPointsScene.swift */; };
 		5458A8252355A66100CB45DC /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458A8242355A66100CB45DC /* TestUtil.swift */; };
-		547F06C524759A5500981F18 /* BreakerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547F06C424759A5500981F18 /* BreakerScene.swift */; };
+		547F06C524759A5500981F18 /* CentroidScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547F06C424759A5500981F18 /* CentroidScene.swift */; };
 		54842732246DA3FA00BBF07C /* ApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54842731246DA3FA00BBF07C /* ApiTests.swift */; };
 		54842749246FEF1D00BBF07C /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54842748246FEF1D00BBF07C /* SVG.swift */; };
 		548AE11E233CE7EF00494FE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548AE11D233CE7EF00494FE4 /* Assets.xcassets */; };
@@ -81,7 +81,7 @@
 		5434D9D72459F05F009BC0E6 /* MonotonePolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotonePolygonScene.swift; sourceTree = "<group>"; };
 		543DF7C1246412B90086B9AC /* ExtraPointsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraPointsScene.swift; sourceTree = "<group>"; };
 		5458A8242355A66100CB45DC /* TestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
-		547F06C424759A5500981F18 /* BreakerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakerScene.swift; sourceTree = "<group>"; };
+		547F06C424759A5500981F18 /* CentroidScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentroidScene.swift; sourceTree = "<group>"; };
 		54842731246DA3FA00BBF07C /* ApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTests.swift; sourceTree = "<group>"; };
 		54842748246FEF1D00BBF07C /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
 		548AE116233CE7EE00494FE4 /* iShapeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iShapeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,12 +204,12 @@
 			path = ExtraPoints;
 			sourceTree = "<group>";
 		};
-		547F06C32475984300981F18 /* Breaker */ = {
+		547F06C32475984300981F18 /* Centroid */ = {
 			isa = PBXGroup;
 			children = (
-				547F06C424759A5500981F18 /* BreakerScene.swift */,
+				547F06C424759A5500981F18 /* CentroidScene.swift */,
 			);
-			path = Breaker;
+			path = Centroid;
 			sourceTree = "<group>";
 		};
 		548AE10D233CE7EE00494FE4 = {
@@ -272,7 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				54D4519724BF159F00D33710 /* Tessellation */,
-				547F06C32475984300981F18 /* Breaker */,
+				547F06C32475984300981F18 /* Centroid */,
 				543DF7C0246412B90086B9AC /* ExtraPoints */,
 				5434D9D42459F020009BC0E6 /* Polygon */,
 				548AE133233CFC8000494FE4 /* Plain */,
@@ -579,7 +579,7 @@
 				5434D9D62459F03A009BC0E6 /* ComplexPolygonScene.swift in Sources */,
 				54D643932345381B007BD72A /* ShapeLinePolygon.swift in Sources */,
 				548AE162233CFC8000494FE4 /* CoordinateSystemScene.swift in Sources */,
-				547F06C524759A5500981F18 /* BreakerScene.swift in Sources */,
+				547F06C524759A5500981F18 /* CentroidScene.swift in Sources */,
 				548AE14A233CFC8000494FE4 /* ViewController.swift in Sources */,
 				548AE159233CFC8000494FE4 /* ShapeCircle.swift in Sources */,
 			);
