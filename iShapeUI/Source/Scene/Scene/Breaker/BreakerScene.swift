@@ -49,14 +49,18 @@ final class BreakerScene: CoordinateSystemScene {
 
         let shape = self.getShape()
         let iShape = IntShape(shape: shape)
-        let pShape = PlainShape(iShape: iShape)
-
+        var pShape = PlainShape(iShape: iShape)
+        pShape.modify(maxEgeSize: iGeom.int(float: 4))
+        
         let extra = self.getExtra()
         
-        let delaunay = pShape.delaunay(extraPoints: extra)
-
+        var delaunay = pShape.delaunay(extraPoints: extra)
+        let extraVertex = delaunay.tessellate(maxAngle: 0.5 * Float.pi, minEdge: iGeom.int(float: 4))
+        delaunay.build()
+        
         let triangles = delaunay.trianglesIndices
-        let shapePoints = iGeom.float(points: pShape.points + extra).toCGPoints()
+        
+        let shapePoints = iGeom.float(points: pShape.points + extra + extraVertex.map({ $0.point})).toCGPoints()
 
         var svgPath = [[CGPoint]]()
         

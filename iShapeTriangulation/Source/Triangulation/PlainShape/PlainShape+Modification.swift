@@ -34,7 +34,7 @@ public extension PlainShape {
                     points.append(b)
                 } else {
                     let l = Int64(sqrt(Double(sqrSize)))
-                    let s = Int(l / maxEgeSize + l / maxEgeSize)
+                    let s = Int(l / maxEgeSize)
                     let ds = Double(s)
      
                     let sx = Double(dx) / ds

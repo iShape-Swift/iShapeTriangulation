@@ -1,5 +1,5 @@
 //
-//  Delaunay+Breaker.swift
+//  Delaunay+Centroid.swift
 //  iGeometry
 //
 //  Created by Nail Sharipov on 20.05.2020.
@@ -28,7 +28,7 @@ extension Delaunay {
         return points
     }
 
-    public func getCentroidNet() -> [[IntPoint]] {
+    public func getCentroidNet(onlyConvex: Bool = false) -> [[IntPoint]] {
         let n = self.triangles.count
         
         var details = [Detail](repeating: Detail(center: .zero, count: 0), count: n)
@@ -119,8 +119,36 @@ extension Delaunay {
                         right = (k + 2) % 3
                         let lastNextPair = current.vertices[right].point
                         path.append(lastNextPair.center(point: v.point))
-                        path.append(v.point)
-                        result.append(path)
+                        
+                        if onlyConvex {
+                            // split path into convex subpath
+                            let c = v.point
+                            var p0 = path[0]
+                            var v0 = p0 - c
+                            var d0 = v0
+                            var subPath = [c, path[0]]
+                            for t in 1..<path.count {
+                                let p1 = path[t]
+                                let d1 = p1 - p0
+                                let v1 = p1 - c
+                                if v0.crossProduct(point: v1) <= 0 && d0.crossProduct(point: d1) <= 0 {
+                                    subPath.append(p1)
+                                } else {
+                                    result.append(subPath)
+                                    subPath.removeAll()
+                                    subPath.append(c)
+                                    subPath.append(p0)
+                                    subPath.append(p1)
+                                    v0 = p0 - c
+                                }
+                                p0 = p1
+                                d0 = d1
+                            }
+                            result.append(subPath)
+                        } else {
+                            path.append(v.point)
+                            result.append(path)
+                        }
                     }
                 } else {
                     var path = [IntPoint]()
@@ -131,15 +159,8 @@ extension Delaunay {
                         let t = self.triangles[next]
                         let center = details[next].center
                         path.append(center)
-                        let index = t.index(index: v.index)
-                        switch index {
-                        case 0: // a -> b
-                            next = t.neighbors[1]
-                        case 1: // b -> c
-                            next = t.neighbors[2]
-                        default:  // c -> a
-                            next = t.neighbors[0]
-                        }
+                        let index = (t.index(index: v.index) + 1) % 3;
+                        next = t.neighbors[index]
                     } while next != start
 
                     result.append(path)

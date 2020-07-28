@@ -487,6 +487,21 @@ public struct ExtraPointsTests {
                 Point(x: -5, y: -10),
                 Point(x: 0, y: -15),
             ]
+        ],
+        // test
+        [
+            [
+                Point(x: 0, y: 0),
+                Point(x: -10, y: 5),
+                Point(x: 0, y: 10),
+                Point(x: 10, y: 5),
+                Point(x: 10, y: -5),
+                Point(x: 0, y: -10),
+                Point(x: -10, y: -5)
+            ],
+            [
+                
+            ]
         ]
     ]
 }

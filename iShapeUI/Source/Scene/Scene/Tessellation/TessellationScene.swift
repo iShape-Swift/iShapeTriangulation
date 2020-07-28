@@ -61,9 +61,9 @@ final class TessellationScene: CoordinateSystemScene {
         if isValid {
             pShape.modify(maxEgeSize: iGeom.int(float: 8))
             var delaunay = pShape.delaunay(extraPoints: nil)
-            let extraVertex = delaunay.tessellate(maxAngle: 0.5 * Float.pi, minEdge: iGeom.int(float: 4))
-
+            let extraVertex = delaunay.tessellate(maxAngle: 0.5 * Float.pi, minEdge: iGeom.int(float: 6))
             delaunay.build()
+            
             let triangles = delaunay.trianglesIndices
             let shapePoints = iGeom.float(points: pShape.points + extraVertex.map({ $0.point }) ).toCGPoints()
             var triangle = [Int]()
