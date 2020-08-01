@@ -58,7 +58,7 @@ Add import:
 import iShapeTriangulation
 ```
 
-After that you need represent your polygon as an array of vertices listed in a clockwise direction. Let's have a look for an example of cheese polygon.
+After that you need represent your polygon as an array of vertices listed in a clockwise direction. Let's have a look for an example of a cheese polygon.
 <p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_0.svg" width="600"/>
 </p>
