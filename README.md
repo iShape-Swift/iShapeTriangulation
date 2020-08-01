@@ -98,8 +98,9 @@ Then get an instance of a Triangulator class and triangulate your polygon. As th
     }
 ```
 The triple are always list vertices in a clock wise direction.
+<p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_1.svg" width="300"/>
-
+</p>
 
 Lets look another example for a polygon with a hole.
 Now you need represent a hole as an array of vertices listed in counterclockwise direction
