@@ -843,7 +843,60 @@ public struct ComplexTests {
         ].scale(m: 1.5),
         ComplexTests.donut(count: 128, radius: 16, k: 0.5),
         ComplexTests.circle(count: 16, radius: 4, k: 0.03),
-        
+        [
+            [
+                Point(x: 0, y: 20),
+                Point(x: 8, y: 10),
+                Point(x: 7, y: 6),
+                Point(x: 9, y: 1),
+                Point(x: 13, y: -1),
+                Point(x: 17, y: 1),
+                Point(x: 26, y: -7),
+                Point(x: 14, y: -15),
+                Point(x: 0, y: -18),
+                Point(x: -14, y: -15),
+                Point(x: -25, y: -7),
+                Point(x: -18, y: 0),
+                Point(x: -16, y: -3),
+                Point(x: -13, y: -4),
+                Point(x: -8, y: -2),
+                Point(x: -6, y: 2),
+                Point(x: -7, y: 6),
+                Point(x: -10, y: 8)
+            ]
+        ],
+        [
+            [
+                Point(x: 0, y: 20),
+                Point(x: 8, y: 10),
+                Point(x: 7, y: 6),
+                Point(x: 9, y: 1),
+                Point(x: 13, y: -1),
+                Point(x: 17, y: 1),
+                Point(x: 26, y: -7),
+                Point(x: 14, y: -15),
+                Point(x: 0, y: -18),
+                Point(x: -14, y: -15),
+                Point(x: -25, y: -7),
+                Point(x: -18, y: 0),
+                Point(x: -16, y: -3),
+                Point(x: -13, y: -4),
+                Point(x: -8, y: -2),
+                Point(x: -6, y: 2),
+                Point(x: -7, y: 6),
+                Point(x: -10, y: 8)
+            ],
+            [
+                Point(x: 2, y: 0),
+                Point(x: -2, y: -2),
+                Point(x: -4, y: -5),
+                Point(x: -2, y: -9),
+                Point(x: 2, y: -11),
+                Point(x: 5, y: -9),
+                Point(x: 7, y: -5),
+                Point(x: 5, y: -2)
+            ]
+        ]
     ]
     
     private static func donut(count: Int, radius: Float, k: Float) -> [[Point]] {

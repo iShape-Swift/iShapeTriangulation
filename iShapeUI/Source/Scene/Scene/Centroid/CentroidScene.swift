@@ -72,7 +72,6 @@ final class CentroidScene: CoordinateSystemScene {
                 let cgPoints = triangle.map({ shapePoints[$0] })
                 let shapeTriangle = ShapeTriangle(points: cgPoints, text: ""/*String(k)*/, color: Colors.gray, lineWidth: 0.08)
                 self.addSublayer(shapeTriangle)
-                svgPath.append(cgPoints)
                 triangle.removeAll()
                 k += 1
             }
@@ -93,7 +92,7 @@ final class CentroidScene: CoordinateSystemScene {
                 data.append(String(vertex.index))
                 points.append(iGeom.float(point: vertex.point).toCGPoint)
             }
-            svgPath.append(points)
+//            svgPath.append(points)
             self.addSublayer(ShapeLinePolygon(points: points, lineWidth: 0.16, color: Colors.darkGray))
         }
         
@@ -109,12 +108,12 @@ final class CentroidScene: CoordinateSystemScene {
         let piece = iGeom.float(paths: iPathes)
         
         for path in piece {
-            self.addSublayer(ShapeLinePolygon(points: path.toCGPoints(), lineWidth: 0.2, color: Colors.red))
+            let cgPath = path.toCGPoints()
+            svgPath.append(cgPath)
+            self.addSublayer(ShapeLinePolygon(points: cgPath, lineWidth: 0.2, color: Colors.red))
         }
-        
-        
-        
-//        SVG.svgPrint(pathes: svgPath)
+
+        SVG.svgPrint(pathes: svgPath)
     }
     
     func showPage(index: Int) {
