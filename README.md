@@ -109,6 +109,7 @@ Now you need represent a hole as an array of vertices listed in counterclockwise
 <p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_2.svg" width="300"/>
 </p>
+
 ```swift
     let hole = [
     // vertices listed in counterclockwise direction
