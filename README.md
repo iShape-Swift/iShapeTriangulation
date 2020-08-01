@@ -112,7 +112,7 @@ Now you need represent a hole as an array of vertices listed in counterclockwise
 
 ```swift
     let hole = [
-    // vertices listed in counterclockwise direction
+        // vertices listed in counterclockwise direction
         CGPoint(x: 2, y: 0),    // 18
         CGPoint(x: -2, y: -2),  // 19
         CGPoint(x: -4, y: -5),  // 20
