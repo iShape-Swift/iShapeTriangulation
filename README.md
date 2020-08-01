@@ -53,16 +53,13 @@ Complex polygon triangulation, tessellation and split into convex polygons. A fa
 
 ## Basic Usage
 
-Add import to the head of your file:
+Add import:
 ```swift
 import iShapeTriangulation
 ```
 
 After that you need represent your polygon as an array of vertices listed in a clockwise direction. Let's have a look for an example of cheese polygon.
-
-<p float="left">
-  <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_0.svg" width="300"/>
-</p>
+<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_0.svg" width="300"/>
 
 ```swift
     let path = [
