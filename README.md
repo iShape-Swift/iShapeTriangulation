@@ -59,7 +59,9 @@ import iShapeTriangulation
 ```
 
 After that you need represent your polygon as an array of vertices listed in a clockwise direction. Let's have a look for an example of cheese polygon.
+<p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_0.svg" width="300"/>
+</p>
 
 ```swift
     let path = [
@@ -104,7 +106,9 @@ The triple are always list vertices in a clock wise direction.
 
 Lets look another example for a polygon with a hole.
 Now you need represent a hole as an array of vertices listed in counterclockwise direction
+<p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_2.svg" width="300"/>
+</p>
 ```swift
     let hole = [
     // vertices listed in counterclockwise direction
@@ -128,7 +132,9 @@ Now you need represent a hole as an array of vertices listed in counterclockwise
         print("triangle \(i): (\(ai), \(bi), \(ci))")
     }
 ```
+<p align="center">
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/cheese_example_3.svg" width="300"/>
+</p>
 ---
 
 ## Installation
