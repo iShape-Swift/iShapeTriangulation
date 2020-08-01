@@ -90,7 +90,7 @@ Then get an instance of a Triangulator class and triangulate your polygon. As th
 
 ```swift
     let triangulator = Triangulator()
-    let triangles = triangulator.triangulate(points: path)
+    let triangles = triangulator.triangulateDelaunay(points: path)
 
     for i in 0..<triangles.count / 3 {
         let ai = triangles[3 * i]
@@ -124,7 +124,7 @@ Now you need represent a hole as an array of vertices listed in counterclockwise
     ]
     
     let points = path + hole
-    let triangles = triangulator.triangulate(points: points, hull: points[0..<path.count], holes: [points[path.count..<points.count]], extraPoints: nil)
+    let triangles = triangulator.triangulateDelaunay(points: points, hull: points[0..<path.count], holes: [points[path.count..<points.count]], extraPoints: nil)
 
     for i in 0..<triangles.count / 3 {
         let ai = triangles[3 * i]
