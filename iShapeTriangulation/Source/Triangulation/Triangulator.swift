@@ -26,6 +26,13 @@ public struct Triangulator {
         self.iGeom = IntGeom(scale: Float(1 / precision))
     }
     
+    /// Makes plain triangulation for polygon
+    /// - Parameter points: Linear array of your polygon vertices listed in a clockwise direction.
+    public func triangulate(points: [CGPoint]) -> [Int] {
+        let iPoints = iGeom.int(points: points.toPoints())
+        let shape = PlainShape(points: iPoints)
+        return shape.triangulate(extraPoints: nil)
+    }
     
     /// Makes plain triangulation for polygon
     /// - Parameter points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
@@ -40,6 +47,14 @@ public struct Triangulator {
         }  else {
             return shape.triangulate(extraPoints: nil)
         }
+    }
+    
+    /// Makes Delaunay triangulation for polygon
+    /// - Parameter points: Linear array of your polygon vertices listed in a clockwise direction.
+    public func triangulateDelaunay(points: [CGPoint]) -> [Int] {
+        let iPoints = iGeom.int(points: points.toPoints())
+        let shape = PlainShape(points: iPoints)
+        return shape.delaunay(extraPoints: nil).trianglesIndices
     }
     
     /// Makes Delaunay triangulation for polygon
