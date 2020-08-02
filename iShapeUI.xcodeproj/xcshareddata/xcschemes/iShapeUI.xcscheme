@@ -60,7 +60,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5491CFF8233F477C00E8FDD2"
+               BlueprintIdentifier = "540D282D23447085001FD387"
                BuildableName = "iShapeTests.xctest"
                BlueprintName = "iShapeTests"
                ReferencedContainer = "container:iShapeUI.xcodeproj">
