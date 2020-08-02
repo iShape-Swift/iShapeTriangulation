@@ -1,10 +1,11 @@
 **/Pods/
 *.xcworkspace
 **/Podfile.lock
+
 *.pbxuser
 !default.pbxuser
 xcuserdata/
 
-Carthage
+**/Carthage/
 
 .DS_Store
