@@ -22,14 +22,14 @@ public struct Triangulator {
     /// with precision = 0.0001 your maximum allowed point is (100k, 100k)
     /// with precision = 0.0000001 your maximum allowed point is (100, 100)
     /// If your broke this rule, the calculation will be undefinied
-    public init(precision: CGFloat = 0.0001) {
+    public init(precision: Float = 0.0001) {
         self.iGeom = IntGeom(scale: Float(1 / precision))
     }
     
     /// Makes plain triangulation for polygon
     /// - Parameter points: Linear array of your polygon vertices listed in a clockwise direction.
-    public func triangulate(points: [CGPoint]) -> [Int] {
-        let iPoints = iGeom.int(points: points.toPoints())
+    public func triangulate(points: [Point]) -> [Int] {
+        let iPoints = iGeom.int(points: points)
         let shape = PlainShape(points: iPoints)
         return shape.triangulate(extraPoints: nil)
     }
@@ -39,10 +39,10 @@ public struct Triangulator {
     /// - Parameter hull: range of the hull vertices in points array
     /// - Parameter holes: array of ranges for all holes
     /// - Parameter extraPoints: extra points for tessellation
-    public func triangulate(points: [CGPoint], hull: ArraySlice<CGPoint>, holes: [ArraySlice<CGPoint>]?, extraPoints: [CGPoint]?) -> [Int] {
+    public func triangulate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
         if let ePoints = extraPoints {
-            let iPoints = iGeom.int(points: ePoints.toPoints())
+            let iPoints = iGeom.int(points: ePoints)
             return shape.triangulate(extraPoints: iPoints)
         }  else {
             return shape.triangulate(extraPoints: nil)
@@ -51,8 +51,8 @@ public struct Triangulator {
     
     /// Makes Delaunay triangulation for polygon
     /// - Parameter points: Linear array of your polygon vertices listed in a clockwise direction.
-    public func triangulateDelaunay(points: [CGPoint]) -> [Int] {
-        let iPoints = iGeom.int(points: points.toPoints())
+    public func triangulateDelaunay(points: [Point]) -> [Int] {
+        let iPoints = iGeom.int(points: points)
         let shape = PlainShape(points: iPoints)
         return shape.delaunay(extraPoints: nil).trianglesIndices
     }
@@ -62,10 +62,10 @@ public struct Triangulator {
     /// - Parameter hull: range of the hull vertices in points array
     /// - Parameter holes: array of ranges for all holes
     /// - Parameter extraPoints: extra points for tessellation
-    public func triangulateDelaunay(points: [CGPoint], hull: ArraySlice<CGPoint>, holes: [ArraySlice<CGPoint>]?, extraPoints: [CGPoint]?) -> [Int] {
+    public func triangulateDelaunay(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
         if let ePoints = extraPoints {
-            let iPoints = iGeom.int(points: ePoints.toPoints())
+            let iPoints = iGeom.int(points: ePoints)
             return shape.delaunay(extraPoints: iPoints).trianglesIndices
         }  else {
             return shape.delaunay(extraPoints: nil).trianglesIndices
@@ -78,10 +78,10 @@ public struct Triangulator {
     ///   - hull: range of the hull vertices in points array
     ///   - holes: array of ranges for all holes
     ///   - extraPoints: extra points for tessellation
-    public func polygonate(points: [CGPoint], hull: ArraySlice<CGPoint>, holes: [ArraySlice<CGPoint>]?, extraPoints: [CGPoint]?) -> [Int] {
+    public func polygonate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
         if let ePoints = extraPoints {
-            let iPoints = iGeom.int(points: ePoints.toPoints())
+            let iPoints = iGeom.int(points: ePoints)
             return shape.delaunay(extraPoints: iPoints).convexPolygonsIndices
         }  else {
             return shape.delaunay(extraPoints: nil).convexPolygonsIndices
@@ -90,7 +90,7 @@ public struct Triangulator {
 
     public struct TessellationResult {
         let indices: [Int]
-        let extraPoints: [CGPoint]
+        let extraPoints: [Point]
     }
 
     /// Makes Delaunay triangulation for polygon
@@ -100,13 +100,13 @@ public struct Triangulator {
     /// - Parameter maxAngle: max possible triangle angle, must be in range (1...0.5)*pi
     /// - Parameter maxEdge: max possible triangle edge belong to the polygon edge
     /// - Parameter minEdge: min possible triangle edge
-    public func tessellate(points: [CGPoint], hull: ArraySlice<CGPoint>, holes: [ArraySlice<CGPoint>]?, maxAngle: Float, maxEdge: CGFloat, minEdge: CGFloat) -> TessellationResult {
+    public func tessellate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, maxAngle: Float, maxEdge: Float, minEdge: Float) -> TessellationResult {
         var shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
-        shape.modify(maxEgeSize: iGeom.int(float: Float(maxEdge)))
+        shape.modify(maxEgeSize: iGeom.int(float: maxEdge))
         var delaunay = shape.delaunay()
-        let vertices = delaunay.tessellate(maxAngle: maxAngle, minEdge: iGeom.int(float: Float(minEdge)))
+        let vertices = delaunay.tessellate(maxAngle: maxAngle, minEdge: iGeom.int(float: minEdge))
         let indices = delaunay.trianglesIndices
-        let extraPoints = vertices.map({ iGeom.float(point: $0.point).toCGPoint })
+        let extraPoints = vertices.map({ iGeom.float(point: $0.point) })
         return TessellationResult(indices: indices, extraPoints: extraPoints)
     }
 
