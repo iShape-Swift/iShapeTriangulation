@@ -13,21 +13,21 @@ import iGeometry
 
 public struct MonotoneTests {
     
-    private static let key = "monotone"
-    public static var pageIndex: Int = UserDefaults.standard.integer(forKey: MonotoneTests.key)
-    public static func nextIndex() -> Int {
-        let n = MonotoneTests.data.count
-        MonotoneTests.pageIndex = (MonotoneTests.pageIndex + 1) % n
-        UserDefaults.standard.set(MonotoneTests.pageIndex, forKey: MonotoneTests.key)
-        return MonotoneTests.pageIndex
-    }
-    
-    public static func prevIndex() -> Int {
-        let n = MonotoneTests.data.count
-        MonotoneTests.pageIndex = (MonotoneTests.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(MonotoneTests.pageIndex, forKey: MonotoneTests.key)
-        return MonotoneTests.pageIndex
-    }
+//    private static let key = "monotone"
+//    public static var pageIndex: Int = UserDefaults.standard.integer(forKey: MonotoneTests.key)
+//    public static func nextIndex() -> Int {
+//        let n = MonotoneTests.data.count
+//        MonotoneTests.pageIndex = (MonotoneTests.pageIndex + 1) % n
+//        UserDefaults.standard.set(MonotoneTests.pageIndex, forKey: MonotoneTests.key)
+//        return MonotoneTests.pageIndex
+//    }
+//    
+//    public static func prevIndex() -> Int {
+//        let n = MonotoneTests.data.count
+//        MonotoneTests.pageIndex = (MonotoneTests.pageIndex - 1 + n) % n
+//        UserDefaults.standard.set(MonotoneTests.pageIndex, forKey: MonotoneTests.key)
+//        return MonotoneTests.pageIndex
+//    }
     
     public static let data: [[Point]] = [
         // test 0
