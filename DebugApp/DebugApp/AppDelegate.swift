@@ -17,18 +17,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         var inputSystem: InputSystem?
         
         override func keyDown(with: NSEvent) {
-            if !(self.inputSystem?.onDown?(with.keyCode) ?? false) {
+            if !(self.inputSystem?.onKeyDown(keyCode: with.keyCode) ?? false) {
                 super.keyDown(with: with)
             }
         }
     }
     
-    var window: CustomWindow?
-
+    private var window: CustomWindow?
+    private let colorSchema = ColorSchema()
+    private let inputSystem = InputSystem()
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        let inputSystem = InputSystem()
-        let contentView = ContentView(inputSystem: inputSystem)
+        
+        let contentView = ContentView().environmentObject(colorSchema).environmentObject(inputSystem)
 
         // Create the window and set the content view.
         let aWindow = CustomWindow(

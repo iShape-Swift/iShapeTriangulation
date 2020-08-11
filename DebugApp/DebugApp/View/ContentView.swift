@@ -11,17 +11,12 @@ import SwiftUI
 struct ContentView: View {
     
     private let state = ContentState()
-    private let inputSystem: InputSystem
-    
-    init(inputSystem: InputSystem) {
-        self.inputSystem = inputSystem
-    }
     
     var body: some View {
         NavigationView {
-            MenuView(state: self.state).frame(width: 150)
-            MainView(state: self.state, inputSystem: inputSystem).frame(minWidth: 30)
-        }.frame(minWidth: 200, maxWidth: .greatestFiniteMagnitude, minHeight: 200, maxHeight: .greatestFiniteMagnitude)
+            MenuView(state: self.state).frame(width: 200)
+            MainView(state: self.state).frame(minWidth: 30)
+        }.frame(minWidth: 250, maxWidth: .greatestFiniteMagnitude, minHeight: 200, maxHeight: .greatestFiniteMagnitude)
     }
 }
 
@@ -30,6 +25,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(inputSystem: InputSystem())
+        ContentView()
     }
 }

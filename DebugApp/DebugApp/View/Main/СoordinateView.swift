@@ -35,7 +35,7 @@ struct СoordinateView: View {
                 for points in anchors {
                     path.addLines(points)
                 }
-            }.strokedPath(.init(lineWidth: 2)).foregroundColor(.red)
+            }.strokedPath(.init(lineWidth: 1)).foregroundColor(.red).opacity(0.7)
         }
         
         return zStack

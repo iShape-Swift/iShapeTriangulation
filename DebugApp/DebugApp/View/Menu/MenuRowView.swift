@@ -19,16 +19,10 @@ struct MenuRowView: View {
     }
 
     var body: some View {
-        let title: String
-        switch self.test {
-        case .monotone:
-            title = "Monotone"
-        case .plain:
-            title = "Plain"
-        }
+        let title = self.test.rawValue.capitalizingFirstLetter()
 
         let text = Text(title)
-            .frame(alignment: .leading)
+            .frame(maxWidth: .greatestFiniteMagnitude, alignment: .leading)
             .listRowInsets(EdgeInsets(top: 4, leading: 55, bottom: 4, trailing: 8))
             .multilineTextAlignment(.leading)
 
@@ -42,6 +36,16 @@ struct MenuRowView: View {
 
 struct MenuRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuRowView(test: .monotone, isSelected: false)
+        MenuRowView(test: .plainMonotone, isSelected: false)
+    }
+}
+
+private extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }

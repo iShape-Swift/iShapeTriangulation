@@ -8,12 +8,13 @@
 
 import SwiftUI
 import iGeometry
+import iShapeTriangulation
 
 struct PlainMonotoneSceneView: View {
 
-    @EnvironmentObject var inputSystem: InputSystem
-    @ObservedObject var state = PlainMonotoneSceneState()
+    @ObservedObject var state = BasicSceneState(key: String(describing: PlainMonotoneSceneView.self), data: MonotoneTests.data)
     @EnvironmentObject var colorSchema: ColorSchema
+    @State var isVisible: Bool = true
     
     private let sceneState: SceneState
     private let iGeom = IntGeom.defGeom
@@ -28,8 +29,7 @@ struct PlainMonotoneSceneView: View {
     }
     
     var body: some View {
-        self.state.inputSystem = self.inputSystem
-        let points = state.data
+        let points = state.points
         let shape = PlainShape(points: iGeom.int(points: points))
         
         let indices = shape.triangulate()
@@ -37,19 +37,18 @@ struct PlainMonotoneSceneView: View {
         triangles.reserveCapacity(indices.count / 3)
         var i = 0
         while i < indices.count {
-            let a = points[indices[i]]
-            let b = points[indices[i + 1]]
-            let c = points[indices[i + 2]]
-            let abc = [a, b, c].map({ CGPoint(x: CGFloat($0.x), y: CGFloat($0.y)) })
-            triangles.append(Triangle(index: i / 3, points: abc))
+            let a = CGPoint(points[indices[i]])
+            let b = CGPoint(points[indices[i + 1]])
+            let c = CGPoint(points[indices[i + 2]])
+            triangles.append(Triangle(index: i / 3, points: [a, b, c]))
             i += 3
         }
         
         let stroke = colorSchema.schema.defaultTriangleStroke
 
         return ZStack {
-            ForEach(triangles, id: \.index) { triangle in // show received results
-                TriangleShapeView(
+            ForEach(triangles, id: \.index) { triangle in
+                PolygonShapeView(
                     sceneState: self.sceneState,
                     points: triangle.points,
                     index: triangle.index,

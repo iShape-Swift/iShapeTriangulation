@@ -10,53 +10,85 @@ import SwiftUI
 
 struct MainView: View {
 
+    @EnvironmentObject var inputSystem: InputSystem
     @ObservedObject private var contentState: ContentState
     private let sceneState: SceneState
 
-    init(state: ContentState, inputSystem: InputSystem) {
+    init(state: ContentState) {
         self.contentState = state
-        self.sceneState = SceneState(inputSystem: inputSystem)
+        self.sceneState = SceneState()
     }
 
     var body: some View {
+        
         return GeometryReader { geometry in
             ZStack {
                 СoordinateView(state: self.sceneState).background(Color.white)
-                self.content(size: geometry.size)
-            }.gesture(
-                MagnificationGesture()
-                    .onChanged { scale in
-                        self.sceneState.modify(scale: scale)
+                self.content(size: geometry.size).allowsHitTesting(false)
+            }.gesture(MagnificationGesture()
+                .onChanged { scale in
+                    self.sceneState.modify(scale: scale)
                 }
                 .onEnded { scale in
                     self.sceneState.apply(scale: scale)
                 })
-            .gesture(
-                DragGesture()
-                    .onChanged { data in
-                        self.sceneState.move(translation: data.translation)
+            .gesture(DragGesture()
+                .onChanged { data in
+                    self.sceneState.move(start: data.startLocation, current: data.location)
                 }
                 .onEnded { data in
-                    self.sceneState.apply(translation: data.translation)
+                    self.sceneState.apply(start: data.startLocation, current: data.location)
                 }
             )
         }
     }
 
     func content(size: CGSize) -> some View {
-        defer {
-            self.sceneState.reset()
-        }
         self.sceneState.sceneSize = size
+        
+        let plainMonotoneScene = PlainMonotoneSceneView(sceneState: self.sceneState)
+        let delaunayMonotoneScene = DelaunayMonotoneSceneView(sceneState: self.sceneState)
+        let plainComplexScene = PlainComplexSceneView(sceneState: self.sceneState)
+        let delaunayComplexScene = DelaunayComplexSceneView(sceneState: self.sceneState)
+        let polygonScene = PolygonSceneView(sceneState: self.sceneState)
+        let extraPointScene = ExtraPointSceneView(sceneState: self.sceneState)
+        let centroidNetScene = CentroidNetSceneView(sceneState: self.sceneState)
+        let tessellationScene = TessellationSceneView(sceneState: self.sceneState)
+        
+        let scene: Scene
+        
         switch self.contentState.current {
-        case .plain:
-            let scene = PlainSceneView(sceneState: self.sceneState)
-            self.sceneState.scene = scene.state
-            return scene
-        case .monotone:
-            let scene = PlainSceneView(sceneState: self.sceneState)
-            self.sceneState.scene = scene.state
-            return scene
+            case .plainMonotone:
+                scene = plainMonotoneScene.state
+            case .delaunayMonotone:
+                scene = delaunayMonotoneScene.state
+            case .plainComplex:
+                scene = plainComplexScene.state
+            case .delaunayComplex:
+                scene = delaunayComplexScene.state
+            case .polygon:
+                scene = polygonScene.state
+            case .extraPoint:
+                scene = extraPointScene.state
+            case .centroidNet:
+                scene = centroidNetScene.state
+            case .tessellation:
+                scene = tessellationScene.state
+        }
+
+        self.inputSystem.subscribe(scene)
+        self.sceneState.scene = scene
+        self.sceneState.reset()
+        
+        return ZStack {
+            plainMonotoneScene.isHidden(self.contentState.current != .plainMonotone)
+            delaunayMonotoneScene.isHidden(self.contentState.current != .delaunayMonotone)
+            plainComplexScene.isHidden(self.contentState.current != .plainComplex)
+            delaunayComplexScene.isHidden(self.contentState.current != .delaunayComplex)
+            polygonScene.isHidden(self.contentState.current != .polygon)
+            extraPointScene.isHidden(self.contentState.current != .extraPoint)
+            centroidNetScene.isHidden(self.contentState.current != .centroidNet)
+            tessellationScene.isHidden(self.contentState.current != .tessellation)
         }
     }
     

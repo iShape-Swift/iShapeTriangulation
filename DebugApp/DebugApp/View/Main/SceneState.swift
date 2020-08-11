@@ -15,6 +15,8 @@ final class SceneState: ObservableObject {
     private let minZoom: CGFloat = 0.01
     private let limitZoom: CGFloat = 1.1
 
+    private var isDrag = false
+    private var isPointDrag = false
     weak var scene: Scene?
     
     var sceneTopLeft: CGPoint {
@@ -33,20 +35,6 @@ final class SceneState: ObservableObject {
     
     private var zoomOrigin: CGFloat = 1
     private var viewPointOrigin: CGPoint = .zero
-    
-    init(inputSystem: InputSystem) {
-        inputSystem.onDown = { [weak self] keyCode in
-            if keyCode == 124 || keyCode == 49 || keyCode == 36 {
-                self?.scene?.onNext()
-                return true
-            } else if keyCode == 123 {
-                self?.scene?.onPrev()
-                return true
-            } else {
-                return false
-            }
-        }
-    }
     
     func modify(scale: CGFloat) {
         let zoom = self.zoomOrigin * scale
@@ -72,20 +60,39 @@ final class SceneState: ObservableObject {
         }
     }
     
-    func move(translation: CGSize) {
-        let dx = -translation.width * zoom
-        let dy = translation.height * zoom
-        self.viewPoint = CGPoint(x: self.viewPointOrigin.x + dx, y: self.viewPointOrigin.y + dy)
+    func move(start: CGPoint, current: CGPoint) {
+        if !self.isDrag {
+            let radius = 5 * zoom
+            let worldStart = self.world(screen: start)
+            self.isPointDrag = self.scene?.onStart(start: worldStart, radius: radius) ?? false
+            self.isDrag = true
+        }
+        
+        let dx = (start.x - current.x) * zoom
+        let dy = (current.y - start.y) * zoom
+        
+        if self.isPointDrag {
+            self.scene?.onMove(delta: CGSize(width: dx, height: dy))
+        } else {
+            self.viewPoint = CGPoint(x: self.viewPointOrigin.x + dx, y: self.viewPointOrigin.y + dy)
+        }
     }
     
-    func apply(translation: CGSize) {
-        let dx = -translation.width * zoom
-        let dy = translation.height * zoom
-        self.viewPointOrigin = CGPoint(x: self.viewPointOrigin.x + dx, y: self.viewPointOrigin.y + dy)
-        self.viewPoint = self.viewPointOrigin
-        if self.viewPoint != self.viewPointOrigin {
+    func apply(start: CGPoint, current: CGPoint) {
+        let dx = (start.x - current.x) * zoom
+        let dy = (current.y - start.y) * zoom
+        if self.isPointDrag {
+            self.scene?.onEnd(delta: CGSize(width: dx, height: dy))
+            self.isPointDrag = false
+        } else {
+            self.viewPoint = CGPoint(x: self.viewPointOrigin.x + dx, y: self.viewPointOrigin.y + dy)
+            self.viewPointOrigin = CGPoint(x: self.viewPointOrigin.x + dx, y: self.viewPointOrigin.y + dy)
             self.viewPoint = self.viewPointOrigin
+            if self.viewPoint != self.viewPointOrigin {
+                self.viewPoint = self.viewPointOrigin
+            }
         }
+        self.isDrag = false
     }
 
     func reset() {
@@ -120,6 +127,17 @@ final class SceneState: ObservableObject {
             }
         }
         return result
+    }
+    
+    func world(screen: CGPoint) -> CGPoint {
+        let scale = 0.5 * zoom
+        let left = viewPoint.x - scale * sceneSize.width
+        let bottom = viewPoint.y + scale * sceneSize.height
+
+        let x = screen.x * zoom + left
+        let y = bottom - screen.y * zoom
+
+        return CGPoint(x: x, y: y)
     }
     
 }

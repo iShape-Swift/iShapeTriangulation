@@ -20,7 +20,6 @@ struct MenuView: View {
     var body: some View {
         List(self.data, id: \.self) { test in
             MenuRowView(test: test, isSelected: self.state.current == test)
-                .background(Color.red)
                 .gesture(TapGesture().onEnded { _ in
                     self.state.current = test
                 }

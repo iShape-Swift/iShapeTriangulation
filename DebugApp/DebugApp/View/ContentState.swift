@@ -10,10 +10,16 @@ import SwiftUI
 
 final class ContentState: ObservableObject {
     
-    enum Test: CaseIterable {
-        case plain
-        case monotone
+    enum Test: String, CaseIterable {
+        case plainMonotone
+        case delaunayMonotone
+        case plainComplex
+        case delaunayComplex
+        case polygon
+        case extraPoint
+        case centroidNet
+        case tessellation
     }
     
-    @Published var current: Test = .plain
+    @Published var current: Test = .plainMonotone
 }
