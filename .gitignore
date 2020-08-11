@@ -7,5 +7,6 @@
 xcuserdata/
 
 **/Carthage/
+!Example/Carthage
 
 .DS_Store
