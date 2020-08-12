@@ -153,3 +153,20 @@ Add the following to your `Cartfile`:
 ```
 github "iShape-Swift/iShapeTriangulation"
 ```
+
+### [Package Manager](https://swift.org/package-manager/)
+
+
+Add the following to your `Package.swift`:
+```
+...
+    dependencies: [
+        .package(url: "https://github.com/iShape-Swift/iShapeTriangulation", from: "0.8.0")
+    ],
+    targets: [
+        .target(
+            name: "[your target]",
+            dependencies: ["iShapeTriangulation"])
+    ]
+...
+```
