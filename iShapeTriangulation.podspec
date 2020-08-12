@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   spec.tvos.deployment_target     = '9.0'
   spec.osx.deployment_target      = '10.9'
 
-  spec.source_files               = 'iShapeTriangulation/Source/**/*.swift'
+  spec.source_files               = 'Source/**/*.swift'
 
 
   spec.dependency                 'iGeometry', '>= 1.5.1'
