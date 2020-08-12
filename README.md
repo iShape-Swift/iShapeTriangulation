@@ -146,3 +146,10 @@ Add the following to your `Podfile`:
 ```ruby
 pod 'iShapeTriangulation'
 ```
+
+### [Cartage](https://github.com/Carthage/Carthage)
+
+Add the following to your `Cartfile`:
+```
+github "iShape-Swift/iShapeTriangulation"
+```
