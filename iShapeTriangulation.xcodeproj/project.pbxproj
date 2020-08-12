@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5471273C24E400980030201D /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273524E400850030201D /* iGeometry.framework */; };
+		5471273D24E400980030201D /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273524E400850030201D /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5471273E24E4009E0030201D /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273724E400850030201D /* iGeometry.framework */; };
+		5471273F24E4009E0030201D /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273724E400850030201D /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5471274024E400A20030201D /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273924E400850030201D /* iGeometry.framework */; };
+		5471274124E400A20030201D /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273924E400850030201D /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5471274224E400A70030201D /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273B24E400850030201D /* iGeometry.framework */; };
+		5471274324E400A70030201D /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273B24E400850030201D /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		54AFC38D24D716B300B94D58 /* iShapeTriangulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		54AFC43524D7175300B94D58 /* Point+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC41E24D7175300B94D58 /* Point+Extension.swift */; };
 		54AFC43624D7175300B94D58 /* Point+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC41E24D7175300B94D58 /* Point+Extension.swift */; };
@@ -87,14 +95,6 @@
 		54AFC48124D719CB00B94D58 /* iShapeTriangulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		54AFC48224D719CB00B94D58 /* iShapeTriangulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		54AFC48324D719CC00B94D58 /* iShapeTriangulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		54AFC49524D71D5C00B94D58 /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC48D24D71D3600B94D58 /* iGeometry.framework */; };
-		54AFC49624D71D5C00B94D58 /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC48D24D71D3600B94D58 /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		54AFC49824D71D6E00B94D58 /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC48F24D71D3600B94D58 /* iGeometry.framework */; };
-		54AFC49924D71D6E00B94D58 /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC48F24D71D3600B94D58 /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		54AFC49B24D71D7B00B94D58 /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC49124D71D3600B94D58 /* iGeometry.framework */; };
-		54AFC49C24D71D7B00B94D58 /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC49124D71D3600B94D58 /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		54AFC49E24D71D8C00B94D58 /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC49324D71D3600B94D58 /* iGeometry.framework */; };
-		54AFC49F24D71D8C00B94D58 /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC49324D71D3600B94D58 /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		54AFC4BC24D721FB00B94D58 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC4BB24D721FB00B94D58 /* UnitTests.swift */; };
 		54AFC4BE24D721FB00B94D58 /* iShapeTriangulation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC3B024D716E500B94D58 /* iShapeTriangulation.framework */; };
 		54AFC4CF24D7222200B94D58 /* TriangulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC4C524D7222100B94D58 /* TriangulatorTests.swift */; };
@@ -109,30 +109,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		54AFC48C24D71D3600B94D58 /* PBXContainerItemProxy */ = {
+		5471273424E400850030201D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC48524D71D3600B94D58 /* iGeometry.xcodeproj */;
+			containerPortal = 5471272D24E400850030201D /* iGeometry.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 54AFC2EE24D6B62B00B94D58;
 			remoteInfo = "iGeometry iOS";
 		};
-		54AFC48E24D71D3600B94D58 /* PBXContainerItemProxy */ = {
+		5471273624E400850030201D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC48524D71D3600B94D58 /* iGeometry.xcodeproj */;
+			containerPortal = 5471272D24E400850030201D /* iGeometry.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 54AFC2FC24D6B6AF00B94D58;
 			remoteInfo = "iGeometry watchOS";
 		};
-		54AFC49024D71D3600B94D58 /* PBXContainerItemProxy */ = {
+		5471273824E400850030201D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC48524D71D3600B94D58 /* iGeometry.xcodeproj */;
+			containerPortal = 5471272D24E400850030201D /* iGeometry.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 54AFC30924D6B6FF00B94D58;
 			remoteInfo = "iGeometry tvOS";
 		};
-		54AFC49224D71D3600B94D58 /* PBXContainerItemProxy */ = {
+		5471273A24E400850030201D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC48524D71D3600B94D58 /* iGeometry.xcodeproj */;
+			containerPortal = 5471272D24E400850030201D /* iGeometry.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 54AFC31624D6B75000B94D58;
 			remoteInfo = "iGeometry macOS";
@@ -153,7 +153,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				54AFC49624D71D5C00B94D58 /* iGeometry.framework in Embed Frameworks */,
+				5471273D24E400980030201D /* iGeometry.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,7 +164,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				54AFC49924D71D6E00B94D58 /* iGeometry.framework in Embed Frameworks */,
+				5471273F24E4009E0030201D /* iGeometry.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,7 +175,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				54AFC49C24D71D7B00B94D58 /* iGeometry.framework in Embed Frameworks */,
+				5471274124E400A20030201D /* iGeometry.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,7 +186,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				54AFC49F24D71D8C00B94D58 /* iGeometry.framework in Embed Frameworks */,
+				5471274324E400A70030201D /* iGeometry.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +194,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5471272D24E400850030201D /* iGeometry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iGeometry.xcodeproj; path = Carthage/Checkouts/iGeometry/iGeometry.xcodeproj; sourceTree = "<group>"; };
 		54AFC38824D716B300B94D58 /* iShapeTriangulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iShapeTriangulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iShapeTriangulation.h; sourceTree = "<group>"; };
 		54AFC38C24D716B300B94D58 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
@@ -223,7 +224,6 @@
 		54AFC43324D7175300B94D58 /* PlainShape+Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlainShape+Delaunay.swift"; sourceTree = "<group>"; };
 		54AFC43424D7175300B94D58 /* Delaunay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delaunay.swift; sourceTree = "<group>"; };
 		54AFC48424D71A3500B94D58 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		54AFC48524D71D3600B94D58 /* iGeometry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iGeometry.xcodeproj; path = Carthage/Checkouts/iGeometry/iGeometry.xcodeproj; sourceTree = "<group>"; };
 		54AFC4B924D721FB00B94D58 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54AFC4BB24D721FB00B94D58 /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
 		54AFC4BD24D721FB00B94D58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54AFC49524D71D5C00B94D58 /* iGeometry.framework in Frameworks */,
+				5471273C24E400980030201D /* iGeometry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54AFC49824D71D6E00B94D58 /* iGeometry.framework in Frameworks */,
+				5471273E24E4009E0030201D /* iGeometry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54AFC49B24D71D7B00B94D58 /* iGeometry.framework in Frameworks */,
+				5471274024E400A20030201D /* iGeometry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54AFC49E24D71D8C00B94D58 /* iGeometry.framework in Frameworks */,
+				5471274224E400A70030201D /* iGeometry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,12 +282,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5471272E24E400850030201D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5471273524E400850030201D /* iGeometry.framework */,
+				5471273724E400850030201D /* iGeometry.framework */,
+				5471273924E400850030201D /* iGeometry.framework */,
+				5471273B24E400850030201D /* iGeometry.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		54AFC37C24D7167A00B94D58 = {
 			isa = PBXGroup;
 			children = (
-				54AFC48524D71D3600B94D58 /* iGeometry.xcodeproj */,
+				5471272D24E400850030201D /* iGeometry.xcodeproj */,
 				54AFC48424D71A3500B94D58 /* Package.swift */,
-				54AFC41C24D7175300B94D58 /* Source */,
+				54AFC41C24D7175300B94D58 /* Sources */,
 				54AFC4BA24D721FB00B94D58 /* UnitTests */,
 				54AFC38924D716B300B94D58 /* Products */,
 				54AFC49424D71D5C00B94D58 /* Frameworks */,
@@ -306,7 +317,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		54AFC41C24D7175300B94D58 /* Source */ = {
+		54AFC41C24D7175300B94D58 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */,
@@ -317,7 +328,7 @@
 				54AFC41D24D7175300B94D58 /* TestData */,
 				54AFC42224D7175300B94D58 /* Triangulation */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		54AFC41D24D7175300B94D58 /* TestData */ = {
@@ -375,17 +386,6 @@
 				54AFC43424D7175300B94D58 /* Delaunay.swift */,
 			);
 			path = Delaunay;
-			sourceTree = "<group>";
-		};
-		54AFC48624D71D3600B94D58 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				54AFC48D24D71D3600B94D58 /* iGeometry.framework */,
-				54AFC48F24D71D3600B94D58 /* iGeometry.framework */,
-				54AFC49124D71D3600B94D58 /* iGeometry.framework */,
-				54AFC49324D71D3600B94D58 /* iGeometry.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		54AFC49424D71D5C00B94D58 /* Frameworks */ = {
@@ -600,8 +600,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 54AFC48624D71D3600B94D58 /* Products */;
-					ProjectRef = 54AFC48524D71D3600B94D58 /* iGeometry.xcodeproj */;
+					ProductGroup = 5471272E24E400850030201D /* Products */;
+					ProjectRef = 5471272D24E400850030201D /* iGeometry.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -616,32 +616,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		54AFC48D24D71D3600B94D58 /* iGeometry.framework */ = {
+		5471273524E400850030201D /* iGeometry.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = iGeometry.framework;
-			remoteRef = 54AFC48C24D71D3600B94D58 /* PBXContainerItemProxy */;
+			remoteRef = 5471273424E400850030201D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		54AFC48F24D71D3600B94D58 /* iGeometry.framework */ = {
+		5471273724E400850030201D /* iGeometry.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = iGeometry.framework;
-			remoteRef = 54AFC48E24D71D3600B94D58 /* PBXContainerItemProxy */;
+			remoteRef = 5471273624E400850030201D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		54AFC49124D71D3600B94D58 /* iGeometry.framework */ = {
+		5471273924E400850030201D /* iGeometry.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = iGeometry.framework;
-			remoteRef = 54AFC49024D71D3600B94D58 /* PBXContainerItemProxy */;
+			remoteRef = 5471273824E400850030201D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		54AFC49324D71D3600B94D58 /* iGeometry.framework */ = {
+		5471273B24E400850030201D /* iGeometry.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = iGeometry.framework;
-			remoteRef = 54AFC49224D71D3600B94D58 /* PBXContainerItemProxy */;
+			remoteRef = 5471273A24E400850030201D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -887,7 +887,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-iOS.plist";
+				INFOPLIST_FILE = "Sources/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -960,7 +960,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-iOS.plist";
+				INFOPLIST_FILE = "Sources/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1040,7 +1040,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-watchOS.plist";
+				INFOPLIST_FILE = "Sources/Info-watchOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1114,7 +1114,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-watchOS.plist";
+				INFOPLIST_FILE = "Sources/Info-watchOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1193,7 +1193,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-tvOS.plist";
+				INFOPLIST_FILE = "Sources/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1266,7 +1266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-tvOS.plist";
+				INFOPLIST_FILE = "Sources/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1346,7 +1346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-macOS.plist";
+				INFOPLIST_FILE = "Sources/Info-macOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1419,7 +1419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Source/Info-macOS.plist";
+				INFOPLIST_FILE = "Sources/Info-macOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
