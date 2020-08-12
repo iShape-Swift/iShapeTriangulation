@@ -140,6 +140,11 @@ Now you need represent a hole as an array of vertices listed in counterclockwise
 
 ## Installation
 
+add imports:
+```swift
+import iGeometry
+import iShapeTriangulation
+```
 ### [CocoaPods](https://cocoapods.org/)
 
 Add the following to your `Podfile`:
@@ -158,15 +163,17 @@ github "iShape-Swift/iShapeTriangulation"
 
 
 Add the following to your `Package.swift`:
-```
-...
-    dependencies: [
-        .package(url: "https://github.com/iShape-Swift/iShapeTriangulation", from: "0.8.0")
-    ],
-    targets: [
-        .target(
-            name: "[your target]",
-            dependencies: ["iShapeTriangulation"])
+```swift
+let package = Package(
+    name: "[your name]",
+    products: [
+        dependencies: [
+            .package(url: "https://github.com/iShape-Swift/iShapeTriangulation", from: "0.8.0")
+        ],
+        targets: [
+            .target(
+                name: "[your target]",
+                dependencies: ["iShapeTriangulation"])
+        ]
     ]
-...
-```
+)```
