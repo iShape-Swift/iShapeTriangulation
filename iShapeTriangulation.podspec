@@ -19,6 +19,6 @@ Pod::Spec.new do |spec|
   spec.source_files               = 'iShapeTriangulation/Source/**/*.swift'
 
 
-  spec.dependency                 'iGeometry', '>= 1.5.0'
+  spec.dependency                 'iGeometry', '>= 1.5.1'
 
 end
