@@ -5,7 +5,6 @@
 //  Created by Nail Sharipov on 20.05.2020.
 //
 
-import Foundation
 import iGeometry
 
 extension Delaunay {
@@ -193,7 +192,7 @@ extension Delaunay {
             let cx = x * invert_divider
             let cy = y * invert_divider
 
-            return IntPoint(x: Int64(round(cx)), y: Int64(round(cy)))
+            return IntPoint(x: Int64(cx.rounded(.toNearestOrAwayFromZero)), y: Int64(cy.rounded(.toNearestOrAwayFromZero)))
         } else {
             return IntPoint(x: (a0.x + a1.x) / 2, y: (a0.y + a1.y) / 2)
         }

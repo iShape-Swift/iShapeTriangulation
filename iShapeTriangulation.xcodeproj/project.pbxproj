@@ -293,6 +293,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5497E74424E429BA0045B980 /* iShapeTriangulation */ = {
+			isa = PBXGroup;
+			children = (
+				54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */,
+				54AFC41D24D7175300B94D58 /* TestData */,
+				54AFC42224D7175300B94D58 /* Triangulation */,
+			);
+			path = iShapeTriangulation;
+			sourceTree = "<group>";
+		};
 		54AFC37C24D7167A00B94D58 = {
 			isa = PBXGroup;
 			children = (
@@ -320,13 +330,11 @@
 		54AFC41C24D7175300B94D58 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */,
+				5497E74424E429BA0045B980 /* iShapeTriangulation */,
 				54AFC38C24D716B300B94D58 /* Info-iOS.plist */,
 				54AFC3B324D716E500B94D58 /* Info-macOS.plist */,
 				54AFC3A624D716D100B94D58 /* Info-tvOS.plist */,
 				54AFC39924D716C400B94D58 /* Info-watchOS.plist */,
-				54AFC41D24D7175300B94D58 /* TestData */,
-				54AFC42224D7175300B94D58 /* Triangulation */,
 			);
 			path = Sources;
 			sourceTree = "<group>";

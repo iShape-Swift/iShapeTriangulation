@@ -6,29 +6,13 @@
 //  Copyright © 2019 Nail Sharipov. All rights reserved.
 //
 
-import Foundation
-import iGeometry
-
 #if DEBUG
+
+import iGeometry
+import Darwin
 
 public struct ComplexTests {
     
-    private static let key = "complex"
-    public static var pageIndex: Int = UserDefaults.standard.integer(forKey: ComplexTests.key)
-    public static func nextIndex() -> Int {
-        let n = ComplexTests.data.count
-        ComplexTests.pageIndex = (ComplexTests.pageIndex + 1) % n
-        UserDefaults.standard.set(ComplexTests.pageIndex, forKey: ComplexTests.key)
-        return ComplexTests.pageIndex
-    }
-    
-    public static func prevIndex() -> Int {
-        let n = ComplexTests.data.count
-        ComplexTests.pageIndex = (ComplexTests.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(ComplexTests.pageIndex, forKey: ComplexTests.key)
-        return ComplexTests.pageIndex
-    }
-
     public static let data: [[[Point]]] = [
         // test 0
         [
@@ -944,6 +928,7 @@ public struct ComplexTests {
         let r = radius + delta
 
         for i in 0..<count {
+            
             let x = r * cos(a0)
             let y = r * sin(a0)
             a0 -= da0

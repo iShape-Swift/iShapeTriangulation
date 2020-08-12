@@ -6,7 +6,6 @@
 //  Copyright © 2019 iShape. All rights reserved.
 //
 
-import Foundation
 import iGeometry
 
 public struct Triangulator {

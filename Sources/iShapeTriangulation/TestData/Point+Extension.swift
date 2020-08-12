@@ -7,7 +7,6 @@
 
 #if DEBUG
 
-import Foundation
 import iGeometry
 
 private extension Array where Element == Point {

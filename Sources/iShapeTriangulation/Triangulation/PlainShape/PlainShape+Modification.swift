@@ -5,7 +5,6 @@
 //  Created by Nail Sharipov on 20.07.2020.
 //
 
-import Foundation
 import iGeometry
 
 public extension PlainShape {
@@ -33,7 +32,7 @@ public extension PlainShape {
                     j += 1
                     points.append(b)
                 } else {
-                    let l = Int64(sqrt(Double(sqrSize)))
+                    let l = Int64(Double(sqrSize).squareRoot())
                     let s = Int(l / maxEgeSize)
                     let ds = Double(s)
      

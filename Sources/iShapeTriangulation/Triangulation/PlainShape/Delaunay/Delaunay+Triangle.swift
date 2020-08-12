@@ -5,7 +5,6 @@
 //  Created by Nail Sharipov on 28.04.2020.
 //
 
-import Foundation
 import iGeometry
 
 extension Delaunay {

@@ -6,7 +6,6 @@
 //  Copyright © 2019 Nail Sharipov. All rights reserved.
 //
 
-import Foundation
 import iGeometry
 
 public extension PlainShape {

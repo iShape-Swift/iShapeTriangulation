@@ -9,4 +9,7 @@ xcuserdata/
 **/Carthage/
 !Example/Carthage
 
+/.build
+/Packages
+
 .DS_Store

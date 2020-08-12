@@ -6,8 +6,6 @@
 //  Copyright © 2019 iShape. All rights reserved.
 //
 
-import Foundation
-
 private struct Triangle: Hashable {
     
     let a: Int

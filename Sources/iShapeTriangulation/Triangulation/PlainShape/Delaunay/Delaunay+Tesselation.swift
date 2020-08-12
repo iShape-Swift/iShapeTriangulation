@@ -5,7 +5,7 @@
 //  Created by Nail Sharipov on 15.07.2020.
 //
 
-import Foundation
+import Darwin
 import iGeometry
 
 public extension Delaunay {
@@ -173,7 +173,7 @@ private extension Delaunay.Triangle {
         let x = (aa * (by - cy) + bb * (cy - ay) + cc * (ay - by)) / d
         let y = (aa * (cx - bx) + bb * (ax - cx) + cc * (bx - ax)) / d
 
-        return IntPoint(x: Int64(round(x)), y: Int64(round(y)))
+        return IntPoint(x: Int64(x.rounded(.toNearestOrAwayFromZero)), y: Int64(y.rounded(.toNearestOrAwayFromZero)))
     }
 
     @inline(__always)

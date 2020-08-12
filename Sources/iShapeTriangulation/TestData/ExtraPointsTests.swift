@@ -7,27 +7,10 @@
 
 #if DEBUG
 
-import Foundation
 import iGeometry
 
 public struct ExtraPointsTests {
-    
-    private static let key = "extraPoints"
-    public static var pageIndex: Int = UserDefaults.standard.integer(forKey: ExtraPointsTests.key)
-    public static func nextIndex() -> Int {
-        let n = ExtraPointsTests.data.count
-        ExtraPointsTests.pageIndex = (ExtraPointsTests.pageIndex + 1) % n
-        UserDefaults.standard.set(ExtraPointsTests.pageIndex, forKey: ExtraPointsTests.key)
-        return ExtraPointsTests.pageIndex
-    }
-    
-    public static func prevIndex() -> Int {
-        let n = ExtraPointsTests.data.count
-        ExtraPointsTests.pageIndex = (ExtraPointsTests.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(ExtraPointsTests.pageIndex, forKey: ExtraPointsTests.key)
-        return ExtraPointsTests.pageIndex
-    }
-    
+
     public static let data: [[[Point]]] = [
         // test 0
         [

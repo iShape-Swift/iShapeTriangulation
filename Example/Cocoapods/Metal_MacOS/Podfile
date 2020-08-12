@@ -3,6 +3,6 @@ platform :osx, '10.15'
 target 'Metal_MacOS' do
 	use_frameworks!
 
-	pod 'iShapeTriangulation', '= 0.6.0'
+	pod 'iShapeTriangulation'
 
 end

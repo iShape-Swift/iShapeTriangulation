@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "iGeometry",
+        "repositoryURL": "https://github.com/iShape-Swift/iGeometry",
+        "state": {
+          "branch": null,
+          "revision": "7dd4ea8c0ff4bce7715e56828161f81999bba201",
+          "version": "1.7.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
