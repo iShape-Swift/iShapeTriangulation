@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		545A0F7C24E2A977001A7DDD /* iShapeTriangulation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 545A0F7924E2A961001A7DDD /* iShapeTriangulation.framework */; };
-		545A0F7D24E2A977001A7DDD /* iShapeTriangulation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 545A0F7924E2A961001A7DDD /* iShapeTriangulation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		545A0F7E24E2A989001A7DDD /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC28324D6A4B500B94D58 /* iGeometry.framework */; };
-		545A0F7F24E2A989001A7DDD /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC28324D6A4B500B94D58 /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		545A0F8124E2AA78001A7DDD /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F8024E2AA78001A7DDD /* MetalView.swift */; };
 		545A0F8324E2BA0E001A7DDD /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F8224E2BA0E001A7DDD /* Shaders.metal */; };
 		545A0F8524E2EE7A001A7DDD /* MeshBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F8424E2EE7A001A7DDD /* MeshBuilder.swift */; };
@@ -19,63 +15,11 @@
 		54AFC26C24D6A24B00B94D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC26B24D6A24B00B94D58 /* Assets.xcassets */; };
 		54AFC26F24D6A24B00B94D58 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC26E24D6A24B00B94D58 /* Preview Assets.xcassets */; };
 		54AFC27224D6A24B00B94D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC27024D6A24B00B94D58 /* Main.storyboard */; };
+		DB7C646BEF3CB61AF45E209F /* Pods_Metal_MacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46ADAD8CAF071E5D9878659C /* Pods_Metal_MacOS.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		545A0F7224E2A961001A7DDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC38824D716B300B94D58;
-			remoteInfo = "iShapeTriangulation iOS";
-		};
-		545A0F7424E2A961001A7DDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC39624D716C400B94D58;
-			remoteInfo = "iShapeTriangulation watchOS";
-		};
-		545A0F7624E2A961001A7DDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC3A324D716D100B94D58;
-			remoteInfo = "iShapeTriangulation tvOS";
-		};
-		545A0F7824E2A961001A7DDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC3B024D716E500B94D58;
-			remoteInfo = "iShapeTriangulation macOS";
-		};
-		545A0F7A24E2A961001A7DDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC4B924D721FB00B94D58;
-			remoteInfo = UnitTests;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		54AFC28824D6A4B500B94D58 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				545A0F7F24E2A989001A7DDD /* iGeometry.framework in Embed Frameworks */,
-				545A0F7D24E2A977001A7DDD /* iShapeTriangulation.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iShapeTriangulation.xcodeproj; path = Carthage/Checkouts/iShapeTriangulation/iShapeTriangulation.xcodeproj; sourceTree = "<group>"; };
+		46ADAD8CAF071E5D9878659C /* Pods_Metal_MacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Metal_MacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		545A0F8024E2AA78001A7DDD /* MetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
 		545A0F8224E2BA0E001A7DDD /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		545A0F8424E2EE7A001A7DDD /* MeshBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshBuilder.swift; sourceTree = "<group>"; };
@@ -88,6 +32,8 @@
 		54AFC27324D6A24B00B94D58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54AFC27424D6A24B00B94D58 /* Metal_MacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Metal_MacOS.entitlements; sourceTree = "<group>"; };
 		54AFC28324D6A4B500B94D58 /* iGeometry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = iGeometry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		718E7100943A7187E50F6C48 /* Pods-Metal_MacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metal_MacOS.debug.xcconfig"; path = "Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B35DB0EAC6D4AC24904F5CC6 /* Pods-Metal_MacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metal_MacOS.release.xcconfig"; path = "Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,33 +41,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				545A0F7E24E2A989001A7DDD /* iGeometry.framework in Frameworks */,
-				545A0F7C24E2A977001A7DDD /* iShapeTriangulation.framework in Frameworks */,
+				DB7C646BEF3CB61AF45E209F /* Pods_Metal_MacOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		545A0F6A24E2A961001A7DDD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				545A0F7324E2A961001A7DDD /* iShapeTriangulation.framework */,
-				545A0F7524E2A961001A7DDD /* iShapeTriangulation.framework */,
-				545A0F7724E2A961001A7DDD /* iShapeTriangulation.framework */,
-				545A0F7924E2A961001A7DDD /* iShapeTriangulation.framework */,
-				545A0F7B24E2A961001A7DDD /* UnitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		54AFC25B24D6A24B00B94D58 = {
 			isa = PBXGroup;
 			children = (
-				545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */,
 				54AFC26624D6A24B00B94D58 /* Metal_MacOS */,
 				54AFC26524D6A24B00B94D58 /* Products */,
 				54AFC28224D6A4B500B94D58 /* Frameworks */,
+				CD7E87390FBAFA1A88276C36 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,8 +95,19 @@
 			isa = PBXGroup;
 			children = (
 				54AFC28324D6A4B500B94D58 /* iGeometry.framework */,
+				46ADAD8CAF071E5D9878659C /* Pods_Metal_MacOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD7E87390FBAFA1A88276C36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				718E7100943A7187E50F6C48 /* Pods-Metal_MacOS.debug.xcconfig */,
+				B35DB0EAC6D4AC24904F5CC6 /* Pods-Metal_MacOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,10 +117,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54AFC27724D6A24B00B94D58 /* Build configuration list for PBXNativeTarget "Metal_MacOS" */;
 			buildPhases = (
+				209A83CBA0DC6516D8B6F37C /* [CP] Check Pods Manifest.lock */,
 				54AFC26024D6A24B00B94D58 /* Sources */,
 				54AFC26124D6A24B00B94D58 /* Frameworks */,
 				54AFC26224D6A24B00B94D58 /* Resources */,
-				54AFC28824D6A4B500B94D58 /* Embed Frameworks */,
+				C105F906B166D3228932CA0C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -213,56 +158,12 @@
 			mainGroup = 54AFC25B24D6A24B00B94D58;
 			productRefGroup = 54AFC26524D6A24B00B94D58 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 545A0F6A24E2A961001A7DDD /* Products */;
-					ProjectRef = 545A0F6924E2A961001A7DDD /* iShapeTriangulation.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				54AFC26324D6A24B00B94D58 /* Metal_MacOS */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		545A0F7324E2A961001A7DDD /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 545A0F7224E2A961001A7DDD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		545A0F7524E2A961001A7DDD /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 545A0F7424E2A961001A7DDD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		545A0F7724E2A961001A7DDD /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 545A0F7624E2A961001A7DDD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		545A0F7924E2A961001A7DDD /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 545A0F7824E2A961001A7DDD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		545A0F7B24E2A961001A7DDD /* UnitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.xctest;
-			remoteRef = 545A0F7A24E2A961001A7DDD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		54AFC26224D6A24B00B94D58 /* Resources */ = {
@@ -276,6 +177,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		209A83CBA0DC6516D8B6F37C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Metal_MacOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C105F906B166D3228932CA0C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		54AFC26024D6A24B00B94D58 /* Sources */ = {
@@ -419,6 +362,7 @@
 		};
 		54AFC27824D6A24B00B94D58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 718E7100943A7187E50F6C48 /* Pods-Metal_MacOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Metal_MacOS/Metal_MacOS.entitlements;
@@ -442,6 +386,7 @@
 		};
 		54AFC27924D6A24B00B94D58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B35DB0EAC6D4AC24904F5CC6 /* Pods-Metal_MacOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Metal_MacOS/Metal_MacOS.entitlements;
