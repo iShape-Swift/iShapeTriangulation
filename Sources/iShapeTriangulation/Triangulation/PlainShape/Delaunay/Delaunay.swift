@@ -6,6 +6,10 @@
 //  Copyright © 2019 Nail Sharipov. All rights reserved.
 //
 
+#if DEBUG
+import Foundation
+#endif
+
 import iGeometry
 
 public struct Delaunay {
