@@ -236,34 +236,70 @@ public struct Delaunay {
         let isPABccw = IntTriangle.isCCW(a: p, b: a, c: b)
         let isPCBccw = IntTriangle.isCCW(a: p, b: c, c: b)
         if isPABccw != isPCBccw {
-            return Delaunay.isDelaunay(p: p, a: a, b: b, c: c)
+            //return Delaunay.isDelaunay(p: p, a: a, b: b, c: c)
+            return Delaunay.isDelaunay(p0: p, p1: c, p2: a, p3: b)
         } else {
             return true
         }
     }
     
+    private static let epsilon = -Double(Int64.min >> 8)
+   
+    /*
     @inline(__always)
     private static func isDelaunay(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         
-        let bax = a.x &- b.x
-        let bay = a.y &- b.y
-        let bcx = c.x &- b.x
-        let bcy = c.y &- b.y
+        let bax = Float(a.x &- b.x)
+        let bay = Float(a.y &- b.y)
+        let bcx = Float(c.x &- b.x)
+        let bcy = Float(c.y &- b.y)
         
-        let pcx = c.x &- p.x
-        let pcy = c.y &- p.y
-        let pax = a.x &- p.x
-        let pay = a.y &- p.y
+        let pcx = Float(c.x &- p.x)
+        let pcy = Float(c.y &- p.y)
+        let pax = Float(a.x &- p.x)
+        let pay = Float(a.y &- p.y)
         
-        let cosAlfa = pax &* pcx &+ pay &* pcy
-        let cosBeta = bax &* bcx &+ bay &* bcy
+        let cosAlfa = pax * pcx + pay * pcy
+        let cosBeta = bax * bcx + bay * bcy
 
-        let sinAlfa = pay &* pcx &- pax &* pcy
-        let sinBeta = bax &* bcy &- bay &* bcx
+        let sinAlfa = pay * pcx - pax * pcy
+        let sinBeta = bax * bcy - bay * bcx
         
-        let result = Float(sinAlfa) * Float(cosBeta) + Float(cosAlfa) * Float(sinBeta)
+        let result = sinAlfa * cosBeta + cosAlfa * sinBeta
 
-        return result > -1000000000
+        
+        if result >= 0 {
+            return true
+        } else if result < epsilon {
+            return false
+        }
+        
+        // ~ 1% of all cases
+    }
+ */
+    
+    @inline(__always)
+    private static func isDelaunay(p0: IntPoint, p1: IntPoint, p2: IntPoint, p3: IntPoint) -> Bool {
+        let cosA = (p0.x - p1.x) * (p0.x - p3.x) + (p0.y - p1.y) * (p0.y - p3.y)
+        let cosB = (p2.x - p1.x) * (p2.x - p3.x) + (p2.y - p1.y) * (p2.y - p3.y)
+        
+        if cosA < 0 && cosB < 0 {
+            return false
+        }
+        
+        if cosA >= 0 && cosB >= 0 {
+            return true
+        }
+        
+        let sinA = (p0.x - p1.x) * (p0.y - p3.y) - (p0.x - p3.x) * (p0.y - p1.y)
+        let sinB = (p2.x - p1.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p2.y - p1.y)
+        
+        let result = Double(sinA) * Double(cosB) + Double(cosA) * Double(sinB)
+        
+        return result >= epsilon
+        
+        
+        // ~ 1% of all cases
     }
     
 #if DEBUG

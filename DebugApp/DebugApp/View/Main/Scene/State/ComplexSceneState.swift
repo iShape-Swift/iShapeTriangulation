@@ -23,7 +23,8 @@ final class ComplexSceneState: ObservableObject, Scene {
     init(key: String, data: [[[Point]]]) {
         self.key = key
         self.data = data
-        self.pageIndex = UserDefaults.standard.integer(forKey: key)
+//        self.pageIndex = UserDefaults.standard.integer(forKey: key)
+        self.pageIndex = 0
         self.paths = self.data[self.pageIndex]
     }
     

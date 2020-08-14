@@ -11,7 +11,7 @@ import SwiftUI
 final class SceneState: ObservableObject {
     
     private static let defaultZoom: CGFloat = 0.1
-    private let maxZoom: CGFloat = 1
+    private let maxZoom: CGFloat = 4
     private let minZoom: CGFloat = 0.01
     private let limitZoom: CGFloat = 1.1
 

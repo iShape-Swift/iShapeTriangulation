@@ -14,50 +14,42 @@ extension Delaunay {
         let index: Index
         
         // a(0), b(1), c(2)
-        var vertices = Array<Vertex>(repeating: .empty, count: 3)
+        var vertices: [Vertex]
         
         // BC - a(0), AC - b(1), AB - c(2)
-        var neighbors = Array<Index>(repeating: -1, count: 3)
+        var neighbors: [Index]
 
         init() {
-            self.index = -1
+            self.index = null
+            self.vertices = [.empty, .empty, .empty]
+            self.neighbors = [null, null, null]
         }
         
         init(index: Index, a: Vertex, b: Vertex, c: Vertex) {
             self.index = index
-            self.vertices[0] = a
-            self.vertices[1] = b
-            self.vertices[2] = c
+            self.vertices = [a, b, c]
+            self.neighbors = [null, null, null]
             assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
         }
         
         init(index: Index, a: Vertex, b: Vertex, c: Vertex, bc: Index) {
             self.index = index
-            self.vertices[0] = a
-            self.vertices[1] = b
-            self.vertices[2] = c
-            self.neighbors[0] = bc
+            self.vertices = [.empty, .empty, .empty]
+            self.neighbors = [bc, null, null]
             assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
         }
         
         init(index: Index, a: Vertex, b: Vertex, c: Vertex, ac: Index, ab: Index) {
             self.index = index
-            self.vertices[0] = a
-            self.vertices[1] = b
-            self.vertices[2] = c
-            self.neighbors[1] = ac
-            self.neighbors[2] = ab
+            self.vertices = [a, b, c]
+            self.neighbors = [null, ac, ab]
             assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
         }
         
         init(index: Index, a: Vertex, b: Vertex, c: Vertex, bc: Index, ac: Index, ab: Index) {
             self.index = index
-            self.vertices[0] = a
-            self.vertices[1] = b
-            self.vertices[2] = c
-            self.neighbors[0] = bc
-            self.neighbors[1] = ac
-            self.neighbors[2] = ab
+            self.vertices = [a, b, c]
+            self.neighbors = [bc, ac, ab]
             assert(IntTriangle.isCCW_or_Line(a: a.point, b: b.point, c: c.point), "Triangle's points are not clock-wise ordered")
         }
         
