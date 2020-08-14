@@ -8,11 +8,32 @@
 
 import SwiftUI
 import iGeometry
-import iShapeTriangulation
+@testable import iShapeTriangulation
 
 struct DelaunayConditionSceneView: View {
 
-    @ObservedObject var state = BasicSceneState(key: String(describing: PlainMonotoneSceneView.self), data: MonotoneTests.data)
+    private struct Vertex {
+        let point: CGPoint
+        let name: String
+    }
+    
+    @ObservedObject var state = BasicSceneState(
+        key: String(describing: DelaunayConditionSceneView.self),
+        data: [
+            [
+                Point(x:-15, y:  0), Point(x:-20, y: -5), Point(x:-25, y:  0), Point(x:-20, y: 10)
+            ],
+            [
+                Point(x: -5, y: 30), Point(x:-10, y: 20), Point(x: -5, y: 10), Point(x:  0, y: 20)
+            ],
+            [
+                Point(x:  5, y:  5), Point(x:  5, y:-10), Point(x: 10, y:-20), Point(x: 10, y: -5)
+            ],
+            [
+                Point(x: -5, y:-20), Point(x:-15, y:-25), Point(x:-20, y:-10), Point(x: -5, y: -15)
+            ]
+        ]
+    )
     @EnvironmentObject var colorSchema: ColorSchema
     @State var isVisible: Bool = true
     
@@ -30,34 +51,48 @@ struct DelaunayConditionSceneView: View {
     
     var body: some View {
         let points = state.points
-        let shape = PlainShape(points: iGeom.int(points: points))
+        let c = points[0]
+        let a = points[1]
+        let b = points[2]
+        let p = points[3]
         
-        let indices = shape.triangulate()
-        var triangles = [Triangle]()
-        triangles.reserveCapacity(indices.count / 3)
-        var i = 0
-        while i < indices.count {
-            let a = CGPoint(points[indices[i]])
-            let b = CGPoint(points[indices[i + 1]])
-            let c = CGPoint(points[indices[i + 2]])
-            triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-            i += 3
-        }
         
-        let stroke = colorSchema.schema.defaultTriangleStroke
+        let circle = iGeometry.Triangle.circumscribedСircle(a: a, b: b, c: c)
+        
+        let ai = iGeom.int(point: a)
+        let bi = iGeom.int(point: b)
+        let ci = iGeom.int(point: c)
+        let pi = iGeom.int(point: p)
+        
+        let success = Delaunay.isDelaunay(p0: pi, p1: ci, p2: ai, p3: bi)
+        let color: Color = success ? .green : .red
+        
+        let vertices = [
+            Vertex(point: CGPoint(a), name: "a"),
+            Vertex(point: CGPoint(b), name: "b"),
+            Vertex(point: CGPoint(c), name: "c"),
+            Vertex(point: CGPoint(p), name: "p")
+        ]
 
+        let diameter = CGFloat(2 * circle.radius)
+        
         return ZStack {
-            ForEach(triangles, id: \.index) { triangle in
-                PolygonShapeView(
-                    sceneState: self.sceneState,
-                    points: triangle.points,
-                    index: triangle.index,
-                    stroke: stroke,
-                    lineWidth: 1.2
-                )
+            Circle()
+                .stroke(Color(white: 0.8), lineWidth: 4)
+                .frame(
+                    width: self.sceneState.screen(world: diameter),
+                    height: self.sceneState.screen(world: diameter),
+                    alignment: .center
+            )
+                .position(self.sceneState.screen(world: CGPoint(circle.center)))
+            Path { path in
+                let screenPoints = sceneState.screen(world: points.map({ CGPoint($0) }))
+                path.addLines(screenPoints)
+                path.closeSubpath()
+            }.strokedPath(.init(lineWidth: 4, lineJoin: .round)).foregroundColor(color)
+            ForEach(vertices, id: \.name) { vertex in
+                Text(vertex.name).position(self.sceneState.screen(world: vertex.point)).foregroundColor(.black)
             }
-            PlainShapeView(sceneState: sceneState, shape: shape, stroke: colorSchema.schema.defaultPolygonStroke, iGeom: iGeom)
         }
     }
- 
 }

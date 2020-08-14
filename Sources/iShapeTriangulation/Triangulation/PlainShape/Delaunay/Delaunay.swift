@@ -140,8 +140,9 @@ public struct Delaunay {
         let b = abc.vertices[bi]  // edge bc
         let c = abc.vertices[ci]
         
-        let isPrefect = Delaunay.isPrefect(p: p.point, a: c.point, b: a.point, c: b.point)
         
+        let isPrefect = Delaunay.isDelaunay(p0: p.point, p1: c.point, p2: a.point, p3: b.point)
+
         if isPrefect {
             return false
         } else {
@@ -232,56 +233,23 @@ public struct Delaunay {
     }
     
     @inline(__always)
-    private static func isPrefect(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        let isPABccw = IntTriangle.isCCW(a: p, b: a, c: b)
-        let isPCBccw = IntTriangle.isCCW(a: p, b: c, c: b)
-        if isPABccw != isPCBccw {
-            //return Delaunay.isDelaunay(p: p, a: a, b: b, c: c)
-            return Delaunay.isDelaunay(p0: p, p1: c, p2: a, p3: b)
-        } else {
-            return true
-        }
-    }
-    
-    private static let epsilon = -Double(Int64.min >> 8)
-   
-    /*
-    @inline(__always)
-    private static func isDelaunay(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
+    static func isDelaunay(p0: IntPoint, p1: IntPoint, p2: IntPoint, p3: IntPoint) -> Bool {
+//        #if DEBUG
+//        self.debugDelaunay(p0: p0, p1: p1, p2: p2, p3: p3)
+//        #endif
         
-        let bax = Float(a.x &- b.x)
-        let bay = Float(a.y &- b.y)
-        let bcx = Float(c.x &- b.x)
-        let bcy = Float(c.y &- b.y)
+        let x01 = p0.x - p1.x
+        let x03 = p0.x - p3.x
+        let x12 = p1.x - p2.x
+        let x32 = p3.x - p2.x
         
-        let pcx = Float(c.x &- p.x)
-        let pcy = Float(c.y &- p.y)
-        let pax = Float(a.x &- p.x)
-        let pay = Float(a.y &- p.y)
+        let y01 = p0.y - p1.y
+        let y03 = p0.y - p3.y
+        let y12 = p1.y - p2.y
+        let y23 = p2.y - p3.y
         
-        let cosAlfa = pax * pcx + pay * pcy
-        let cosBeta = bax * bcx + bay * bcy
-
-        let sinAlfa = pay * pcx - pax * pcy
-        let sinBeta = bax * bcy - bay * bcx
-        
-        let result = sinAlfa * cosBeta + cosAlfa * sinBeta
-
-        
-        if result >= 0 {
-            return true
-        } else if result < epsilon {
-            return false
-        }
-        
-        // ~ 1% of all cases
-    }
- */
-    
-    @inline(__always)
-    private static func isDelaunay(p0: IntPoint, p1: IntPoint, p2: IntPoint, p3: IntPoint) -> Bool {
-        let cosA = (p0.x - p1.x) * (p0.x - p3.x) + (p0.y - p1.y) * (p0.y - p3.y)
-        let cosB = (p2.x - p1.x) * (p2.x - p3.x) + (p2.y - p1.y) * (p2.y - p3.y)
+        let cosA = x01 * x03 + y01 * y03
+        let cosB = x12 * x32 - y12 * y23
         
         if cosA < 0 && cosB < 0 {
             return false
@@ -291,20 +259,81 @@ public struct Delaunay {
             return true
         }
         
-        let sinA = (p0.x - p1.x) * (p0.y - p3.y) - (p0.x - p3.x) * (p0.y - p1.y)
-        let sinB = (p2.x - p1.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p2.y - p1.y)
+        // we can not just compare
+        // sinA * cosB + cosA * sinB ? 0
+        // cause we need weak Delaunay condition
         
-        let result = Double(sinA) * Double(cosB) + Double(cosA) * Double(sinB)
+        let sinA = x01 * y03 - x03 * y01
+        let sinB = x12 * y23 + x32 * y12
+
+        let sl01 = x01 * x01 + y01 * y01
+        let sl03 = x03 * x03 + y03 * y03
+        let sl12 = x12 * x12 + y12 * y12
+        let sl23 = x32 * x32 + y23 * y23
         
-        return result >= epsilon
+        let max0 = Double(sl01 > sl03 ? sl01 : sl03)
+        let max1 = Double(sl12 > sl23 ? sl12 : sl23)
         
-        
-        // ~ 1% of all cases
+        let sinAB = (Double(sinA) * Double(cosB) + Double(cosA) * Double(sinB)) / (max0 * max1)
+
+        return sinAB < 0.001
     }
     
-#if DEBUG
-    static func verefy(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
-        return Delaunay.isPrefect(p: p, a: a, b: b, c: c)
-    }
-#endif
+    #if DEBUG
+        // P, C, A, B
+        private static func debugDelaunay(p0: IntPoint, p1: IntPoint, p2: IntPoint, p3: IntPoint) {
+            let p = IntGeom.defGeom.float(point: p0)
+            let c = IntGeom.defGeom.float(point: p1)
+            let a = IntGeom.defGeom.float(point: p2)
+            let b = IntGeom.defGeom.float(point: p3)
+            
+            let A = (b - c).length
+            let B = (c - a).length
+            let C = (a - b).length
+            
+            let CP = (p - c).length
+            let BP = (p - b).length
+
+            // CPB
+            let cos_alpha = (BP * BP + CP * CP - A * A) / (2 * BP * CP)
+            
+            // CAB
+            let cos_beta = (B * B + C * C - A * A) / (2 * B * C)
+            
+            let toAngle = 180 / Float.pi
+            let alpha = acos(cos_alpha)*toAngle
+            let beta = acos(cos_beta)*toAngle
+            let al = String(format: "%.2f", alpha)
+            let be = String(format: "%.2f", beta)
+            let su = String(format: "%.2f", beta + alpha)
+            
+            print("alpha: \(al), beta: \(be), sum: \(su)")
+        }
+
+    #endif
 }
+#if DEBUG
+
+private extension Point {
+    
+    var length: Float {
+        return (x * x + y * y).squareRoot()
+    }
+}
+
+private func +(left: Point, right: Point) -> Point {
+    return Point(x: left.x + right.x, y: left.y + right.y)
+}
+
+private func -(left: Point, right: Point) -> Point {
+    return Point(x: left.x - right.x, y: left.y - right.y)
+}
+
+private func *(left: Float, right: Point) -> Point {
+    return Point(x: left * right.x, y: left * right.y)
+}
+
+private func /(left: Point, right: Float) -> Point {
+    return Point(x: left.x / right, y: left.y / right)
+}
+#endif

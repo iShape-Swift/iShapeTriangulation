@@ -102,6 +102,10 @@ final class SceneState: ObservableObject {
         self.viewPointOrigin = .zero
     }
 
+    func screen(world: CGFloat) -> CGFloat {
+        return world / zoom
+    }
+    
     func screen(world: CGPoint) -> CGPoint {
         let scale = 0.5 * zoom
         let left = viewPoint.x - scale * sceneSize.width

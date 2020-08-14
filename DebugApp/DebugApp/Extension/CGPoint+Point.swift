@@ -22,7 +22,7 @@ extension CGPoint {
     }
     
     var length: CGFloat {
-        return sqrt(x * x + y * y)
+        return (x * x + y * y).squareRoot()
     }
     
     var magnitude: CGFloat {
