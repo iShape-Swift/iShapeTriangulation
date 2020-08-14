@@ -55,56 +55,71 @@ extension Delaunay {
         
         @inline(__always)
         func vertex(neighbor: Index) -> Vertex {
-            for i in 0...2 {
-                if self.neighbors[i] == neighbor {
-                    return self.vertices[i]
+            var vertex = Vertex.empty
+            self.neighbors.withUnsafeBufferPointer { buffer in
+                for i in 0...2 {
+                    if buffer[i] == neighbor {
+                        vertex = self.vertices[i]
+                        return
+                    }
                 }
+                assertionFailure("Neighbor is not present")
             }
-            assertionFailure("Neighbor is not present")
-            return Vertex.empty
+            
+            return vertex
         }
         
         @inline(__always)
         func opposite(neighbor: Index) -> Index {
-            for i in 0...2 {
-                if self.neighbors[i] == neighbor {
-                    return i
+            var index = null
+            self.neighbors.withUnsafeBufferPointer { buffer in
+                for i in 0...2 {
+                    if buffer[i] == neighbor {
+                        index = i
+                        return
+                    }
                 }
+                assertionFailure("Neighbor is not present")
             }
-            assertionFailure("Neighbor is not present")
-            return -1
+            
+            return index
         }
         
         @inline(__always)
         func index(index: Index) -> Index {
-            for i in 0...2 {
-                if self.vertices[i].index == index {
-                    return i
+            var j = null
+            self.vertices.withUnsafeBufferPointer { buffer in
+                for i in 0...2 {
+                    if buffer[i].index == index {
+                        j = i
+                        return
+                    }
                 }
             }
-            return -1
+
+            return j
         }
         
         @inline(__always)
         mutating func updateOpposite(oldNeighbor: Index, newNeighbor: Index) {
-            for i in 0...2 {
-                if self.neighbors[i] == oldNeighbor {
-                    self.neighbors[i] = newNeighbor
-                    return
-                }
-            }
-            assertionFailure("Neighbor is not present")
+            let index = self.opposite(neighbor: oldNeighbor)
+            self.neighbors[index] = newNeighbor
         }
         
         @inline(__always)
         func neighbor(vertex: Index) -> Index {
-            for i in 0...2 {
-                if self.vertices[i].index == vertex {
-                    return self.neighbors[i]
+            var index = null
+            self.vertices.withUnsafeBufferPointer { buffer in
+                for i in 0...2 {
+                    if buffer[i].index == vertex {
+                        index = self.neighbors[i]
+                        return
+                    }
                 }
+                assertionFailure("Point is not present")
             }
-            assertionFailure("Point is not present")
-            return -1
+
+            return index
         }
     }
     

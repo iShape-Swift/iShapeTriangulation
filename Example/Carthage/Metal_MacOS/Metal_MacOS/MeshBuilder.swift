@@ -58,7 +58,7 @@ final class MeshBuilder {
         }
         
         let shape = PlainShape(iGeom: IntGeom.defGeom, hull: hull, holes: [hole])
-        let indices = shape.triangulate().map( { uint16($0) })
+        let indices = shape.delaunay().trianglesIndices.map( { uint16($0) })
         let points = IntGeom.defGeom.float(points: shape.points)
         
         let vertexSize = points.count * MemoryLayout.size(ofValue: points[0])

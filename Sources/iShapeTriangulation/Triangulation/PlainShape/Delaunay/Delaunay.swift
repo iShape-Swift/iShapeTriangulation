@@ -168,45 +168,41 @@ public struct Delaunay {
                     index: abc.index,
                     a: a,
                     b: b,
-                    c: p
+                    c: p,
+                    bc: bp,                     // a - bp
+                    ac: pbc.index,              // p - ap
+                    ab: ab                      // b - ab
                 )
-                
-                abp.neighbors[0] = bp           // a - bp
-                abp.neighbors[1] = pbc.index    // b - ap
-                abp.neighbors[2] = ab           // p - ab
 
                 acp = Triangle(
                     index: pbc.index,
                     a: a,
                     b: p,
-                    c: c
+                    c: c,
+                    bc: cp,                     // a - cp
+                    ac: ac,                     // p - ac
+                    ab: abc.index               // b - ap
                 )
-
-                acp.neighbors[0] = cp           // a - cp
-                acp.neighbors[1] = ac           // p - ac
-                acp.neighbors[2] = abc.index    // c - ap
             } else {
                 abp = Triangle(
                     index: abc.index,
                     a: a,
                     b: p,
-                    c: b
+                    c: b,
+                    bc: bp,                     // a - bp
+                    ac: ab,                     // p - ab
+                    ab: pbc.index               // b - ap
                 )
-                
-                abp.neighbors[0] = bp           // a - bp
-                abp.neighbors[1] = ab           // p - ab
-                abp.neighbors[2] = pbc.index    // b - ap
 
                 acp = Triangle(
                     index: pbc.index,
                     a: a,
                     b: c,
-                    c: p
+                    c: p,
+                    bc: cp,                     // a - cp
+                    ac: abc.index,              // p - ap
+                    ab: ac                      // b - ac
                 )
-
-                acp.neighbors[0] = cp           // a - cp
-                acp.neighbors[1] = abc.index    // c - ap
-                acp.neighbors[2] = ac           // p - ac
             }
             
             // fix neighbor's link
