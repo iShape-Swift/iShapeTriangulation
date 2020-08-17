@@ -38,7 +38,7 @@ struct TessellationSceneView: View {
             let hull = paths.remove(at: 0)
             shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
         }
-        shape.modify(maxEgeSize: iGeom.int(float: 8))
+        shape.modify(maxEgeSize: iGeom.int(float: 4))
 
         var delaunay = shape.delaunay(extraPoints: extra)
         let newVertex = delaunay.tessellate(maxAngle: 0.5 * Float.pi, minEdge: iGeom.int(float: 6))
