@@ -38,10 +38,10 @@ struct TessellationSceneView: View {
             let hull = paths.remove(at: 0)
             shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
         }
-        shape.modify(maxEgeSize: iGeom.int(float: 4))
+//        shape.modify(maxEgeSize: iGeom.int(float: 4))
 
         var delaunay = shape.delaunay(extraPoints: extra)
-        let newVertex = delaunay.tessellate(maxAngle: 0.5 * Float.pi, minEdge: iGeom.int(float: 6))
+        let newVertex = delaunay.tessellate(maxAngle: 0.5 * Float.pi, minEdge: iGeom.int(float: 4))
         let indices = delaunay.trianglesIndices
 
         let points = iGeom.float(points: shape.points + extra + newVertex.map({ $0.point }))
@@ -66,7 +66,8 @@ struct TessellationSceneView: View {
                     points: triangle.points,
                     index: triangle.index,
                     stroke: stroke,
-                    lineWidth: 1.2
+                    lineWidth: 1.2,
+                    showIndex: false
                 )
             }
             ForEach(extraPoints, id: \.self) { point in

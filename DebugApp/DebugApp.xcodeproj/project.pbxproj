@@ -30,6 +30,7 @@
 		549B002224DF2F3400025754 /* PlainMonotoneSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549B002124DF2F3400025754 /* PlainMonotoneSceneView.swift */; };
 		549B002524DF379F00025754 /* PlainShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549B002424DF379F00025754 /* PlainShapeView.swift */; };
 		54AA95A124E69AD200F3155F /* DelaunayConditionSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA95A024E69AD200F3155F /* DelaunayConditionSceneView.swift */; };
+		54AD0BF224EAC05B007E82DD /* TessellationConditionSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AD0BF124EAC05B007E82DD /* TessellationConditionSceneView.swift */; };
 		54AFC4E524D723D700B94D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC4E424D723D700B94D58 /* AppDelegate.swift */; };
 		54AFC4E724D723D700B94D58 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC4E624D723D700B94D58 /* ContentView.swift */; };
 		54AFC4E924D723D700B94D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC4E824D723D700B94D58 /* Assets.xcassets */; };
@@ -118,6 +119,7 @@
 		549B002124DF2F3400025754 /* PlainMonotoneSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainMonotoneSceneView.swift; sourceTree = "<group>"; };
 		549B002424DF379F00025754 /* PlainShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainShapeView.swift; sourceTree = "<group>"; };
 		54AA95A024E69AD200F3155F /* DelaunayConditionSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelaunayConditionSceneView.swift; sourceTree = "<group>"; };
+		54AD0BF124EAC05B007E82DD /* TessellationConditionSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TessellationConditionSceneView.swift; sourceTree = "<group>"; };
 		54AFC4E124D723D700B94D58 /* DebugApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DebugApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54AFC4E424D723D700B94D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54AFC4E624D723D700B94D58 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				545A0F5F24E28492001A7DDD /* CentroidSceneView.swift */,
 				545A0F6124E2872F001A7DDD /* TessellationSceneView.swift */,
 				54AA95A024E69AD200F3155F /* DelaunayConditionSceneView.swift */,
+				54AD0BF124EAC05B007E82DD /* TessellationConditionSceneView.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				549B002224DF2F3400025754 /* PlainMonotoneSceneView.swift in Sources */,
 				54E6A26324DFCDB800A78708 /* Scene.swift in Sources */,
 				54E2047D24E00367003F1D77 /* ColorSchema.swift in Sources */,
+				54AD0BF224EAC05B007E82DD /* TessellationConditionSceneView.swift in Sources */,
 				545A0F5124E27099001A7DDD /* ComplexSceneState.swift in Sources */,
 				545A0F5624E2730D001A7DDD /* DelaunayMonotoneSceneView.swift in Sources */,
 			);

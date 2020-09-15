@@ -20,6 +20,7 @@ final class ContentState: ObservableObject {
         case centroidNet
         case tessellation
         case delaunayCondition
+        case tessellationCondition
     }
     
     @Published var current: Test = .plainMonotone

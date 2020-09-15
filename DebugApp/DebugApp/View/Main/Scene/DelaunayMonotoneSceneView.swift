@@ -14,7 +14,6 @@ struct DelaunayMonotoneSceneView: View {
 
     @ObservedObject var state = BasicSceneState(key: String(describing: DelaunayMonotoneSceneView.self), data: MonotoneTests.data)
     @EnvironmentObject var colorSchema: ColorSchema
-    @State var isVisible: Bool = true
     
     private let sceneState: SceneState
     private let iGeom = IntGeom.defGeom

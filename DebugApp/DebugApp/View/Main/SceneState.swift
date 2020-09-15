@@ -62,7 +62,7 @@ final class SceneState: ObservableObject {
     
     func move(start: CGPoint, current: CGPoint) {
         if !self.isDrag {
-            let radius = 5 * zoom
+            let radius = 8 * zoom
             let worldStart = self.world(screen: start)
             self.isPointDrag = self.scene?.onStart(start: worldStart, radius: radius) ?? false
             self.isDrag = true

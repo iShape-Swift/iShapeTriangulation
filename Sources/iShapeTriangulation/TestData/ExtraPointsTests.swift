@@ -17,12 +17,25 @@ public struct ExtraPointsTests {
             [
                 Point(x: -15, y: -15),
                 Point(x: -25, y: 0),
+                Point(x: -8.5, y: 15),
+                Point(x: 15, y: 15),
+                Point(x: 15, y: -15)
+            ],
+            [
+                Point(x: -9, y: 7)
+            ]
+        ],
+        // test 0
+        [
+            [
+                Point(x: -15, y: -15),
+                Point(x: -25, y: 0),
                 Point(x: -15, y: 15),
                 Point(x: 15, y: 15),
                 Point(x: 15, y: -15)
             ],
             [
-                Point(x: 0, y: 0)
+                Point(x: 14, y: -14)
             ]
         ],
         // test 1

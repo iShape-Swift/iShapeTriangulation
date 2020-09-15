@@ -35,7 +35,6 @@ struct DelaunayConditionSceneView: View {
         ]
     )
     @EnvironmentObject var colorSchema: ColorSchema
-    @State var isVisible: Bool = true
     
     private let sceneState: SceneState
     private let iGeom = IntGeom.defGeom

@@ -55,6 +55,7 @@ struct MainView: View {
         let centroidNetScene = CentroidNetSceneView(sceneState: self.sceneState)
         let tessellationScene = TessellationSceneView(sceneState: self.sceneState)
         let delaunayConditionScene = DelaunayConditionSceneView(sceneState: self.sceneState)
+        let tessellationConditionScene = TessellationConditionSceneView(sceneState: self.sceneState)
         
         let scene: Scene
         
@@ -77,6 +78,8 @@ struct MainView: View {
                 scene = tessellationScene.state
             case .delaunayCondition:
                 scene = delaunayConditionScene.state
+            case .tessellationCondition:
+                scene = tessellationConditionScene.state
         }
 
         self.inputSystem.subscribe(scene)
@@ -93,6 +96,7 @@ struct MainView: View {
             centroidNetScene.isHidden(self.contentState.current != .centroidNet)
             tessellationScene.isHidden(self.contentState.current != .tessellation)
             delaunayConditionScene.isHidden(self.contentState.current != .delaunayCondition)
+            tessellationConditionScene.isHidden(self.contentState.current != .tessellationCondition)
         }
     }
     

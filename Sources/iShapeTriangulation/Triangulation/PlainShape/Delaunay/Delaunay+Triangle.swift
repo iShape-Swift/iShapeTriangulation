@@ -86,6 +86,18 @@ extension Delaunay {
         }
         
         @inline(__always)
+        func adjacentNeighbor(vertex: Index, neighbor: Index) -> Index {
+            for i in 0...2 {
+                let ni = neighbors[i]
+                if self.vertices[i].index != vertex && ni != neighbor {
+                    return ni
+                }
+            }
+            assertionFailure("Neighbor is not present")
+            return null
+        }
+        
+        @inline(__always)
         func index(index: Index) -> Index {
             var j = null
             self.vertices.withUnsafeBufferPointer { buffer in
@@ -104,6 +116,16 @@ extension Delaunay {
         mutating func updateOpposite(oldNeighbor: Index, newNeighbor: Index) {
             let index = self.opposite(neighbor: oldNeighbor)
             self.neighbors[index] = newNeighbor
+        }
+        
+        @inline(__always)
+        mutating func update(vertex: Vertex) {
+            for i in 0...2 {
+                if self.vertices[i].index == vertex.index {
+                    self.vertices[i] = vertex
+                    return
+                }
+            }
         }
         
         @inline(__always)

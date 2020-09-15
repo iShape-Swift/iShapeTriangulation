@@ -15,14 +15,16 @@ struct PolygonShapeView: View {
     private let stroke: Color
     private let lineWidth: CGFloat
     private let index: Int
+    private let showIndex: Bool
     @ObservedObject private var sceneState: SceneState
 
-    init(sceneState: SceneState, points: [CGPoint], index: Int, stroke: Color = .gray, lineWidth: CGFloat = 1) {
+    init(sceneState: SceneState, points: [CGPoint], index: Int, stroke: Color = .gray, lineWidth: CGFloat = 1, showIndex: Bool = true) {
         self.stroke = stroke
         self.lineWidth = lineWidth
         self.sceneState = sceneState
         self.index = index
         self.points = points
+        self.showIndex = showIndex
     }
 
     var body: some View {
@@ -32,7 +34,7 @@ struct PolygonShapeView: View {
                 path.addLines(screenPoints)
                 path.closeSubpath()
             }.strokedPath(.init(lineWidth: self.lineWidth)).foregroundColor(self.stroke)
-            Text("\(index)").foregroundColor(self.stroke).position(screenPoints.center)
+            Text("\(index)").foregroundColor(self.stroke).position(screenPoints.center).isHidden(!showIndex)
         }
     }
 }
