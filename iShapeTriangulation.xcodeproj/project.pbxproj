@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541254252522387400DF6569 /* PlainShape+Tesselation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541254242522387400DF6569 /* PlainShape+Tesselation.swift */; };
+		541254262522387400DF6569 /* PlainShape+Tesselation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541254242522387400DF6569 /* PlainShape+Tesselation.swift */; };
+		541254272522387400DF6569 /* PlainShape+Tesselation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541254242522387400DF6569 /* PlainShape+Tesselation.swift */; };
+		541254282522387400DF6569 /* PlainShape+Tesselation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541254242522387400DF6569 /* PlainShape+Tesselation.swift */; };
+		5412543125223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412543025223C8700DF6569 /* PlainShape+CentroidNet.swift */; };
+		5412543225223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412543025223C8700DF6569 /* PlainShape+CentroidNet.swift */; };
+		5412543325223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412543025223C8700DF6569 /* PlainShape+CentroidNet.swift */; };
+		5412543425223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412543025223C8700DF6569 /* PlainShape+CentroidNet.swift */; };
 		5471273C24E400980030201D /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273524E400850030201D /* iGeometry.framework */; };
 		5471273D24E400980030201D /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273524E400850030201D /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5471273E24E4009E0030201D /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273724E400850030201D /* iGeometry.framework */; };
@@ -205,6 +213,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		541254242522387400DF6569 /* PlainShape+Tesselation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlainShape+Tesselation.swift"; sourceTree = "<group>"; };
+		5412543025223C8700DF6569 /* PlainShape+CentroidNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlainShape+CentroidNet.swift"; sourceTree = "<group>"; };
 		5471272D24E400850030201D /* iGeometry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iGeometry.xcodeproj; path = Carthage/Checkouts/iGeometry/iGeometry.xcodeproj; sourceTree = "<group>"; };
 		548458852510834A00EAF4FF /* IndexBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexBuffer.swift; sourceTree = "<group>"; };
 		54AFC38824D716B300B94D58 /* iShapeTriangulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iShapeTriangulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -387,6 +397,8 @@
 			children = (
 				54AFC42824D7175300B94D58 /* PlainShape+Test.swift */,
 				54AFC42924D7175300B94D58 /* PlainShape+Triangulation.swift */,
+				541254242522387400DF6569 /* PlainShape+Tesselation.swift */,
+				5412543025223C8700DF6569 /* PlainShape+CentroidNet.swift */,
 				54AFC42A24D7175300B94D58 /* PlainShape+ShapeNavigator.swift */,
 				54AFC42B24D7175300B94D58 /* PlainShape+Modification.swift */,
 				54AFC42C24D7175300B94D58 /* PlainShape+Layout.swift */,
@@ -730,6 +742,7 @@
 				54AFC46D24D7175300B94D58 /* Delaunay+Centroid.swift in Sources */,
 				548458862510834A00EAF4FF /* IndexBuffer.swift in Sources */,
 				54AFC47924D7175300B94D58 /* PlainShape+Delaunay.swift in Sources */,
+				5412543125223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */,
 				54AFC44924D7175300B94D58 /* IntTriangle.swift in Sources */,
 				54AFC47524D7175300B94D58 /* Delaunay+Tesselation.swift in Sources */,
 				54AFC44524D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
@@ -738,6 +751,7 @@
 				54AFC46524D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC44D24D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC45D24D7175300B94D58 /* PlainShape+Modification.swift in Sources */,
+				541254252522387400DF6569 /* PlainShape+Tesselation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +771,7 @@
 				54AFC46E24D7175300B94D58 /* Delaunay+Centroid.swift in Sources */,
 				54E1658525108DC400EFB41E /* IndexBuffer.swift in Sources */,
 				54AFC47A24D7175300B94D58 /* PlainShape+Delaunay.swift in Sources */,
+				5412543225223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */,
 				54AFC44A24D7175300B94D58 /* IntTriangle.swift in Sources */,
 				54AFC47624D7175300B94D58 /* Delaunay+Tesselation.swift in Sources */,
 				54AFC44624D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
@@ -765,6 +780,7 @@
 				54AFC46624D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC44E24D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC45E24D7175300B94D58 /* PlainShape+Modification.swift in Sources */,
+				541254262522387400DF6569 /* PlainShape+Tesselation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +800,7 @@
 				54AFC46F24D7175300B94D58 /* Delaunay+Centroid.swift in Sources */,
 				54E1658625108DC500EFB41E /* IndexBuffer.swift in Sources */,
 				54AFC47B24D7175300B94D58 /* PlainShape+Delaunay.swift in Sources */,
+				5412543325223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */,
 				54AFC44B24D7175300B94D58 /* IntTriangle.swift in Sources */,
 				54AFC47724D7175300B94D58 /* Delaunay+Tesselation.swift in Sources */,
 				54AFC44724D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
@@ -792,6 +809,7 @@
 				54AFC46724D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC44F24D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC45F24D7175300B94D58 /* PlainShape+Modification.swift in Sources */,
+				541254272522387400DF6569 /* PlainShape+Tesselation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,6 +829,7 @@
 				54AFC47024D7175300B94D58 /* Delaunay+Centroid.swift in Sources */,
 				54E1657F25108DC300EFB41E /* IndexBuffer.swift in Sources */,
 				54AFC47C24D7175300B94D58 /* PlainShape+Delaunay.swift in Sources */,
+				5412543425223C8700DF6569 /* PlainShape+CentroidNet.swift in Sources */,
 				54AFC44C24D7175300B94D58 /* IntTriangle.swift in Sources */,
 				54AFC47824D7175300B94D58 /* Delaunay+Tesselation.swift in Sources */,
 				54AFC44824D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
@@ -819,6 +838,7 @@
 				54AFC46824D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC45024D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC46024D7175300B94D58 /* PlainShape+Modification.swift in Sources */,
+				541254282522387400DF6569 /* PlainShape+Tesselation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,7 +28,7 @@ struct CentroidNetSceneView: View {
     }
     
     var body: some View {
-        let shape: PlainShape
+        var shape: PlainShape
         var paths = state.paths
         let extra = iGeom.int(points: paths.removeLast())
         if self.state.paths.count == 1 {
@@ -37,8 +37,12 @@ struct CentroidNetSceneView: View {
             let hull = paths.remove(at: 0)
             shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
         }
+        
+        let minEdge = iGeom.int(float: 2)
+        let maxEdge = iGeom.int(float: 3)
+        
+        let centroidNet = shape.makeCentroidNet(extraPoints: extra, onlyConvex: false, minEdge: minEdge, maxEdge: maxEdge)
 
-        let centroidNet = shape.delaunay(extraPoints: extra).getCentroidNet()
         
         var centroids = [Centroid]()
         centroids.reserveCapacity(centroidNet.count)

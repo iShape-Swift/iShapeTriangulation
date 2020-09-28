@@ -38,13 +38,15 @@ struct TessellationSceneView: View {
             let hull = paths.remove(at: 0)
             shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
         }
-//        shape.modify(maxEgeSize: iGeom.int(float: 4))
+        
+        let minEdge = iGeom.int(float: 4)
+        let maxEdge = iGeom.int(float: 6)
+        
+        let tessellation = shape.tessellate(extraPoints: extra, minEdge: minEdge, maxEdge: maxEdge, maxAngle: 0.51 * .pi, mergeAngle: 0.55 * .pi)
 
-        var delaunay = shape.delaunay(extraPoints: extra)
-        let newVertex = delaunay.tessellate(maxAngle: 0.5 * Float.pi, minEdge: iGeom.int(float: 4))
-        let indices = delaunay.trianglesIndices
+        let indices = tessellation.indices
 
-        let points = iGeom.float(points: shape.points + extra + newVertex.map({ $0.point }))
+        let points = iGeom.float(points: shape.points + extra + tessellation.extraPoints)
         
         var triangles = [Triangle]()
         triangles.reserveCapacity(indices.count / 3)

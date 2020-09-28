@@ -51,4 +51,25 @@ struct IndexBuffer {
             self.add(index: index)
         }
     }
+    
+    @inline(__always)
+    mutating func decrease() {
+        self.map.removeLast()
+        let count = self.map.count
+        if let index = array.firstIndex(where: { $0 >= count }) {
+            array.remove(at: index)
+        }
+    }
+    
+    @inline(__always)
+    mutating func reset() {
+        let lastIndex = self.map.count - 1
+        if self.array.count != self.map.count {
+            self.array = [Int](repeating: 0, count: self.map.count)
+        }
+        for i in 0...lastIndex {
+            self.map[i] = true
+            self.array[i] = lastIndex - i
+        }
+    }
 }

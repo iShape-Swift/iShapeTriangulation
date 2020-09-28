@@ -79,58 +79,6 @@ public struct Delaunay {
         }
     }
     
-    mutating func fix(indices: [Int]) -> Int {
-        let count = triangles.count
-
-        var minFixIndex = count
-        var origin = indices
-
-        var buffer = Array<Int>()
-        buffer.reserveCapacity(16)
-
-        while origin.count > 0 {
-            buffer.removeAll(keepingCapacity: true)
-            for i in origin {
-                var triangle = self.triangles[i]
-                for k in 0...2 {
-                    let neighborIndex = triangle.neighbors[k]
-                    if neighborIndex >= 0 {
-                        var neighbor = triangles[neighborIndex]
-                        if self.swap(abc: triangle, pbc: neighbor) {
-                            
-                            if minFixIndex > neighborIndex {
-                                minFixIndex = neighborIndex
-                            }
-                            if minFixIndex > i {
-                                minFixIndex = i
-                            }
-                            
-                            triangle = self.triangles[triangle.index]
-                            neighbor = self.triangles[neighbor.index]
-                            
-                            for j in 0...2 {
-                                let ni = triangle.neighbors[j]
-                                if ni >= 0 && ni != neighbor.index {
-                                    buffer.append(ni)
-                                }
-                            }
-
-                            for j in 0...2 {
-                                let ni = neighbor.neighbors[j]
-                                if ni >= 0 && ni != triangle.index {
-                                    buffer.append(ni)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            origin = buffer
-        }
-        
-        return minFixIndex
-    }
-    
     mutating func fix(indices: [Int], indexBuffer: inout IndexBuffer) {
         var origin = indices
 

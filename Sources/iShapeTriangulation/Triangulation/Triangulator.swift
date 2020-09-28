@@ -37,7 +37,7 @@ public struct Triangulator {
     /// - Parameter points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
     /// - Parameter hull: range of the hull vertices in points array
     /// - Parameter holes: array of ranges for all holes
-    /// - Parameter extraPoints: extra points for tessellation
+    /// - Parameter extraPoints: extra points for triangulation
     public func triangulate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
         if let ePoints = extraPoints {
@@ -87,26 +87,5 @@ public struct Triangulator {
         }
     }
 
-    public struct TessellationResult {
-        let indices: [Int]
-        let extraPoints: [Point]
-    }
-
-    /// Makes Delaunay triangulation for polygon
-    /// - Parameter points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
-    /// - Parameter hull: range of the hull vertices in points array
-    /// - Parameter holes: array of ranges for all holes
-    /// - Parameter maxAngle: max possible triangle angle, must be in range (1...0.5)*pi
-    /// - Parameter maxEdge: max possible triangle edge belong to the polygon edge
-    /// - Parameter minEdge: min possible triangle edge
-    public func tessellate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, maxAngle: Float, maxEdge: Float, minEdge: Float) -> TessellationResult {
-        var shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
-        shape.modify(maxEgeSize: iGeom.int(float: maxEdge))
-        var delaunay = shape.delaunay()
-        let vertices = delaunay.tessellate(maxAngle: maxAngle, minEdge: iGeom.int(float: minEdge))
-        let indices = delaunay.trianglesIndices
-        let extraPoints = vertices.map({ iGeom.float(point: $0.point) })
-        return TessellationResult(indices: indices, extraPoints: extraPoints)
-    }
 
 }

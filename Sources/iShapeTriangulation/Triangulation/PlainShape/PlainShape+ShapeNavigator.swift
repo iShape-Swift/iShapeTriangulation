@@ -91,7 +91,7 @@ extension PlainShape {
                 }
                 
                 iPoints[this] = b
-                links[this] = Link(prev: prev, this: this, next: next, vertex: Vertex(index: this, point: b))
+                links[this] = Link(prev: prev, this: this, next: next, vertex: Vertex(index: this, isExtra: false, point: b))
                 natures[this] = nature
                 
                 a = b
@@ -114,7 +114,7 @@ extension PlainShape {
                 let p = extraPoints[i]
                 let j = i + m
                 iPoints[j] = p
-                links[j] = Link(prev: j, this: j, next: j, vertex: Vertex(index: j, point: p))
+                links[j] = Link(prev: j, this: j, next: j, vertex: Vertex(index: j, isExtra: true, point: p))
                 natures[j] = .extra
             }
         }
@@ -149,10 +149,10 @@ extension PlainShape {
             var a = dataList[i]
             indices[i] = a.index
             if a.factor == b.factor {
-                let index = links[b.index].vertex.index
+                let v = links[b.index].vertex
                 repeat {
                     let link = links[a.index]
-                    links[a.index] = Link(prev: link.prev, this: link.this, next: link.next, vertex: Vertex(index: index, point: link.vertex.point))
+                    links[a.index] = Link(prev: link.prev, this: link.this, next: link.next, vertex: Vertex(index: v.index, isExtra: v.isExtra, point: link.vertex.point))
                     i += 1
                     if i < n {
                         a = dataList[i]

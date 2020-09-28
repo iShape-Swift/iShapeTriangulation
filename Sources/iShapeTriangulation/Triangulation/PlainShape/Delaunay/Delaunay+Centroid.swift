@@ -27,7 +27,7 @@ extension Delaunay {
         return points
     }
 
-    public func getCentroidNet(onlyConvex: Bool = false) -> [[IntPoint]] {
+    func makeCentroidNet(onlyConvex: Bool = false) -> [[IntPoint]] {
         let n = self.triangles.count
         
         var details = [Detail](repeating: Detail(center: .zero, count: 0), count: n)
@@ -53,7 +53,7 @@ extension Delaunay {
                 }
                 visitedIndex[v.index] = true
                 
-                if v.index < self.pathCount {
+                if !v.isExtra {
                     if detail.count == 1 && triangle.neighbors[j] >= 0 {
                         switch j {
                         case 0: // a
@@ -160,8 +160,8 @@ extension Delaunay {
                         path.append(center)
                         let index = (t.index(index: v.index) + 1) % 3;
                         next = t.neighbors[index]
-                    } while next != start
-
+                    } while next != start && next>=0
+                    
                     result.append(path)
                 }
                 
