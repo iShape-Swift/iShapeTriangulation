@@ -15,11 +15,11 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target      = '9.0'
   spec.tvos.deployment_target     = '9.0'
   spec.watchos.deployment_target  = '4.0'
-  spec.osx.deployment_target      = '10.9'
+  spec.osx.deployment_target      = '10.15'
 
   spec.source_files               = 'Sources/**/*.swift'
 
 
-  spec.dependency                 'iGeometry', '>= 1.7.0'
+  spec.dependency                 'iGeometry', '>= 1.8.0'
 
 end
