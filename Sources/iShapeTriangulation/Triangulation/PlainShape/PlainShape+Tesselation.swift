@@ -21,15 +21,16 @@ public extension PlainShape {
     ///   - maxEdge: maximal possible triangle edge
     ///   - maxAngle: maximal possible triangle angle
     ///   - mergeAngle: maximal possible triangle angle for border triangle
+    ///   - method: method for picking next splitting point
     /// - Returns: Tessellation result
-    mutating func tessellate(extraPoints: [IntPoint]? = nil, minEdge: Int64, maxEdge: Int64 = 0, maxAngle: Float = 0.55 * Float.pi, mergeAngle: Float = 0.65 * Float.pi) -> Tessellation {
+    mutating func tessellate(extraPoints: [IntPoint]? = nil, minEdge: Int64, maxEdge: Int64 = 0, maxAngle: Float = 0.55 * Float.pi, mergeAngle: Float = 0.65 * Float.pi, method: Delaunay.SplitMethod = .byEquilateralTriangle) -> Tessellation {
         if maxEdge > 0 {
             self.modify(maxEgeSize: maxEdge)
         }
         
         var delaunay = self.delaunay(extraPoints: extraPoints)
 
-        let vertices = delaunay.tessellate(minEdge: minEdge, maxAngle: maxAngle, mergeAngle: mergeAngle)
+        let vertices = delaunay.tessellate(minEdge: minEdge, maxAngle: maxAngle, mergeAngle: mergeAngle, method: method)
         let indices = delaunay.trianglesIndices
         let newPoints = vertices.map({ $0.point })
         

@@ -10,6 +10,11 @@ import iGeometry
 
 extension Delaunay {
 
+    public enum SplitMethod {
+        case byCircumscribedCircle
+        case byEquilateralTriangle
+    }
+    
     private struct Validator {
         
         private let sqrMaxCos: Float
@@ -116,7 +121,7 @@ extension Delaunay {
     }
     
     
-    mutating func tessellate(minEdge: Int64, maxAngle: Float, mergeAngle: Float) -> [Vertex] {
+    mutating func tessellate(minEdge: Int64, maxAngle: Float, mergeAngle: Float, method: SplitMethod) -> [Vertex] {
         let isAnglesInRange = .pi > maxAngle && 0.5 * .pi <= maxAngle && .pi > mergeAngle && 0.5 * .pi <= mergeAngle
         assert(isAnglesInRange, "angles must be in range 0.5*pi..<pi")
         guard isAnglesInRange else {
@@ -149,8 +154,14 @@ extension Delaunay {
                     continue
                 }
                 
-                let p = triangle.circumscribedCenter
-//                let p = triangle.extraPoint(index: k)
+                let p: IntPoint
+                switch method {
+                case .byCircumscribedCircle:
+                    p = triangle.circumscribedCenter
+                case .byEquilateralTriangle:
+                    p = triangle.equilateralTriangle(index: k)
+                }
+
                 let neighbor = self.triangles[j]
                 
                 guard neighbor.isContain(p: p) else {
@@ -397,7 +408,7 @@ private extension Delaunay.Triangle {
     }
     
     @inline(__always)
-    func extraPoint(index: Int) -> IntPoint {
+    func equilateralTriangle(index: Int) -> IntPoint {
         let a = self.vertices[index].point
         let b = self.vertices[(index + 2) % 3].point
         let c = self.vertices[(index + 1) % 3].point
@@ -414,15 +425,6 @@ private extension Delaunay.Triangle {
         }
         
     }
-    
-#if DEBUG
-    func test_IsCCW_or_Line() {
-        let a = self.vertices[0].point
-        let b = self.vertices[1].point
-        let c = self.vertices[2].point
-        assert(IntTriangle.isCCW_or_Line(a: a, b: b, c: c), "Triangle's points are not clock-wise ordered")
-    }
-#endif
 }
 
 private extension IntPoint {

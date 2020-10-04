@@ -27,6 +27,7 @@ public struct Triangulator {
     
     /// Makes plain triangulation for polygon
     /// - Parameter points: Linear array of your polygon vertices listed in a clockwise direction.
+    /// - Returns: Indices of triples which form triangles in clockwise direction
     public func triangulate(points: [Point]) -> [Int] {
         let iPoints = iGeom.int(points: points)
         let shape = PlainShape(points: iPoints)
@@ -38,6 +39,7 @@ public struct Triangulator {
     /// - Parameter hull: range of the hull vertices in points array
     /// - Parameter holes: array of ranges for all holes
     /// - Parameter extraPoints: extra points for triangulation
+    /// - Returns: Indices of triples which form triangles in clockwise direction
     public func triangulate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
         if let ePoints = extraPoints {
@@ -50,6 +52,7 @@ public struct Triangulator {
     
     /// Makes Delaunay triangulation for polygon
     /// - Parameter points: Linear array of your polygon vertices listed in a clockwise direction.
+    /// - Returns: Indices of triples which form triangles in clockwise direction
     public func triangulateDelaunay(points: [Point]) -> [Int] {
         let iPoints = iGeom.int(points: points)
         let shape = PlainShape(points: iPoints)
@@ -61,6 +64,7 @@ public struct Triangulator {
     /// - Parameter hull: range of the hull vertices in points array
     /// - Parameter holes: array of ranges for all holes
     /// - Parameter extraPoints: extra points for tessellation
+    /// - Returns: Indices of triples which form triangles in clockwise direction
     public func triangulateDelaunay(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
         if let ePoints = extraPoints {
@@ -77,6 +81,7 @@ public struct Triangulator {
     ///   - hull: range of the hull vertices in points array
     ///   - holes: array of ranges for all holes
     ///   - extraPoints: extra points for tessellation
+    /// - Returns: Indices of arrays which form polygons in clockwise direction. Example: n0, i0, i1, ... i(n0-1), n1, j0, j1, ... j(n1-1), ...
     public func polygonate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
         if let ePoints = extraPoints {
@@ -86,6 +91,5 @@ public struct Triangulator {
             return shape.delaunay(extraPoints: nil).convexPolygonsIndices
         }
     }
-
 
 }
