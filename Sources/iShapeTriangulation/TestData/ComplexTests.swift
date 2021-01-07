@@ -72,7 +72,7 @@ public struct ComplexTests {
             [
                 Point(x: -15, y: -15),
                 Point(x: -15, y: -5),
-                Point(x: -6, y: 4.4),
+                Point(x: -20, y: 15),
                 Point(x: 15, y: 15),
                 Point(x: 15, y: -15)
             ]
