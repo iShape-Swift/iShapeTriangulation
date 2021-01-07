@@ -20,6 +20,6 @@ Pod::Spec.new do |spec|
   spec.source_files               = 'Sources/**/*.swift'
 
 
-  spec.dependency                 'iGeometry', '>= 1.8.0'
+  spec.dependency                 'iGeometry', '>= 1.9.0'
 
 end
