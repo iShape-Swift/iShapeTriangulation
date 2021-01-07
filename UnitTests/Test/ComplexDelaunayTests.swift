@@ -30,7 +30,7 @@ final class ComplexDelaunayTests: XCTestCase {
         
         XCTAssertEqual(TestUtil.isCCW(points: pShape.points, triangles: triangles), true)
         
-        print(triangles.prettyString)
+//        print(triangles.prettyString)
         
         return triangles
     }

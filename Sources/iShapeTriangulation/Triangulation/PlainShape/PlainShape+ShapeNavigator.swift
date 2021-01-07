@@ -19,42 +19,50 @@ extension PlainShape {
     }
     
     struct ShapeNavigator {
-        let iPoints: [IntPoint]
+        let pathCount: Int
+        let extraCount: Int
         let links: [Link]
         let natures: [LinkNature]
         let sortIndices: [Int]
     }
     
-    
-    func createNavigator(extraPoints: [IntPoint]? = nil) -> ShapeNavigator {
+    func createNavigator(maxEdge: Int64, extraPoints: [IntPoint]?) -> ShapeNavigator {
+        let splitLayout: SplitLayout
+        if maxEdge == 0 {
+            splitLayout = self.plain()
+        } else {
+            splitLayout = self.split(maxEgeSize: maxEdge)
+        }
+        
+        let pathCount = splitLayout.nodes.count
+        
         let n: Int
         if let extraPoints = extraPoints {
-            n = self.points.count + extraPoints.count
+            n = splitLayout.nodes.count + extraPoints.count
         } else {
-            n = self.points.count
+            n = splitLayout.nodes.count
         }
 
-        var iPoints = Array<IntPoint>(repeating: .zero, count: n)
         var links = Array<Link>(repeating: .empty, count: n)
         var natures = Array<LinkNature>(repeating: .simple, count: n)
         
-        for layout in self.layouts {
+        for layout in splitLayout.layouts {
             var prev = layout.end - 1
             var this = layout.end
             var next = layout.begin
             
-            var a = self.points[prev]
-            var b = self.points[this]
-            var A = a.bitPack
-            var B = b.bitPack
+            var a = splitLayout.nodes[prev]
+            var b = splitLayout.nodes[this]
+            var A = a.point.bitPack
+            var B = b.point.bitPack
             
             while next <= layout.end {
-                let c = points[next]
-                let C = c.bitPack
+                let c = splitLayout.nodes[next]
+                let C = c.point.bitPack
                 
                 var nature: LinkNature = .simple
                 
-                let isCCW = IntTriangle.isCCW(a: a, b: b, c: c)
+                let isCCW = IntTriangle.isCCW(a: a.point, b: b.point, c: c.point)
                 
                 if layout.isClockWise {
                     if A > B && B < C {
@@ -89,9 +97,10 @@ extension PlainShape {
                         }
                     }
                 }
+
+                let verNature: Vertex.Nature = b.index < self.points.count ? .origin : .extraPath
                 
-                iPoints[this] = b
-                links[this] = Link(prev: prev, this: this, next: next, vertex: Vertex(index: this, isExtra: false, point: b))
+                links[this] = Link(prev: prev, this: this, next: next, vertex: Vertex(index: b.index, nature: verNature, point: b.point))
                 natures[this] = nature
                 
                 a = b
@@ -108,13 +117,12 @@ extension PlainShape {
         }
         
         if let extraPoints = extraPoints {
-            let m = self.points.count
+            let m = splitLayout.nodes.count
             
             for i in 0..<extraPoints.count {
                 let p = extraPoints[i]
                 let j = i + m
-                iPoints[j] = p
-                links[j] = Link(prev: j, this: j, next: j, vertex: Vertex(index: j, isExtra: true, point: p))
+                links[j] = Link(prev: j, this: j, next: j, vertex: Vertex(index: j, nature: .extraInner, point: p))
                 natures[j] = .extra
             }
         }
@@ -123,7 +131,7 @@ extension PlainShape {
 
         var dataList = Array<SortData>(repeating: SortData(index: 0, factor: 0), count: n)
         for i in 0..<n {
-            let p = iPoints[i]
+            let p = links[i].vertex.point
             dataList[i] = SortData(index: i, factor: p.bitPack)
         }
         
@@ -152,7 +160,7 @@ extension PlainShape {
                 let v = links[b.index].vertex
                 repeat {
                     let link = links[a.index]
-                    links[a.index] = Link(prev: link.prev, this: link.this, next: link.next, vertex: Vertex(index: v.index, isExtra: v.isExtra, point: link.vertex.point))
+                    links[a.index] = Link(prev: link.prev, this: link.this, next: link.next, vertex: Vertex(index: v.index, nature: v.nature, point: link.vertex.point))
                     i += 1
                     if i < n {
                         a = dataList[i]
@@ -165,12 +173,92 @@ extension PlainShape {
             b = a
             i += 1
         }
+        
+        let extraCount = extraPoints?.count ?? 0
 
-        return ShapeNavigator(iPoints: iPoints, links: links, natures: natures, sortIndices: indices)
+        return ShapeNavigator(pathCount: pathCount, extraCount: extraCount, links: links, natures: natures, sortIndices: indices)
     }
     
     private struct SortData {
         let index: Int
         let factor: Int64
+    }
+
+    private struct Node {
+        let point: IntPoint
+        let index: Int
+    }
+    
+    private struct SplitLayout {
+        let layouts: [Layout]
+        let nodes: [Node]
+    }
+
+    private func split(maxEgeSize: Int64) -> SplitLayout {
+        let originalCount = self.points.count
+        
+        var nodes = [Node]()
+        nodes.reserveCapacity(originalCount)
+        
+        var layouts = [Layout]()
+        layouts.reserveCapacity(originalCount)
+        
+        let sqrMaxSize = maxEgeSize * maxEgeSize
+        
+        var begin = 0
+        var originalIndex = 0
+        var extraIndex = originalCount
+
+        for layout in self.layouts {
+            let last = layout.end
+            var a = self.points[last]
+            var length = 0
+            
+            for i in layout.begin...last {
+                let b = self.points[i]
+                let dx = b.x - a.x
+                let dy = b.y - a.y
+                let sqrSize = dx * dx + dy * dy
+                if sqrSize > sqrMaxSize {
+                    let l = Int64(Double(sqrSize).squareRoot())
+                    let s = Int(l / maxEgeSize)
+                    let ds = Double(s)
+     
+                    let sx = Double(dx) / ds
+                    let sy = Double(dy) / ds
+                    var fx: Double = 0
+                    var fy: Double = 0
+                    for _ in 1..<s {
+                        fx += sx
+                        fy += sy
+                        
+                        let x = a.x + Int64(fx)
+                        let y = a.y + Int64(fy)
+                        nodes.append(Node(point: IntPoint(x: x, y: y), index: extraIndex))
+                        extraIndex += 1
+                    }
+                    length += s - 1
+                }
+                length += 1
+                nodes.append(Node(point: b, index: originalIndex))
+                originalIndex += 1
+                a = b
+            }
+            layouts.append(Layout(begin: begin, length: length, isClockWise: layout.isClockWise))
+            begin += length
+        }
+        return SplitLayout(layouts: layouts, nodes: nodes)
+    }
+    
+    private func plain() -> SplitLayout {
+        var nodes = [Node]()
+        nodes.reserveCapacity(self.points.count)
+        var index = 0
+        for p in self.points {
+            nodes.append(Node(point: p, index: index))
+            index += 1
+        }
+
+        return SplitLayout(layouts: self.layouts, nodes: nodes)
     }
 }

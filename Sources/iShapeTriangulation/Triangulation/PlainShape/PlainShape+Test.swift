@@ -42,7 +42,7 @@ extension PlainShape {
     
     var pathes: [[Vertex]] {
         get {
-            let navigator = self.createNavigator()
+            let navigator = self.createNavigator(maxEdge: 0, extraPoints: nil)
             let links = navigator.links
             
             var pathes = [[Vertex]]()
@@ -50,7 +50,6 @@ extension PlainShape {
             
             for split in self.layouts {
                 var vertices = [Vertex]()
-                vertices.reserveCapacity(navigator.iPoints.count)
                 var next = links[split.begin]
                 repeat {
                     vertices.append(next.vertex)

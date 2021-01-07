@@ -38,6 +38,7 @@
 		54AFC4EF24D723D700B94D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC4ED24D723D700B94D58 /* Main.storyboard */; };
 		54AFC50B24D7243F00B94D58 /* iShapeTriangulation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC50724D7242700B94D58 /* iShapeTriangulation.framework */; };
 		54AFC50C24D7243F00B94D58 /* iShapeTriangulation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC50724D7242700B94D58 /* iShapeTriangulation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		54B5EBF025A769E800FFFC45 /* PathShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B5EBEF25A769E800FFFC45 /* PathShapeView.swift */; };
 		54E2047A24DFEB79003F1D77 /* InputSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2047924DFEB79003F1D77 /* InputSystem.swift */; };
 		54E2047D24E00367003F1D77 /* ColorSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2047C24E00367003F1D77 /* ColorSchema.swift */; };
 		54E6A26324DFCDB800A78708 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6A26224DFCDB800A78708 /* Scene.swift */; };
@@ -129,6 +130,7 @@
 		54AFC4F024D723D700B94D58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54AFC4F124D723D700B94D58 /* DebugApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugApp.entitlements; sourceTree = "<group>"; };
 		54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iShapeTriangulation.xcodeproj; path = ../iShapeTriangulation.xcodeproj; sourceTree = "<group>"; };
+		54B5EBEF25A769E800FFFC45 /* PathShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathShapeView.swift; sourceTree = "<group>"; };
 		54E2047924DFEB79003F1D77 /* InputSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSystem.swift; sourceTree = "<group>"; };
 		54E2047C24E00367003F1D77 /* ColorSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchema.swift; sourceTree = "<group>"; };
 		54E6A26224DFCDB800A78708 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				549B002424DF379F00025754 /* PlainShapeView.swift */,
 				54926B3F24E05FA100766EF7 /* PolygonShapeView.swift */,
 				545A0F6324E2898D001A7DDD /* DotShapeView.swift */,
+				54B5EBEF25A769E800FFFC45 /* PathShapeView.swift */,
 			);
 			path = Shape;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				549B002524DF379F00025754 /* PlainShapeView.swift in Sources */,
 				5471932024DBFAB3008B67CB /* ContentState.swift in Sources */,
 				5471932424DC0654008B67CB /* SceneState.swift in Sources */,
+				54B5EBF025A769E800FFFC45 /* PathShapeView.swift in Sources */,
 				54926B4724E0697E00766EF7 /* PlainComplexSceneView.swift in Sources */,
 				54AA95A124E69AD200F3155F /* DelaunayConditionSceneView.swift in Sources */,
 				545A0F6224E2872F001A7DDD /* TessellationSceneView.swift in Sources */,

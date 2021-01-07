@@ -92,13 +92,11 @@ public extension PlainShape {
         }
     }
 
-    func delaunay(extraPoints: [IntPoint]? = nil) -> Delaunay {
-        let layout = self.split(extraPoints: extraPoints)
-        
-        let extraCount: Int = extraPoints?.count ?? 0
-        let vertexCount = self.points.count + extraCount
-
-        let totalCount = vertexCount &+ ((self.layouts.count - 2) << 1) + extraCount
+    func delaunay(maxEdge: Int64 = 0, extraPoints: [IntPoint]? = nil) -> Delaunay {
+        let layout = self.split(maxEdge: maxEdge, extraPoints: extraPoints)
+            
+        let holesCount = self.layouts.count
+        let totalCount = layout.pathCount + 2 * layout.extraCount + holesCount * 2 - 2
         
         var triangleStack = TriangleStack(count: totalCount)
         
@@ -110,10 +108,20 @@ public extension PlainShape {
         
         var triangles = triangleStack.getTriangles()
         
-        var sliceBuffer = SliceBuffer(vertexCount: vertexCount, slices: layout.slices)
+        var sliceBuffer = SliceBuffer(vertexCount: links.count, slices: layout.slices)
         sliceBuffer.addConections(triangles: &triangles)
         
-        var delaunay = Delaunay(pathCount: self.points.count, extraCount: extraCount, triangles: triangles)
+        var delaunay: Delaunay
+        if extraPoints == nil && maxEdge == 0 {
+            delaunay = Delaunay(points: self.points, triangles: triangles)
+        } else {
+            var points = [IntPoint](repeating: .zero, count: layout.links.count)
+            for link in layout.links {
+                points[link.vertex.index] = link.vertex.point
+            }
+            delaunay = Delaunay(points: points, triangles: triangles)
+        }
+
         delaunay.build()
         
         return delaunay

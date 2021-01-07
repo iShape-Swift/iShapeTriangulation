@@ -13,14 +13,12 @@ import Foundation
 import iGeometry
 
 public struct Delaunay {
-   
-    let pathCount: Int
-    var extraCount: Int
+
+    public internal (set) var points: [IntPoint]
     var triangles: [Triangle]
     
-    init(pathCount: Int, extraCount: Int, triangles: [Triangle]) {
-        self.pathCount = pathCount
-        self.extraCount = extraCount
+    init(points: [IntPoint], triangles: [Triangle]) {
+        self.points = points
         self.triangles = triangles
     }
     

@@ -27,7 +27,7 @@ extension Delaunay {
         return points
     }
 
-    func makeCentroidNet(onlyConvex: Bool = false) -> [[IntPoint]] {
+    func makeCentroidNet(minArea: Int64 = 0, onlyConvex: Bool = false) -> [[IntPoint]] {
         let n = self.triangles.count
         
         var details = [Detail](repeating: Detail(center: .zero, count: 0), count: n)
@@ -40,7 +40,7 @@ extension Delaunay {
             details[i] = Detail(center: triangle.center, count: count)
         }
 
-        var visitedIndex = Array<Bool>(repeating: false, count: self.pathCount + self.extraCount)
+        var visitedIndex = Array<Bool>(repeating: false, count: self.points.count)
         var result = [[IntPoint]]()
 
         for i in 0..<n {
@@ -53,21 +53,26 @@ extension Delaunay {
                 }
                 visitedIndex[v.index] = true
                 
-                if !v.isExtra {
+                if v.nature.isPath {
                     if detail.count == 1 && triangle.neighbors[j] >= 0 {
+                        let path: [IntPoint]
                         switch j {
                         case 0: // a
                             let ab = v.point.center(point: triangle.vertices[1].point)
                             let ca = v.point.center(point: triangle.vertices[2].point)
-                            result.append([v.point, ab, detail.center, ca])
+                            path = [v.point, ab, detail.center, ca]
                         case 1: // b
                             let bc = v.point.center(point: triangle.vertices[2].point)
                             let ab = v.point.center(point: triangle.vertices[0].point)
-                            result.append([v.point, bc, detail.center, ab])
+                            path = [v.point, bc, detail.center, ab]
                         default: // c
                             let ca = v.point.center(point: triangle.vertices[0].point)
                             let bc = v.point.center(point: triangle.vertices[1].point)
-                            result.append([v.point, ca, detail.center, bc])
+                            path = [v.point, ca, detail.center, bc]
+                        }
+                        
+                        if path.area > minArea  {
+                            result.append(path)
                         }
                     } else {
                         var path = [IntPoint]()
@@ -133,7 +138,9 @@ extension Delaunay {
                                 if v0.crossProduct(point: v1) <= 0 && d0.crossProduct(point: d1) <= 0 {
                                     subPath.append(p1)
                                 } else {
-                                    result.append(subPath)
+                                    if subPath.area > minArea  {
+                                        result.append(subPath)
+                                    }
                                     subPath.removeAll()
                                     subPath.append(c)
                                     subPath.append(p0)
@@ -143,10 +150,15 @@ extension Delaunay {
                                 p0 = p1
                                 d0 = d1
                             }
-                            result.append(subPath)
+
+                            if subPath.area > minArea  {
+                                result.append(subPath)
+                            }
                         } else {
                             path.append(v.point)
-                            result.append(path)
+                            if path.area > minArea  {
+                                result.append(path)
+                            }
                         }
                     }
                 } else {
@@ -162,7 +174,9 @@ extension Delaunay {
                         next = t.neighbors[index]
                     } while next != start && next>=0
                     
-                    result.append(path)
+                    if path.area > minArea  {
+                        result.append(path)
+                    }
                 }
                 
             }
@@ -218,4 +232,3 @@ private extension IntPoint {
         return IntPoint(x: (self.x + point.x) / 2, y: (self.y + point.y) / 2)
     }
 }
-

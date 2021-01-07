@@ -51,3 +51,10 @@ func *(left: CGFloat, right: CGPoint) -> CGPoint {
 func /(left: CGPoint, right: CGFloat) -> CGPoint {
     return CGPoint(x: left.x / right, y: left.y / right)
 }
+
+
+extension Array where Element == Point {
+    var cgPoints: [CGPoint] {
+        self.map({ CGPoint($0) })
+    }
+}

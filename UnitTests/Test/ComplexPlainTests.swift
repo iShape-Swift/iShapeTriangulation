@@ -28,9 +28,7 @@ final class ComplexPlainTests: XCTestCase {
         let triangles = pShape.triangulate()
         
         XCTAssertEqual(TestUtil.isCCW(points: pShape.points, triangles: triangles), true)
-        
-//        print(triangles.prettyString)
-        
+
         return triangles
     }
     

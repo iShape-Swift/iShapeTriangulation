@@ -9,24 +9,31 @@
 import iGeometry
 
 public extension PlainShape {
+    
     /// Make CentroidNet for polygon
     /// - Parameters:
+    ///   - iGeom: iGeom
+    ///   - onlyConvex: if true only convex polygons will be present in result, the nonconvex polygons will be splitted into convex polygons
+    ///   - maxEdge: maximal possible triangle edge for tessellation
+    ///   - maxArea: maximum possible triangle area, triangles with higher area will be splitted
+    ///   - minArea: the polygons with lower area will be not included
     ///   - extraPoints: extra points (inside points)
-    ///   - onlyConvex: if true only convex polygons will be present in result
-    ///   - minEdge: minimal possible triangle edge for tesselation
-    ///   - maxEdge: maximal possible triangle edge for tesselation
     /// - Returns: array of polygons in a clock-wise-direction
-    func makeCentroidNet(extraPoints: [IntPoint]? = nil, onlyConvex: Bool, minEdge: Int64, maxEdge: Int64 = 0, method: Delaunay.SplitMethod = .byEquilateralTriangle) -> [[IntPoint]] {
-        var shape = self
-
-        if maxEdge > 0 {
-            shape.modify(maxEgeSize: maxEdge)
+    func makeCentroidNet(iGeom: IntGeom, onlyConvex: Bool, maxEdge: Float, maxArea max: Float? = nil, minArea: Float = 0, extraPoints: [IntPoint]? = nil) -> [[IntPoint]] {
+        let iEdge = iGeom.int(float: maxEdge)
+        var delaunay = self.delaunay(maxEdge: iEdge, extraPoints: extraPoints)
+        let maxArea: Float
+        if let max = max {
+            maxArea = max
+        } else {
+            maxArea = 0.4 * maxEdge * maxEdge
         }
-
-        var delaunay = shape.delaunay(extraPoints: extraPoints)
         
-        _ = delaunay.tessellate(minEdge: minEdge, maxAngle: 0.55 * Float.pi, mergeAngle: 0.7 * Float.pi, method: method)
-        let centroidNet = delaunay.makeCentroidNet(onlyConvex: onlyConvex)
+        delaunay.tessellate(iGeom: iGeom, maxArea: maxArea)
+
+        let iMinArea = iGeom.sqrInt(float: minArea)
+        
+        let centroidNet = delaunay.makeCentroidNet(minArea: iMinArea, onlyConvex: onlyConvex)
 
         return centroidNet
     }

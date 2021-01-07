@@ -46,9 +46,12 @@ struct IndexBuffer {
     }
 
     @inline(__always)
-    mutating func add(indices: [Int]) {
-        for index in indices {
-            self.add(index: index)
+    mutating func remove(index: Int) {
+        if self.map[index] {
+            self.map[index] = false
+            if let j = array.firstIndex(where: { $0 == index }) {
+                array.remove(at: j)
+            }
         }
     }
     
@@ -58,18 +61,6 @@ struct IndexBuffer {
         let count = self.map.count
         if let index = array.firstIndex(where: { $0 >= count }) {
             array.remove(at: index)
-        }
-    }
-    
-    @inline(__always)
-    mutating func reset() {
-        let lastIndex = self.map.count - 1
-        if self.array.count != self.map.count {
-            self.array = [Int](repeating: 0, count: self.map.count)
-        }
-        for i in 0...lastIndex {
-            self.map[i] = true
-            self.array[i] = lastIndex - i
         }
     }
 }

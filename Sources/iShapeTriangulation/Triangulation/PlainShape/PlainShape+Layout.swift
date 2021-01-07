@@ -21,6 +21,8 @@ extension PlainShape {
     }
     
     struct MonotoneLayout {
+        let pathCount: Int
+        let extraCount: Int
         let links: [Link]
         let slices: [Slice]
         let indices: [Int]
@@ -73,9 +75,9 @@ extension PlainShape {
         }
     }
     
-    func split(extraPoints: [IntPoint]? = nil) -> MonotoneLayout {
+    func split(maxEdge: Int64, extraPoints: [IntPoint]?) -> MonotoneLayout {
         
-        let navigator = self.createNavigator(extraPoints: extraPoints)
+        let navigator = self.createNavigator(maxEdge: maxEdge, extraPoints: extraPoints)
         
         var links = navigator.links
         let natures = navigator.natures
@@ -477,7 +479,10 @@ extension PlainShape {
                 assertionFailure("unused \(nature.rawValue) point detected")
         }
         
-        return MonotoneLayout(links: links, slices: slices, indices: indices)
+        let pathCount = navigator.pathCount
+        let extraCount = navigator.extraCount
+        
+        return MonotoneLayout(pathCount: pathCount, extraCount: extraCount, links: links, slices: slices, indices: indices)
     }
     
     @inline(__always)

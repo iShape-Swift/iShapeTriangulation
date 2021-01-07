@@ -11,6 +11,10 @@ import iGeometry
 public struct Triangulator {
     
     public let iGeom: IntGeom
+
+    public init(iGeom: IntGeom) {
+        self.iGeom = iGeom
+    }
     
     /// Creates a new triangulator with the specified precision
     /// - Parameter precision: The minimum required precision. It's a minimum linear distance after which points will be recognized as the same.
@@ -90,6 +94,46 @@ public struct Triangulator {
         }  else {
             return shape.delaunay(extraPoints: nil).convexPolygonsIndices
         }
+    }
+    
+    /// Tessellate polygon
+    /// - Parameters:
+    ///   - points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
+    ///   - hull: range of the hull vertices in points array
+    ///   - holes: array of ranges for all holes
+    ///   - maxEdge: maximal possible triangle edge
+    ///   - maxArea: maximum possible triangle area, triangles with higher area will be splitted
+    ///   - extraPoints: extra points for tessellation
+    /// - Returns: All points and indices of triples which form triangles in clockwise direction
+    public func tessellate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, maxEdge: Float, maxArea: Float? = nil, extraPoints: [Point]? = nil) -> (points: [Point], indices: [Int]) {
+        var shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
+        let delaunay: Delaunay
+        if let ePoints = extraPoints {
+            let iPoints = iGeom.int(points: ePoints)
+            delaunay = shape.tessellate(iGeom: iGeom, maxEdge: maxEdge, maxArea: maxArea, extraPoints: iPoints)
+        }  else {
+            delaunay = shape.tessellate(iGeom: iGeom, maxEdge: maxEdge, maxArea: maxArea)
+        }
+
+        let points = iGeom.float(points: delaunay.points)
+        let indices = delaunay.trianglesIndices
+        
+        return (points: points, indices: indices)
+    }
+    
+    public func centroidNet(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, onlyConvex: Bool = false, maxEdge: Float, maxArea: Float? = nil, minArea: Float = 0, extraPoints: [Point]? = nil) -> [[Point]] {
+        let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
+        let paths: [[IntPoint]]
+        if let ePoints = extraPoints {
+            let iPoints = iGeom.int(points: ePoints)
+            paths = shape.makeCentroidNet(iGeom: iGeom, onlyConvex: onlyConvex, maxEdge: maxEdge, maxArea: maxArea, minArea: minArea, extraPoints: iPoints)
+        }  else {
+            paths = shape.makeCentroidNet(iGeom: iGeom, onlyConvex: onlyConvex, maxEdge: maxEdge, maxArea: maxArea, minArea: minArea)
+        }
+
+        let result = iGeom.float(paths: paths)
+        
+        return result
     }
 
 }

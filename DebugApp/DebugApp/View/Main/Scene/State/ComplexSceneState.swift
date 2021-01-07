@@ -23,8 +23,7 @@ final class ComplexSceneState: ObservableObject, Scene {
     init(key: String, data: [[[Point]]]) {
         self.key = key
         self.data = data
-//        self.pageIndex = UserDefaults.standard.integer(forKey: key)
-        self.pageIndex = 0
+        self.pageIndex = UserDefaults.standard.integer(forKey: key)
         self.paths = self.data[self.pageIndex]
     }
     
@@ -70,7 +69,8 @@ final class ComplexSceneState: ObservableObject, Scene {
         }
         let dx = Float(delta.width)
         let dy = Float(delta.height)
-        self.paths[index.0][index.1] = Point(x: self.startPosition.x - dx, y: self.startPosition.y - dy)
+        let p = Point(x: self.startPosition.x - dx, y: self.startPosition.y - dy)
+        self.paths[index.0][index.1] = p
     }
     
     func onEnd(delta: CGSize) {

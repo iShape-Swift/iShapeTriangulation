@@ -10,129 +10,98 @@ import iGeometry
 
 extension Delaunay {
 
-    public enum SplitMethod {
-        case byCircumscribedCircle
-        case byEquilateralTriangle
-    }
-    
     private struct Validator {
-        
-        private let sqrMaxCos: Float
-        private let sqrMergeCos: Float
-        private let sqrMinEdge: Int64
-        
-        init(minEdge: Int64, maxAngle: Float, mergeAngle: Float) {
-            let maxCos = cos(maxAngle)
-            self.sqrMaxCos = maxCos * maxCos
-            
-            let mergeCos = cos(mergeAngle)
-            self.sqrMergeCos = mergeCos * mergeCos
 
-            self.sqrMinEdge = minEdge * minEdge
+        static let sqrMergeCos: Float = {
+            let mergeCos = cos(0.8 * Float.pi)
+            return mergeCos * mergeCos
+        }()
+        
+        private let maxArea: Float
+        private let iGeom: IntGeom
+        
+        init(iGeom: IntGeom, maxArea: Float) {
+            self.iGeom = iGeom
+            self.maxArea = 2 * maxArea
         }
 
         @inline(__always)
         func testRegular(triangle: Triangle) -> Int {
-            let a = triangle.vertices[0]
-            let b = triangle.vertices[1]
-            let c = triangle.vertices[2]
+            let a = iGeom.float(point: triangle.vertices[0].point)
+            let b = iGeom.float(point: triangle.vertices[1].point)
+            let c = iGeom.float(point: triangle.vertices[2].point)
 
-            let ab = a.point.sqrDistance(point: b.point)
-            let ca = c.point.sqrDistance(point: a.point)
-            let bc = b.point.sqrDistance(point: c.point)
-            
-            guard ab > sqrMinEdge || ca > sqrMinEdge || bc > sqrMinEdge else {
-                return -1
-            }
+            let ab = a.sqrDistance(point: b)
+            let ca = c.sqrDistance(point: a)
+            let bc = b.sqrDistance(point: c)
+
+            let s0 = a.x * (c.y - b.y) + b.x * (a.y - c.y) + c.x * (b.y - a.y)
+            let s1: Float
             
             let k: Int
-            let aa = Float(bc)
-            let bb = Float(ca)
-            let cc = Float(ab)
             let sCos: Float
             
             if ab >= bc + ca {
                 // c, ab
                 k = 2
-                let l = aa + bb - cc
-                sCos = l * l / (4 * aa * bb)
+                let l = bc + ca - ab
+                sCos = l * l / (4 * bc * ca)
+                s1 = s0 / (1 - sCos)
             } else if bc >= ca + ab {
                 // a, bc
                 k = 0
-                let l = bb + cc - aa
-                sCos = l * l / (4 * bb * cc)
+                let l = ca + ab - bc
+                sCos = l * l / (4 * ca * ab)
+                s1 = s0 / (1 - sCos)
             } else if ca >= bc + ab {
                 // b, ca
                 k = 1
-                let l = aa + cc - bb
-                sCos = l * l / (4 * aa * cc)
+                let l = bc + ab - ca
+                sCos = l * l / (4 * bc * ab)
+                s1 = s0 / (1 - sCos)
             } else {
-                return -1
+                if ab >= bc && ab >= ca {
+                    k = 2
+                } else if bc >= ca {
+                    k = 0
+                } else {
+                    k = 1
+                }
+                s1 = s0
             }
-            
-            if sCos > self.sqrMaxCos {
+
+            if s1 > maxArea {
                 return k
             }
-            
+
             return -1
         }
-    
+        
         @inline(__always)
-        func testMerge(triangle: Triangle) -> Int {
-            let a = triangle.vertices[0]
-            let b = triangle.vertices[1]
-            let c = triangle.vertices[2]
+        static func sqrCos(a: IntPoint, b: IntPoint, c: IntPoint) -> Float {
+            let ab = a.sqrDistance(point: b)
+            let ca = c.sqrDistance(point: a)
+            let bc = b.sqrDistance(point: c)
 
-            let ab = a.point.sqrDistance(point: b.point)
-            let ca = c.point.sqrDistance(point: a.point)
-            let bc = b.point.sqrDistance(point: c.point)
-            
-            let k: Int
             let aa = Float(bc)
             let bb = Float(ca)
             let cc = Float(ab)
-            let sCos: Float
             
-            if ab >= bc + ca {
-                // c, ab
-                k = 2
-                let l = aa + bb - cc
-                sCos = l * l / (4 * aa * bb)
-            } else if bc >= ca + ab {
-                // a, bc
-                k = 0
-                let l = bb + cc - aa
-                sCos = l * l / (4 * bb * cc)
-            } else if ca >= bc + ab {
-                // b, ca
-                k = 1
-                let l = aa + cc - bb
-                sCos = l * l / (4 * aa * cc)
-            } else {
-                return -1
+            guard ab >= bc + ca else {
+                return 0
             }
-            
-            if sCos > self.sqrMergeCos {
-                return k
-            }
-            
-            return -1
+
+            let l = aa + bb - cc
+            return l * l / (4 * aa * bb)
         }
     }
     
-    
-    mutating func tessellate(minEdge: Int64, maxAngle: Float, mergeAngle: Float, method: SplitMethod) -> [Vertex] {
-        let isAnglesInRange = .pi > maxAngle && 0.5 * .pi <= maxAngle && .pi > mergeAngle && 0.5 * .pi <= mergeAngle
-        assert(isAnglesInRange, "angles must be in range 0.5*pi..<pi")
-        guard isAnglesInRange else {
-            return []
-        }
-        
+    mutating func tessellate(iGeom: IntGeom, maxArea: Float) {
         var extraPoints = [Vertex]()
-        let initExtraCount = self.pathCount + self.extraCount
-        var extraPointsIndex = initExtraCount
+        let originCount = self.points.count
+        var extraPointsIndex = originCount
         
-        let validator = Validator(minEdge: minEdge, maxAngle: maxAngle, mergeAngle: mergeAngle)
+        let validator = Validator(iGeom: iGeom, maxArea: maxArea)
         
         var unprocessed = IndexBuffer(count: self.triangles.count)
 
@@ -148,26 +117,35 @@ extension Delaunay {
                     continue
                 }
                 
-                let j = triangle.neighbors[k]
+                let nIx = triangle.neighbors[k]
                 
-                guard j >= 0 else {
+                guard nIx >= 0 else {
                     continue
                 }
-                
-                let p: IntPoint
-                switch method {
-                case .byCircumscribedCircle:
-                    p = triangle.circumscribedCenter
-                case .byEquilateralTriangle:
-                    p = triangle.equilateralTriangle(index: k)
-                }
 
-                let neighbor = self.triangles[j]
-                
+                let p = triangle.circumscribedCenter
+
+                let neighbor = self.triangles[nIx]
                 guard neighbor.isContain(p: p) else {
                     continue
                 }
                 
+                let j = neighbor.opposite(neighbor: triangle.index)
+                let j_next = (j + 1) % 3
+                let j_prev = (j + 2) % 3
+
+                if neighbor.neighbors[j_next] == -1 || neighbor.neighbors[j_prev] == -1 {
+                    let nextCos = Validator.sqrCos(a: neighbor.vertices[j_prev].point, b: neighbor.vertices[j].point, c: p)
+                    if nextCos > Validator.sqrMergeCos {
+                        continue
+                    }
+                    
+                    let prevCos = Validator.sqrCos(a: neighbor.vertices[j].point, b: neighbor.vertices[j_next].point, c: p)
+                    if prevCos > Validator.sqrMergeCos {
+                        continue
+                    }
+                }
+
                 let k_next = (k + 1) % 3
                 let k_prev = (k + 2) % 3
                 
@@ -176,7 +154,7 @@ extension Delaunay {
                 let l_next = (l + 1) % 3
                 let l_prev = (l + 2) % 3
                 
-                let vertex = Vertex(index: extraPointsIndex, isExtra: true, point: p)
+                let vertex = Vertex(index: extraPointsIndex, nature: .extraTessellated, point: p)
                 extraPoints.append(vertex)
                 
                 let n = self.triangles.count
@@ -187,13 +165,15 @@ extension Delaunay {
                 t0.neighbors[k_next] = n
                 self.triangles[i] = t0
                 assert(IntTriangle.isCCW_or_Line(a: t0.vertices[0].point, b: t0.vertices[1].point, c: t0.vertices[2].point), "Triangle's points are not clock-wise ordered")
-
+                unprocessed.add(index: t0.index)
+                
                 var t1 = neighbor
                 t1.vertices[l_next] = vertex
                 t1.neighbors[l_prev] = n + 1
-                self.triangles[j] = t1
+                self.triangles[nIx] = t1
                 assert(IntTriangle.isCCW_or_Line(a: t1.vertices[0].point, b: t1.vertices[1].point, c: t1.vertices[2].point), "Triangle's points are not clock-wise ordered")
-
+                unprocessed.add(index: t1.index)
+                
                 let t2Neighbor = triangle.neighbors[k_next]
                 let t2 = Triangle(
                     index: n,
@@ -219,138 +199,22 @@ extension Delaunay {
                    b: neighbor.vertices[l_next],
                    c: vertex,
                    bc: n,
-                   ac: j,
+                   ac: nIx,
                    ab: t3Neighbor
                 )
 
                 if t3Neighbor >= 0 {
-                    self.triangles[t3Neighbor].updateOpposite(oldNeighbor: j, newNeighbor: n + 1)
+                    self.triangles[t3Neighbor].updateOpposite(oldNeighbor: nIx, newNeighbor: n + 1)
                 }
 
                 self.triangles.append(t3)
                 unprocessed.add(index: t3.index)
 
-                self.fix(indices: [i, j, n, n + 1], indexBuffer: &unprocessed)
+                self.fix(indices: [i, nIx, n, n + 1], indexBuffer: &unprocessed)
             }
-            
-            // test all bordered triangles
-
-            var i = 0
-            
-            while i < triangles.count {
-                let triangle = self.triangles[i]
-
-                let k = validator.testMerge(triangle: triangle)
-
-                guard k >= 0 else {
-                    i += 1
-                    continue
-                }
-                
-                let j = triangle.neighbors[k]
-                
-                guard j < 0 else {
-                    i += 1
-                    continue
-                }
-
-                let k_next = (k + 1) % 3
-                let k_prev = (k + 2) % 3
-
-                let aVertex = triangle.vertices[k]
-
-                let isPathCount = aVertex.index < (self.pathCount + self.extraCount)
-
-                // is this vertex a new Vertex (added while tessellating)
-                if !isPathCount {
-                    let last = triangle.neighbors[k_prev]
-                    var next = triangle.neighbors[k_next]
-                    
-                    guard last >= 0 && next >= 0 else {
-                        i += 1
-                        continue
-                    }
-
-                    var prevIndex = triangle.index
-                    var family = [Int]()
-                    family.reserveCapacity(8)
-                    while next >= 0 && next != last {
-                        family.append(next)
-                        let nextTriangle = self.triangles[next]
-                        next = nextTriangle.adjacentNeighbor(vertex: aVertex.index, neighbor: prevIndex)
-                        prevIndex = nextTriangle.index
-                    }
-
-                    let isMovable = next == last
-                    if isMovable {
-                        family.append(next)
-                        let a = aVertex.point
-                        let b = triangle.vertices[k_next].point
-                        let c = triangle.vertices[k_prev].point
-                        let ca = a - c
-                        let cb = b - c
-
-                        let nAB = Delaunay.projectionAonB(a: ca, b: cb)
-                        let p = c + nAB
-                        let vIx = aVertex.index - initExtraCount
-                        let newVertex = Vertex(index: aVertex.index, isExtra: false, point: p)
-                        extraPoints[vIx] = newVertex
-
-                        for index in family {
-                            self.triangles[index].update(vertex: newVertex)
-                        }
-
-                        let first = family[0]
-                        self.triangles[first].updateOpposite(oldNeighbor: triangle.index, newNeighbor: -1)
-                        self.triangles[last].updateOpposite(oldNeighbor: triangle.index, newNeighbor: -1)
-
-                        if self.triangles.count - 1 != triangle.index {
-                            let lastTriangle = self.triangles[self.triangles.count - 1]
-
-                            let nA = lastTriangle.neighbors[0]
-                            if nA >= 0 {
-                                self.triangles[nA].updateOpposite(oldNeighbor: lastTriangle.index, newNeighbor: triangle.index)
-                            }
-                            let nB = lastTriangle.neighbors[1]
-                            if nB >= 0 {
-                                self.triangles[nB].updateOpposite(oldNeighbor: lastTriangle.index, newNeighbor: triangle.index)
-                            }
-                            let nC = lastTriangle.neighbors[2]
-                            if nC >= 0 {
-                                self.triangles[nC].updateOpposite(oldNeighbor: lastTriangle.index, newNeighbor: triangle.index)
-                            }
-                            
-                            self.triangles[triangle.index] = Triangle(
-                                index: triangle.index,
-                                a: lastTriangle.vertices[0],
-                                b: lastTriangle.vertices[1],
-                                c: lastTriangle.vertices[2],
-                                bc: nA,
-                                ac: nB,
-                                ab: nC
-                            )
-                            
-                            if let index = family.firstIndex(where: { $0 == lastTriangle.index }) {
-                                family[index] = triangle.index
-                            }
-                        }
-
-                        self.triangles.removeLast()
-                        
-                        unprocessed.decrease()
-                        
-                        self.fix(indices: family, indexBuffer: &unprocessed)
-                    }
-                }
-                
-                i += 1
-            } // while
-
         } while unprocessed.hasNext
         
-        self.extraCount += extraPoints.count
-        
-        return extraPoints
+        self.points += extraPoints.map({ $0.point })
     }
     
     private static func projectionAonB(a: IntPoint, b: IntPoint) -> IntPoint {
@@ -385,6 +249,14 @@ private extension Delaunay.Triangle {
 
         return IntPoint(x: Int64(x.rounded(.toNearestOrAwayFromZero)), y: Int64(y.rounded(.toNearestOrAwayFromZero)))
     }
+    
+    @inline(__always)
+    private var area: Int64 {
+        let a = self.vertices[0].point
+        let b = self.vertices[1].point
+        let c = self.vertices[2].point
+        return (a.x * (c.y - b.y) + b.x * (a.y - c.y) + c.x * (b.y - a.y)) / 2
+    }
 
     @inline(__always)
     func isContain(p: IntPoint) -> Bool {
@@ -404,7 +276,7 @@ private extension Delaunay.Triangle {
     
     @inline(__always)
     private static func sign(a: IntPoint, b: IntPoint, c: IntPoint) -> Int64 {
-        return (a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)
+        (a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)
     }
     
     @inline(__always)
@@ -423,13 +295,52 @@ private extension Delaunay.Triangle {
             let r = a - ab.cwRotate60
             return r
         }
-        
     }
+    
+    @inline(__always)
+    func middle(index: Int, neighbor: Delaunay.Triangle) -> IntPoint {
+        let ai = self.vertices[index].point
+        let bi = self.vertices[(index + 2) % 3].point
+        let ci = neighbor.vertex(neighbor: self.index).point
+        let di = self.vertices[(index + 1) % 3].point
+
+        let a = Point(x: Float(ai.x), y: Float(ai.y))
+        let b = Point(x: Float(bi.x), y: Float(bi.y))
+        let c = Point(x: Float(ci.x), y: Float(ci.y))
+        let d = Point(x: Float(di.x), y: Float(di.y))
+        
+        let s = (b.x - a.x) * (b.y + a.y) + (c.x - b.x) * (c.y + b.y) + (d.x - c.x) * (d.y + c.y) + (a.x - d.x) * (a.y + d.y)
+
+        var x: Float = 0
+        var y: Float = 0
+        var q: Float = 0
+
+        q = a.x * d.y - d.x * a.y
+        x += (a.x + d.x) * q
+        y += (a.y + d.y) * q
+
+        q = b.x * a.y - a.x * b.y
+        x += (b.x + a.x) * q
+        y += (b.y + a.y) * q
+        
+        q = c.x * b.y - d.x * c.y
+        x += (c.x + b.x) * q
+        y += (c.y + b.y) * q
+        
+        q = d.x * c.y - c.x * d.y
+        x += (d.x + c.x) * q
+        y += (d.y + c.y) * q
+        let k = 1 / (3 * s)
+
+        return IntPoint(x: Int64(k * x), y: Int64(k * y))
+    }
+    
+    
 }
 
 private extension IntPoint {
     var magnitude: Int64 {
-        return x * x + y * y
+        x * x + y * y
     }
 
     private static let sin60: Double = 0.5 * Double(3).squareRoot()
@@ -451,10 +362,5 @@ private extension IntPoint {
         let x = dx * IntPoint.cos60 + dy * IntPoint.sin60
         let y = -dx * IntPoint.sin60 + dy * IntPoint.cos60
         return IntPoint(x: Int64(x.rounded(.toNearestOrAwayFromZero)), y: Int64(y.rounded(.toNearestOrAwayFromZero)))
-    }
-    
-    @inline(__always)
-    func center(point: IntPoint) -> IntPoint {
-        return IntPoint(x: (self.x + point.x) / 2, y: (self.y + point.y) / 2)
     }
 }
