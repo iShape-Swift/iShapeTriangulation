@@ -46,18 +46,34 @@ public struct Delaunay {
                             triangle = self.triangles[triangle.index]
                             neighbor = self.triangles[neighbor.index]
                             
-                            for j in 0...2 {
-                                let ni = triangle.neighbors[j]
-                                if ni >= 0 && ni != neighbor.index {
-                                    buffer.append(ni)
-                                }
+                            let tna = triangle.neighbors.a
+                            if tna >= 0 && tna != neighbor.index {
+                                buffer.append(tna)
                             }
-
-                            for j in 0...2 {
-                                let ni = neighbor.neighbors[j]
-                                if ni >= 0 && ni != triangle.index {
-                                    buffer.append(ni)
-                                }
+                            
+                            let tnb = triangle.neighbors.b
+                            if tnb >= 0 && tnb != neighbor.index {
+                                buffer.append(tnb)
+                            }
+                            
+                            let tnc = triangle.neighbors.c
+                            if tnc >= 0 && tnc != neighbor.index {
+                                buffer.append(tnc)
+                            }
+                            
+                            let nna = neighbor.neighbors.a
+                            if nna >= 0 && nna != triangle.index {
+                                buffer.append(nna)
+                            }
+                            
+                            let nnb = neighbor.neighbors.b
+                            if nnb >= 0 && nnb != triangle.index {
+                                buffer.append(nnb)
+                            }
+                            
+                            let nnc = neighbor.neighbors.c
+                            if nnc >= 0 && nnc != triangle.index {
+                                buffer.append(nnc)
                             }
                         }
                     }
@@ -71,7 +87,7 @@ public struct Delaunay {
                         break
                     }
                     visitIndex &+= 1
-                }   
+                }
             }
             origin = buffer
         }
@@ -92,25 +108,40 @@ public struct Delaunay {
                     if neighborIndex >= 0 {
                         var neighbor = triangles[neighborIndex]
                         if self.swap(abc: triangle, pbc: neighbor) {
-
                             indexBuffer.add(index: triangle.index)
                             indexBuffer.add(index: neighbor.index)
                             
                             triangle = self.triangles[triangle.index]
                             neighbor = self.triangles[neighbor.index]
-                            
-                            for j in 0...2 {
-                                let ni = triangle.neighbors[j]
-                                if ni >= 0 && ni != neighbor.index {
-                                    buffer.append(ni)
-                                }
-                            }
 
-                            for j in 0...2 {
-                                let ni = neighbor.neighbors[j]
-                                if ni >= 0 && ni != triangle.index {
-                                    buffer.append(ni)
-                                }
+                            let tna = triangle.neighbors.a
+                            if tna >= 0 && tna != neighbor.index {
+                                buffer.append(tna)
+                            }
+                            
+                            let tnb = triangle.neighbors.b
+                            if tnb >= 0 && tnb != neighbor.index {
+                                buffer.append(tnb)
+                            }
+                            
+                            let tnc = triangle.neighbors.c
+                            if tnc >= 0 && tnc != neighbor.index {
+                                buffer.append(tnc)
+                            }
+                            
+                            let nna = neighbor.neighbors.a
+                            if nna >= 0 && nna != triangle.index {
+                                buffer.append(nna)
+                            }
+                            
+                            let nnb = neighbor.neighbors.b
+                            if nnb >= 0 && nnb != triangle.index {
+                                buffer.append(nnb)
+                            }
+                            
+                            let nnc = neighbor.neighbors.c
+                            if nnc >= 0 && nnc != triangle.index {
+                                buffer.append(nnc)
                             }
                         }
                     }
@@ -125,14 +156,34 @@ public struct Delaunay {
         let pi = pbc.opposite(neighbor: abc.index)
         let p = pbc.vertices[pi]
         
-        let ai = abc.opposite(neighbor: pbc.index)
-        let bi = (ai + 1) % 3
-        let ci = (ai + 2) % 3
+        let ai: Int
+        let bi: Int
+        let ci: Int
+        let a: Vertex  // opposite a-p
+        let b: Vertex  // edge bc
+        let c: Vertex
         
-        let a = abc.vertices[ai]  // opposite a-p
-        let b = abc.vertices[bi]  // edge bc
-        let c = abc.vertices[ci]
-        
+        ai = abc.opposite(neighbor: pbc.index)
+        switch ai {
+        case 0:
+            bi = 1
+            ci = 2
+            a = abc.vertices.a
+            b = abc.vertices.b
+            c = abc.vertices.c
+        case 1:
+            bi = 2
+            ci = 0
+            a = abc.vertices.b
+            b = abc.vertices.c
+            c = abc.vertices.a
+        default:
+            bi = 0
+            ci = 1
+            a = abc.vertices.c
+            b = abc.vertices.a
+            c = abc.vertices.b
+        }
         
         let isPrefect = Delaunay.isDelaunay(p0: p.point, p1: c.point, p2: a.point, p3: b.point)
 
@@ -227,18 +278,18 @@ public struct Delaunay {
 //        self.debugDelaunay(p0: p0, p1: p1, p2: p2, p3: p3)
 //        #endif
         
-        let x01 = p0.x - p1.x
-        let x03 = p0.x - p3.x
-        let x12 = p1.x - p2.x
-        let x32 = p3.x - p2.x
+        let x01 = p0.x &- p1.x
+        let x03 = p0.x &- p3.x
+        let x12 = p1.x &- p2.x
+        let x32 = p3.x &- p2.x
         
-        let y01 = p0.y - p1.y
-        let y03 = p0.y - p3.y
-        let y12 = p1.y - p2.y
-        let y23 = p2.y - p3.y
+        let y01 = p0.y &- p1.y
+        let y03 = p0.y &- p3.y
+        let y12 = p1.y &- p2.y
+        let y23 = p2.y &- p3.y
         
-        let cosA = x01 * x03 + y01 * y03
-        let cosB = x12 * x32 - y12 * y23
+        let cosA = x01 &* x03 &+ y01 &* y03
+        let cosB = x12 &* x32 &- y12 &* y23
         
         if cosA < 0 && cosB < 0 {
             return false
@@ -252,18 +303,24 @@ public struct Delaunay {
         // sinA * cosB + cosA * sinB ? 0
         // cause we need weak Delaunay condition
         
-        let sinA = x01 * y03 - x03 * y01
-        let sinB = x12 * y23 + x32 * y12
+        let sinA = x01 &* y03 &- x03 &* y01
+        let sinB = x12 &* y23 &+ x32 &* y12
 
-        let sl01 = x01 * x01 + y01 * y01
-        let sl03 = x03 * x03 + y03 * y03
-        let sl12 = x12 * x12 + y12 * y12
-        let sl23 = x32 * x32 + y23 * y23
+        let sl01 = x01 &* x01 &+ y01 &* y01
+        let sl03 = x03 &* x03 &+ y03 &* y03
+        let sl12 = x12 &* x12 &+ y12 &* y12
+        let sl23 = x32 &* x32 &+ y23 &* y23
         
         let max0 = Double(sl01 > sl03 ? sl01 : sl03)
         let max1 = Double(sl12 > sl23 ? sl12 : sl23)
         
-        let sinAB = (Double(sinA) * Double(cosB) + Double(cosA) * Double(sinB)) / (max0 * max1)
+        
+        let dSinA = Double(sinA)
+        let dCosA = Double(cosA)
+        let dSinB = Double(sinB)
+        let dCosB = Double(cosB)
+
+        let sinAB = (dSinA * dCosB + dCosA * dSinB) / (max0 * max1)
 
         return sinAB < 0.001
     }

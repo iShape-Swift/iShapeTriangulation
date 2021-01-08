@@ -14,7 +14,7 @@ struct IndexBuffer {
         self.array = [Int](repeating: 0, count: count)
         self.map = [Bool](repeating: true, count: count)
         for i in 0..<count {
-            self.array[i] = count - i - 1
+            self.array[i] = count &- i &- 1
         }
     }
 
