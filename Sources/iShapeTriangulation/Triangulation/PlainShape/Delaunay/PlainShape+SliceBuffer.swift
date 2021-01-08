@@ -61,9 +61,9 @@ extension PlainShape {
             
             for i in 0..<n {
                 var triangle = triangles[i]
-                let a = triangle.vertices[0].index
-                let b = triangle.vertices[1].index
-                let c = triangle.vertices[2].index
+                let a = triangle.vertices.a.index
+                let b = triangle.vertices.b.index
+                let c = triangle.vertices.c.index
                 
                 var edgeIndex = self.find(a: a, b: b)
                 if edgeIndex >= 0 {
@@ -73,7 +73,7 @@ extension PlainShape {
                         edge.edge = 2
                         self.edges[edgeIndex] = edge
                     } else {
-                        triangle.neighbors[2] = edge.triangle
+                        triangle.neighbors.c = edge.triangle
                         var neighbor = triangles[edge.triangle]
                         neighbor.neighbors[edge.edge] = i
                         triangles[edge.triangle] = neighbor
@@ -89,7 +89,7 @@ extension PlainShape {
                         edge.edge = 1
                         self.edges[edgeIndex] = edge
                     } else {
-                        triangle.neighbors[1] = edge.triangle
+                        triangle.neighbors.b = edge.triangle
                         var neighbor = triangles[edge.triangle]
                         neighbor.neighbors[edge.edge] = i
                         triangles[edge.triangle] = neighbor
@@ -105,7 +105,7 @@ extension PlainShape {
                         edge.edge = 0
                         self.edges[edgeIndex] = edge
                     } else {
-                        triangle.neighbors[0] = edge.triangle
+                        triangle.neighbors.a = edge.triangle
                         var neighbor = triangles[edge.triangle]
                         neighbor.neighbors[edge.edge] = i
                         triangles[edge.triangle] = neighbor

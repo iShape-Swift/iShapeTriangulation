@@ -20,8 +20,9 @@ final class MeshBuilder {
     
     private var k: Float = 0
     private var d: Float = 0.005
-    private let n = 1024
+    private let n = 256
     private let radius: Float = 0.6
+    private let triangulator = Triangulator(iGeom: .defGeom)
 
     func next(device: MTLDevice) -> Mesh {
         if k < -0.5 {
@@ -57,9 +58,8 @@ final class MeshBuilder {
             hole[i] = Point(x: 0.5 * v.x, y: 0.5 * v.y)
         }
         
-        let shape = PlainShape(iGeom: IntGeom.defGeom, hull: hull, holes: [hole])
-        let indices = shape.delaunay().trianglesIndices.map( { uint16($0) })
-        let points = IntGeom.defGeom.float(points: shape.points)
+        let points = hull + hole
+        let indices = triangulator.triangulateDelaunay(points: points, hull: points[0..<hull.count], holes: [points[hull.count...]], extraPoints: nil).map( { uint16($0) })
         
         let vertexSize = points.count * MemoryLayout.size(ofValue: points[0])
         let vertexBuffer = device.makeBuffer(bytes: points, length: vertexSize, options: [.cpuCacheModeWriteCombined])!
@@ -71,3 +71,4 @@ final class MeshBuilder {
     }
 
 }
+

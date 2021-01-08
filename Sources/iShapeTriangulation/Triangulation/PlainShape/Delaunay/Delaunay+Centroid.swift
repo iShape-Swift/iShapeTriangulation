@@ -58,16 +58,16 @@ extension Delaunay {
                         let path: [IntPoint]
                         switch j {
                         case 0: // a
-                            let ab = v.point.center(point: triangle.vertices[1].point)
-                            let ca = v.point.center(point: triangle.vertices[2].point)
+                            let ab = v.point.center(point: triangle.vertices.b.point)
+                            let ca = v.point.center(point: triangle.vertices.c.point)
                             path = [v.point, ab, detail.center, ca]
                         case 1: // b
-                            let bc = v.point.center(point: triangle.vertices[2].point)
-                            let ab = v.point.center(point: triangle.vertices[0].point)
+                            let bc = v.point.center(point: triangle.vertices.c.point)
+                            let ab = v.point.center(point: triangle.vertices.a.point)
                             path = [v.point, bc, detail.center, ab]
                         default: // c
-                            let ca = v.point.center(point: triangle.vertices[0].point)
-                            let bc = v.point.center(point: triangle.vertices[1].point)
+                            let ca = v.point.center(point: triangle.vertices.a.point)
+                            let bc = v.point.center(point: triangle.vertices.b.point)
                             path = [v.point, ca, detail.center, bc]
                         }
                         
@@ -218,9 +218,9 @@ private extension Delaunay.Triangle {
     
     @inline(__always)
     var center: IntPoint {
-        let a = self.vertices[0].point
-        let b = self.vertices[1].point
-        let c = self.vertices[2].point
+        let a = self.vertices.a.point
+        let b = self.vertices.b.point
+        let c = self.vertices.c.point
         return IntPoint(x: (a.x + b.x + c.x) / 3, y: (a.y + b.y + c.y) / 3)
     }
 }

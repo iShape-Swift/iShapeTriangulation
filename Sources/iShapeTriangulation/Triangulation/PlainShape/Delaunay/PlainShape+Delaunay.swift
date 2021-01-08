@@ -55,15 +55,15 @@ public extension PlainShape {
             
             if let ac = self.pop(a: a.index, b: c.index) {
                 var neighbor = triangles[ac.neighbor]
-                neighbor.neighbors[0] = triangle.index
-                triangle.neighbors[1] = neighbor.index
+                neighbor.neighbors.a = triangle.index
+                triangle.neighbors.b = neighbor.index
                 self.triangles[neighbor.index] = neighbor
             }
             
             if let ab = self.pop(a: a.index, b: b.index) {
                 var neighbor = triangles[ab.neighbor]
-                neighbor.neighbors[0] = triangle.index
-                triangle.neighbors[2] = neighbor.index
+                neighbor.neighbors.a = triangle.index
+                triangle.neighbors.c = neighbor.index
                 self.triangles[neighbor.index] = neighbor
             }
             

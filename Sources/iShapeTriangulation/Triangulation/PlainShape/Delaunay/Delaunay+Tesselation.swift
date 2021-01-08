@@ -27,9 +27,9 @@ extension Delaunay {
 
         @inline(__always)
         func testRegular(triangle: Triangle) -> Int {
-            let a = iGeom.float(point: triangle.vertices[0].point)
-            let b = iGeom.float(point: triangle.vertices[1].point)
-            let c = iGeom.float(point: triangle.vertices[2].point)
+            let a = iGeom.float(point: triangle.vertices.a.point)
+            let b = iGeom.float(point: triangle.vertices.b.point)
+            let c = iGeom.float(point: triangle.vertices.c.point)
 
             let ab = a.sqrDistance(point: b)
             let ca = c.sqrDistance(point: a)
@@ -164,14 +164,14 @@ extension Delaunay {
                 t0.vertices[k_prev] = vertex
                 t0.neighbors[k_next] = n
                 self.triangles[i] = t0
-                assert(IntTriangle.isCCW_or_Line(a: t0.vertices[0].point, b: t0.vertices[1].point, c: t0.vertices[2].point), "Triangle's points are not clock-wise ordered")
+                assert(IntTriangle.isCCW_or_Line(a: t0.vertices.a.point, b: t0.vertices.b.point, c: t0.vertices.c.point), "Triangle's points are not clock-wise ordered")
                 unprocessed.add(index: t0.index)
                 
                 var t1 = neighbor
                 t1.vertices[l_next] = vertex
                 t1.neighbors[l_prev] = n + 1
                 self.triangles[nIx] = t1
-                assert(IntTriangle.isCCW_or_Line(a: t1.vertices[0].point, b: t1.vertices[1].point, c: t1.vertices[2].point), "Triangle's points are not clock-wise ordered")
+                assert(IntTriangle.isCCW_or_Line(a: t1.vertices.a.point, b: t1.vertices.b.point, c: t1.vertices.c.point), "Triangle's points are not clock-wise ordered")
                 unprocessed.add(index: t1.index)
                 
                 let t2Neighbor = triangle.neighbors[k_next]
@@ -230,9 +230,9 @@ private extension Delaunay.Triangle {
     
     @inline(__always)
     var circumscribedCenter: IntPoint {
-        let a = self.vertices[0].point
-        let b = self.vertices[1].point
-        let c = self.vertices[2].point
+        let a = self.vertices.a.point
+        let b = self.vertices.b.point
+        let c = self.vertices.c.point
         let ax = Double(a.x)
         let ay = Double(a.y)
         let bx = Double(b.x)
@@ -252,17 +252,17 @@ private extension Delaunay.Triangle {
     
     @inline(__always)
     private var area: Int64 {
-        let a = self.vertices[0].point
-        let b = self.vertices[1].point
-        let c = self.vertices[2].point
+        let a = self.vertices.a.point
+        let b = self.vertices.b.point
+        let c = self.vertices.c.point
         return (a.x * (c.y - b.y) + b.x * (a.y - c.y) + c.x * (b.y - a.y)) / 2
     }
 
     @inline(__always)
     func isContain(p: IntPoint) -> Bool {
-        let a = self.vertices[0].point
-        let b = self.vertices[1].point
-        let c = self.vertices[2].point
+        let a = self.vertices.a.point
+        let b = self.vertices.b.point
+        let c = self.vertices.c.point
         
         let d1 = Delaunay.Triangle.sign(a: p, b: a, c: b)
         let d2 = Delaunay.Triangle.sign(a: p, b: b, c: c)

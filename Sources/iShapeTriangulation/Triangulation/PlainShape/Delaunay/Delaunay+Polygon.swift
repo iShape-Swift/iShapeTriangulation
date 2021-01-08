@@ -95,25 +95,25 @@ extension Delaunay {
 
         init(triangle: Triangle) {
             self.links = [
-                PlainShape.Link(prev: 2, this: 0, next: 1, vertex: triangle.vertices[0]),
-                PlainShape.Link(prev: 0, this: 1, next: 2, vertex: triangle.vertices[1]),
-                PlainShape.Link(prev: 1, this: 2, next: 0, vertex: triangle.vertices[2])
+                PlainShape.Link(prev: 2, this: 0, next: 1, vertex: triangle.vertices.a),
+                PlainShape.Link(prev: 0, this: 1, next: 2, vertex: triangle.vertices.b),
+                PlainShape.Link(prev: 1, this: 2, next: 0, vertex: triangle.vertices.c)
             ]
             
             self.edges = [Edge]()
             self.edges.reserveCapacity(3)
             
-            let ab = triangle.neighbors[2]
+            let ab = triangle.neighbors.c
             if ab >= 0 {
                 self.edges.append(Edge(triangleIndex: triangle.index, neighbor: ab, a: 0, b: 1))
             }
             
-            let bc = triangle.neighbors[0]
+            let bc = triangle.neighbors.a
             if bc >= 0 {
                 self.edges.append(Edge(triangleIndex: triangle.index, neighbor: bc, a: 1, b: 2))
             }
             
-            let ca = triangle.neighbors[1]
+            let ca = triangle.neighbors.b
             if ca >= 0 {
                 self.edges.append(Edge(triangleIndex: triangle.index, neighbor: ca, a: 2, b: 0))
             }
