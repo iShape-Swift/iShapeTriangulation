@@ -38,9 +38,9 @@ extension PlainShape {
         
         let n: Int
         if let extraPoints = extraPoints {
-            n = splitLayout.nodes.count + extraPoints.count
+            n = pathCount + extraPoints.count
         } else {
-            n = splitLayout.nodes.count
+            n = pathCount
         }
 
         var links = Array<Link>(repeating: .empty, count: n)
@@ -117,11 +117,9 @@ extension PlainShape {
         }
         
         if let extraPoints = extraPoints {
-            let m = splitLayout.nodes.count
-            
             for i in 0..<extraPoints.count {
                 let p = extraPoints[i]
-                let j = i + m
+                let j = i + pathCount
                 links[j] = Link(prev: j, this: j, next: j, vertex: Vertex(index: j, nature: .extraInner, point: p))
                 natures[j] = .extra
             }

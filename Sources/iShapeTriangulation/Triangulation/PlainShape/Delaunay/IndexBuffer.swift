@@ -8,13 +8,15 @@
 struct IndexBuffer {
     
     private var array: [Int]
-    private var map: [Bool]
+    private var map: [Int]
     
     init(count: Int) {
         self.array = [Int](repeating: 0, count: count)
-        self.map = [Bool](repeating: true, count: count)
+        self.map = [Int](repeating: -1, count: count)
         for i in 0..<count {
-            self.array[i] = count &- i &- 1
+            let index = count &- i &- 1
+            self.array[i] = index
+            self.map[index] = i
         }
     }
 
@@ -26,7 +28,7 @@ struct IndexBuffer {
     @inline(__always)
     mutating func next() -> Int {
         let last = self.array.removeLast()
-        self.map[last] = false
+        self.map[last] = -1
         return last
     }
 
@@ -35,32 +37,23 @@ struct IndexBuffer {
         if index >= self.map.count {
             let n = self.map.count - index
             for _ in 0...n {
-                self.map.append(false)
+                self.map.append(-1)
             }
-            self.map[index] = true
+            self.map[index] = self.array.count
             self.array.append(index)
-        } else if !self.map[index] {
-            self.map[index] = true
+        } else if self.map[index] == -1 {
+            self.map[index] = self.array.count
             self.array.append(index)
         }
     }
 
     @inline(__always)
     mutating func remove(index: Int) {
-        if self.map[index] {
-            self.map[index] = false
-            if let j = array.firstIndex(where: { $0 == index }) {
-                array.remove(at: j)
-            }
+        let j = self.map[index]
+        if j >= 0 {
+            self.map[index] = -1
+            self.array.remove(at: j)
         }
     }
-    
-    @inline(__always)
-    mutating func decrease() {
-        self.map.removeLast()
-        let count = self.map.count
-        if let index = array.firstIndex(where: { $0 >= count }) {
-            array.remove(at: index)
-        }
-    }
+
 }
