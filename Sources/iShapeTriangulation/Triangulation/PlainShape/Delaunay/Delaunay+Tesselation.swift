@@ -101,114 +101,111 @@ extension Delaunay {
         
         var unprocessed = IndexBuffer(count: self.triangles.count)
 
-        repeat {
-        
-            while unprocessed.hasNext {
-                let i = unprocessed.next()
-                let triangle = self.triangles[i]
+        while unprocessed.hasNext {
+            let i = unprocessed.next()
+            let triangle = self.triangles[i]
 
-                let k = validator.testRegular(triangle: triangle)
+            let k = validator.testRegular(triangle: triangle)
 
-                guard k >= 0 else {
-                    continue
-                }
-                
-                let nIx = triangle.neighbors[k]
-                
-                guard nIx >= 0 else {
-                    continue
-                }
-
-                let p = triangle.circumscribedCenter
-
-                let neighbor = self.triangles[nIx]
-                guard neighbor.isContain(p: p) else {
-                    continue
-                }
-                
-                let j = neighbor.opposite(neighbor: triangle.index)
-                let j_next = (j &+ 1) % 3
-                let j_prev = (j &+ 2) % 3
-
-                if neighbor.neighbors[j_next] == -1 || neighbor.neighbors[j_prev] == -1 {
-                    let njp = neighbor.vertices[j].point
-                    let nextCos = Validator.sqrCos(a: neighbor.vertices[j_prev].point, b: njp, c: p)
-                    if nextCos > Validator.sqrMergeCos {
-                        continue
-                    }
-                    
-                    let prevCos = Validator.sqrCos(a: njp, b: neighbor.vertices[j_next].point, c: p)
-                    if prevCos > Validator.sqrMergeCos {
-                        continue
-                    }
-                }
-
-                let k_next = (k &+ 1) % 3
-                let k_prev = (k &+ 2) % 3
-                
-                let l = neighbor.opposite(neighbor: i)
-
-                let l_next = (l &+ 1) % 3
-                let l_prev = (l &+ 2) % 3
-                
-                let vertex = Vertex(index: self.points.count, nature: .extraTessellated, point: p)
-                self.points.append(p)
-                
-                let n = self.triangles.count
-
-                var t0 = triangle
-                t0.vertices[k_prev] = vertex
-                t0.neighbors[k_next] = n
-                self.triangles[i] = t0
-                assert(IntTriangle.isCCW_or_Line(a: t0.vertices.a.point, b: t0.vertices.b.point, c: t0.vertices.c.point), "Triangle's points are not clock-wise ordered")
-                unprocessed.add(index: t0.index)
-                
-                var t1 = neighbor
-                t1.vertices[l_next] = vertex
-                t1.neighbors[l_prev] = n &+ 1
-                self.triangles[nIx] = t1
-                assert(IntTriangle.isCCW_or_Line(a: t1.vertices.a.point, b: t1.vertices.b.point, c: t1.vertices.c.point), "Triangle's points are not clock-wise ordered")
-                unprocessed.add(index: t1.index)
-                
-                let t2Neighbor = triangle.neighbors[k_next]
-                let t2 = Triangle(
-                    index: n,
-                    a: triangle.vertices[k],
-                    b: vertex,
-                    c: triangle.vertices[k_prev],
-                    bc: n &+ 1,
-                    ac: t2Neighbor,
-                    ab: i
-                )
-
-                if t2Neighbor >= 0 {
-                    self.triangles[t2Neighbor].updateOpposite(oldNeighbor: i, newNeighbor: n)
-                }
-
-                self.triangles.append(t2)
-                unprocessed.add(index: t2.index)
-
-                let t3Neighbor = neighbor.neighbors[l_prev]
-                let t3 = Triangle(
-                   index: n &+ 1,
-                   a: neighbor.vertices[l],
-                   b: neighbor.vertices[l_next],
-                   c: vertex,
-                   bc: n,
-                   ac: nIx,
-                   ab: t3Neighbor
-                )
-
-                if t3Neighbor >= 0 {
-                    self.triangles[t3Neighbor].updateOpposite(oldNeighbor: nIx, newNeighbor: n &+ 1)
-                }
-
-                self.triangles.append(t3)
-                unprocessed.add(index: t3.index)
-
-                self.fix(indices: [i, nIx, n, n &+ 1], indexBuffer: &unprocessed)
+            guard k >= 0 else {
+                continue
             }
-        } while unprocessed.hasNext
+            
+            let nIx = triangle.neighbors[k]
+            
+            guard nIx >= 0 else {
+                continue
+            }
+
+            let p = triangle.circumscribedCenter
+
+            let neighbor = self.triangles[nIx]
+            guard neighbor.isContain(p: p) else {
+                continue
+            }
+            
+            let j = neighbor.opposite(neighbor: triangle.index)
+            let j_next = (j &+ 1) % 3
+            let j_prev = (j &+ 2) % 3
+
+            if neighbor.neighbors[j_next] == -1 || neighbor.neighbors[j_prev] == -1 {
+                let njp = neighbor.vertices[j].point
+                let nextCos = Validator.sqrCos(a: neighbor.vertices[j_prev].point, b: njp, c: p)
+                if nextCos > Validator.sqrMergeCos {
+                    continue
+                }
+                
+                let prevCos = Validator.sqrCos(a: njp, b: neighbor.vertices[j_next].point, c: p)
+                if prevCos > Validator.sqrMergeCos {
+                    continue
+                }
+            }
+
+            let k_next = (k &+ 1) % 3
+            let k_prev = (k &+ 2) % 3
+            
+            let l = neighbor.opposite(neighbor: i)
+
+            let l_next = (l &+ 1) % 3
+            let l_prev = (l &+ 2) % 3
+            
+            let vertex = Vertex(index: self.points.count, nature: .extraTessellated, point: p)
+            self.points.append(p)
+            
+            let n = self.triangles.count
+
+            var t0 = triangle
+            t0.vertices[k_prev] = vertex
+            t0.neighbors[k_next] = n
+            self.triangles[i] = t0
+            assert(IntTriangle.isCCW_or_Line(a: t0.vertices.a.point, b: t0.vertices.b.point, c: t0.vertices.c.point), "Triangle's points are not clock-wise ordered")
+            unprocessed.add(index: t0.index)
+            
+            var t1 = neighbor
+            t1.vertices[l_next] = vertex
+            t1.neighbors[l_prev] = n &+ 1
+            self.triangles[nIx] = t1
+            assert(IntTriangle.isCCW_or_Line(a: t1.vertices.a.point, b: t1.vertices.b.point, c: t1.vertices.c.point), "Triangle's points are not clock-wise ordered")
+            unprocessed.add(index: t1.index)
+            
+            let t2Neighbor = triangle.neighbors[k_next]
+            let t2 = Triangle(
+                index: n,
+                a: triangle.vertices[k],
+                b: vertex,
+                c: triangle.vertices[k_prev],
+                bc: n &+ 1,
+                ac: t2Neighbor,
+                ab: i
+            )
+
+            if t2Neighbor >= 0 {
+                self.triangles[t2Neighbor].updateOpposite(oldNeighbor: i, newNeighbor: n)
+            }
+
+            self.triangles.append(t2)
+            unprocessed.add(index: t2.index)
+
+            let t3Neighbor = neighbor.neighbors[l_prev]
+            let t3 = Triangle(
+               index: n &+ 1,
+               a: neighbor.vertices[l],
+               b: neighbor.vertices[l_next],
+               c: vertex,
+               bc: n,
+               ac: nIx,
+               ab: t3Neighbor
+            )
+
+            if t3Neighbor >= 0 {
+                self.triangles[t3Neighbor].updateOpposite(oldNeighbor: nIx, newNeighbor: n &+ 1)
+            }
+
+            self.triangles.append(t3)
+            unprocessed.add(index: t3.index)
+
+            self.fix(indices: [i, nIx, n, n &+ 1], indexBuffer: &unprocessed)
+        }
     }
 }
 
@@ -234,14 +231,6 @@ private extension Delaunay.Triangle {
         let y = (aa * (cx - bx) + bb * (ax - cx) + cc * (bx - ax)) / d
 
         return IntPoint(x: Int64(x.rounded(.toNearestOrAwayFromZero)), y: Int64(y.rounded(.toNearestOrAwayFromZero)))
-    }
-    
-    @inline(__always)
-    private var area: Int64 {
-        let a = self.vertices.a.point
-        let b = self.vertices.b.point
-        let c = self.vertices.c.point
-        return (a.x &* (c.y &- b.y) &+ b.x &* (a.y &- c.y) &+ c.x &* (b.y &- a.y)) >> 1
     }
 
     @inline(__always)
