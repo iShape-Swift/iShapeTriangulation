@@ -97,10 +97,6 @@ extension Delaunay {
     }
     
     mutating func tessellate(iGeom: IntGeom, maxArea: Float) {
-        var extraPoints = [Vertex]()
-        let originCount = self.points.count
-        var extraPointsIndex = originCount
-        
         let validator = Validator(iGeom: iGeom, maxArea: maxArea)
         
         var unprocessed = IndexBuffer(count: self.triangles.count)
@@ -135,12 +131,13 @@ extension Delaunay {
                 let j_prev = (j &+ 2) % 3
 
                 if neighbor.neighbors[j_next] == -1 || neighbor.neighbors[j_prev] == -1 {
-                    let nextCos = Validator.sqrCos(a: neighbor.vertices[j_prev].point, b: neighbor.vertices[j].point, c: p)
+                    let njp = neighbor.vertices[j].point
+                    let nextCos = Validator.sqrCos(a: neighbor.vertices[j_prev].point, b: njp, c: p)
                     if nextCos > Validator.sqrMergeCos {
                         continue
                     }
                     
-                    let prevCos = Validator.sqrCos(a: neighbor.vertices[j].point, b: neighbor.vertices[j_next].point, c: p)
+                    let prevCos = Validator.sqrCos(a: njp, b: neighbor.vertices[j_next].point, c: p)
                     if prevCos > Validator.sqrMergeCos {
                         continue
                     }
@@ -154,11 +151,10 @@ extension Delaunay {
                 let l_next = (l &+ 1) % 3
                 let l_prev = (l &+ 2) % 3
                 
-                let vertex = Vertex(index: extraPointsIndex, nature: .extraTessellated, point: p)
-                extraPoints.append(vertex)
+                let vertex = Vertex(index: self.points.count, nature: .extraTessellated, point: p)
+                self.points.append(p)
                 
                 let n = self.triangles.count
-                extraPointsIndex &+= 1
 
                 var t0 = triangle
                 t0.vertices[k_prev] = vertex
@@ -213,8 +209,6 @@ extension Delaunay {
                 self.fix(indices: [i, nIx, n, n &+ 1], indexBuffer: &unprocessed)
             }
         } while unprocessed.hasNext
-        
-        self.points += extraPoints.map({ $0.point })
     }
 }
 
