@@ -13,19 +13,6 @@ extension Delaunay {
         let center: IntPoint
         let count: Int
     }
-    
-    public func getCenters(intGeom: IntGeom) -> [Point] {
-        let n = self.triangles.count
-        var points = [Point]()
-        points.reserveCapacity(n)
-        
-        for triangle in self.triangles {
-            let center = triangle.center
-            points.append(intGeom.float(point: center))
-        }
-
-        return points
-    }
 
     func makeCentroidNet(minArea: Int64 = 0, onlyConvex: Bool = false) -> [[IntPoint]] {
         let n = self.triangles.count
@@ -34,8 +21,16 @@ extension Delaunay {
         for i in 0..<n {
             let triangle = self.triangles[i]
             var count = 0
-            for j in 0...2 where triangle.neighbors[j] >= 0 {
-                count &+= 1
+            if triangle.neighbors.a >= 0 {
+                count += 1
+            }
+
+            if triangle.neighbors.b >= 0 {
+                count += 1
+            }
+
+            if triangle.neighbors.c >= 0 {
+                count += 1
             }
             details[i] = Detail(center: triangle.center, count: count)
         }
@@ -71,7 +66,7 @@ extension Delaunay {
                             path = [v.point, ca, detail.center, bc]
                         }
                         
-                        if path.area > minArea  {
+                        if minArea == 0 || path.area > minArea  {
                             result.append(path)
                         }
                     } else {
@@ -138,7 +133,7 @@ extension Delaunay {
                                 if v0.crossProduct(point: v1) <= 0 && d0.crossProduct(point: d1) <= 0 {
                                     subPath.append(p1)
                                 } else {
-                                    if subPath.area > minArea  {
+                                    if minArea == 0 || subPath.area > minArea  {
                                         result.append(subPath)
                                     }
                                     subPath.removeAll()
@@ -151,12 +146,12 @@ extension Delaunay {
                                 d0 = d1
                             }
 
-                            if subPath.area > minArea  {
+                            if minArea == 0 || subPath.area > minArea  {
                                 result.append(subPath)
                             }
                         } else {
                             path.append(v.point)
-                            if path.area > minArea  {
+                            if minArea == 0 || path.area > minArea  {
                                 result.append(path)
                             }
                         }
@@ -174,7 +169,7 @@ extension Delaunay {
                         next = t.neighbors[index]
                     } while next != start && next>=0
                     
-                    if path.area > minArea  {
+                    if minArea == 0 || path.area > minArea  {
                         result.append(path)
                     }
                 }
@@ -184,34 +179,6 @@ extension Delaunay {
 
         return result
     }
-
-    @inline(__always)
-    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
-        let dxA = a0.x - a1.x
-        let dyB = b0.y - b1.y
-        let dyA = a0.y - a1.y
-        let dxB = b0.x - b1.x
-        
-        let divider = dxA * dyB - dyA * dxB
-        
-        if divider != 0 {
-            let xyA = Double(a0.x * a1.y - a0.y * a1.x)
-            let xyB = Double(b0.x * b1.y - b0.y * b1.x)
-            
-            let invert_divider: Double = 1.0 / Double(divider)
-            
-            let x = xyA * Double(b0.x - b1.x) - Double(a0.x - a1.x) * xyB
-            let y = xyA * Double(b0.y - b1.y) - Double(a0.y - a1.y) * xyB
-
-            let cx = x * invert_divider
-            let cy = y * invert_divider
-
-            return IntPoint(x: Int64(cx.rounded(.toNearestOrAwayFromZero)), y: Int64(cy.rounded(.toNearestOrAwayFromZero)))
-        } else {
-            return IntPoint(x: (a0.x &+ a1.x) >> 1, y: (a0.y &+ a1.y) >> 1)
-        }
-    }
-    
 }
 
 private extension Delaunay.Triangle {

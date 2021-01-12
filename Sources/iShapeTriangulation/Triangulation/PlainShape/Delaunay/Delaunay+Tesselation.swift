@@ -100,7 +100,8 @@ extension Delaunay {
         let validator = Validator(iGeom: iGeom, maxArea: maxArea)
         
         var unprocessed = IndexBuffer(count: self.triangles.count)
-
+        var fixIndices = [0, 0, 0, 0]
+        
         while unprocessed.hasNext {
             let i = unprocessed.next()
             let triangle = self.triangles[i]
@@ -203,8 +204,13 @@ extension Delaunay {
 
             self.triangles.append(t3)
             unprocessed.add(index: t3.index)
+            
+            fixIndices[0] = i
+            fixIndices[1] = nIx
+            fixIndices[2] = n
+            fixIndices[3] = n &+ 1
 
-            self.fix(indices: [i, nIx, n, n &+ 1], indexBuffer: &unprocessed)
+            self.fix(indices: fixIndices, indexBuffer: &unprocessed)
         }
     }
 }
