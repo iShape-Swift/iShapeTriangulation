@@ -22,7 +22,11 @@ extension Delaunay {
         
         init(iGeom: IntGeom, maxArea: Float) {
             self.iGeom = iGeom
-            self.maxArea = 2 * maxArea
+            if maxArea > 0 {
+                self.maxArea = 2 * maxArea
+            } else {
+                self.maxArea = .infinity
+            }
         }
 
         @inline(__always)
