@@ -8,8 +8,7 @@
 struct IndexBuffer {
     
     private struct Link {
-        static let empty = Link(prev: -1, empty: true, next: -1)
-        var prev: Int
+        static let empty = Link(empty: true, next: -1)
         let empty: Bool
         var next: Int
     }
@@ -26,7 +25,7 @@ struct IndexBuffer {
         self.first = 0
         self.array = [Link](repeating: .empty, count: count)
         for i in 0..<count {
-            self.array[i] = Link(prev: i - 1, empty: false, next: i + 1)
+            self.array[i] = Link(empty: false, next: i + 1)
         }
         self.array[count - 1].next = -1
     }
@@ -41,10 +40,6 @@ struct IndexBuffer {
         let index = first
         first = array[index].next
         
-        // remove
-        if first >= 0 {
-            array[first].prev = -1
-        }
         array[index] = .empty
 
         return index
@@ -55,31 +50,14 @@ struct IndexBuffer {
         let isOverflow = index >= self.array.count
         if isOverflow || self.array[index].empty {
             if isOverflow {
-                let n = self.array.count - index
+                let n = index - self.array.count
                 for _ in 0...n {
                     self.array.append(.empty)
                 }
             }
-            array[index] = Link(prev: -1, empty: false, next: first)
-            if first >= 0 {
-                array[first].prev = index
-            }
-            first = index
-        }
-    }
+            array[index] = Link(empty: false, next: first)
 
-    @inline(__always)
-    mutating func remove(index: Int) {
-        let link = array[index]
-        if link.next >= 0 {
-            array[link.next].prev = link.prev
-        }
-        if link.prev >= 0 {
-            array[link.prev].next = link.next
-        }
-        array[index] = .empty
-        if first == index {
-            first = link.next
+            first = index
         }
     }
 
