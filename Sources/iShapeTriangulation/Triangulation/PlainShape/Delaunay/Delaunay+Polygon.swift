@@ -27,12 +27,10 @@ extension Delaunay {
             var result = [Int](repeating: 0, count: n + 1)
             result[0] = n
             var link = self.links[0]
-            var i = 1
-            repeat {
+            for i in 1...n {
                 result[i] = link.vertex.index
                 link = self.links[link.next]
-                i += 1
-            } while i <= n
+            }
 
             return result
         }
