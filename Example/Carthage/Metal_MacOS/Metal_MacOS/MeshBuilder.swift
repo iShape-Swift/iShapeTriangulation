@@ -20,7 +20,7 @@ final class MeshBuilder {
     
     private var k: Float = 0
     private var d: Float = 0.005
-    private let n = 256
+    private let n = 1024
     private let radius: Float = 0.6
     private let triangulator = Triangulator(iGeom: .defGeom)
 
