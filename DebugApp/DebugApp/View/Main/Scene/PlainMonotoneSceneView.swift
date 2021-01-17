@@ -17,9 +17,11 @@ struct PlainMonotoneSceneView: View {
     
     private let sceneState: SceneState
     private let iGeom = IntGeom.defGeom
+    private let isDisabled: Bool
 
-    init(sceneState: SceneState) {
+    init(sceneState: SceneState, isDisabled: Bool) {
         self.sceneState = sceneState
+        self.isDisabled = isDisabled
     }
     
     private struct Triangle {
@@ -28,19 +30,24 @@ struct PlainMonotoneSceneView: View {
     }
     
     var body: some View {
-        let points = state.points
-        let shape = PlainShape(points: iGeom.int(points: points))
-        
-        let indices = shape.triangulate()
+        var shape = PlainShape.empty
         var triangles = [Triangle]()
-        triangles.reserveCapacity(indices.count / 3)
-        var i = 0
-        while i < indices.count {
-            let a = CGPoint(points[indices[i]])
-            let b = CGPoint(points[indices[i + 1]])
-            let c = CGPoint(points[indices[i + 2]])
-            triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-            i += 3
+        
+        if !isDisabled {
+            let points = state.points
+            shape = PlainShape(points: iGeom.int(points: points))
+            
+            let indices = shape.triangulate()
+            
+            triangles.reserveCapacity(indices.count / 3)
+            var i = 0
+            while i < indices.count {
+                let a = CGPoint(points[indices[i]])
+                let b = CGPoint(points[indices[i + 1]])
+                let c = CGPoint(points[indices[i + 2]])
+                triangles.append(Triangle(index: i / 3, points: [a, b, c]))
+                i += 3
+            }
         }
         
         let stroke = colorSchema.schema.defaultTriangleStroke

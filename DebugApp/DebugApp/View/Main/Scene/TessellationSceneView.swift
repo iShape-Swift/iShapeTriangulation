@@ -18,9 +18,11 @@ struct TessellationSceneView: View {
     
     private let sceneState: SceneState
     private let triangulator = Triangulator(iGeom: IntGeom.defGeom)
+    private let isDisabled: Bool
 
-    init(sceneState: SceneState) {
+    init(sceneState: SceneState, isDisabled: Bool) {
         self.sceneState = sceneState
+        self.isDisabled = isDisabled
     }
     
     private struct Triangle {
@@ -29,35 +31,40 @@ struct TessellationSceneView: View {
     }
     
     var body: some View {
-        var paths = state.paths
-
-        let extraPoints = paths.removeLast()
-        let points = paths.flatMap({ $0 })
-        let path = paths[0]
-        
-        let hull = points[0..<path.count]
-        
-        var holes = [ArraySlice<Point>]()
-        var n = hull.count
-        if paths.count > 1 {
-            for i in 1..<paths.count {
-                let hole = paths[i]
-                holes.append(points[n..<n + hole.count])
-                n += hole.count
-            }
-        }
-
-        let result = triangulator.tessellate(points: points, hull: hull, holes: holes.isEmpty ? nil : holes, maxEdge: 4, extraPoints: extraPoints)
-        
+        var extraPoints = [Point]()
         var triangles = [Triangle]()
-        triangles.reserveCapacity(result.indices.count / 3)
-        var i = 0
-        while i < result.indices.count {
-            let a = CGPoint(result.points[result.indices[i]])
-            let b = CGPoint(result.points[result.indices[i + 1]])
-            let c = CGPoint(result.points[result.indices[i + 2]])
-            triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-            i += 3
+        var paths = [[Point]]()
+        
+        if !isDisabled {
+            paths = state.paths
+
+            extraPoints = paths.removeLast()
+            let points = paths.flatMap({ $0 })
+            let path = paths[0]
+            
+            let hull = points[0..<path.count]
+            
+            var holes = [ArraySlice<Point>]()
+            var n = hull.count
+            if paths.count > 1 {
+                for i in 1..<paths.count {
+                    let hole = paths[i]
+                    holes.append(points[n..<n + hole.count])
+                    n += hole.count
+                }
+            }
+
+            let result = triangulator.tessellate(points: points, hull: hull, holes: holes.isEmpty ? nil : holes, maxEdge: 4, extraPoints: extraPoints)
+
+            triangles.reserveCapacity(result.indices.count / 3)
+            var i = 0
+            while i < result.indices.count {
+                let a = CGPoint(result.points[result.indices[i]])
+                let b = CGPoint(result.points[result.indices[i + 1]])
+                let c = CGPoint(result.points[result.indices[i + 2]])
+                triangles.append(Triangle(index: i / 3, points: [a, b, c]))
+                i += 3
+            }
         }
 
         let stroke = colorSchema.schema.defaultTriangleStroke

@@ -12,14 +12,17 @@ import iShapeTriangulation
 
 struct PolygonSceneView: View {
 
-    @ObservedObject var state = ComplexSceneState(key: String(describing: PolygonSceneView.self), data: ExtraPointsTests.data)
+    @ObservedObject var state = ComplexSceneState(key: String(describing: PolygonSceneView.self), data: ComplexTests.data)
+//    @ObservedObject var state = ComplexSceneState(key: String(describing: PolygonSceneView.self), data: ExtraPointsTests.data)
     @EnvironmentObject var colorSchema: ColorSchema
     
     private let sceneState: SceneState
     private let iGeom = IntGeom.defGeom
+    private let isDisabled: Bool
 
-    init(sceneState: SceneState) {
+    init(sceneState: SceneState, isDisabled: Bool) {
         self.sceneState = sceneState
+        self.isDisabled = isDisabled
     }
     
     private struct Polygon {
@@ -28,31 +31,34 @@ struct PolygonSceneView: View {
     }
     
     var body: some View {
-        let shape: PlainShape
-        var paths = state.paths
-        let extra = iGeom.int(points: paths.removeLast())
-        if self.state.paths.count == 1 {
-            shape = PlainShape(iGeom: iGeom, hull: paths[0])
-        } else {
-            let hull = paths.remove(at: 0)
-            shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
-        }
-
-        let indices = shape.delaunay(extraPoints: extra).convexPolygonsIndices
-        let points = iGeom.float(points: shape.points + extra)
-        
+        var shape: PlainShape = .empty
         var polygons = [Polygon]()
-        var i = 0
-        while i < indices.count {
-            let n = indices[i]
-            i += 1
-            var path = [CGPoint](repeating: .zero, count: n)
-            for j in 0..<n {
-                let index = indices[j + i]
-                path[j] = CGPoint(points[index])
+        
+        if !self.isDisabled {
+            var paths = state.paths
+            let extra: [IntPoint]? = nil // iGeom.int(points: paths.removeLast())
+            if self.state.paths.count == 1 {
+                shape = PlainShape(iGeom: iGeom, hull: paths[0])
+            } else {
+                let hull = paths.remove(at: 0)
+                shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
             }
-            polygons.append(Polygon(index: polygons.count, points: path))
-            i += n
+
+            let indices = shape.delaunay(extraPoints: extra).convexPolygonsIndices
+            let points = iGeom.float(points: shape.points/* + extra*/)
+            
+            var i = 0
+            while i < indices.count {
+                let n = indices[i]
+                i += 1
+                var path = [CGPoint](repeating: .zero, count: n)
+                for j in 0..<n {
+                    let index = indices[j + i]
+                    path[j] = CGPoint(points[index])
+                }
+                polygons.append(Polygon(index: polygons.count, points: path))
+                i += n
+            }
         }
 
         let stroke = colorSchema.schema.defaultTriangleStroke

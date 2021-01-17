@@ -29,9 +29,11 @@ struct TessellationConditionSceneView: View {
     
     private let sceneState: SceneState
     private let iGeom = IntGeom.defGeom
+    private let isDisabled: Bool
 
-    init(sceneState: SceneState) {
+    init(sceneState: SceneState, isDisabled: Bool) {
         self.sceneState = sceneState
+        self.isDisabled = isDisabled
     }
     
     var body: some View {

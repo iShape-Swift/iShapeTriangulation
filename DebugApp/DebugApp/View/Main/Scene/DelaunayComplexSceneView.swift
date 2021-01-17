@@ -17,9 +17,11 @@ struct DelaunayComplexSceneView: View {
     
     private let sceneState: SceneState
     private let iGeom = IntGeom.defGeom
+    private let isDisabled: Bool
 
-    init(sceneState: SceneState) {
+    init(sceneState: SceneState, isDisabled: Bool) {
         self.sceneState = sceneState
+        self.isDisabled = isDisabled
     }
     
     private struct Triangle {
@@ -28,27 +30,31 @@ struct DelaunayComplexSceneView: View {
     }
     
     var body: some View {
-        var paths = state.paths
-        let shape: PlainShape
-        if paths.count == 1 {
-            shape = PlainShape(iGeom: iGeom, hull: paths[0])
-        } else {
-            let hull = paths.remove(at: 0)
-            shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
-        }
-        
-        let points = iGeom.float(points: shape.points)
-        
-        let indices = shape.delaunay().trianglesIndices
+        var shape: PlainShape = .empty
         var triangles = [Triangle]()
-        triangles.reserveCapacity(indices.count / 3)
-        var i = 0
-        while i < indices.count {
-            let a = CGPoint(points[indices[i]])
-            let b = CGPoint(points[indices[i + 1]])
-            let c = CGPoint(points[indices[i + 2]])
-            triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-            i += 3
+        
+        if !isDisabled {
+            var paths = state.paths
+            if paths.count == 1 {
+                shape = PlainShape(iGeom: iGeom, hull: paths[0])
+            } else {
+                let hull = paths.remove(at: 0)
+                shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
+            }
+            
+            let points = iGeom.float(points: shape.points)
+            
+            let indices = shape.delaunay().trianglesIndices
+            
+            triangles.reserveCapacity(indices.count / 3)
+            var i = 0
+            while i < indices.count {
+                let a = CGPoint(points[indices[i]])
+                let b = CGPoint(points[indices[i + 1]])
+                let c = CGPoint(points[indices[i + 2]])
+                triangles.append(Triangle(index: i / 3, points: [a, b, c]))
+                i += 3
+            }
         }
         
         let stroke = colorSchema.schema.defaultTriangleStroke

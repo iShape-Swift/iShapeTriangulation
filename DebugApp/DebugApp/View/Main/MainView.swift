@@ -46,16 +46,16 @@ struct MainView: View {
     func content(size: CGSize) -> some View {
         self.sceneState.sceneSize = size
         
-        let plainMonotoneScene = PlainMonotoneSceneView(sceneState: self.sceneState)
-        let delaunayMonotoneScene = DelaunayMonotoneSceneView(sceneState: self.sceneState)
-        let plainComplexScene = PlainComplexSceneView(sceneState: self.sceneState)
-        let delaunayComplexScene = DelaunayComplexSceneView(sceneState: self.sceneState)
-        let polygonScene = PolygonSceneView(sceneState: self.sceneState)
-        let extraPointScene = ExtraPointSceneView(sceneState: self.sceneState)
-        let centroidNetScene = CentroidNetSceneView(sceneState: self.sceneState)
-        let tessellationScene = TessellationSceneView(sceneState: self.sceneState)
-        let delaunayConditionScene = DelaunayConditionSceneView(sceneState: self.sceneState)
-        let tessellationConditionScene = TessellationConditionSceneView(sceneState: self.sceneState)
+        let plainMonotoneScene = PlainMonotoneSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .plainMonotone)
+        let delaunayMonotoneScene = DelaunayMonotoneSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .delaunayMonotone)
+        let plainComplexScene = PlainComplexSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .plainComplex)
+        let delaunayComplexScene = DelaunayComplexSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .delaunayComplex)
+        let polygonScene = PolygonSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .polygon)
+        let extraPointScene = ExtraPointSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .extraPoint)
+        let centroidNetScene = CentroidNetSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .centroidNet)
+        let tessellationScene = TessellationSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .tessellation)
+        let delaunayConditionScene = DelaunayConditionSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .delaunayCondition)
+        let tessellationConditionScene = TessellationConditionSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .tessellationCondition)
         
         let scene: Scene
         
