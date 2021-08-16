@@ -86,18 +86,19 @@ struct MainView: View {
         self.sceneState.scene = scene
         self.sceneState.reset()
         
-        return ZStack {
-            plainMonotoneScene.isHidden(self.contentState.current != .plainMonotone)
-            delaunayMonotoneScene.isHidden(self.contentState.current != .delaunayMonotone)
-            plainComplexScene.isHidden(self.contentState.current != .plainComplex)
-            delaunayComplexScene.isHidden(self.contentState.current != .delaunayComplex)
-            polygonScene.isHidden(self.contentState.current != .polygon)
-            extraPointScene.isHidden(self.contentState.current != .extraPoint)
-            centroidNetScene.isHidden(self.contentState.current != .centroidNet)
-            tessellationScene.isHidden(self.contentState.current != .tessellation)
-            delaunayConditionScene.isHidden(self.contentState.current != .delaunayCondition)
-            tessellationConditionScene.isHidden(self.contentState.current != .tessellationCondition)
-        }
+        return
+            ZStack {
+                plainMonotoneScene.isHidden(self.contentState.current != .plainMonotone)
+                delaunayMonotoneScene.isHidden(self.contentState.current != .delaunayMonotone)
+                plainComplexScene.isHidden(self.contentState.current != .plainComplex)
+                delaunayComplexScene.isHidden(self.contentState.current != .delaunayComplex)
+                polygonScene.isHidden(self.contentState.current != .polygon)
+                extraPointScene.isHidden(self.contentState.current != .extraPoint)
+                centroidNetScene.isHidden(self.contentState.current != .centroidNet)
+                tessellationScene.isHidden(self.contentState.current != .tessellation)
+                delaunayConditionScene.isHidden(self.contentState.current != .delaunayCondition)
+                tessellationConditionScene.isHidden(self.contentState.current != .tessellationCondition)
+            }
     }
     
 }

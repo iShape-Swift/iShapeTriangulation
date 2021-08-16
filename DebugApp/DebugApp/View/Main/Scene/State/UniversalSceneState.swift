@@ -1,45 +1,45 @@
 //
-//  ComplexSceneState.swift
+//  UniversalSceneState.swift
 //  DebugApp
 //
-//  Created by Nail Sharipov on 11.08.2020.
-//  Copyright © 2020 Nail Sharipov. All rights reserved.
+//  Created by Nail Sharipov on 30.01.2021.
+//  Copyright © 2021 Nail Sharipov. All rights reserved.
 //
 
 import SwiftUI
 import iGeometry
 import iShapeTriangulation
 
-final class ComplexSceneState: ObservableObject, Scene {
+final class UniversalSceneState: ObservableObject, Scene {
 
     private (set) var pageIndex: Int
     
     private let key: String
-    private let data: [[[Point]]]
+    private let tests: [UniversalData]
     private var moveIndex: (Int, Int)?
     private var startPosition: Point = .zero
     
-    @Published var paths: [[Point]]
+    @Published var data: UniversalData
     
-    init(key: String, data: [[[Point]]]) {
+    init(key: String, tests: [UniversalData]) {
         self.key = key
-        self.data = data
+        self.tests = tests
         self.pageIndex = UserDefaults.standard.integer(forKey: key)
-        self.paths = self.data[self.pageIndex]
+        self.data = self.tests[self.pageIndex]
     }
     
     func onNext() {
-        let n = self.data.count
+        let n = self.tests.count
         self.pageIndex = (self.pageIndex + 1) % n
         UserDefaults.standard.set(pageIndex, forKey: self.key)
-        self.paths = self.data[self.pageIndex]
+        self.data = self.tests[self.pageIndex]
     }
     
     func onPrev() {
-        let n = self.data.count
+        let n = self.tests.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
         UserDefaults.standard.set(pageIndex, forKey: self.key)
-        self.paths = self.data[self.pageIndex]
+        self.data = self.tests[self.pageIndex]
     }
     
     func onStart(start: CGPoint, radius: CGFloat) -> Bool {
@@ -47,8 +47,9 @@ final class ComplexSceneState: ObservableObject, Scene {
         let oy = Float(start.y)
         self.moveIndex = nil
         var min = Float(radius * radius)
-        for i in 0..<self.paths.count {
-            let path = self.paths[i]
+        let paths = self.data.points
+        for i in 0..<paths.count {
+            let path = paths[i]
             for j in 0..<path.count {
                 let p = path[j]
                 let dx = p.x - ox
@@ -71,7 +72,7 @@ final class ComplexSceneState: ObservableObject, Scene {
         let dx = Float(delta.width)
         let dy = Float(delta.height)
         let p = Point(x: self.startPosition.x - dx, y: self.startPosition.y - dy)
-        self.paths[index.0][index.1] = p
+        self.data.points[index.0][index.1] = p
     }
     
     func onEnd(delta: CGSize) {

@@ -41,68 +41,45 @@ struct TessellationConditionSceneView: View {
         let a = points[0]
         let b = points[1]
         let c = points[2]
+        let d = points[3]
         let p = points[3]
         let s = points[4]
 
         let m = Self.middle2(a: a, b: b, c: p, d: c)
-        
-        let exPoint = TessellationConditionSceneView.extraPoint(a: p, b: b, c: c)
-        
+
         var circles = [iGeometry.Circle]()
-        
-        let abc = iGeometry.Triangle.circumscribedСircle(a: a, b: b, c: c)
 
         circles.append(iGeometry.Triangle.circumscribedСircle(a: a, b: b, c: s))
         circles.append(iGeometry.Triangle.circumscribedСircle(a: a, b: c, c: s))
         circles.append(iGeometry.Triangle.circumscribedСircle(a: s, b: b, c: p))
         circles.append(iGeometry.Triangle.circumscribedСircle(a: s, b: c, c: p))
         
-        let bpc = iGeometry.Triangle.circumscribedСircle(a: b, b: p, c: c)
+        let ab = (a - b).magnitude.squareRoot()
+        let cd = (c - d).magnitude.squareRoot()
+        let ac = (a - c).magnitude.squareRoot()
+        let bd = (b - d).magnitude.squareRoot()
         
+        let ad = (a - d).magnitude.squareRoot()
+        let bc = (b - c).magnitude.squareRoot()
+        
+        let len = cd + ab
+
+        let clr: Color
+        if len < ad + bc || len < ac + bd {
+            clr = .black
+        } else {
+            clr = .red
+        }
         
         let vertices = [
             Vertex(point: CGPoint(a), name: "a"),
             Vertex(point: CGPoint(b), name: "b"),
             Vertex(point: CGPoint(c), name: "c"),
-            Vertex(point: CGPoint(p), name: "p"),
+            Vertex(point: CGPoint(d), name: "d"),
             Vertex(point: CGPoint(s), name: "s")
         ]
 
         return ZStack {
-//            Circle()
-//                .stroke(Color.yellow, lineWidth: 4)
-//                .frame(
-//                    width: self.sceneState.screen(world: CGFloat(2 * abc.radius)),
-//                    height: self.sceneState.screen(world: CGFloat(2 * abc.radius)),
-//                    alignment: .center
-//            )
-//                .position(self.sceneState.screen(world: CGPoint(abc.center)))
-//            ForEach(circles, id: \.radius) { circle in
-//                Circle()
-//                    .stroke(Color(white: 0.8), lineWidth: 4)
-//                    .frame(
-//                        width: self.sceneState.screen(world: CGFloat(2 * circle.radius)),
-//                        height: self.sceneState.screen(world: CGFloat(2 * circle.radius)),
-//                        alignment: .center
-//                )
-//                    .position(self.sceneState.screen(world: CGPoint(circle.center)))
-//            }
-//            Circle()
-//                .fill().foregroundColor(.yellow)
-//                .frame(
-//                    width: self.sceneState.screen(world: CGFloat(2)),
-//                    height: self.sceneState.screen(world: CGFloat(2)),
-//                    alignment: .center
-//            )
-//                .position(self.sceneState.screen(world: CGPoint(bpc.center)))
-//            Circle()
-//                .fill().foregroundColor(.yellow)
-//                .frame(
-//                    width: self.sceneState.screen(world: CGFloat(2)),
-//                    height: self.sceneState.screen(world: CGFloat(2)),
-//                    alignment: .center
-//            )
-//                .position(self.sceneState.screen(world: CGPoint(exPoint)))
             Circle()
                 .fill().foregroundColor(.blue)
                 .frame(
@@ -116,26 +93,12 @@ struct TessellationConditionSceneView: View {
                 path.addLines(screenPoints)
                 path.closeSubpath()
             }.strokedPath(.init(lineWidth: 4, lineJoin: .round)).foregroundColor(Color(white: 0.8))
-//            Path { path in
-//                let screenPoints = sceneState.screen(world: [a, b, s].map({ CGPoint($0) }))
-//                path.addLines(screenPoints)
-//                path.closeSubpath()
-//            }.strokedPath(.init(lineWidth: 2, lineJoin: .round)).foregroundColor(Color(white: 0.3))
-//            Path { path in
-//                let screenPoints = sceneState.screen(world: [a, c, s].map({ CGPoint($0) }))
-//                path.addLines(screenPoints)
-//                path.closeSubpath()
-//            }.strokedPath(.init(lineWidth: 2, lineJoin: .round)).foregroundColor(Color(white: 0.3))
-//            Path { path in
-//                let screenPoints = sceneState.screen(world: [s, b, p].map({ CGPoint($0) }))
-//                path.addLines(screenPoints)
-//                path.closeSubpath()
-//            }.strokedPath(.init(lineWidth: 2, lineJoin: .round)).foregroundColor(Color(white: 0.3))
-//            Path { path in
-//                let screenPoints = sceneState.screen(world: [s, c, p].map({ CGPoint($0) }))
-//                path.addLines(screenPoints)
-//                path.closeSubpath()
-//            }.strokedPath(.init(lineWidth: 2, lineJoin: .round)).foregroundColor(Color(white: 0.3))
+            Path { path in
+                let ab = sceneState.screen(world: [a, b].map({ CGPoint($0) }))
+                path.addLines(ab)
+                let cd = sceneState.screen(world: [c, d].map({ CGPoint($0) }))
+                path.addLines(cd)
+            }.strokedPath(.init(lineWidth: 4, lineJoin: .round)).foregroundColor(clr)
             ForEach(vertices, id: \.name) { vertex in
                 Text(vertex.name).bold().position(self.sceneState.screen(world: vertex.point)).foregroundColor(.red)
             }

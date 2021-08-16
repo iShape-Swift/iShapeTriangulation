@@ -24,6 +24,14 @@
 		5471274224E400A70030201D /* iGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273B24E400850030201D /* iGeometry.framework */; };
 		5471274324E400A70030201D /* iGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5471273B24E400850030201D /* iGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		548458862510834A00EAF4FF /* IndexBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548458852510834A00EAF4FF /* IndexBuffer.swift */; };
+		5485C61C25C540590003FA07 /* CentroidTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C61B25C540590003FA07 /* CentroidTestData.swift */; };
+		5485C61D25C540590003FA07 /* CentroidTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C61B25C540590003FA07 /* CentroidTestData.swift */; };
+		5485C61E25C540590003FA07 /* CentroidTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C61B25C540590003FA07 /* CentroidTestData.swift */; };
+		5485C61F25C540590003FA07 /* CentroidTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C61B25C540590003FA07 /* CentroidTestData.swift */; };
+		5485C62725C5406F0003FA07 /* UniversalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C62625C5406F0003FA07 /* UniversalData.swift */; };
+		5485C62825C5406F0003FA07 /* UniversalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C62625C5406F0003FA07 /* UniversalData.swift */; };
+		5485C62925C5406F0003FA07 /* UniversalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C62625C5406F0003FA07 /* UniversalData.swift */; };
+		5485C62A25C5406F0003FA07 /* UniversalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C62625C5406F0003FA07 /* UniversalData.swift */; };
 		54AFC38D24D716B300B94D58 /* iShapeTriangulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		54AFC43524D7175300B94D58 /* Point+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC41E24D7175300B94D58 /* Point+Extension.swift */; };
 		54AFC43624D7175300B94D58 /* Point+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC41E24D7175300B94D58 /* Point+Extension.swift */; };
@@ -217,6 +225,8 @@
 		5412543025223C8700DF6569 /* PlainShape+CentroidNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlainShape+CentroidNet.swift"; sourceTree = "<group>"; };
 		5471272D24E400850030201D /* iGeometry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iGeometry.xcodeproj; path = Carthage/Checkouts/iGeometry/iGeometry.xcodeproj; sourceTree = "<group>"; };
 		548458852510834A00EAF4FF /* IndexBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexBuffer.swift; sourceTree = "<group>"; };
+		5485C61B25C540590003FA07 /* CentroidTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentroidTestData.swift; sourceTree = "<group>"; };
+		5485C62625C5406F0003FA07 /* UniversalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalData.swift; sourceTree = "<group>"; };
 		54AFC38824D716B300B94D58 /* iShapeTriangulation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iShapeTriangulation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54AFC38B24D716B300B94D58 /* iShapeTriangulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iShapeTriangulation.h; sourceTree = "<group>"; };
 		54AFC38C24D716B300B94D58 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
@@ -369,6 +379,8 @@
 				54AFC41F24D7175300B94D58 /* MonotoneTests.swift */,
 				54AFC42024D7175300B94D58 /* ComplexTests.swift */,
 				54AFC42124D7175300B94D58 /* ExtraPointsTests.swift */,
+				5485C61B25C540590003FA07 /* CentroidTestData.swift */,
+				5485C62625C5406F0003FA07 /* UniversalData.swift */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -732,6 +744,7 @@
 			files = (
 				54AFC45124D7175300B94D58 /* PlainShape+Test.swift in Sources */,
 				54AFC47124D7175300B94D58 /* PlainShape+SliceBuffer.swift in Sources */,
+				5485C61C25C540590003FA07 /* CentroidTestData.swift in Sources */,
 				54AFC43924D7175300B94D58 /* MonotoneTests.swift in Sources */,
 				54AFC44124D7175300B94D58 /* ExtraPointsTests.swift in Sources */,
 				54AFC46924D7175300B94D58 /* Delaunay+Polygon.swift in Sources */,
@@ -748,6 +761,7 @@
 				54AFC44524D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
 				54AFC46124D7175300B94D58 /* PlainShape+Layout.swift in Sources */,
 				54AFC43D24D7175300B94D58 /* ComplexTests.swift in Sources */,
+				5485C62725C5406F0003FA07 /* UniversalData.swift in Sources */,
 				54AFC46524D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC44D24D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC45D24D7175300B94D58 /* PlainShape+Modification.swift in Sources */,
@@ -761,6 +775,7 @@
 			files = (
 				54AFC45224D7175300B94D58 /* PlainShape+Test.swift in Sources */,
 				54AFC47224D7175300B94D58 /* PlainShape+SliceBuffer.swift in Sources */,
+				5485C61D25C540590003FA07 /* CentroidTestData.swift in Sources */,
 				54AFC43A24D7175300B94D58 /* MonotoneTests.swift in Sources */,
 				54AFC44224D7175300B94D58 /* ExtraPointsTests.swift in Sources */,
 				54AFC46A24D7175300B94D58 /* Delaunay+Polygon.swift in Sources */,
@@ -777,6 +792,7 @@
 				54AFC44624D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
 				54AFC46224D7175300B94D58 /* PlainShape+Layout.swift in Sources */,
 				54AFC43E24D7175300B94D58 /* ComplexTests.swift in Sources */,
+				5485C62825C5406F0003FA07 /* UniversalData.swift in Sources */,
 				54AFC46624D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC44E24D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC45E24D7175300B94D58 /* PlainShape+Modification.swift in Sources */,
@@ -790,6 +806,7 @@
 			files = (
 				54AFC45324D7175300B94D58 /* PlainShape+Test.swift in Sources */,
 				54AFC47324D7175300B94D58 /* PlainShape+SliceBuffer.swift in Sources */,
+				5485C61E25C540590003FA07 /* CentroidTestData.swift in Sources */,
 				54AFC43B24D7175300B94D58 /* MonotoneTests.swift in Sources */,
 				54AFC44324D7175300B94D58 /* ExtraPointsTests.swift in Sources */,
 				54AFC46B24D7175300B94D58 /* Delaunay+Polygon.swift in Sources */,
@@ -806,6 +823,7 @@
 				54AFC44724D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
 				54AFC46324D7175300B94D58 /* PlainShape+Layout.swift in Sources */,
 				54AFC43F24D7175300B94D58 /* ComplexTests.swift in Sources */,
+				5485C62925C5406F0003FA07 /* UniversalData.swift in Sources */,
 				54AFC46724D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC44F24D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC45F24D7175300B94D58 /* PlainShape+Modification.swift in Sources */,
@@ -819,6 +837,7 @@
 			files = (
 				54AFC45424D7175300B94D58 /* PlainShape+Test.swift in Sources */,
 				54AFC47424D7175300B94D58 /* PlainShape+SliceBuffer.swift in Sources */,
+				5485C61F25C540590003FA07 /* CentroidTestData.swift in Sources */,
 				54AFC43C24D7175300B94D58 /* MonotoneTests.swift in Sources */,
 				54AFC44424D7175300B94D58 /* ExtraPointsTests.swift in Sources */,
 				54AFC46C24D7175300B94D58 /* Delaunay+Polygon.swift in Sources */,
@@ -835,6 +854,7 @@
 				54AFC44824D7175300B94D58 /* IntPoint+Monotone.swift in Sources */,
 				54AFC46424D7175300B94D58 /* PlainShape+Layout.swift in Sources */,
 				54AFC44024D7175300B94D58 /* ComplexTests.swift in Sources */,
+				5485C62A25C5406F0003FA07 /* UniversalData.swift in Sources */,
 				54AFC46824D7175300B94D58 /* Delaunay+Triangle.swift in Sources */,
 				54AFC45024D7175300B94D58 /* Triangulator.swift in Sources */,
 				54AFC46024D7175300B94D58 /* PlainShape+Modification.swift in Sources */,

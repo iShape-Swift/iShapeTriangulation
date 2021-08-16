@@ -12,8 +12,7 @@ import iShapeTriangulation
 
 struct CentroidNetSceneView: View {
 
-    @ObservedObject var state = ComplexSceneState(key: String(describing: CentroidNetSceneView.self), data: ComplexTests.data)
-//    @ObservedObject var state = ComplexSceneState(key: String(describing: CentroidNetSceneView.self), data: ExtraPointsTests.data)
+    @ObservedObject var state = UniversalSceneState(key: String(describing: CentroidNetSceneView.self), tests: CentroidTestData.data)
     @EnvironmentObject var colorSchema: ColorSchema
 
     private let triangulator = Triangulator(iGeom: IntGeom.defGeom)
@@ -32,27 +31,11 @@ struct CentroidNetSceneView: View {
     
     var body: some View {
         var centroids = [Centroid]()
-        
-        if !isDisabled {
-            let paths = state.paths
 
-            let extraPoints: [Point]? = nil  //= paths.removeLast()
-            let points = paths.flatMap({ $0 })
-            let path = paths[0]
+        if !isDisabled {
+            let bundle = state.data.bundle
             
-            let hull = points[0..<path.count]
-            
-            var holes = [ArraySlice<Point>]()
-            var n = hull.count
-            if paths.count > 1 {
-                for i in 1..<paths.count {
-                    let hole = paths[i]
-                    holes.append(points[n..<n + hole.count])
-                    n += hole.count
-                }
-            }
-            
-            let centroidNet = triangulator.centroidNet(points: points, hull: hull, holes: holes, onlyConvex: false, maxEdge: 0, minArea: 0, extraPoints: extraPoints)
+            let centroidNet = triangulator.centroidNet(points: bundle.points, hull: bundle.hull, holes: bundle.holes, onlyConvex: true, maxEdge: 4, minArea: 0, extraPoints: bundle.extraPoints)
 
             centroids.reserveCapacity(centroidNet.count)
             for path in centroidNet {
@@ -63,16 +46,21 @@ struct CentroidNetSceneView: View {
 
         let stroke = colorSchema.schema.defaultPolygonStroke
 
-        return ZStack {
-            ForEach(centroids, id: \.index) { triangle in
-                PolygonShapeView(
-                    sceneState: self.sceneState,
-                    points: triangle.points,
-                    index: triangle.index,
-                    stroke: stroke,
-                    lineWidth: 2
-                )
-            }
+        return ZStack(alignment: .top) {
+            Text("CentroidNet: \(state.pageIndex)")
+                .font(.title)
+                .foregroundColor(.black)
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                ForEach(centroids, id: \.index) { triangle in
+                    PolygonShapeView(
+                        sceneState: self.sceneState,
+                        points: triangle.points,
+                        index: triangle.index,
+                        stroke: stroke,
+                        lineWidth: 2
+                    )
+                }
+            
         }
     }
 

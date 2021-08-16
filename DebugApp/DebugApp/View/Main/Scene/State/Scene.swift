@@ -9,6 +9,7 @@
 import Foundation
 
 protocol Scene: Keyboard {
+    var pageIndex: Int { get }
     func onNext()
     func onPrev()
     func onStart(start: CGPoint, radius: CGFloat) -> Bool

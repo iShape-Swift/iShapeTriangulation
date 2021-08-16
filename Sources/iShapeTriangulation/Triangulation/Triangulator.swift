@@ -84,16 +84,10 @@ public struct Triangulator {
     ///   - points: Linear array of all your polygon vertices. All hull's vertices must be list in clockwise order. All holes vertices must be list in counterclockwise order.
     ///   - hull: range of the hull vertices in points array
     ///   - holes: array of ranges for all holes
-    ///   - extraPoints: extra points for tessellation
     /// - Returns: Indices of arrays which form polygons in clockwise direction. Example: n0, i0, i1, ... i(n0-1), n1, j0, j1, ... j(n1-1), ...
-    public func polygonate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?, extraPoints: [Point]?) -> [Int] {
+    public func polygonate(points: [Point], hull: ArraySlice<Point>, holes: [ArraySlice<Point>]?) -> [Int] {
         let shape = PlainShape(iGeom: iGeom, points: points, hull: hull, holes: holes)
-        if let ePoints = extraPoints {
-            let iPoints = iGeom.int(points: ePoints)
-            return shape.delaunay(extraPoints: iPoints).convexPolygonsIndices
-        }  else {
-            return shape.delaunay(extraPoints: nil).convexPolygonsIndices
-        }
+        return shape.delaunay(extraPoints: nil).convexPolygonsIndices
     }
     
     /// Tessellate polygon

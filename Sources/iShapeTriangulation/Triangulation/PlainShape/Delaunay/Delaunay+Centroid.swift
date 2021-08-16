@@ -75,11 +75,15 @@ extension Delaunay {
 
                         // first going in a counterclockwise direction
                         var current = triangle
-                        var k = triangle.index(index: v.index)
+                        var k = j
                         var right = (k &+ 2) % 3
                         var prev = triangle.neighbors[right]
                         while prev >= 0 {
                             let prevTriangle = self.triangles[prev]
+                            let ni = prevTriangle.opposite(neighbor: current.index)
+                            let edgeMiddle = prevTriangle.middle(index: ni)
+                            path.append(edgeMiddle)
+                            
                             k = prevTriangle.index(index: v.index)
                             if k < 0 {
                                 break
@@ -97,15 +101,18 @@ extension Delaunay {
 
                         path.reverse()
                         
-                        path.append(details[i].center)
+                        path.append(detail.center)
                         
                         // now going in a clockwise direction
                         current = triangle
-                        k = triangle.index(index: v.index)
+                        k = j
                         left = (k &+ 1) % 3
                         var next = triangle.neighbors[left]
                         while next >= 0 {
                             let nextTriangle = self.triangles[next]
+                            let ni = nextTriangle.opposite(neighbor: current.index)
+                            let edgeMiddle = nextTriangle.middle(index: ni)
+                            path.append(edgeMiddle)
                             k = nextTriangle.index(index: v.index)
                             if k < 0 {
                                 break
@@ -158,17 +165,24 @@ extension Delaunay {
                     }
                 } else {
                     var path = [IntPoint]()
-                    path.reserveCapacity(8)
+                    path.reserveCapacity(16)
                     let start = i
                     var next = start
+                    
                     repeat {
                         let t = self.triangles[next]
                         let center = details[next].center
                         path.append(center)
-                        let index = (t.index(index: v.index) &+ 1) % 3
-                        next = t.neighbors[index]
-                    } while next != start && next>=0
-                    
+                        
+                        let vIndex = t.index(index: v.index)
+                        let nextIndex = (vIndex + 1) % 3
+                        
+                        let edgeMiddle = t.middle(index: nextIndex)
+                        path.append(edgeMiddle)
+
+                        next = t.neighbors[nextIndex]
+                    } while next != start && next >= 0
+
                     if minArea == 0 || path.area > minArea  {
                         result.append(path)
                     }
@@ -181,6 +195,7 @@ extension Delaunay {
     }
 }
 
+
 private extension Delaunay.Triangle {
     
     @inline(__always)
@@ -190,12 +205,29 @@ private extension Delaunay.Triangle {
         let c = self.vertices.c.point
         return IntPoint(x: (a.x &+ b.x &+ c.x) / 3, y: (a.y &+ b.y &+ c.y) / 3)
     }
+    
+    @inline(__always)
+    func middle(index: Int)  -> IntPoint {
+        switch index {
+        case 0:
+            return (vertices.b.point + vertices.c.point).middle
+        case 1:
+            return (vertices.a.point + vertices.c.point).middle
+        default:
+            return (vertices.a.point + vertices.b.point).middle
+        }
+    }
 }
 
 private extension IntPoint {
+
+    @inline(__always)
+    var middle: IntPoint {
+        IntPoint(x: x >> 1, y: y >> 1)
+    }
     
     @inline(__always)
     func center(point: IntPoint) -> IntPoint {
-        return IntPoint(x: (self.x &+ point.x) >> 1, y: (self.y + point.y) >> 1)
+        (self + point).middle
     }
 }

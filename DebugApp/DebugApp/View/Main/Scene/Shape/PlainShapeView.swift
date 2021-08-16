@@ -81,7 +81,7 @@ struct PlainShapeView: View {
                     path.addLines(screenPoints)
                     path.closeSubpath()
                 }
-            }.strokedPath(.init(lineWidth: self.lineWidth)).foregroundColor(self.stroke)
+            }.strokedPath(.init(lineWidth: self.lineWidth, lineCap: .round)).foregroundColor(self.stroke)
             ForEach(self.indices, id: \.value) { index in
                 Text("\(index.value)").position(self.sceneState.screen(world: index.point)).foregroundColor(.black)
             }

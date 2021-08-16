@@ -33,7 +33,7 @@ struct PolygonShapeView: View {
             Path { path in
                 path.addLines(screenPoints)
                 path.closeSubpath()
-            }.strokedPath(.init(lineWidth: self.lineWidth)).foregroundColor(self.stroke)
+            }.strokedPath(.init(lineWidth: self.lineWidth, lineCap: .round, lineJoin: .round)).foregroundColor(self.stroke)
             Text("\(index)").foregroundColor(self.stroke).position(screenPoints.center).isHidden(!showIndex)
         }
     }

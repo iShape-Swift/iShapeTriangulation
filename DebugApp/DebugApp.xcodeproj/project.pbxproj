@@ -25,6 +25,7 @@
 		5471932424DC0654008B67CB /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5471932324DC0654008B67CB /* SceneState.swift */; };
 		5471932624DC07DF008B67CB /* СoordinateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5471932524DC07DF008B67CB /* СoordinateView.swift */; };
 		547F535124D9CB0F0094CB88 /* MenuRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547F535024D9CB0F0094CB88 /* MenuRowView.swift */; };
+		5485C62E25C54A640003FA07 /* UniversalSceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485C62D25C54A640003FA07 /* UniversalSceneState.swift */; };
 		54926B4024E05FA100766EF7 /* PolygonShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54926B3F24E05FA100766EF7 /* PolygonShapeView.swift */; };
 		54926B4724E0697E00766EF7 /* PlainComplexSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54926B4624E0697E00766EF7 /* PlainComplexSceneView.swift */; };
 		549B002224DF2F3400025754 /* PlainMonotoneSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549B002124DF2F3400025754 /* PlainMonotoneSceneView.swift */; };
@@ -115,6 +116,7 @@
 		5471932324DC0654008B67CB /* SceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneState.swift; sourceTree = "<group>"; };
 		5471932524DC07DF008B67CB /* СoordinateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СoordinateView.swift"; sourceTree = "<group>"; };
 		547F535024D9CB0F0094CB88 /* MenuRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowView.swift; sourceTree = "<group>"; };
+		5485C62D25C54A640003FA07 /* UniversalSceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalSceneState.swift; sourceTree = "<group>"; };
 		54926B3F24E05FA100766EF7 /* PolygonShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShapeView.swift; sourceTree = "<group>"; };
 		54926B4624E0697E00766EF7 /* PlainComplexSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainComplexSceneView.swift; sourceTree = "<group>"; };
 		549B002124DF2F3400025754 /* PlainMonotoneSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainMonotoneSceneView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				54E6A26224DFCDB800A78708 /* Scene.swift */,
 				545A0F4924E26F10001A7DDD /* BasicSceneState.swift */,
 				545A0F5024E27099001A7DDD /* ComplexSceneState.swift */,
+				5485C62D25C54A640003FA07 /* UniversalSceneState.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				5471932424DC0654008B67CB /* SceneState.swift in Sources */,
 				54B5EBF025A769E800FFFC45 /* PathShapeView.swift in Sources */,
 				54926B4724E0697E00766EF7 /* PlainComplexSceneView.swift in Sources */,
+				5485C62E25C54A640003FA07 /* UniversalSceneState.swift in Sources */,
 				54AA95A124E69AD200F3155F /* DelaunayConditionSceneView.swift in Sources */,
 				545A0F6224E2872F001A7DDD /* TessellationSceneView.swift in Sources */,
 				545A0F5E24E27CAD001A7DDD /* ExtraPointSceneView.swift in Sources */,

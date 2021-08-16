@@ -13,9 +13,9 @@ import iShapeTriangulation
 
 final class BasicSceneState: ObservableObject, Scene {
 
+    private (set) var pageIndex: Int
     private let key: String
     private let data: [[Point]]
-    private var pageIndex: Int
     private var moveIndex: Int?
     private var startPosition: Point = .zero
     
