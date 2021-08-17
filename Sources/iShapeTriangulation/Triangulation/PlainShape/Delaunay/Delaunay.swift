@@ -23,28 +23,33 @@ public struct Delaunay {
     }
     
     mutating func build() {
-        let count = triangles.count
-        var visitMarks = Array<Bool>(repeating: false, count: count)
-        var visitIndex = 0
+        triangles.withUnsafeMutableBufferPointer { pointer in
+            let count = pointer.count
+            
+            let visitMarks = UnsafeMutablePointer<Bool>.allocate(capacity: count)
+            visitMarks.initialize(repeating: false, count: count)
+            var visitIndex = 0
 
-        var origin = [0]
-        origin.reserveCapacity(16)
+            var origin = IntList(capacity: 64)
+            origin.append(0)
+            
+            var buffer = IntList(capacity: 64)
 
-        var buffer = Array<Int>()
-        buffer.reserveCapacity(16)
-
-        while origin.count > 0 {
-            buffer.removeAll(keepingCapacity: true)
-            for i in origin {
-                var triangle = self.triangles[i]
-                visitMarks[i] = true
-                for k in 0...2 {
-                    let neighborIndex = triangle.neighbors[k]
-                    if neighborIndex >= 0 {
-                        var neighbor = triangles[neighborIndex]
-                        if self.swap(abc: triangle, pbc: neighbor) {
-                            triangle = self.triangles[triangle.index]
-                            neighbor = self.triangles[neighbor.index]
+            while origin.count > 0 {
+                var j = 0
+                while j < origin.count {
+                    let i = origin[j]
+                    j &+= 1
+                    var triangle = pointer[i]
+                    visitMarks[i] = true
+                    for k in 0...2 {
+                        let neighborIndex = triangle.neighbors[k]
+                        guard neighborIndex >= 0 else { continue }
+                        
+                        var neighbor = pointer[neighborIndex]
+                        if Self.swap(abc: triangle, pbc: neighbor, triangles: pointer) {
+                            triangle = pointer[triangle.index]
+                            neighbor = pointer[neighbor.index]
                             
                             let tna = triangle.neighbors.a
                             if tna >= 0 && tna != neighbor.index {
@@ -78,81 +83,95 @@ public struct Delaunay {
                         }
                     }
                 }
-            }
-            if buffer.isEmpty && visitIndex < count {
-                visitIndex &+= 1
-                while visitIndex < count {
-                    if visitMarks[visitIndex] == false {
-                        buffer.append(visitIndex)
-                        break
-                    }
+                if buffer.count == 0 && visitIndex < count {
                     visitIndex &+= 1
+                    while visitIndex < count {
+                        if visitMarks[visitIndex] == false {
+                            buffer.append(visitIndex)
+                            break
+                        }
+                        visitIndex &+= 1
+                    }
                 }
+                let temp = origin
+                origin = buffer
+                buffer = temp
+                buffer.removeAll()
             }
-            origin = buffer
+            
+            origin.deallocate()
+            buffer.deallocate()
+            visitMarks.deallocate()
         }
     }
     
     mutating func fix(indices: [Int], indexBuffer: inout IndexBuffer) {
-        var origin = indices
+        triangles.withUnsafeMutableBufferPointer { pointer in
+            var origin = IntList(array: indices)
+            var buffer = IntList(capacity: 64)
 
-        var buffer = Array<Int>()
-        buffer.reserveCapacity(16)
+            while origin.count > 0 {
+                var j = 0
+                while j < origin.count {
+                    let i = origin[j]
+                    j &+= 1
+                    var triangle = pointer[i]
+                    for k in 0...2 {
+                        let neighborIndex = triangle.neighbors[k]
+                        if neighborIndex >= 0 {
+                            var neighbor = pointer[neighborIndex]
+                            if Self.swap(abc: triangle, pbc: neighbor, triangles: pointer) {
+                                indexBuffer.add(index: triangle.index)
+                                indexBuffer.add(index: neighbor.index)
+                                
+                                triangle = pointer[triangle.index]
+                                neighbor = pointer[neighbor.index]
 
-        while origin.count > 0 {
-            buffer.removeAll(keepingCapacity: true)
-            for i in origin {
-                var triangle = self.triangles[i]
-                for k in 0...2 {
-                    let neighborIndex = triangle.neighbors[k]
-                    if neighborIndex >= 0 {
-                        var neighbor = triangles[neighborIndex]
-                        if self.swap(abc: triangle, pbc: neighbor) {
-                            indexBuffer.add(index: triangle.index)
-                            indexBuffer.add(index: neighbor.index)
-                            
-                            triangle = self.triangles[triangle.index]
-                            neighbor = self.triangles[neighbor.index]
-
-                            let tna = triangle.neighbors.a
-                            if tna >= 0 && tna != neighbor.index {
-                                buffer.append(tna)
-                            }
-                            
-                            let tnb = triangle.neighbors.b
-                            if tnb >= 0 && tnb != neighbor.index {
-                                buffer.append(tnb)
-                            }
-                            
-                            let tnc = triangle.neighbors.c
-                            if tnc >= 0 && tnc != neighbor.index {
-                                buffer.append(tnc)
-                            }
-                            
-                            let nna = neighbor.neighbors.a
-                            if nna >= 0 && nna != triangle.index {
-                                buffer.append(nna)
-                            }
-                            
-                            let nnb = neighbor.neighbors.b
-                            if nnb >= 0 && nnb != triangle.index {
-                                buffer.append(nnb)
-                            }
-                            
-                            let nnc = neighbor.neighbors.c
-                            if nnc >= 0 && nnc != triangle.index {
-                                buffer.append(nnc)
+                                let tna = triangle.neighbors.a
+                                if tna >= 0 && tna != neighbor.index {
+                                    buffer.append(tna)
+                                }
+                                
+                                let tnb = triangle.neighbors.b
+                                if tnb >= 0 && tnb != neighbor.index {
+                                    buffer.append(tnb)
+                                }
+                                
+                                let tnc = triangle.neighbors.c
+                                if tnc >= 0 && tnc != neighbor.index {
+                                    buffer.append(tnc)
+                                }
+                                
+                                let nna = neighbor.neighbors.a
+                                if nna >= 0 && nna != triangle.index {
+                                    buffer.append(nna)
+                                }
+                                
+                                let nnb = neighbor.neighbors.b
+                                if nnb >= 0 && nnb != triangle.index {
+                                    buffer.append(nnb)
+                                }
+                                
+                                let nnc = neighbor.neighbors.c
+                                if nnc >= 0 && nnc != triangle.index {
+                                    buffer.append(nnc)
+                                }
                             }
                         }
                     }
                 }
+                let temp = origin
+                origin = buffer
+                buffer = temp
+                buffer.removeAll()
             }
-            origin = buffer
+            
+            origin.deallocate()
+            buffer.deallocate()
         }
     }
-    
-    @inline(__always)
-    private mutating func swap(abc: Triangle, pbc: Triangle) -> Bool {
+
+    private static func swap(abc: Triangle, pbc: Triangle, triangles: UnsafeMutableBufferPointer<Delaunay.Triangle>) -> Bool {
         let pi = pbc.opposite(neighbor: abc.index)
         let p = pbc.vertices[pi]
         
@@ -252,32 +271,29 @@ public struct Delaunay {
             // ac (abc) is now edge of acp
             let acIndex = abc.neighbors[bi] // b - angle
             if acIndex >= 0 {
-                var neighbor = self.triangles[acIndex]
+                var neighbor = triangles[acIndex]
                 neighbor.updateOpposite(oldNeighbor: abc.index, newNeighbor: acp.index)
-                self.triangles[acIndex] = neighbor
+                triangles[acIndex] = neighbor
             }
 
             // bp (pbc) is now edge of abp
             let bpIndex = pbc.neighbor(vertex: c.index) // c - angle
             if bpIndex >= 0 {
-                var neighbor = self.triangles[bpIndex]
+                var neighbor = triangles[bpIndex]
                 neighbor.updateOpposite(oldNeighbor: pbc.index, newNeighbor: abp.index)
-                self.triangles[bpIndex] = neighbor
+                triangles[bpIndex] = neighbor
             }
             
-            self.triangles[abc.index] = abp
-            self.triangles[pbc.index] = acp
+            triangles[abc.index] = abp
+            triangles[pbc.index] = acp
             
             return true
         }
     }
     
-    @inline(__always)
+//    @inline(__always)
     static func isDelaunay(p0: IntPoint, p1: IntPoint, p2: IntPoint, p3: IntPoint) -> Bool {
-//        #if DEBUG
-//        self.debugDelaunay(p0: p0, p1: p1, p2: p2, p3: p3)
-//        #endif
-        
+
         let x01 = p0.x &- p1.x
         let x03 = p0.x &- p3.x
         let x12 = p1.x &- p2.x
@@ -353,7 +369,7 @@ public struct Delaunay {
             let be = String(format: "%.2f", beta)
             let su = String(format: "%.2f", beta + alpha)
             
-            print("alpha: \(al), beta: \(be), sum: \(su)")
+            debugPrint("alpha: \(al), beta: \(be), sum: \(su)")
         }
 
     #endif
@@ -383,3 +399,51 @@ private func /(left: Point, right: Float) -> Point {
     return Point(x: left.x / right, y: left.y / right)
 }
 #endif
+
+private struct IntList {
+    
+    private var buffer: UnsafeMutablePointer<Int>
+    private var capacity: Int
+    private (set) var count: Int
+
+    @inline(__always)
+    subscript(index: Int) -> Int {
+        buffer[index]
+    }
+    
+    init(capacity: Int) {
+        buffer = UnsafeMutablePointer<Int>.allocate(capacity: capacity)
+        self.capacity = capacity
+        self.count = 0
+    }
+    
+    init(array: [Int]) {
+        capacity = array.count
+        count = capacity
+        buffer = UnsafeMutablePointer<Int>.allocate(capacity: count)
+        buffer.initialize(from: array, count: count)
+    }
+
+    @inline(__always)
+    mutating func append(_ value: Int) {
+        if count == capacity {
+            let newCapacity = 2 * (capacity + 1)
+            let newBuffer = UnsafeMutablePointer<Int>.allocate(capacity: newCapacity)
+            newBuffer.initialize(from: buffer, count: capacity)
+            buffer.deallocate()
+            capacity = newCapacity
+            buffer = newBuffer
+        }
+        buffer[count] = value
+        count &+= 1
+    }
+    
+    @inline(__always)
+    mutating func removeAll() {
+        count = 0
+    }
+    
+    func deallocate() {
+        buffer.deallocate()
+    }
+}
