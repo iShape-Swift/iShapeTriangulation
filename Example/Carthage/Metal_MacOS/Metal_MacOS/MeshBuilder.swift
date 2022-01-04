@@ -59,7 +59,7 @@ final class MeshBuilder {
         }
         
         let points = hull + hole
-        let indices = triangulator.triangulateDelaunay(points: points, hull: points[0..<hull.count], holes: [points[hull.count...]], extraPoints: nil).map( { uint16($0) })
+        let indices = (try? triangulator.triangulate(points: points, hull: points[0..<hull.count], holes: [points[hull.count...]], extraPoints: nil).map( { uint16($0) })) ?? []
         
         let vertexSize = points.count * MemoryLayout.size(ofValue: points[0])
         let vertexBuffer = device.makeBuffer(bytes: points, length: vertexSize, options: [.cpuCacheModeWriteCombined])!
