@@ -12,7 +12,7 @@ import iShapeTriangulation
 
 final class ApiTests: XCTestCase {
     
-    func test_0() {
+    func test_00() throws {
         
         let shape = PlainShape(
             hull: [
@@ -37,7 +37,7 @@ final class ApiTests: XCTestCase {
             ]
         )
         
-        let delaunay = shape.delaunay()
+        let delaunay = try shape.delaunay()
         
         let triangles = delaunay.trianglesIndices
 
@@ -68,4 +68,39 @@ final class ApiTests: XCTestCase {
         XCTAssertEqual(polygons.compare(array: [6, 6, 7, 8, 9, 4, 5, 5, 7, 0, 1, 11, 8, 5, 11, 1, 2, 3, 10, 4, 9, 10, 3, 4]), true)
     }
    
+    
+    func test_01() {
+        let triangulator = Triangulator()
+        let points = [
+            Point(x: -10, y: -10),
+            Point(x: 10, y: -10),
+            Point(x: 10, y: 10),
+            Point(x: -10, y: 10)
+        ]
+        do {
+            _ = try triangulator.triangulate(points: points)
+        } catch TriangulationError.notValidPath(let validation) {
+            switch validation {
+            case .valid:
+                XCTFail()
+            case .hasSamePoints(_, _):
+                XCTFail()
+            case .hullIsNotClockWise:
+                break
+            case .holeIsNotCounterClockWise(_):
+                XCTFail()
+            case .hullIsSelfIntersecting(_, _):
+                XCTFail()
+            case .holeIsSelfIntersecting(_, _):
+                XCTFail()
+            case .hullIsIntersectingHole(_, _):
+                XCTFail()
+            case .holeIsIntersectingHole(_, _):
+                XCTFail()
+            }
+        } catch {
+            XCTFail()
+        }
+    }
+    
 }

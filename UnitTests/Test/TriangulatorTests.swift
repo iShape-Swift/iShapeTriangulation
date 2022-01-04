@@ -12,7 +12,7 @@ import iShapeTriangulation
 
 final class TriangulatorTests: XCTestCase {
     
-    func test_0() {
+    func test_0() throws {
         let points = [
             Point(x: -5, y: 10),
             Point(x: 5, y: 10),
@@ -33,7 +33,7 @@ final class TriangulatorTests: XCTestCase {
         let hule = points[0...7]
         let hole = points[8...11]
         
-        let triangles = Triangulator().triangulateDelaunay(points: points, hull: hule, holes: [hole], extraPoints: nil)
+        let triangles = try Triangulator().triangulateDelaunay(points: points, hull: hule, holes: [hole], extraPoints: nil)
         
         let origin = [
             6, 7, 8,

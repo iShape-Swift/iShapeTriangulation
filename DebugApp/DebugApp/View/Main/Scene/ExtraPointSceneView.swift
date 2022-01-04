@@ -45,17 +45,18 @@ struct ExtraPointSceneView: View {
                 shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
             }
 
-            let indices = shape.delaunay(extraPoints: extra).trianglesIndices
-            let points = iGeom.float(points: shape.points + extra)
+            if let indices = try? shape.delaunay(extraPoints: extra).trianglesIndices {
+                let points = iGeom.float(points: shape.points + extra)
 
-            triangles.reserveCapacity(indices.count / 3)
-            var i = 0
-            while i < indices.count {
-                let a = CGPoint(points[indices[i]])
-                let b = CGPoint(points[indices[i + 1]])
-                let c = CGPoint(points[indices[i + 2]])
-                triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-                i += 3
+                triangles.reserveCapacity(indices.count / 3)
+                var i = 0
+                while i < indices.count {
+                    let a = CGPoint(points[indices[i]])
+                    let b = CGPoint(points[indices[i + 1]])
+                    let c = CGPoint(points[indices[i + 2]])
+                    triangles.append(Triangle(index: i / 3, points: [a, b, c]))
+                    i += 3
+                }
             }
         }
 

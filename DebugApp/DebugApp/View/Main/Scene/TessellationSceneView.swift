@@ -54,16 +54,17 @@ struct TessellationSceneView: View {
                 }
             }
 
-            let result = triangulator.tessellate(points: points, hull: hull, holes: holes.isEmpty ? nil : holes, maxEdge: 4, extraPoints: extraPoints)
+            if let result = try? triangulator.tessellate(points: points, hull: hull, holes: holes.isEmpty ? nil : holes, maxEdge: 4, extraPoints: extraPoints) {
 
-            triangles.reserveCapacity(result.indices.count / 3)
-            var i = 0
-            while i < result.indices.count {
-                let a = CGPoint(result.points[result.indices[i]])
-                let b = CGPoint(result.points[result.indices[i + 1]])
-                let c = CGPoint(result.points[result.indices[i + 2]])
-                triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-                i += 3
+                triangles.reserveCapacity(result.indices.count / 3)
+                var i = 0
+                while i < result.indices.count {
+                    let a = CGPoint(result.points[result.indices[i]])
+                    let b = CGPoint(result.points[result.indices[i + 1]])
+                    let c = CGPoint(result.points[result.indices[i + 2]])
+                    triangles.append(Triangle(index: i / 3, points: [a, b, c]))
+                    i += 3
+                }
             }
         }
 

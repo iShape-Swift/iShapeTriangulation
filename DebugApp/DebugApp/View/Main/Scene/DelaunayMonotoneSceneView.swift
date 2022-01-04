@@ -36,15 +36,16 @@ struct DelaunayMonotoneSceneView: View {
         if !isDisabled {
             let points = state.points
             shape = PlainShape(points: iGeom.int(points: points))
-            let indices = shape.delaunay().trianglesIndices
-            triangles.reserveCapacity(indices.count / 3)
-            var i = 0
-            while i < indices.count {
-                let a = CGPoint(points[indices[i]])
-                let b = CGPoint(points[indices[i + 1]])
-                let c = CGPoint(points[indices[i + 2]])
-                triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-                i += 3
+            if let indices = try? shape.delaunay().trianglesIndices {
+                triangles.reserveCapacity(indices.count / 3)
+                var i = 0
+                while i < indices.count {
+                    let a = CGPoint(points[indices[i]])
+                    let b = CGPoint(points[indices[i + 1]])
+                    let c = CGPoint(points[indices[i + 2]])
+                    triangles.append(Triangle(index: i / 3, points: [a, b, c]))
+                    i += 3
+                }
             }
         }
             

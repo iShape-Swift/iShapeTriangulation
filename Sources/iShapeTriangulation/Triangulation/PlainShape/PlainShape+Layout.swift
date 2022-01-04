@@ -20,6 +20,10 @@ extension PlainShape {
         let vertex: Vertex
     }
     
+    enum SplitError: Error {
+        case unusedPoint
+    }
+    
     struct MonotoneLayout {
         let pathCount: Int
         let extraCount: Int
@@ -75,7 +79,7 @@ extension PlainShape {
         }
     }
     
-    func split(maxEdge: Int64, extraPoints: [IntPoint]?) -> MonotoneLayout {
+    func split(maxEdge: Int64, extraPoints: [IntPoint]?) throws -> MonotoneLayout {
         
         let navigator = self.createNavigator(maxEdge: maxEdge, extraPoints: extraPoints)
         
@@ -476,7 +480,7 @@ extension PlainShape {
                     }   //  while dSubs
                 }   // switch
                 
-                assertionFailure("unused \(nature.rawValue) point detected")
+                throw SplitError.unusedPoint
         }
         
         let pathCount = navigator.pathCount

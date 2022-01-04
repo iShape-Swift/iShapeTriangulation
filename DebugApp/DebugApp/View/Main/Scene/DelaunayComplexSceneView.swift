@@ -44,16 +44,17 @@ struct DelaunayComplexSceneView: View {
             
             let points = iGeom.float(points: shape.points)
             
-            let indices = shape.delaunay().trianglesIndices
+            if let indices = try? shape.delaunay().trianglesIndices {
             
-            triangles.reserveCapacity(indices.count / 3)
-            var i = 0
-            while i < indices.count {
-                let a = CGPoint(points[indices[i]])
-                let b = CGPoint(points[indices[i + 1]])
-                let c = CGPoint(points[indices[i + 2]])
-                triangles.append(Triangle(index: i / 3, points: [a, b, c]))
-                i += 3
+                triangles.reserveCapacity(indices.count / 3)
+                var i = 0
+                while i < indices.count {
+                    let a = CGPoint(points[indices[i]])
+                    let b = CGPoint(points[indices[i + 1]])
+                    let c = CGPoint(points[indices[i + 2]])
+                    triangles.append(Triangle(index: i / 3, points: [a, b, c]))
+                    i += 3
+                }
             }
         }
         

@@ -9,12 +9,19 @@
 import iGeometry
 
 public extension PlainShape {
-    
+        
     /// Makes plain triangulation for polygon
     /// - Parameter extraPoints: extra points for triangulation
     /// - Returns: Indices of triples which form triangles in clockwise direction
-    func triangulate(extraPoints: [IntPoint]? = nil) -> [Int] {
-        let layout = self.split(maxEdge: 0, extraPoints: extraPoints)
+    func triangulate(extraPoints: [IntPoint]? = nil) throws -> [Int] {
+        let layout: MonotoneLayout
+        do {
+            layout = try self.split(maxEdge: 0, extraPoints: extraPoints)
+        } catch SplitError.unusedPoint {
+            let validation = self.validate()
+            throw TriangulationError.notValidPath(validation)
+        }
+        
         let extraCount: Int = extraPoints?.count ?? 0
         let totalCount = self.points.count + extraCount + ((self.layouts.count - 2) << 1)
         

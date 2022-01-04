@@ -18,10 +18,19 @@ public extension PlainShape {
     ///   - maxArea: maximum possible triangle area, triangles with higher area will be splitted
     ///   - minArea: the polygons with lower area will be not included
     ///   - extraPoints: extra points (inside points)
+    /// - Throws: `TessellationError`
     /// - Returns: array of polygons in a clock-wise-direction
-    func makeCentroidNet(iGeom: IntGeom, onlyConvex: Bool, maxEdge: Float, maxArea max: Float? = nil, minArea: Float = 0, extraPoints: [IntPoint]? = nil) -> [[IntPoint]] {
+    func makeCentroidNet(iGeom: IntGeom, onlyConvex: Bool, maxEdge: Float, maxArea max: Float? = nil, minArea: Float = 0, extraPoints: [IntPoint]? = nil) throws -> [[IntPoint]] {
         let iEdge = iGeom.int(float: maxEdge)
-        var delaunay = self.delaunay(maxEdge: iEdge, extraPoints: extraPoints)
+        
+        var delaunay: Delaunay
+
+        do {
+            delaunay = try self.delaunay(maxEdge: iEdge, extraPoints: extraPoints)
+        } catch DelaunayError.notValidPath(let validation) {
+            throw CentroidNetError.notValidPath(validation)
+        }
+        
         let maxArea: Float
         if let max = max {
             maxArea = max

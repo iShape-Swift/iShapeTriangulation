@@ -8,17 +8,23 @@
 import iGeometry
 
 public extension PlainShape {
-
+    
     /// Tessellate polygon
     /// - Parameters:
     ///   - iGeom: iGeom
     ///   - maxEdge: maximal possible triangle edge
     ///   - maxArea: maximum possible triangle area, triangles with higher area will be splitted
     ///   - extraPoints: extra points (inside points)
+    /// - Throws: `TessellationError`
     /// - Returns: Tessellation result
-    mutating func tessellate(iGeom: IntGeom, maxEdge: Float, maxArea: Float? = nil, extraPoints: [IntPoint]? = nil) -> Delaunay {
+    mutating func tessellate(iGeom: IntGeom, maxEdge: Float, maxArea: Float? = nil, extraPoints: [IntPoint]? = nil) throws -> Delaunay {
         let iEdge = iGeom.int(float: maxEdge)
-        var delaunay = self.delaunay(maxEdge: iEdge, extraPoints: extraPoints)
+        var delaunay: Delaunay
+        do {
+            delaunay = try self.delaunay(maxEdge: iEdge, extraPoints: extraPoints)
+        } catch DelaunayError.notValidPath(let validation) {
+            throw TessellationError.notValidPath(validation)
+        }
 
         let area: Float
         if let maxArea = maxArea {

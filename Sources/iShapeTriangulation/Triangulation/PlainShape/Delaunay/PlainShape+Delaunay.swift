@@ -15,7 +15,7 @@ public extension PlainShape {
         let b: Int            // vertex index
         let neighbor: Int     // prev triangle index
     }
-    
+
     private struct TriangleStack {
         
         private var edges: [Edge]
@@ -92,8 +92,14 @@ public extension PlainShape {
         }
     }
 
-    func delaunay(maxEdge: Int64 = 0, extraPoints: [IntPoint]? = nil) -> Delaunay {
-        let layout = self.split(maxEdge: maxEdge, extraPoints: extraPoints)
+    func delaunay(maxEdge: Int64 = 0, extraPoints: [IntPoint]? = nil) throws -> Delaunay {
+        let layout: MonotoneLayout
+        do {
+            layout = try self.split(maxEdge: maxEdge, extraPoints: extraPoints)
+        } catch SplitError.unusedPoint {
+            let validation = self.validate()
+            throw DelaunayError.notValidPath(validation)
+        }
             
         let holesCount = self.layouts.count
         let totalCount = layout.pathCount + 2 * layout.extraCount + holesCount * 2 - 2

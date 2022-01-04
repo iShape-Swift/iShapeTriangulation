@@ -35,12 +35,12 @@ struct CentroidNetSceneView: View {
         if !isDisabled {
             let bundle = state.data.bundle
             
-            let centroidNet = triangulator.centroidNet(points: bundle.points, hull: bundle.hull, holes: bundle.holes, onlyConvex: true, maxEdge: 4, minArea: 0, extraPoints: bundle.extraPoints)
-
-            centroids.reserveCapacity(centroidNet.count)
-            for path in centroidNet {
-                let points = path.cgPoints
-                centroids.append(Centroid(index: centroids.count, points: points))
+            if let centroidNet = try? triangulator.centroidNet(points: bundle.points, hull: bundle.hull, holes: bundle.holes, onlyConvex: true, maxEdge: 4, minArea: 0, extraPoints: bundle.extraPoints) {
+                centroids.reserveCapacity(centroidNet.count)
+                for path in centroidNet {
+                    let points = path.cgPoints
+                    centroids.append(Centroid(index: centroids.count, points: points))
+                }
             }
         }
 

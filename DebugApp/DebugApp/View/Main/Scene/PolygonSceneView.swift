@@ -44,20 +44,21 @@ struct PolygonSceneView: View {
                 shape = PlainShape(iGeom: iGeom, hull: hull, holes: paths)
             }
 
-            let indices = shape.delaunay(extraPoints: extra).convexPolygonsIndices
-            let points = iGeom.float(points: shape.points/* + extra*/)
-            
-            var i = 0
-            while i < indices.count {
-                let n = indices[i]
-                i += 1
-                var path = [CGPoint](repeating: .zero, count: n)
-                for j in 0..<n {
-                    let index = indices[j + i]
-                    path[j] = CGPoint(points[index])
+            if let indices = try? shape.delaunay(extraPoints: extra).convexPolygonsIndices {
+                let points = iGeom.float(points: shape.points/* + extra*/)
+                
+                var i = 0
+                while i < indices.count {
+                    let n = indices[i]
+                    i += 1
+                    var path = [CGPoint](repeating: .zero, count: n)
+                    for j in 0..<n {
+                        let index = indices[j + i]
+                        path[j] = CGPoint(points[index])
+                    }
+                    polygons.append(Polygon(index: polygons.count, points: path))
+                    i += n
                 }
-                polygons.append(Polygon(index: polygons.count, points: path))
-                i += n
             }
         }
 
