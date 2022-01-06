@@ -1,0 +1,11 @@
+framework module iGeometry {
+  umbrella header "iGeometry.h"
+
+  export *
+  module * { export * }
+}
+
+module iGeometry.Swift {
+    header "iGeometry-Swift.h"
+    requires objc
+}

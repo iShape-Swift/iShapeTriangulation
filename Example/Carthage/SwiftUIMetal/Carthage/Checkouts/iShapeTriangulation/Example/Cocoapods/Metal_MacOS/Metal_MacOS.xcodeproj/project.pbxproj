@@ -1,0 +1,435 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		545A0F8124E2AA78001A7DDD /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F8024E2AA78001A7DDD /* MetalView.swift */; };
+		545A0F8324E2BA0E001A7DDD /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F8224E2BA0E001A7DDD /* Shaders.metal */; };
+		545A0F8524E2EE7A001A7DDD /* MeshBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F8424E2EE7A001A7DDD /* MeshBuilder.swift */; };
+		54AFC26824D6A24B00B94D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC26724D6A24B00B94D58 /* AppDelegate.swift */; };
+		54AFC26A24D6A24B00B94D58 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFC26924D6A24B00B94D58 /* ContentView.swift */; };
+		54AFC26C24D6A24B00B94D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC26B24D6A24B00B94D58 /* Assets.xcassets */; };
+		54AFC26F24D6A24B00B94D58 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC26E24D6A24B00B94D58 /* Preview Assets.xcassets */; };
+		54AFC27224D6A24B00B94D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC27024D6A24B00B94D58 /* Main.storyboard */; };
+		DB7C646BEF3CB61AF45E209F /* Pods_Metal_MacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46ADAD8CAF071E5D9878659C /* Pods_Metal_MacOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		46ADAD8CAF071E5D9878659C /* Pods_Metal_MacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Metal_MacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		545A0F8024E2AA78001A7DDD /* MetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		545A0F8224E2BA0E001A7DDD /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		545A0F8424E2EE7A001A7DDD /* MeshBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshBuilder.swift; sourceTree = "<group>"; };
+		54AFC26424D6A24B00B94D58 /* Metal_MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metal_MacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54AFC26724D6A24B00B94D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		54AFC26924D6A24B00B94D58 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		54AFC26B24D6A24B00B94D58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		54AFC26E24D6A24B00B94D58 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		54AFC27124D6A24B00B94D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		54AFC27324D6A24B00B94D58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54AFC27424D6A24B00B94D58 /* Metal_MacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Metal_MacOS.entitlements; sourceTree = "<group>"; };
+		54AFC28324D6A4B500B94D58 /* iGeometry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = iGeometry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		718E7100943A7187E50F6C48 /* Pods-Metal_MacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metal_MacOS.debug.xcconfig"; path = "Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B35DB0EAC6D4AC24904F5CC6 /* Pods-Metal_MacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Metal_MacOS.release.xcconfig"; path = "Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		54AFC26124D6A24B00B94D58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB7C646BEF3CB61AF45E209F /* Pods_Metal_MacOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		54AFC25B24D6A24B00B94D58 = {
+			isa = PBXGroup;
+			children = (
+				54AFC26624D6A24B00B94D58 /* Metal_MacOS */,
+				54AFC26524D6A24B00B94D58 /* Products */,
+				54AFC28224D6A4B500B94D58 /* Frameworks */,
+				CD7E87390FBAFA1A88276C36 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		54AFC26524D6A24B00B94D58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54AFC26424D6A24B00B94D58 /* Metal_MacOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		54AFC26624D6A24B00B94D58 /* Metal_MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				54AFC26724D6A24B00B94D58 /* AppDelegate.swift */,
+				54AFC26924D6A24B00B94D58 /* ContentView.swift */,
+				54AFC26B24D6A24B00B94D58 /* Assets.xcassets */,
+				54AFC27024D6A24B00B94D58 /* Main.storyboard */,
+				54AFC27324D6A24B00B94D58 /* Info.plist */,
+				54AFC27424D6A24B00B94D58 /* Metal_MacOS.entitlements */,
+				54AFC26D24D6A24B00B94D58 /* Preview Content */,
+				545A0F8024E2AA78001A7DDD /* MetalView.swift */,
+				545A0F8224E2BA0E001A7DDD /* Shaders.metal */,
+				545A0F8424E2EE7A001A7DDD /* MeshBuilder.swift */,
+			);
+			path = Metal_MacOS;
+			sourceTree = "<group>";
+		};
+		54AFC26D24D6A24B00B94D58 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				54AFC26E24D6A24B00B94D58 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		54AFC28224D6A4B500B94D58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54AFC28324D6A4B500B94D58 /* iGeometry.framework */,
+				46ADAD8CAF071E5D9878659C /* Pods_Metal_MacOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD7E87390FBAFA1A88276C36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				718E7100943A7187E50F6C48 /* Pods-Metal_MacOS.debug.xcconfig */,
+				B35DB0EAC6D4AC24904F5CC6 /* Pods-Metal_MacOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		54AFC26324D6A24B00B94D58 /* Metal_MacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54AFC27724D6A24B00B94D58 /* Build configuration list for PBXNativeTarget "Metal_MacOS" */;
+			buildPhases = (
+				209A83CBA0DC6516D8B6F37C /* [CP] Check Pods Manifest.lock */,
+				54AFC26024D6A24B00B94D58 /* Sources */,
+				54AFC26124D6A24B00B94D58 /* Frameworks */,
+				54AFC26224D6A24B00B94D58 /* Resources */,
+				C105F906B166D3228932CA0C /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Metal_MacOS;
+			productName = Metal_MacOS;
+			productReference = 54AFC26424D6A24B00B94D58 /* Metal_MacOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		54AFC25C24D6A24B00B94D58 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = "Nail Sharipov";
+				TargetAttributes = {
+					54AFC26324D6A24B00B94D58 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = 54AFC25F24D6A24B00B94D58 /* Build configuration list for PBXProject "Metal_MacOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 54AFC25B24D6A24B00B94D58;
+			productRefGroup = 54AFC26524D6A24B00B94D58 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				54AFC26324D6A24B00B94D58 /* Metal_MacOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		54AFC26224D6A24B00B94D58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54AFC27224D6A24B00B94D58 /* Main.storyboard in Resources */,
+				54AFC26F24D6A24B00B94D58 /* Preview Assets.xcassets in Resources */,
+				54AFC26C24D6A24B00B94D58 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		209A83CBA0DC6516D8B6F37C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Metal_MacOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C105F906B166D3228932CA0C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Metal_MacOS/Pods-Metal_MacOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		54AFC26024D6A24B00B94D58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				545A0F8324E2BA0E001A7DDD /* Shaders.metal in Sources */,
+				545A0F8524E2EE7A001A7DDD /* MeshBuilder.swift in Sources */,
+				545A0F8124E2AA78001A7DDD /* MetalView.swift in Sources */,
+				54AFC26A24D6A24B00B94D58 /* ContentView.swift in Sources */,
+				54AFC26824D6A24B00B94D58 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		54AFC27024D6A24B00B94D58 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				54AFC27124D6A24B00B94D58 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		54AFC27524D6A24B00B94D58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		54AFC27624D6A24B00B94D58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		54AFC27824D6A24B00B94D58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 718E7100943A7187E50F6C48 /* Pods-Metal_MacOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Metal_MacOS/Metal_MacOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Metal_MacOS/Preview Content\"";
+				DEVELOPMENT_TEAM = HPV9E52JPX;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Metal_MacOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "WeakTeam.Metal-MacOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		54AFC27924D6A24B00B94D58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B35DB0EAC6D4AC24904F5CC6 /* Pods-Metal_MacOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Metal_MacOS/Metal_MacOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Metal_MacOS/Preview Content\"";
+				DEVELOPMENT_TEAM = HPV9E52JPX;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Metal_MacOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "WeakTeam.Metal-MacOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		54AFC25F24D6A24B00B94D58 /* Build configuration list for PBXProject "Metal_MacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54AFC27524D6A24B00B94D58 /* Debug */,
+				54AFC27624D6A24B00B94D58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54AFC27724D6A24B00B94D58 /* Build configuration list for PBXNativeTarget "Metal_MacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54AFC27824D6A24B00B94D58 /* Debug */,
+				54AFC27924D6A24B00B94D58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 54AFC25C24D6A24B00B94D58 /* Project object */;
+}

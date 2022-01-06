@@ -1,0 +1,14 @@
+**/Pods/
+*.xcworkspace
+**/Podfile.lock
+
+*.pbxuser
+!default.pbxuser
+xcuserdata/
+
+**/Carthage/
+
+/.build
+/Packages
+
+.DS_Store
