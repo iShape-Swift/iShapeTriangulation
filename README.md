@@ -169,7 +169,7 @@ let package = Package(
     name: "[your name]",
     products: [
         dependencies: [
-            .package(url: "https://github.com/iShape-Swift/iShapeTriangulation", from: "0.8.0")
+            .package(url: "https://github.com/iShape-Swift/iShapeTriangulation", from: "1.0.0")
         ],
         targets: [
             .target(
@@ -179,3 +179,8 @@ let package = Package(
     ]
 )
 ```
+Or add it directly throw .xcodeproj
+<p align="center">
+<img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/SwiftPackageManager_tip.png" width="600"/>
+</p>
+
