@@ -91,13 +91,13 @@ Then get an instance of a Triangulator class and triangulate your polygon. As th
 
 ```swift
     let triangulator = Triangulator()
-    let triangles = triangulator.triangulateDelaunay(points: path)
-
-    for i in 0..<triangles.count / 3 {
-        let ai = triangles[3 * i]
-        let bi = triangles[3 * i + 1]
-        let ci = triangles[3 * i + 2]
-        print("triangle \(i): (\(ai), \(bi), \(ci))")
+    if let triangles = try? triangulator.triangulateDelaunay(points: path) {
+        for i in 0..<triangles.count / 3 {
+            let ai = triangles[3 * i]
+            let bi = triangles[3 * i + 1]
+            let ci = triangles[3 * i + 2]
+            print("triangle \(i): (\(ai), \(bi), \(ci))")
+        }
     }
 ```
 The triple are always list vertices in a clock wise direction.
@@ -125,13 +125,13 @@ Now you need represent a hole as an array of vertices listed in counterclockwise
     ]
     
     let points = path + hole
-    let triangles = triangulator.triangulateDelaunay(points: points, hull: points[0..<path.count], holes: [points[path.count..<points.count]], extraPoints: nil)
-
-    for i in 0..<triangles.count / 3 {
-        let ai = triangles[3 * i]
-        let bi = triangles[3 * i + 1]
-        let ci = triangles[3 * i + 2]
-        print("triangle \(i): (\(ai), \(bi), \(ci))")
+    if let triangles = try? triangulator.triangulateDelaunay(points: points, hull: points[0..<path.count], holes: [points[path.count..<points.count]], extraPoints: nil) {
+        for i in 0..<triangles.count / 3 {
+            let ai = triangles[3 * i]
+            let bi = triangles[3 * i + 1]
+            let ci = triangles[3 * i + 2]
+            print("triangle \(i): (\(ai), \(bi), \(ci))")
+        }
     }
 ```
 <p align="center">
