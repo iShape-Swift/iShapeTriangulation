@@ -72,14 +72,6 @@ final class Coordinator: NSObject, MTKViewDelegate {
     private let metalCommandQueue: MTLCommandQueue
     private let pipeline: MTLRenderPipelineState
     
-    private let vertexData: [Point] = [
-        Point(x: 0.0, y: 0.5),
-        Point(x: -0.5, y: -0.5),
-        Point(x: 0.5, y: -0.5)
-    ]
-    
-    private let vertexBuffer: MTLBuffer
-    
     init(_ parent: MetalView) {
         self.parent = parent
         self.device = MTLCreateSystemDefaultDevice()!
@@ -91,9 +83,6 @@ final class Coordinator: NSObject, MTKViewDelegate {
         pipelineDescriptor.fragmentFunction = library.makeFunction(name: "fragmentShader")!
         
         self.pipeline = try! self.device.makeRenderPipelineState(descriptor: pipelineDescriptor)
-
-        let vertexSize = self.vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
-        self.vertexBuffer = self.device.makeBuffer(bytes: vertexData, length: vertexSize, options: [.cpuCacheModeWriteCombined])!
         
         super.init()
     }

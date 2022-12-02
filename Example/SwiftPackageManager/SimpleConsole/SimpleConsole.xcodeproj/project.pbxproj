@@ -305,7 +305,7 @@
 			repositoryURL = "https://github.com/iShape-Swift/iGeometry";
 			requirement = {
 				kind = exactVersion;
-				version = 1.9.0;
+				version = 1.10.0;
 			};
 		};
 		546CC6B92786E1BD009CD181 /* XCRemoteSwiftPackageReference "iShapeTriangulation" */ = {
