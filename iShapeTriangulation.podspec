@@ -8,14 +8,13 @@ Pod::Spec.new do |spec|
   spec.license                    = { :type => 'MIT', :file => 'LICENSE' }
   spec.homepage                   = 'https://github.com/NailxSharipov/iShapeTriangulation'
 
-
-  spec.swift_versions             = ['4.2', '5.0']
+  spec.swift_versions             = ['5.0', '5.3']
   spec.requires_arc               = true
 
-  spec.ios.deployment_target      = '9.0'
-  spec.tvos.deployment_target     = '9.0'
+  spec.ios.deployment_target      = '11.0'
+  spec.tvos.deployment_target     = '11.0'
   spec.watchos.deployment_target  = '4.0'
-  spec.osx.deployment_target      = '10.15'
+  spec.macos.deployment_target    = '10.15'
 
   spec.source_files               = 'Sources/**/*.swift'
 
