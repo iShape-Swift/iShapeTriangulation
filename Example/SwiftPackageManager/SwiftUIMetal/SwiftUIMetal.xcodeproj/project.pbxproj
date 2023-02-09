@@ -19,8 +19,6 @@
 		54B8CC9127860B7F004C181F /* MeshBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8CC8F27860B7F004C181F /* MeshBuilder.swift */; };
 		54B8CC9327860BCE004C181F /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 54B8CC9227860BCE004C181F /* Shaders.metal */; };
 		54B8CC9427860BCE004C181F /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 54B8CC9227860BCE004C181F /* Shaders.metal */; };
-		54B8CC9727860C3F004C181F /* iGeometry in Frameworks */ = {isa = PBXBuildFile; productRef = 54B8CC9627860C3F004C181F /* iGeometry */; };
-		54B8CC9D27860C66004C181F /* iGeometry in Frameworks */ = {isa = PBXBuildFile; productRef = 54B8CC9C27860C66004C181F /* iGeometry */; };
 		54B8CCA227860D88004C181F /* iShapeTriangulation in Frameworks */ = {isa = PBXBuildFile; productRef = 54B8CCA127860D88004C181F /* iShapeTriangulation */; };
 		54B8CCA627861280004C181F /* iShapeTriangulation in Frameworks */ = {isa = PBXBuildFile; productRef = 54B8CCA527861280004C181F /* iShapeTriangulation */; };
 /* End PBXBuildFile section */
@@ -43,7 +41,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				54B8CCA227860D88004C181F /* iShapeTriangulation in Frameworks */,
-				54B8CC9727860C3F004C181F /* iGeometry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +49,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				54B8CCA627861280004C181F /* iShapeTriangulation in Frameworks */,
-				54B8CC9D27860C66004C181F /* iGeometry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +127,6 @@
 			);
 			name = "SwiftUIMetal (iOS)";
 			packageProductDependencies = (
-				54B8CC9627860C3F004C181F /* iGeometry */,
 				54B8CCA127860D88004C181F /* iShapeTriangulation */,
 			);
 			productName = "SwiftUIMetal (iOS)";
@@ -152,7 +147,6 @@
 			);
 			name = "SwiftUIMetal (macOS)";
 			packageProductDependencies = (
-				54B8CC9C27860C66004C181F /* iGeometry */,
 				54B8CCA527861280004C181F /* iShapeTriangulation */,
 			);
 			productName = "SwiftUIMetal (macOS)";
@@ -187,7 +181,6 @@
 			);
 			mainGroup = 54B8CC5E278609FD004C181F;
 			packageReferences = (
-				54B8CC9527860C3F004C181F /* XCRemoteSwiftPackageReference "iGeometry" */,
 				54B8CCA027860D88004C181F /* XCRemoteSwiftPackageReference "iShapeTriangulation" */,
 			);
 			productRefGroup = 54B8CC6C278609FE004C181F /* Products */;
@@ -508,14 +501,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		54B8CC9527860C3F004C181F /* XCRemoteSwiftPackageReference "iGeometry" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/iShape-Swift/iGeometry";
-			requirement = {
-				kind = exactVersion;
-				version = 1.10.0;
-			};
-		};
 		54B8CCA027860D88004C181F /* XCRemoteSwiftPackageReference "iShapeTriangulation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/iShape-Swift/iShapeTriangulation";
@@ -527,16 +512,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		54B8CC9627860C3F004C181F /* iGeometry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 54B8CC9527860C3F004C181F /* XCRemoteSwiftPackageReference "iGeometry" */;
-			productName = iGeometry;
-		};
-		54B8CC9C27860C66004C181F /* iGeometry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 54B8CC9527860C3F004C181F /* XCRemoteSwiftPackageReference "iGeometry" */;
-			productName = iGeometry;
-		};
 		54B8CCA127860D88004C181F /* iShapeTriangulation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 54B8CCA027860D88004C181F /* XCRemoteSwiftPackageReference "iShapeTriangulation" */;

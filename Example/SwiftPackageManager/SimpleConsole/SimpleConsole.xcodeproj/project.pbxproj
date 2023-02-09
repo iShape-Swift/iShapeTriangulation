@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		546CC6AA2786DF6A009CD181 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546CC6A92786DF6A009CD181 /* main.swift */; };
-		546CC6B82786E1A4009CD181 /* iGeometry in Frameworks */ = {isa = PBXBuildFile; productRef = 546CC6B72786E1A4009CD181 /* iGeometry */; };
 		546CC6BB2786E1BD009CD181 /* iShapeTriangulation in Frameworks */ = {isa = PBXBuildFile; productRef = 546CC6BA2786E1BD009CD181 /* iShapeTriangulation */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				546CC6BB2786E1BD009CD181 /* iShapeTriangulation in Frameworks */,
-				546CC6B82786E1A4009CD181 /* iGeometry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +81,6 @@
 			);
 			name = SimpleConsole;
 			packageProductDependencies = (
-				546CC6B72786E1A4009CD181 /* iGeometry */,
 				546CC6BA2786E1BD009CD181 /* iShapeTriangulation */,
 			);
 			productName = SimpleConsole;
@@ -115,7 +112,6 @@
 			);
 			mainGroup = 546CC69D2786DF6A009CD181;
 			packageReferences = (
-				546CC6B62786E1A4009CD181 /* XCRemoteSwiftPackageReference "iGeometry" */,
 				546CC6B92786E1BD009CD181 /* XCRemoteSwiftPackageReference "iShapeTriangulation" */,
 			);
 			productRefGroup = 546CC6A72786DF6A009CD181 /* Products */;
@@ -300,14 +296,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		546CC6B62786E1A4009CD181 /* XCRemoteSwiftPackageReference "iGeometry" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/iShape-Swift/iGeometry";
-			requirement = {
-				kind = exactVersion;
-				version = 1.10.0;
-			};
-		};
 		546CC6B92786E1BD009CD181 /* XCRemoteSwiftPackageReference "iShapeTriangulation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/iShape-Swift/iShapeTriangulation";
@@ -319,11 +307,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		546CC6B72786E1A4009CD181 /* iGeometry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 546CC6B62786E1A4009CD181 /* XCRemoteSwiftPackageReference "iGeometry" */;
-			productName = iGeometry;
-		};
 		546CC6BA2786E1BD009CD181 /* iShapeTriangulation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 546CC6B92786E1BD009CD181 /* XCRemoteSwiftPackageReference "iShapeTriangulation" */;
