@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name                       = 'iShapeTriangulation'
-  spec.version                    = '1.0.1'
+  spec.version                    = '1.0.2'
   spec.summary                    = 'Triangulation polygons'
   spec.authors                    = 'Nail Sharipov'
   spec.source                     = { :git => 'https://github.com/NailxSharipov/iShapeTriangulation.git', :tag => spec.version.to_s }
@@ -13,12 +13,11 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target      = '11.0'
   spec.tvos.deployment_target     = '11.0'
-  spec.watchos.deployment_target  = '4.0'
   spec.macos.deployment_target    = '10.15'
 
-  spec.source_files               = 'Sources/**/*.swift'
+  spec.source_files               = 'Sources/**/*.{h,m,swift}'
 
 
-  spec.dependency                 'iGeometry', '>= 1.11.1'
+  spec.dependency                 'iGeometry', '>= 1.11.2'
 
 end
