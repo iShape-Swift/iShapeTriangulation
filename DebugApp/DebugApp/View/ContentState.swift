@@ -21,6 +21,7 @@ final class ContentState: ObservableObject {
         case tessellation
         case delaunayCondition
         case tessellationCondition
+        case tetragonIntersection
     }
     
     @Published var current: Test = .plainMonotone

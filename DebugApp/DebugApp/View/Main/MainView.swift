@@ -56,7 +56,8 @@ struct MainView: View {
         let tessellationScene = TessellationSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .tessellation)
         let delaunayConditionScene = DelaunayConditionSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .delaunayCondition)
         let tessellationConditionScene = TessellationConditionSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .tessellationCondition)
-        
+        let tetragonIntersectionScene = TetragonIntersectionSceneView(sceneState: self.sceneState, isDisabled: self.contentState.current != .tetragonIntersection)
+
         let scene: Scene
         
         switch self.contentState.current {
@@ -80,6 +81,8 @@ struct MainView: View {
                 scene = delaunayConditionScene.state
             case .tessellationCondition:
                 scene = tessellationConditionScene.state
+            case .tetragonIntersection:
+                scene = tetragonIntersectionScene.state
         }
 
         self.inputSystem.subscribe(scene)
@@ -97,7 +100,8 @@ struct MainView: View {
                 centroidNetScene.isHidden(self.contentState.current != .centroidNet)
                 tessellationScene.isHidden(self.contentState.current != .tessellation)
                 delaunayConditionScene.isHidden(self.contentState.current != .delaunayCondition)
-                tessellationConditionScene.isHidden(self.contentState.current != .tessellationCondition)
+//                tessellationConditionScene.isHidden(self.contentState.current != .tessellationCondition)
+                tetragonIntersectionScene.isHidden(self.contentState.current != .tetragonIntersection)
             }
     }
     

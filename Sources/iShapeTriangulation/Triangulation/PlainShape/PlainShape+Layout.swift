@@ -583,30 +583,67 @@ extension PlainShape {
         
         return iNewHand
     }
-    
-    @inline(__always)
-    private static func sign(a: IntPoint, b: IntPoint, c: IntPoint) -> Int64 {
-        return (a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)
+
+    static func isTetragonContain(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint, d: IntPoint) -> Bool {
+        let ab = a - b
+        let bc = b - c
+        let cd = c - d
+        let da = d - a
+
+        let da_ab = da.crossProduct(point: ab)
+        
+        // dab
+        if da_ab > 0 {
+            return isTriangleContain(a: b, b: c, c: d, p: p) && isTriangleNotContain(a: d, b: a, c: b, p: p)
+        }
+        
+        let ab_bc = ab.crossProduct(point: bc)
+        
+        // abc
+        if ab_bc > 0 {
+            return isTriangleContain(a: c, b: d, c: a, p: p) && isTriangleNotContain(a: a, b: b, c: c, p: p)
+        }
+        
+        let bc_cd = bc.crossProduct(point: cd)
+        
+        // bcd
+        if bc_cd > 0 {
+            return isTriangleContain(a: d, b: a, c: b, p: p) && isTriangleNotContain(a: b, b: c, c: d, p: p)
+        }
+        
+        let cd_da = cd.crossProduct(point: da)
+        
+        // cda
+        if cd_da > 0 {
+            return isTriangleContain(a: a, b: b, c: c, p: p) && isTriangleNotContain(a: c, b: d, c: a, p: p)
+        }
+
+        // concave
+        return isTriangleContain(a: a, b: b, c: c, p: p) || isTriangleContain(a: c, b: d, c: a, p: p)
     }
-    
-    @inline(__always)
-    private static func isTriangleContain(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
+
+    private static func isTriangleContain(a: IntPoint, b: IntPoint, c: IntPoint, p: IntPoint) -> Bool {
+        let q0 = (p - b).crossProduct(point: a - b)
+        let q1 = (p - c).crossProduct(point: b - c)
+        let q2 = (p - a).crossProduct(point: c - a)
         
-        let d1 = PlainShape.sign(a: p, b: a, c: b)
-        let d2 = PlainShape.sign(a: p, b: b, c: c)
-        let d3 = PlainShape.sign(a: p, b: c, c: a)
-        
-        let has_neg = d1 < 0 || d2 < 0 || d3 < 0
-        let has_pos = d1 > 0 || d2 > 0 || d3 > 0
+        let has_neg = q0 < 0 || q1 < 0 || q2 < 0
+        let has_pos = q0 > 0 || q1 > 0 || q2 > 0
         
         return !(has_neg && has_pos)
     }
     
-    @inline(__always)
-    private static func isTetragonContain(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint, d: IntPoint) -> Bool {
-        return PlainShape.isTriangleContain(p: p, a: a, b: b, c: c) || PlainShape.isTriangleContain(p: p, a: a, b: c, c: d)
+    private static func isTriangleNotContain(a: IntPoint, b: IntPoint, c: IntPoint, p: IntPoint) -> Bool {
+        let q0 = (p - b).crossProduct(point: a - b)
+        let q1 = (p - c).crossProduct(point: b - c)
+        let q2 = (p - a).crossProduct(point: c - a)
+        
+        let has_neg = q0 <= 0 || q1 <= 0 || q2 <= 0
+        let has_pos = q0 >= 0 || q1 >= 0 || q2 >= 0
+        
+        return has_neg && has_pos
     }
-
+    
 }
 
 private extension Array {

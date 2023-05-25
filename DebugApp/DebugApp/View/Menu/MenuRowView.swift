@@ -34,12 +34,6 @@ struct MenuRowView: View {
     }
 }
 
-struct MenuRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuRowView(test: .plainMonotone, isSelected: false)
-    }
-}
-
 private extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()

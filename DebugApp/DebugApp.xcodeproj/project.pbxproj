@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		5424571B24D863E700599E30 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5424571A24D863E700599E30 /* MenuView.swift */; };
 		5424572224D866B000599E30 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5424572124D866B000599E30 /* MainView.swift */; };
+		5448C72C2A1F89BA00C975AF /* TetragonIntersectionSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448C72B2A1F89BA00C975AF /* TetragonIntersectionSceneView.swift */; };
+		5448C72E2A1FA07F00C975AF /* Tetragon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448C72D2A1FA07F00C975AF /* Tetragon.swift */; };
 		544BCD1524E1204A00C2FB0B /* View+hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BCD1424E1204A00C2FB0B /* View+hidden.swift */; };
 		545A0F4A24E26F10001A7DDD /* BasicSceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F4924E26F10001A7DDD /* BasicSceneState.swift */; };
 		545A0F5124E27099001A7DDD /* ComplexSceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A0F5024E27099001A7DDD /* ComplexSceneState.swift */; };
@@ -37,51 +39,13 @@
 		54AFC4E924D723D700B94D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC4E824D723D700B94D58 /* Assets.xcassets */; };
 		54AFC4EC24D723D700B94D58 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC4EB24D723D700B94D58 /* Preview Assets.xcassets */; };
 		54AFC4EF24D723D700B94D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AFC4ED24D723D700B94D58 /* Main.storyboard */; };
-		54AFC50B24D7243F00B94D58 /* iShapeTriangulation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC50724D7242700B94D58 /* iShapeTriangulation.framework */; };
-		54AFC50C24D7243F00B94D58 /* iShapeTriangulation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 54AFC50724D7242700B94D58 /* iShapeTriangulation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		54B5EBF025A769E800FFFC45 /* PathShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B5EBEF25A769E800FFFC45 /* PathShapeView.swift */; };
 		54E2047A24DFEB79003F1D77 /* InputSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2047924DFEB79003F1D77 /* InputSystem.swift */; };
 		54E2047D24E00367003F1D77 /* ColorSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2047C24E00367003F1D77 /* ColorSchema.swift */; };
+		54E29E9E2A1F34370091D3D4 /* iGeometry in Frameworks */ = {isa = PBXBuildFile; productRef = 54E29E9D2A1F34370091D3D4 /* iGeometry */; };
+		54E29EA02A1F34370091D3D4 /* iShapeTriangulation in Frameworks */ = {isa = PBXBuildFile; productRef = 54E29E9F2A1F34370091D3D4 /* iShapeTriangulation */; };
 		54E6A26324DFCDB800A78708 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6A26224DFCDB800A78708 /* Scene.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		54AFC50024D7242700B94D58 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC38824D716B300B94D58;
-			remoteInfo = "iShapeTriangulation iOS";
-		};
-		54AFC50224D7242700B94D58 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC39624D716C400B94D58;
-			remoteInfo = "iShapeTriangulation watchOS";
-		};
-		54AFC50424D7242700B94D58 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC3A324D716D100B94D58;
-			remoteInfo = "iShapeTriangulation tvOS";
-		};
-		54AFC50624D7242700B94D58 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC3B024D716E500B94D58;
-			remoteInfo = "iShapeTriangulation macOS";
-		};
-		54AFC50824D7242700B94D58 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 54AFC4B924D721FB00B94D58;
-			remoteInfo = UnitTests;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		54AFC50D24D7243F00B94D58 /* Embed Frameworks */ = {
@@ -90,7 +54,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				54AFC50C24D7243F00B94D58 /* iShapeTriangulation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +63,8 @@
 /* Begin PBXFileReference section */
 		5424571A24D863E700599E30 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		5424572124D866B000599E30 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		5448C72B2A1F89BA00C975AF /* TetragonIntersectionSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetragonIntersectionSceneView.swift; sourceTree = "<group>"; };
+		5448C72D2A1FA07F00C975AF /* Tetragon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetragon.swift; sourceTree = "<group>"; };
 		544BCD1424E1204A00C2FB0B /* View+hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hidden.swift"; sourceTree = "<group>"; };
 		545A0F4924E26F10001A7DDD /* BasicSceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSceneState.swift; sourceTree = "<group>"; };
 		545A0F5024E27099001A7DDD /* ComplexSceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSceneState.swift; sourceTree = "<group>"; };
@@ -131,10 +96,11 @@
 		54AFC4EE24D723D700B94D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		54AFC4F024D723D700B94D58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54AFC4F124D723D700B94D58 /* DebugApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugApp.entitlements; sourceTree = "<group>"; };
-		54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iShapeTriangulation.xcodeproj; path = ../iShapeTriangulation.xcodeproj; sourceTree = "<group>"; };
 		54B5EBEF25A769E800FFFC45 /* PathShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathShapeView.swift; sourceTree = "<group>"; };
 		54E2047924DFEB79003F1D77 /* InputSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSystem.swift; sourceTree = "<group>"; };
 		54E2047C24E00367003F1D77 /* ColorSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchema.swift; sourceTree = "<group>"; };
+		54E29E9B2A1F34010091D3D4 /* iShapeTriangulation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = iShapeTriangulation; path = ..; sourceTree = "<group>"; };
+		54E29E9C2A1F34230091D3D4 /* iGeometry */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = iGeometry; path = ../../iGeometry; sourceTree = "<group>"; };
 		54E6A26224DFCDB800A78708 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,7 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54AFC50B24D7243F00B94D58 /* iShapeTriangulation.framework in Frameworks */,
+				54E29EA02A1F34370091D3D4 /* iShapeTriangulation in Frameworks */,
+				54E29E9E2A1F34370091D3D4 /* iGeometry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +158,7 @@
 				5424572124D866B000599E30 /* MainView.swift */,
 				5471932324DC0654008B67CB /* SceneState.swift */,
 				5471932524DC07DF008B67CB /* СoordinateView.swift */,
+				5448C72D2A1FA07F00C975AF /* Tetragon.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -219,6 +187,7 @@
 				545A0F6124E2872F001A7DDD /* TessellationSceneView.swift */,
 				54AA95A024E69AD200F3155F /* DelaunayConditionSceneView.swift */,
 				54AD0BF124EAC05B007E82DD /* TessellationConditionSceneView.swift */,
+				5448C72B2A1F89BA00C975AF /* TetragonIntersectionSceneView.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -237,7 +206,7 @@
 		54AFC4D824D723D700B94D58 = {
 			isa = PBXGroup;
 			children = (
-				54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */,
+				54E29E9A2A1F34010091D3D4 /* Packages */,
 				54AFC4E324D723D700B94D58 /* DebugApp */,
 				54AFC4E224D723D700B94D58 /* Products */,
 				54AFC50A24D7243F00B94D58 /* Frameworks */,
@@ -275,23 +244,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		54AFC4F824D7242700B94D58 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				54AFC50124D7242700B94D58 /* iShapeTriangulation.framework */,
-				54AFC50324D7242700B94D58 /* iShapeTriangulation.framework */,
-				54AFC50524D7242700B94D58 /* iShapeTriangulation.framework */,
-				54AFC50724D7242700B94D58 /* iShapeTriangulation.framework */,
-				54AFC50924D7242700B94D58 /* UnitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		54AFC50A24D7243F00B94D58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		54E29E9A2A1F34010091D3D4 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				54E29E9B2A1F34010091D3D4 /* iShapeTriangulation */,
+				54E29E9C2A1F34230091D3D4 /* iGeometry */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +277,10 @@
 			dependencies = (
 			);
 			name = DebugApp;
+			packageProductDependencies = (
+				54E29E9D2A1F34370091D3D4 /* iGeometry */,
+				54E29E9F2A1F34370091D3D4 /* iShapeTriangulation */,
+			);
 			productName = DebugApp;
 			productReference = 54AFC4E124D723D700B94D58 /* DebugApp.app */;
 			productType = "com.apple.product-type.application";
@@ -341,56 +311,12 @@
 			mainGroup = 54AFC4D824D723D700B94D58;
 			productRefGroup = 54AFC4E224D723D700B94D58 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 54AFC4F824D7242700B94D58 /* Products */;
-					ProjectRef = 54AFC4F724D7242700B94D58 /* iShapeTriangulation.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				54AFC4E024D723D700B94D58 /* DebugApp */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		54AFC50124D7242700B94D58 /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 54AFC50024D7242700B94D58 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		54AFC50324D7242700B94D58 /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 54AFC50224D7242700B94D58 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		54AFC50524D7242700B94D58 /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 54AFC50424D7242700B94D58 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		54AFC50724D7242700B94D58 /* iShapeTriangulation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iShapeTriangulation.framework;
-			remoteRef = 54AFC50624D7242700B94D58 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		54AFC50924D7242700B94D58 /* UnitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.xctest;
-			remoteRef = 54AFC50824D7242700B94D58 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		54AFC4DF24D723D700B94D58 /* Resources */ = {
@@ -416,6 +342,7 @@
 				545A0F6024E28492001A7DDD /* CentroidSceneView.swift in Sources */,
 				545A0F5C24E27AC4001A7DDD /* CGPoint+Point.swift in Sources */,
 				54926B4024E05FA100766EF7 /* PolygonShapeView.swift in Sources */,
+				5448C72E2A1FA07F00C975AF /* Tetragon.swift in Sources */,
 				5424572224D866B000599E30 /* MainView.swift in Sources */,
 				5424571B24D863E700599E30 /* MenuView.swift in Sources */,
 				54AFC4E524D723D700B94D58 /* AppDelegate.swift in Sources */,
@@ -428,6 +355,7 @@
 				545A0F6424E2898D001A7DDD /* DotShapeView.swift in Sources */,
 				549B002524DF379F00025754 /* PlainShapeView.swift in Sources */,
 				5471932024DBFAB3008B67CB /* ContentState.swift in Sources */,
+				5448C72C2A1F89BA00C975AF /* TetragonIntersectionSceneView.swift in Sources */,
 				5471932424DC0654008B67CB /* SceneState.swift in Sources */,
 				54B5EBF025A769E800FFFC45 /* PathShapeView.swift in Sources */,
 				54926B4724E0697E00766EF7 /* PlainComplexSceneView.swift in Sources */,
@@ -588,7 +516,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ishape.DebugApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -610,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ishape.DebugApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -639,6 +567,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		54E29E9D2A1F34370091D3D4 /* iGeometry */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = iGeometry;
+		};
+		54E29E9F2A1F34370091D3D4 /* iShapeTriangulation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = iShapeTriangulation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 54AFC4D924D723D700B94D58 /* Project object */;
 }

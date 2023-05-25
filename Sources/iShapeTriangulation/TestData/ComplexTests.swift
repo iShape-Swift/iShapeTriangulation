@@ -896,6 +896,60 @@ public struct ComplexTests {
             Point(x: -64.088834623923688, y: 1978.7948822334845),
             Point(x: -86.088834623923759, y: 2016.8999999999999),
             ]
+        ],
+        [
+            [
+                Point(x: 10.0, y:  10.0),
+                Point(x: 10.0, y:  -5.0),
+                Point(x:  1.0, y:   0.0),
+                Point(x:  5.0, y:  -5.0),
+                Point(x:  3.0, y:  -5.0),
+                Point(x:  5.0, y: -10.0),
+                Point(x:-10.0, y: -10.0)
+            ]
+        ],
+        [
+            [
+                Point(x: 10.0, y:  8.0),
+//                Point(x: 15.0, y:  8.0),
+                Point(x: 15.0, y: -1.0),
+                Point(x:  6.0, y:  3.0),
+                Point(x: 10.0, y:  0.0),
+                Point(x:  8.0, y:  0.0),
+                Point(x:  9.0, y: -2.0),
+                Point(x: -5.0, y: -2.0),
+            ]
+        ],
+        [
+            [
+                Point(x: 10.6, y:  8.3),
+                Point(x:  9.8, y:  5.4),
+                Point(x: 14.2, y:  3.4),
+                Point(x: 13.0, y:    0),
+                Point(x: 14.2, y:  1.2),
+                Point(x: 15.2, y: -1.2),
+                Point(x:  6.2, y:  2.4),
+                Point(x: 10.6, y: -0.5),
+                Point(x:  7.9, y:  1.0),
+                Point(x:  8.6, y: -2.0),
+                Point(x:  4.2, y: -1.7),
+                Point(x:  4.2, y: -5.1),
+                Point(x: -0.9, y: -5.6),
+                Point(x:    0, y: -3.9),
+                Point(x: -3.6, y: -4.2),
+                Point(x: -2.1, y: -1.5),
+                Point(x: -5.0, y: -1.7),
+                Point(x: -2.8, y: -0.3),
+                Point(x: -3.6, y:  2.0),
+                Point(x:-10.7, y:  4.2),
+                Point(x:-11.9, y:  1.0),
+                Point(x:-14.1, y:  3.9),
+                Point(x:-11.4, y:  3.4),
+                Point(x:-10.9, y:  6.6),
+                Point(x: -6.3, y:  7.3),
+                Point(x: -1.2, y:  3.7),
+                Point(x:  8.1, y:  4.2)
+            ]
         ]
     ]
     

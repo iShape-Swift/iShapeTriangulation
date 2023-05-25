@@ -19,9 +19,3 @@ struct ContentView: View {
         }.frame(minWidth: 250, maxWidth: .greatestFiniteMagnitude, minHeight: 200, maxHeight: .greatestFiniteMagnitude)
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
