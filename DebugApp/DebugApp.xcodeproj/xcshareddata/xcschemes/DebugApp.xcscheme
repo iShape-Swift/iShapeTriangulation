@@ -29,13 +29,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "54AFC4B824D721FB00B94D58"
-               BuildableName = "UnitTests.xctest"
-               BlueprintName = "UnitTests"
-               ReferencedContainer = "container:../iShapeTriangulation.xcodeproj">
+               BlueprintIdentifier = "54DE5AE32A1FE2B1007F0651"
+               BuildableName = "DebugAppTests.xctest"
+               BlueprintName = "DebugAppTests"
+               ReferencedContainer = "container:DebugApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
