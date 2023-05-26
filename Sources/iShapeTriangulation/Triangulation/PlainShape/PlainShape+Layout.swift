@@ -594,35 +594,46 @@ extension PlainShape {
         
         // dab
         if da_ab > 0 {
-            return isTriangleContain(a: b, b: c, c: d, p: p) && isTriangleNotContain(a: d, b: a, c: b, p: p)
+            let in_bcd = isTriangleContain(p: p, a: b, b: c, c: d)
+            let not_dab = isTriangleNotContain(p: p, a: d, b: a, c: b)
+            return in_bcd && not_dab
         }
         
         let ab_bc = ab.crossProduct(point: bc)
         
         // abc
         if ab_bc > 0 {
-            return isTriangleContain(a: c, b: d, c: a, p: p) && isTriangleNotContain(a: a, b: b, c: c, p: p)
+            let in_cda = isTriangleContain(p: p, a: c, b: d, c: a)
+            let not_abc = isTriangleNotContain(p: p, a: a, b: b, c: c)
+            return in_cda && not_abc
         }
         
         let bc_cd = bc.crossProduct(point: cd)
         
         // bcd
         if bc_cd > 0 {
-            return isTriangleContain(a: d, b: a, c: b, p: p) && isTriangleNotContain(a: b, b: c, c: d, p: p)
+            let in_dab = isTriangleContain(p: p, a: d, b: a, c: b)
+            let not_bcd = isTriangleNotContain(p: p, a: b, b: c, c: d)
+            return in_dab && not_bcd
         }
         
         let cd_da = cd.crossProduct(point: da)
         
         // cda
         if cd_da > 0 {
-            return isTriangleContain(a: a, b: b, c: c, p: p) && isTriangleNotContain(a: c, b: d, c: a, p: p)
+            let in_abc = isTriangleContain(p: p, a: a, b: b, c: c)
+            let not_cda = isTriangleNotContain(p: p, a: c, b: d, c: a)
+            return in_abc && not_cda
         }
 
-        // concave
-        return isTriangleContain(a: a, b: b, c: c, p: p) || isTriangleContain(a: c, b: d, c: a, p: p)
+        // convex
+        
+        let abc = isTriangleContain(p: p, a: a, b: b, c: c)
+        let cda = isTriangleContain(p: p, a: c, b: d, c: a)
+        return abc || cda
     }
 
-    private static func isTriangleContain(a: IntPoint, b: IntPoint, c: IntPoint, p: IntPoint) -> Bool {
+    private static func isTriangleContain(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         let q0 = (p - b).crossProduct(point: a - b)
         let q1 = (p - c).crossProduct(point: b - c)
         let q2 = (p - a).crossProduct(point: c - a)
@@ -633,7 +644,7 @@ extension PlainShape {
         return !(has_neg && has_pos)
     }
     
-    private static func isTriangleNotContain(a: IntPoint, b: IntPoint, c: IntPoint, p: IntPoint) -> Bool {
+    private static func isTriangleNotContain(p: IntPoint, a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         let q0 = (p - b).crossProduct(point: a - b)
         let q1 = (p - c).crossProduct(point: b - c)
         let q2 = (p - a).crossProduct(point: c - a)
