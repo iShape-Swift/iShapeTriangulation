@@ -25,6 +25,11 @@ Complex polygon triangulation, tessellation and split into convex polygons. A fa
 <img src="https://github.com/iShape-Swift/iShapeTriangulation/blob/master/Readme/eagle_centroid.svg" width="800" />
 </p>
 
+## Important Update: Check Out My New Library!
+
+I'm excited to introduce [iTriangle](https://github.com/iShape-Swift/iTriangle), the latest evolution of this project. Not only does it retain most of the fantastic features of iShapeTriangulation, but it also brings significant improvements, including better support for self-intersection cases. Additionally, it offers more precise adherence to the Delaunay condition. I'll be dedicating my future efforts to this new library, so I highly recommend trying it out for the most up-to-date features and enhancements. Your feedback is always appreciated!
+
+
 ## Features
 
 💡 Fast O(n*log(n)) algorithm based on "Triangulation of monotone polygons"
